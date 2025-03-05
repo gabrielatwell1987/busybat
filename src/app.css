@@ -1,0 +1,102 @@
+@font-face {
+	font-family: 'Creepster';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/Creepster-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Fira';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/FiraSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Fira SemiBold';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/FiraSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Fira Black';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/FiraSans-Black.ttf') format('truetype');
+}
+
+:root {
+	/* fonts */
+	--font-regular: 'Fira', sans-serif;
+	--font-semibold: 'Fira SemiBold', sans-serif;
+	--font-bold: 'Fira Black', sans-serif;
+	--font-title: 'Creepster', sans-serif;
+	--radius: 5px;
+
+	/* colors */
+	--color-primary: hsl(0, 0%, 94%);
+	--color-fade-primary: hsl(0, 0%, 74%);
+	--color-secondary: hsl(300, 33%, 9%);
+	--color-accent: hsl(320, 75%, 66%);
+	--color-success: hsl(134, 61%, 41%);
+	--color-danger: hsl(354, 70%, 54%);
+	--color-warning: hsl(45, 100%, 51%);
+	--color-info: hsl(188, 78%, 41%);
+	--color-light: hsl(210, 17%, 98%);
+	--color-dark: hsl(210, 10%, 23%);
+	--color-gray: hsl(0, 0%, 50%);
+	--color-white: hsl(0, 0%, 100%);
+	--color-black: hsl(0, 0%, 0%);
+
+	/* sizes */
+	--base-size: 1.2rem;
+	--scale: 1.2;
+	--radius: 5px;
+	--xxl: calc(var(--xl) * var(--scale) * var(--scale));
+	--xl: calc(var(--h1) * var(--scale) * var(--scale));
+	--lg: calc(var(--h1) * var(--scale));
+	--h1: calc(var(--h2) * var(--scale));
+	--h2: calc(var(--h3) * var(--scale));
+	--h3: calc(var(--h4) * var(--scale));
+	--h4: calc(var(--h5) * var(--scale));
+	--h5: calc(var(--h6) * var(--scale));
+	--h6: var(--base-size);
+	--sm: calc(var(--base-size) / var(--scale));
+}
+
+html {
+	height: 100%;
+	overflow-y: auto;
+}
+
+body {
+	background-color: hsl(0, 0%, 100%);
+	color: var(--color-secondary);
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: auto !important;
+	-webkit-overflow-scrolling: touch;
+	display: flex;
+	flex-direction: column;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	font-family: var(--font-title);
+	font-size: clamp(var(--h4), 2vw, var(--h1));
+}
+
+@supports (-webkit-touch-callout: none) {
+	body,
+	html {
+		height: -webkit-fill-available;
+	}
+}
