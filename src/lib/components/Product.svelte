@@ -1,8 +1,7 @@
 <script>
-	// import { ViewTransition } from '$lib/components/ViewTransition.svelte';
 	import { createEventDispatcher } from 'svelte';
 
-	let { id, name, price, description, imageUrl, rating, inStock } = $props();
+	let { id, name, price, description, imageUrl, rating, inStock, context = 'default' } = $props();
 
 	const dispatch = createEventDispatcher();
 
@@ -21,7 +20,7 @@
 	}
 </script>
 
-<div class="product-card" style="view-transition-name: product-card-{id}">
+<div class="product-card" style="view-transition-name: {context}-product-card-{id}">
 	<div class="product-image">
 		<img src={imageUrl} alt={name} />
 
@@ -58,10 +57,7 @@
 			transform 0.3s ease,
 			box-shadow 0.3s ease;
 		background-color: white;
-		/* margin: 16px; */
-		/* max-width: 300px; */
 		width: 100%;
-		/* margin-inline: auto; */
 
 		&:hover {
 			transform: translateY(-5px);
@@ -146,7 +142,6 @@
 				width: 100%;
 				padding: 0.7rem;
 				background-color: var(--color-success);
-				/* background-color: hsl(135, 22%, 29%); */
 				color: var(--color-white);
 				border: none;
 				border-radius: var(--radius);
@@ -158,7 +153,6 @@
 
 				&:hover:not([disabled]) {
 					background-color: hsl(134, 61%, 31%);
-					/* background-color: hsl(135, 22%, 39%); */
 				}
 
 				&:disabled {

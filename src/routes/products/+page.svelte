@@ -20,6 +20,7 @@
 			description={product.description}
 			rating={product.rating}
 			inStock={product.inStock}
+			context="products-page"
 			on:addtocart={handleAddToCart}
 		/>
 	{/each}
@@ -37,7 +38,7 @@
 		margin-inline: auto;
 		width: auto;
 		height: auto;
-		view-transition-name: fade;
+		view-transition-name: products-content;
 		padding: 1rem;
 
 		@media (width <= 500px) {
@@ -46,12 +47,12 @@
 		}
 	}
 
-	::view-transition-old(fade) {
-		animation: fade-in 1s linear forwards;
+	::view-transition-old(\*-product-card-\*) {
+		animation: fade-out 1s linear forwards;
 	}
 
-	::view-transition-new(fade) {
-		animation: fade-out 1s linear forwards;
+	::view-transition-new(\*-product-card-\*) {
+		animation: fade-in 1s linear forwards;
 	}
 
 	@keyframes fade-in {
