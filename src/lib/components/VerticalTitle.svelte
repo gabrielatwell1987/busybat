@@ -8,18 +8,15 @@
 
 <style>
 	.title-container {
-		position: absolute;
+		position: fixed;
 		right: 1rem;
 		top: 50%;
 		transform: translateY(-50%);
 		z-index: 10;
 
 		@media (width <= 500px) {
-			position: absolute;
 			right: 2rem;
 			bottom: 1rem;
-			top: auto;
-			transform: none;
 		}
 
 		& h1 {
@@ -31,7 +28,7 @@
 			text-wrap: nowrap;
 			writing-mode: vertical-lr;
 			margin-bottom: 3em;
-			margin-right: 1rem;
+			margin-right: 0;
 			z-index: 5;
 
 			@media (width <= 768px) {

@@ -25,14 +25,20 @@
 	{/each}
 </div>
 
+<VerticalTitle title="Products" />
+
 <style>
 	.content {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 1em;
+		align-items: stretch;
+		max-width: 1200px;
+		margin-inline: auto;
 		width: auto;
 		height: auto;
 		view-transition-name: fade;
+		padding: 1rem;
 
 		@media (width <= 500px) {
 			grid-template-columns: 1fr;
