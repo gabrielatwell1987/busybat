@@ -162,30 +162,4 @@
 			}
 		}
 	}
-
-	::view-transition-old(product-card-\*) {
-		animation: fade-out 0.3s forwards;
-	}
-
-	::view-transition-new(product-card-\*) {
-		animation: fade-in 0.5s forwards;
-	}
-
-	@keyframes fade-in {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	@keyframes fade-out {
-		from {
-			opacity: 1;
-		}
-		to {
-			opacity: 0;
-		}
-	}
 </style>

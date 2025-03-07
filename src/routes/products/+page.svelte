@@ -30,6 +30,7 @@
 
 <style>
 	.content {
+		/* --product-fade-duration: 3s; */
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 1em;
@@ -48,14 +49,22 @@
 	}
 
 	::view-transition-old(\*-product-card-\*) {
-		animation: fade-out 1s linear forwards;
+		animation: product-fade-out 1s linear forwards !important;
 	}
 
 	::view-transition-new(\*-product-card-\*) {
-		animation: fade-in 1s linear forwards;
+		animation: product-fade-in 1s linear forwards !important;
 	}
 
-	@keyframes fade-in {
+	::view-transition-old(products-content) {
+		animation: product-fade-out 1s linear forwards !important;
+	}
+
+	::view-transition-new(products-content) {
+		animation: product-fade-in 1s linear forwards !important;
+	}
+
+	@keyframes product-fade-in {
 		from {
 			opacity: 0;
 		}
@@ -64,7 +73,7 @@
 		}
 	}
 
-	@keyframes fade-out {
+	@keyframes product-fade-out {
 		from {
 			opacity: 1;
 		}
