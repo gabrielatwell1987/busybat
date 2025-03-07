@@ -60,7 +60,7 @@
 		border-radius: var(--radius);
 		width: 99%;
 		height: 5em;
-		box-shadow: 0 0 4px hsl(0, 0%, 50%);
+		box-shadow: 0 0 4px var(--color-gray);
 		z-index: 40;
 		margin-inline: auto;
 		view-transition-name: navigation;
@@ -118,15 +118,20 @@
 					letter-spacing: 3px;
 					transition:
 						color 0.2s ease-in-out,
+						border-bottom 0.2s ease-in-out,
 						transform 0.2s ease-in-out,
 						font-weight 0.2s ease-in-out;
 					display: inline-block;
 
 					&:hover {
-						color: var(--color-dark);
+						border-bottom: 5px solid var(--color-secondary);
 						border-radius: 2px;
 						transform: scale(1.1);
 						font-weight: 900;
+
+						@media (width <= 500px) {
+							border-bottom: none;
+						}
 					}
 
 					@media (width <= 500px) {
