@@ -9,7 +9,7 @@
 
 <div class="content">
 	<div class="form-container">
-		<form action="https://form.taxi/s/226lrszc" method="POST">
+		<form method="POST" action="https://form.taxi/s/226lrszc">
 			<fieldset>
 				<label for="name">Name:</label>
 				<input type="text" id="name" name="name" bind:value={name} required />
