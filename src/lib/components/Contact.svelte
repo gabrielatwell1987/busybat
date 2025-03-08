@@ -1,6 +1,10 @@
 <script>
 	import Button from '$lib/components/Button.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
+
+	let name = $state('');
+	let email = $state('');
+	let message = $state('');
 </script>
 
 <div class="content">
@@ -8,13 +12,14 @@
 		<form action="https://form.taxi/s/226lrszc" method="POST">
 			<fieldset>
 				<label for="name">Name:</label>
-				<input type="text" id="name" name="name" required />
+				<input type="text" id="name" name="name" bind:value={name} required />
 
 				<label for="email">Email:</label>
-				<input type="email" id="email" name="email" required />
+				<input type="email" id="email" name="email" bind:value={email} required />
 
 				<label for="message">Message:</label>
-				<textarea name="message" id="message" cols="30" rows="10" required></textarea>
+				<textarea name="message" id="message" cols="30" rows="10" bind:value={message} required
+				></textarea>
 
 				<div class="send">
 					<Button title="Send" />
