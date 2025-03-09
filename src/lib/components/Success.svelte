@@ -32,11 +32,17 @@
 			font-size: clamp(var(--h6), 3vw, var(--h3));
 			font-family: var(--font-regular);
 			text-align: center;
+			margin: 0;
+			padding: 0;
 
 			& i {
-				font-size: clamp(var(--sm), 1.5vw, var(--h6));
+				font-size: clamp(var(--xs), 1vw, var(--h6));
 				font-weight: 700;
 			}
+		}
+
+		@media (width <= 500px) {
+			transform: translateY(-5em);
 		}
 	}
 

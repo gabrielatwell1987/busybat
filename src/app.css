@@ -63,6 +63,7 @@
 	--h5: calc(var(--h6) * var(--scale));
 	--h6: var(--base-size);
 	--sm: calc(var(--base-size) / var(--scale));
+	--xs: calc(var(--sm) / var(--scale));
 }
 
 html {
