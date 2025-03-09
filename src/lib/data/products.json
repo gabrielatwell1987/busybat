@@ -19,10 +19,10 @@
 	},
 	{
 		"id": "3",
-		"name": "ferris wheel",
-		"price": 10.0,
-		"imageUrl": "https://images.pexels.com/photos/30911091/pexels-photo-30911091/free-photo-of-colorful-summer-day-at-coney-island-amusement-park.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-		"description": "A ferris wheel",
+		"name": "archie",
+		"price": 100000.0,
+		"imageUrl": "archie.webp",
+		"description": "Wilo poodle",
 		"rating": 5,
 		"inStock": true
 	},
@@ -64,11 +64,11 @@
 	},
 	{
 		"id": "8",
-		"name": "Jamal Biggums",
-		"price": 1000000,
-		"imageUrl": "https://images.pexels.com/photos/7858296/pexels-photo-7858296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-		"description": "A black man",
-		"rating": 2,
+		"name": "Speechless",
+		"price": -500.0,
+		"imageUrl": "https://images.pexels.com/photos/6518727/pexels-photo-6518727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+		"description": "I'll pay you to take this",
+		"rating": 1,
 		"inStock": true
 	}
 ]
