@@ -1,5 +1,5 @@
 <script>
-	import Button from '$lib/components/Button.svelte';
+	import SendButton from '$lib/components/SendButton.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 
 	let name = $state('');
@@ -22,7 +22,7 @@
 				></textarea>
 
 				<div class="send">
-					<Button title="Send" />
+					<SendButton title="Send" />
 				</div>
 			</fieldset>
 		</form>
