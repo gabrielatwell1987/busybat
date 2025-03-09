@@ -8,7 +8,11 @@
 
 	<VerticalTitle title="Success" />
 
-	<p>Your message has been sent successfully. We will get back to you as soon as possible.</p>
+	<p>
+		<i>Your message has been sent successfully</i>.
+	</p>
+
+	<p>We will contact you as soon as possible.</p>
 </section>
 
 <style>
@@ -19,13 +23,50 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		min-height: 100vh;
-		gap: 2rem;
+		min-height: 90vh;
+		gap: 1rem;
+		transform: translateY(-2em);
+		view-transition-name: success-slide;
 
 		& p {
 			font-size: clamp(var(--h6), 3vw, var(--h3));
 			font-family: var(--font-regular);
 			text-align: center;
+
+			& i {
+				font-size: clamp(var(--sm), 1.5vw, var(--h6));
+				font-weight: 700;
+			}
+		}
+	}
+
+	::view-transition-old(success-slide) {
+		animation: success-slide-old 0.75s forwards ease-out;
+	}
+
+	::view-transition-new(success-slide) {
+		animation: success-slide-new 1s forwards ease-out;
+	}
+
+	@keyframes success-slide-new {
+		from {
+			opacity: 0;
+			transform: translateY(-5em);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes success-slide-old {
+		to {
+			opacity: 0;
+			transform: translateY(5em);
+		}
+		from {
+			opacity: 1;
+			transform: translateY(0);
 		}
 	}
 </style>
