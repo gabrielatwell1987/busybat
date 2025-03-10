@@ -71,6 +71,7 @@
 					padding: 2em;
 					box-sizing: border-box;
 					position: relative;
+					background-color: var(--color-white);
 				}
 
 				& label {
@@ -93,9 +94,9 @@
 					padding-block: 0.1rem;
 					border-radius: calc(var(--radius) * 3);
 
-					background-color: rgba(255, 255, 255, 0.2);
+					background-color: rgba(255, 255, 255, 0.9);
 					backdrop-filter: blur(8px);
-					border: 2px solid rgba(255, 255, 255, 0.18);
+					border: 2px solid rgba(255, 255, 255, 0.3);
 					box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 					outline: none;
 					transition: all 0.3s ease-in-out;
