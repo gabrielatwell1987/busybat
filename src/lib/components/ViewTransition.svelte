@@ -2,12 +2,12 @@
 	import { onNavigate } from '$app/navigation';
 
 	// view transition
-	onNavigate(() => {
+	onNavigate((navigation) => {
 		console.log('Navigation triggered:', navigation.from, '→', navigation.to);
 
 		if (!document.startViewTransition) {
 			console.log('View Transitions API not supported');
-			return;
+			return Promise.resolve();
 		}
 
 		return new Promise((resolve) => {
@@ -23,7 +23,7 @@
 
 <style>
 	:root {
-		background-color: #000;
+		background-color: hsl(0, 0%, 100%);
 	}
 
 	:root::view-transition-group(root) {
