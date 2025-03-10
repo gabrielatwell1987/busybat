@@ -14,5 +14,10 @@
 		width: 100vw;
 		height: 100vh;
 		overflow-y: hidden;
+		background-size: auto;
+		background-repeat: repeat;
+		position: relative;
+		top: 0;
+		left: 0;
 	}
 </style>

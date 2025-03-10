@@ -172,7 +172,7 @@
 
 				@media (width <= 768px) {
 					width: 90%;
-					transform: translateY(-25%);
+					transform: translateY(0);
 					margin-inline: auto;
 					scale: 0.75;
 					margin-right: 5em;
@@ -191,7 +191,7 @@
 				height: 100vh;
 				padding: 0;
 				width: 100%;
-				transform: translateY(-5%);
+				transform: translateY(0);
 			}
 		}
 	}

@@ -3,7 +3,12 @@
 </script>
 
 <footer>
-	<p><span>&copy;</span> {year} <span>{name}</span> Co. All rights reserved</p>
+	<p>
+		&copy;
+		{year}
+		{name}
+		All rights reserved
+	</p>
 </footer>
 
 <style>
@@ -25,25 +30,15 @@
 			font-family: var(--font-semibold);
 			color: var(--color-secondary);
 			padding: 0 0.5rem;
-			font-size: clamp(var(--xs), 1vw, var(--sm));
-			font-weight: 400;
+			font-size: clamp(var(--sm), 1.2vw, var(--h5));
+			font-weight: 100;
 			text-wrap: nowrap;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 
-			& span {
-				margin-top: 0.215rem;
-
-				&:nth-child(2) {
-					color: var(--color-accent);
-					padding-inline: 0.5rem;
-					margin-top: 0;
-				}
-			}
-
 			@media (max-width: 500px) {
-				scale: 0.9;
+				scale: 0.8;
 			}
 		}
 	}
