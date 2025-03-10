@@ -1,7 +1,13 @@
 <script>
-	import BusinessCard from '$lib/components/BusinessCard.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 </script>
 
 <main>
-	<BusinessCard />
+	<Icon />
 </main>
+
+<style>
+	main {
+		height: 100vh;
+	}
+</style>
