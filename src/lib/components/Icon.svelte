@@ -4,7 +4,7 @@
 
 <section>
 	<div class="cards">
-		<img class="rotate" src={b} alt="Business Card Front" width="600" height="400" />
+		<img class="rotate" src={b} alt="Icon" width="600" height="400" />
 	</div>
 </section>
 

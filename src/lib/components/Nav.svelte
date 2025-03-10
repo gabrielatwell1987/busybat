@@ -33,11 +33,8 @@
 
 	<ul class:open={isOpen}>
 		<li><a href="/" onclick={handleLinkClick}>Home</a></li>
-
 		<li><a href="/products" onclick={handleLinkClick}>Products</a></li>
-
 		<li><a href="/about" onclick={handleLinkClick}>About</a></li>
-
 		<li><a href="/contact" onclick={handleLinkClick}>Contact</a></li>
 	</ul>
 </nav>
