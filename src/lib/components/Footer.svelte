@@ -24,7 +24,7 @@
 		height: 3em;
 		z-index: 20;
 		max-width: calc(100% - 2rem);
-		width: auto;
+		width: fit-content;
 
 		& p {
 			font-family: var(--font-semibold);
@@ -36,6 +36,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			backdrop-filter: blur(10px);
 
 			@media (max-width: 500px) {
 				scale: 0.8;

@@ -15,7 +15,7 @@
 		align-items: center;
 		gap: 1rem;
 		padding: 1rem;
-		background-color: hsl(0, 0%, 100%);
+		background-color: transparent;
 		border-radius: var(--radius);
 		height: 100%;
 		position: relative;
@@ -47,7 +47,7 @@
 			gap: 2rem;
 			position: relative;
 			margin: 0;
-			transform: translateY(2em);
+			transform: translateY(-2em);
 			padding-top: 2em;
 		}
 
@@ -69,32 +69,33 @@
 	}
 
 	::view-transition-old(rotate) {
-		animation: rotate-ccw 1s ease-out forwards;
+		animation: rotate 1s ease-out forwards;
 	}
 
 	::view-transition-new(rotate) {
-		animation: rotate-cw 1s ease-out forwards;
+		animation: rotate 1s ease-out forwards;
 	}
 
-	@keyframes rotate-ccw {
+	@keyframes rotate {
 		0% {
 			transform: rotate(0deg);
-			opacity: 1;
+			scale: 1;
 		}
-		100% {
-			transform: rotate(-360deg);
-			opacity: 0;
+		25% {
+			transform: rotate(-15deg);
+			scale: 1.1;
 		}
-	}
-
-	@keyframes rotate-cw {
-		0% {
+		50% {
 			transform: rotate(0deg);
-			opacity: 0;
+			scale: 1;
+		}
+		75% {
+			transform: rotate(15deg);
+			scale: 1.1;
 		}
 		100% {
-			transform: rotate(360deg);
-			opacity: 1;
+			transform: rotate(0deg);
+			scale: 1;
 		}
 	}
 </style>

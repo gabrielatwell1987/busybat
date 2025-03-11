@@ -22,7 +22,9 @@
 	};
 </script>
 
-<nav style="background-image: url({bg});">
+<nav
+	style="background-image: url({bg});  background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
+>
 	<Title title="Busy Little Bat Sewing" />
 
 	<button class="burger" class:open={isOpen} onclick={toggleMenu} aria-label="hamburger menu">

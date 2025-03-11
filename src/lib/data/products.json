@@ -22,13 +22,13 @@
 		"name": "Archie",
 		"price": 100000.0,
 		"imageUrl": "photos/archie.webp",
-		"description": "Wilo poodle",
+		"description": "A poodle with an attitude",
 		"rating": 5,
 		"inStock": true
 	},
 	{
 		"id": "4",
-		"name": "Dancing wila",
+		"name": "Random dancer",
 		"price": 1,
 		"imageUrl": "https://images.pexels.com/photos/30926674/pexels-photo-30926674/free-photo-of-elegant-ballet-dancer-in-white-dress-with-red-hearts.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
 		"description": "A dancer who's mentally incompetent",
@@ -46,7 +46,7 @@
 	},
 	{
 		"id": "6",
-		"name": "Clown face",
+		"name": "What is this?",
 		"price": 20.0,
 		"imageUrl": "https://images.pexels.com/photos/53207/carnival-venice-eyes-mask-53207.jpeg?auto=compress&cs=tinysrgb&w=600",
 		"description": "A clown face",
@@ -67,7 +67,7 @@
 		"name": "Speechless",
 		"price": -500.0,
 		"imageUrl": "https://images.pexels.com/photos/6518727/pexels-photo-6518727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-		"description": "I'll pay you to take this",
+		"description": "We'll pay you to take this",
 		"rating": 1,
 		"inStock": true
 	}

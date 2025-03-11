@@ -95,7 +95,7 @@
 			padding: 1rem;
 
 			& .product-name {
-				margin-top: 0;
+				margin: 0;
 				font-family: var(--font-semibold);
 				font-size: clamp(var(--h5), 2vw, var(--h4));
 				font-weight: 600;
@@ -107,7 +107,7 @@
 				font-size: 1.4rem;
 				font-weight: bold;
 				color: var(--color-info);
-				margin: 8px 0;
+				margin: 0.5rem 0;
 				grid-row: 3;
 			}
 
