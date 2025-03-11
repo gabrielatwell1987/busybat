@@ -23,7 +23,7 @@
 </script>
 
 <nav
-	style="background-image: url({bg});  background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
+	style="background-image: url({bg}); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
 >
 	<Title title="Busy Little Bat Sewing" />
 

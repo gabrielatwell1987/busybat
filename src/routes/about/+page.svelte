@@ -1,11 +1,11 @@
 <script>
 	import Icon from '$lib/components/Icon.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
-	import pink from '$lib/assets/pink-leo.webp';
+	import bg from '$lib/assets/product-bg.webp';
 </script>
 
 <main
-	style="background-image: url({pink}); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
+	style="background-image: url({bg}); background-repeat: repeat; background-position: center center; background-size: contain;"
 >
 	<VerticalTitle title="About" />
 
@@ -32,6 +32,8 @@
 
 <style>
 	main {
+		height: auto;
+
 		& .content {
 			text-align: center;
 			display: grid;
@@ -40,7 +42,7 @@
 
 			& h2 {
 				font-family: var(--font-title);
-				font-size: clamp(var(--h5), 5vw, var(--lg));
+				font-size: clamp(var(--h4), 5vw, var(--lg));
 				font-weight: 700;
 				letter-spacing: 5px;
 				margin: 0;

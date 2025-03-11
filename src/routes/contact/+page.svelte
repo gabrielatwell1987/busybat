@@ -4,7 +4,7 @@
 </script>
 
 <section
-	style="background-image: url({bg}); background-repeat: repeat; background-position: center center;"
+	style="background-image: url({bg}); background-repeat: repeat; background-position: center center; background-size: contain;"
 >
 	<Contact />
 </section>
