@@ -11,6 +11,8 @@
 	<div class="form-container">
 		<form method="POST" action="https://form.taxi/s/226lrszc">
 			<fieldset>
+				<legend>Message us</legend>
+
 				<label for="name">Name:</label>
 				<input type="text" id="name" name="name" bind:value={name} required />
 
@@ -64,14 +66,32 @@
 					margin: 0;
 					display: flex;
 					flex-direction: column;
-					box-shadow: 0 0 5px 0 var(--color-dark);
-					border-radius: var(--ls);
+					border: 2px solid var(--color-gray);
+					border-radius: var(--radius);
 					gap: inherit;
 					width: 100%;
 					padding: 2em;
 					box-sizing: border-box;
 					position: relative;
 					background-color: var(--color-white);
+
+					& legend {
+						color: var(--color-gray);
+						font-family: var(--font-regular);
+						font-size: clamp(var(--h6), 2vw, var(--h5));
+						font-weight: 700;
+						text-align: left;
+						letter-spacing: 3px;
+						padding-inline: 1rem;
+
+						@media (width <= 500px) {
+							transform: translateY(0);
+						}
+					}
+
+					@media (width <= 500px) {
+						border: none;
+					}
 				}
 
 				& label {

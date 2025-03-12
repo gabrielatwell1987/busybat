@@ -123,10 +123,11 @@
 					display: inline-block;
 
 					&:hover {
-						border-bottom: 5px solid var(--color-secondary);
+						border-bottom: 5px solid var(--color-accent);
 						border-radius: 2px;
 						transform: scale(1.1);
 						font-weight: 900;
+						color: var(--color-accent);
 
 						@media (width <= 500px) {
 							border-bottom: none;

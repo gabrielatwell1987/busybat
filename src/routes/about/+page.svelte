@@ -1,12 +1,9 @@
 <script>
 	import Icon from '$lib/components/Icon.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
-	import bg from '$lib/assets/product-bg.webp';
 </script>
 
-<main
-	style="background-image: url({bg}); background-repeat: repeat; background-position: center center; background-size: contain;"
->
+<main>
 	<VerticalTitle title="About" />
 
 	<Icon />
