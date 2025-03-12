@@ -13,7 +13,7 @@
 
 <style>
 	footer {
-		position: fixed;
+		position: absolute;
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
@@ -25,6 +25,7 @@
 		z-index: 20;
 		max-width: calc(100% - 2rem);
 		width: fit-content;
+		/* backdrop-filter: blur(10px); */
 
 		& p {
 			font-family: var(--font-semibold);
@@ -36,7 +37,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			backdrop-filter: blur(10px);
+			/* background-color: var(--color-faded-primary); */
 
 			@media (max-width: 500px) {
 				scale: 0.8;

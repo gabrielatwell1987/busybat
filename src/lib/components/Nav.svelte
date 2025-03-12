@@ -2,6 +2,7 @@
 	import Title from '$lib/components/Title.svelte';
 	import logo from '$lib/assets/logo.webp';
 	import bg from '$lib/assets/pink-leo.webp';
+	import FlippyNav from '$lib/components/FlippyNav.svelte';
 
 	let isOpen = $state(false);
 
@@ -34,10 +35,10 @@
 	</button>
 
 	<ul class:open={isOpen}>
-		<li><a href="/" onclick={handleLinkClick}>Home</a></li>
-		<li><a href="/products" onclick={handleLinkClick}>Products</a></li>
-		<li><a href="/about" onclick={handleLinkClick}>About</a></li>
-		<li><a href="/contact" onclick={handleLinkClick}>Contact</a></li>
+		<FlippyNav title="Home" url="/" onclick={handleLinkClick} />
+		<FlippyNav title="Products" url="/products" onclick={handleLinkClick} />
+		<FlippyNav title="About" url="/about" onclick={handleLinkClick} />
+		<FlippyNav title="Contact" url="/contact" onclick={handleLinkClick} />
 	</ul>
 </nav>
 
@@ -104,42 +105,6 @@
 			display: flex;
 			gap: clamp(0.5rem, 2vw, 2rem);
 			flex-flow: row wrap;
-
-			& li {
-				list-style: none;
-
-				& a {
-					text-decoration: none;
-					color: var(--color-secondary);
-					font-family: var(--font-bold);
-					font-size: clamp(var(--h6), 2vw, var(--h3));
-					font-weight: 900;
-					letter-spacing: 3px;
-					transition:
-						color 0.2s ease-in-out,
-						border-bottom 0.2s ease-in-out,
-						transform 0.2s ease-in-out,
-						font-weight 0.2s ease-in-out;
-					display: inline-block;
-
-					&:hover {
-						border-bottom: 5px solid var(--color-accent);
-						border-radius: 2px;
-						transform: scale(1.1);
-						font-weight: 900;
-						color: var(--color-accent);
-
-						@media (width <= 500px) {
-							border-bottom: none;
-						}
-					}
-
-					@media (width <= 500px) {
-						letter-spacing: 5px;
-						font-size: var(--h6);
-					}
-				}
-			}
 		}
 		@media (width <= 500px) {
 			width: 95%;
@@ -191,28 +156,6 @@
 
 				&.open {
 					left: -12%;
-				}
-
-				& li {
-					transform: translateY(-15px);
-					transition: transform 0.5s ease-out;
-					transition-delay: 0.05s;
-
-					&:nth-child(2) {
-						transition-delay: 0.2s;
-					}
-
-					&:nth-child(3) {
-						transition-delay: 0.25s;
-					}
-
-					&:nth-child(4) {
-						transition-delay: 0.3s;
-					}
-				}
-
-				&.open li {
-					transform: translateY(0);
 				}
 			}
 		}

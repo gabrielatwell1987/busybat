@@ -1,0 +1,56 @@
+<script>
+	let { title, url, onclick } = $props();
+</script>
+
+<li class="quick-flip">
+	<a href={url} {onclick}>{title}</a>
+</li>
+
+<style>
+	.quick-flip {
+		--transition-duration: 0.75s;
+		--timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+		overflow-y: clip;
+		list-style: none;
+
+		> * {
+			display: block;
+			transition:
+				transform var(--transition-duration) var(--timing-function),
+				translate 0ms calc(var(--transition-duration) / 2);
+			text-decoration: none;
+			color: var(--color-secondary);
+			font-family: var(--font-bold);
+			font-size: clamp(var(--h6), 2vw, var(--h3));
+			font-weight: 900;
+			letter-spacing: 3px;
+		}
+
+		&:is(:hover, :focus-within) > * {
+			transform: translateY(-2lh);
+			translate: 0 2lh;
+		}
+
+		&:focus-within {
+			outline: 2px solid var(--teal);
+			border-radius: 4px;
+
+			> *:focus {
+				outline: none;
+			}
+		}
+	}
+
+	@media (width <= 500px) {
+		.quick-flip > * {
+			letter-spacing: 5px;
+		}
+
+		.quick-flip:is(:hover, :focus-within) > * {
+			border-bottom: none;
+			transform: none;
+			translate: 0;
+			color: var(--color-accent);
+		}
+	}
+</style>

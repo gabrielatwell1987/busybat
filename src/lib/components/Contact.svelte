@@ -30,7 +30,7 @@
 		</form>
 	</div>
 
-	<VerticalTitle title="Contact us" class="vertical-title" />
+	<VerticalTitle title="Contact" class="vertical-title" />
 </div>
 
 <style>

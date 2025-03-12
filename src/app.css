@@ -84,6 +84,7 @@ body {
 	-webkit-overflow-scrolling: touch;
 	display: flex;
 	flex-direction: column;
+	line-height: 1.5;
 }
 
 a {

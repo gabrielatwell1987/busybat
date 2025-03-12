@@ -32,7 +32,7 @@
 		height: auto;
 
 		& .content {
-			text-align: center;
+			/* text-align: center; */
 			display: grid;
 			place-items: center;
 			margin-bottom: 5em;
@@ -65,11 +65,12 @@
 					margin-bottom: 0.15rem;
 					padding: 0;
 					font-size: clamp(var(--sm), 2vw, var(--h6));
-					line-height: 1.5;
+					text-align: center;
 
 					&.width {
-						width: 75%;
+						width: 95%;
 						margin-inline: auto;
+						text-align: left;
 					}
 				}
 			}
