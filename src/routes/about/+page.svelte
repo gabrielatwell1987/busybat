@@ -3,6 +3,10 @@
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 </script>
 
+<svelte:head>
+	<title>Busy Little Bat Sewing &middot; About Us</title>
+</svelte:head>
+
 <main>
 	<VerticalTitle title="About" />
 

@@ -10,6 +10,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Busy Little Bat Sewing &middot; Our Products</title>
+</svelte:head>
+
 <div class="content">
 	{#each products as product}
 		<Product
