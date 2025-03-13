@@ -8,7 +8,7 @@
 
 <style>
 	.quick-flip {
-		--transition-duration: 0.75s;
+		--transition-duration: 0.4s;
 		--timing-function: cubic-bezier(0.66, 0, 0.34, 1);
 		overflow-y: clip;
 		list-style: none;
