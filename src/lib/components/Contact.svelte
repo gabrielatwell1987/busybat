@@ -61,9 +61,7 @@
 				transform: translateY(0);
 
 				@media (width <= 500px) {
-					color: pink;
-					background-color: red;
-					/* transform: translateX(1rem); */
+					transform: translateX(1rem);
 				}
 
 				& fieldset {
