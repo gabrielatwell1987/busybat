@@ -3,7 +3,6 @@
 	import logo from '$lib/assets/logo.webp';
 	import bg from '$lib/assets/pink-leo.webp';
 	import FlippyNav from '$lib/components/FlippyNav.svelte';
-	import { goto } from '$app/navigation';
 
 	let isOpen = $state(false);
 
@@ -16,7 +15,7 @@
 			const href = event.currentTarget.getAttribute('href');
 
 			setTimeout(() => {
-				goto(href);
+				window.location.href = href;
 			}, 10);
 
 			event.preventDefault();
