@@ -62,6 +62,7 @@
 
 				@media (width <= 500px) {
 					color: pink;
+					background-color: red;
 					/* transform: translateX(1rem); */
 				}
 
