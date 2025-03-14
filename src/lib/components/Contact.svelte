@@ -8,6 +8,8 @@
 </script>
 
 <div class="content">
+	<h1>jamal</h1>
+
 	<div class="form-container">
 		<form method="POST" action="https://form.taxi/s/226lrszc">
 			<fieldset>
@@ -47,7 +49,7 @@
 			width: 100%;
 			overflow-y: auto;
 			padding: 1rem 0;
-			view-transition-name: form;
+			view-transition-name: form-content;
 			overflow-x: hidden;
 			transform: translateY(0);
 
@@ -59,6 +61,10 @@
 				margin-inline: auto;
 				margin-bottom: 1em;
 				transform: translateY(0);
+
+				/* @media (width <= 500px) {
+					transform: translateX(1rem);
+				} */
 
 				& fieldset {
 					border: none;
@@ -216,12 +222,12 @@
 		}
 	}
 
-	::view-transition-old(form) {
-		animation: move-down 1s ease-out forwards;
+	::view-transition-old(form-content) {
+		animation: move-down var(--timing) ease-out forwards;
 	}
 
-	::view-transition-new(form) {
-		animation: move-up 1s ease-out forwards;
+	::view-transition-new(form-content) {
+		animation: move-up var(--timing) ease-out forwards;
 	}
 
 	@keyframes move-down {

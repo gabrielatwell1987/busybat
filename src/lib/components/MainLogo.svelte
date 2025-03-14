@@ -27,7 +27,7 @@
 		align-items: flex-start;
 		height: 100vh;
 		background-color: hsl(0, 0%, 100%);
-		view-transition-name: content;
+		view-transition-name: scale-content;
 		transform: translateY(-6em);
 		position: relative;
 
@@ -108,12 +108,12 @@
 		}
 	}
 
-	::view-transition-old(content) {
-		animation: scale-out 0.75s ease-out forwards;
+	::view-transition-old(scale-content) {
+		animation: scale-out var(--timing) ease-out forwards;
 	}
 
-	::view-transition-new(content) {
-		animation: scale-in 0.75s ease-out forwards;
+	::view-transition-new(scale-content) {
+		animation: scale-in var(--timing) ease-out forwards;
 	}
 
 	@keyframes scale-out {
