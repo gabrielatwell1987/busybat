@@ -31,23 +31,23 @@
 
 	:root::view-transition-old(root) {
 		animation: 0.75s cubic-bezier(0.37, 0.06, 0.6, 0.91) both out;
-		animation-delay: 0.25s;
+		animation-delay: 0.5s;
 	}
 
 	:root::view-transition-new(root) {
 		animation: 0.75s cubic-bezier(0.37, 0.06, 0.6, 0.91) 1s both in;
-		animation-delay: 0.25s;
+		animation-delay: 0.5s;
 	}
 
 	@supports (-webkit-touch-callout: none) {
 		:root::view-transition-old(root) {
-			animation: 0.25s cubic-bezier(0.4, 0, 1, 1) both out-safari;
-			animation-delay: 0.25s;
+			animation: 0.75s cubic-bezier(0.4, 0, 1, 1) both out-safari;
+			animation-delay: 0.5s;
 		}
 
 		:root::view-transition-new(root) {
 			animation: 0.75s cubic-bezier(0, 0, 0.2, 1) both in-safari;
-			animation-delay: 0.25s;
+			animation-delay: 0.5s;
 		}
 	}
 
