@@ -60,9 +60,9 @@
 				margin-bottom: 1em;
 				transform: translateY(0);
 
-				@media (width <= 500px) {
+				/* @media (width <= 500px) {
 					transform: translateX(1rem);
-				}
+				} */
 
 				& fieldset {
 					border: none;
