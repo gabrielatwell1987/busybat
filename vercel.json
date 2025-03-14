@@ -1,6 +1,8 @@
 {
 	"version": 2,
 	"framework": "sveltekit",
-	"installCommand": "npm install",
-	"buildCommand": "npm run build"
+	"installCommand": "npm install && node fix-install.js",
+	"buildCommand": "npm run build",
+	"outputDirectory": ".svelte-kit/vercel/output",
+	"devCommand": "npm run dev"
 }
