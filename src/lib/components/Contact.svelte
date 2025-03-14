@@ -61,7 +61,7 @@
 				transform: translateY(0);
 
 				@media (width <= 500px) {
-					padding-bottom: 10em;
+					color: pink;
 					/* transform: translateX(1rem); */
 				}
 

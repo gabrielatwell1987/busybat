@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -9,5 +10,11 @@ const config = {
 		adapter: adapter()
 	}
 };
+
+try {
+	require('svelte/compiler');
+} catch (e) {
+	console.warn('Warning: svelte/compiler not found, continuing anyway');
+}
 
 export default config;
