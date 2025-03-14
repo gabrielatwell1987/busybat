@@ -47,7 +47,7 @@
 			width: 100%;
 			overflow-y: auto;
 			padding: 1rem 0;
-			view-transition-name: form;
+			view-transition-name: form-content;
 			overflow-x: hidden;
 			transform: translateY(0);
 
@@ -220,11 +220,11 @@
 		}
 	}
 
-	::view-transition-old(form) {
+	::view-transition-old(form-content) {
 		animation: move-down var(--timing) ease-out forwards;
 	}
 
-	::view-transition-new(form) {
+	::view-transition-new(form-content) {
 		animation: move-up var(--timing) ease-out forwards;
 	}
 
