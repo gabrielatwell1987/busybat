@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
@@ -7,7 +8,8 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			external: []
+			external: [],
+			deps: ['svelte']
 		})
 	},
 
@@ -15,5 +17,12 @@ const config = {
 		runes: true
 	}
 };
+
+try {
+	// Try to require svelte/compiler to check if it's available
+	require('svelte/compiler');
+} catch (e) {
+	console.warn('Warning: svelte/compiler not found in config, continuing anyway');
+}
 
 export default config;
