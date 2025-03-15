@@ -65,13 +65,7 @@
 	--sm: calc(var(--base-size) / var(--scale));
 	--xs: calc(var(--sm) / var(--scale));
 
-<<<<<<< HEAD
 	--timing: 0.75s;
-=======
-	/* animation timing */
-	--timing: 0.75s;
-	--timing-fast: 0.3s;
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
 }
 
 html {
