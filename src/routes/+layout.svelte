@@ -43,7 +43,7 @@
 	.slot {
 		flex: 1 0 auto;
 		position: relative;
-		margin-top: 2em;
+		transform: translateY(3em);
 		padding: 1em;
 	}
 </style>
