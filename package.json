@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite dev --host",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "vite preview --host",
 		"prepare": "svelte-kit sync || echo ''",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint ."
