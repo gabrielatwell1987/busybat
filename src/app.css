@@ -64,6 +64,8 @@
 	--h6: var(--base-size);
 	--sm: calc(var(--base-size) / var(--scale));
 	--xs: calc(var(--sm) / var(--scale));
+
+	--timing: 0.75s;
 }
 
 html {
@@ -94,6 +96,10 @@ a {
 h1 {
 	font-family: var(--font-title);
 	font-size: clamp(var(--h4), 2vw, var(--h1));
+}
+
+.indent {
+	text-indent: 1rem;
 }
 
 @supports (-webkit-touch-callout: none) {

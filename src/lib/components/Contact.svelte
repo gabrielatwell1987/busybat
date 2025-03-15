@@ -60,6 +60,11 @@
 				margin-bottom: 1em;
 				transform: translateY(0);
 
+				@media (width <= 500px) {
+					padding-bottom: 10em;
+					/* transform: translateX(1rem); */
+				}
+
 				& fieldset {
 					border: none;
 					padding: 0;
@@ -217,11 +222,11 @@
 	}
 
 	::view-transition-old(form) {
-		animation: move-down 1s ease-out forwards;
+		animation: move-down var(--timing) ease-out forwards;
 	}
 
 	::view-transition-new(form) {
-		animation: move-up 1s ease-out forwards;
+		animation: move-up var(--timing) ease-out forwards;
 	}
 
 	@keyframes move-down {

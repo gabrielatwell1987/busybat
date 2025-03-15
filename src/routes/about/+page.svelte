@@ -1,5 +1,4 @@
 <script>
-	import Icon from '$lib/components/Icon.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 </script>
 
@@ -10,8 +9,6 @@
 <main>
 	<VerticalTitle title="About" />
 
-	<Icon />
-
 	<div class="content">
 		<h2>About page</h2>
 
@@ -20,12 +17,19 @@
 		<div class="summary">
 			<p>this is your about page..</p>
 
-			<p class="width">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum laborum eveniet, explicabo
-				ullam quasi velit consectetur illum officiis, nulla commodi animi placeat sunt doloremque
-				dicta qui vel dolore molestiae ratione totam, quos facilis dignissimos. Impedit numquam enim
-				ratione minus nesciunt voluptatibus saepe eum, laudantium error mollitia eaque assumenda
-				alias vitae.
+			<p class="width indent">
+				We make custom clothing and accessories for all ages and sizes. We specialize in unique and
+				fun designs. We also offer sewing classes for all skill levels. We are a small business that
+				is dedicated to providing quality products and services to our customers. We take pride in
+				our work and strive to make every customer happy. We are passionate about sewing and love
+				sharing our knowledge with others. We are committed to providing a positive and welcoming
+				environment for all of our customers. We look forward to working with you!.
+			</p>
+
+			<p class="width indent">
+				If you have any questions or would like to learn more about our products and services,
+				please feel free to contact us. We are always happy to help and look forward to hearing from
+				you!
 			</p>
 		</div>
 	</div>
@@ -36,14 +40,15 @@
 		height: auto;
 
 		& .content {
-			/* text-align: center; */
 			display: grid;
 			place-items: center;
 			margin-bottom: 5em;
+			padding-top: 3em;
+			view-transition-name: slide-content;
 
 			& h2 {
 				font-family: var(--font-title);
-				font-size: clamp(var(--h4), 5vw, var(--lg));
+				font-size: clamp(var(--h4), 5vw, var(--xl));
 				font-weight: 700;
 				letter-spacing: 5px;
 				margin: 0;
@@ -63,21 +68,56 @@
 
 			& .summary {
 				margin-top: 1em;
-				font-weight: 700;
 
 				& p {
 					margin-bottom: 0.15rem;
 					padding: 0;
-					font-size: clamp(var(--sm), 2vw, var(--h6));
+					font-size: clamp(var(--sm), 2vw, var(--h5));
+					font-weight: 300;
 					text-align: center;
 
 					&.width {
-						width: 95%;
+						max-width: 1200px;
+						width: 100%;
 						margin-inline: auto;
 						text-align: left;
+						font-size: clamp(var(--sm), 3vw, var(--h5));
+						font-weight: 500;
+
+						&:first-child {
+							text-align: center;
+							font-size: clamp(var(--h6), 5vw, var(--h3));
+							font-weight: 800;
+						}
 					}
 				}
 			}
+		}
+	}
+
+	::view-transition-old(slide-content) {
+		animation: slide-down var(--timing) ease-out forwards;
+	}
+
+	::view-transition-new(slide-content) {
+		animation: slide-up var(--timing) ease-out forwards;
+	}
+
+	@keyframes slide-up {
+		0% {
+			transform: translateY(-100%);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes slide-down {
+		0% {
+			transform: translateY(0);
+		}
+		100% {
+			transform: translateY(100%);
 		}
 	}
 </style>
