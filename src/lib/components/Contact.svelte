@@ -8,8 +8,6 @@
 </script>
 
 <div class="content">
-	<h1>jamal</h1>
-
 	<div class="form-container">
 		<form method="POST" action="https://form.taxi/s/226lrszc">
 			<fieldset>
@@ -62,16 +60,10 @@
 				margin-bottom: 1em;
 				transform: translateY(0);
 
-<<<<<<< HEAD
 				@media (width <= 500px) {
 					padding-bottom: 10em;
 					/* transform: translateX(1rem); */
 				}
-=======
-				/* @media (width <= 500px) {
-					transform: translateX(1rem);
-				} */
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
 
 				& fieldset {
 					border: none;
@@ -229,19 +221,11 @@
 		}
 	}
 
-<<<<<<< HEAD
-	::view-transition-old(form) {
-		animation: move-down var(--timing) ease-out forwards;
-	}
-
-	::view-transition-new(form) {
-=======
 	::view-transition-old(form-content) {
 		animation: move-down var(--timing) ease-out forwards;
 	}
 
 	::view-transition-new(form-content) {
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
 		animation: move-up var(--timing) ease-out forwards;
 	}
 

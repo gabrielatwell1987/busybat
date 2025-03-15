@@ -23,11 +23,8 @@
 				is dedicated to providing quality products and services to our customers. We take pride in
 				our work and strive to make every customer happy. We are passionate about sewing and love
 				sharing our knowledge with others. We are committed to providing a positive and welcoming
-<<<<<<< HEAD
-				environment for all of our customers. We look forward to working with you!.
-=======
-				environment for all of our customers. We look forward to working with you!
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
+				environment for all of our customers. We look forward to working with you!. environment for
+				all of our customers. We look forward to working with you!
 			</p>
 
 			<p class="width indent">
@@ -48,10 +45,7 @@
 			place-items: center;
 			padding-top: 3em;
 			margin-bottom: 5em;
-<<<<<<< HEAD
 			padding-top: 3em;
-=======
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
 			view-transition-name: slide-content;
 
 			& h2 {
@@ -76,21 +70,13 @@
 
 			& .summary {
 				margin-top: 1em;
-<<<<<<< HEAD
-=======
-				/* font-weight: 700; */
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
 
 				& p {
 					margin-bottom: 0.15rem;
 					padding: 0;
 					font-size: clamp(var(--sm), 2vw, var(--h5));
-<<<<<<< HEAD
 					font-weight: 300;
-=======
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
 					text-align: center;
-					font-weight: 300;
 
 					&.width {
 						max-width: 1200px;

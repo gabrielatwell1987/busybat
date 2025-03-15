@@ -34,7 +34,6 @@
 		animation-delay: 0.5s;
 	}
 
-<<<<<<< HEAD
 	:root::view-transition-new(root) {
 		animation: var(--timing) cubic-bezier(0.37, 0.06, 0.6, 0.91) 1s both in;
 		animation-delay: 0.5s;
@@ -90,9 +89,5 @@
 		to {
 			opacity: 0.65;
 		}
-=======
-	:root::view-transition-group(root) {
-		animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
->>>>>>> cd73f7f77c9844331c796dbdae0a0e37a2ac13fe
 	}
 </style>
