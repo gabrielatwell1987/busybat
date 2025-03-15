@@ -26,5 +26,8 @@
 		"prettier-plugin-svelte": "^3.3.3",
 		"svelte": "^5.1.9",
 		"vite": "^6.0.0"
+	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "^4.35.0"
 	}
 }
