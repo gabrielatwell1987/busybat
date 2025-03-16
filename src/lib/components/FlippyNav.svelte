@@ -29,6 +29,9 @@
 		&:is(:hover, :focus-within) > * {
 			transform: translateY(-2lh);
 			translate: 0 2lh;
+			color: var(--color-accent);
+			transition: color var(--transition-duration) var(--timing-function);
+			-webkit-text-stroke: 1px var(--color-secondary);
 		}
 
 		&:focus-within {
@@ -51,6 +54,7 @@
 			transform: none;
 			translate: 0;
 			color: var(--color-accent);
+			-webkit-text-stroke: 0px var(--color-secondary);
 		}
 	}
 </style>

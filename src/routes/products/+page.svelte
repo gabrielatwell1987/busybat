@@ -34,13 +34,13 @@
 
 <style>
 	.content {
-		/* --product-fade-duration: 3s; */
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 1em;
 		align-items: stretch;
 		max-width: 1200px;
 		margin-inline: auto;
+		margin-bottom: 2rem;
 		width: auto;
 		height: auto;
 		view-transition-name: products-content;

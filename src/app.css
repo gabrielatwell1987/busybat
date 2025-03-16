@@ -65,7 +65,7 @@
 	--sm: calc(var(--base-size) / var(--scale));
 	--xs: calc(var(--sm) / var(--scale));
 
-	--timing: 0.75s;
+	--timing: 1s;
 }
 
 html {
