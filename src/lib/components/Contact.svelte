@@ -50,6 +50,7 @@
 			view-transition-name: form-content;
 			overflow-x: hidden;
 			transform: translateY(0);
+			position: relative;
 
 			& form {
 				display: flex;
@@ -62,7 +63,10 @@
 
 				@media (width <= 500px) {
 					padding-bottom: 10em;
-					/* transform: translateX(1rem); */
+					margin-left: 2rem;
+					position: absolute;
+					left: -9%;
+					transform: translateX(-9%);
 				}
 
 				& fieldset {
