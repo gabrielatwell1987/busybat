@@ -58,12 +58,9 @@
 				gap: 1rem;
 				width: min(70%, 1000px);
 				margin-inline: auto;
-				margin-bottom: 1em;
 				transform: translateY(0);
 
 				@media (width <= 500px) {
-					padding-bottom: 10em;
-					margin-left: 2rem;
 					position: absolute;
 					left: -9%;
 					transform: translateX(-9%);
