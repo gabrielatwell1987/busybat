@@ -38,6 +38,7 @@
 		display: flex;
 		width: 100%;
 		overflow-x: hidden;
+		height: 100%;
 
 		& .form-container {
 			display: flex;
@@ -59,6 +60,12 @@
 				width: min(70%, 1000px);
 				margin-inline: auto;
 				transform: translateY(0);
+				scale: 1;
+
+				@media (width <= 1950px) {
+					scale: 0.9;
+					margin-block: 1em;
+				}
 
 				@media (width <= 500px) {
 					position: absolute;
