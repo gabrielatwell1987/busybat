@@ -7,7 +7,7 @@
 <SEO
 	title="Busy Little Bat Sewing Co."
 	description="Handmade bags and accessories"
-	keywords="busy bat, busy bat sewing, busy bat sewing co., handmade sewing, handmade bags, handmade accessories"
+	keywords="busy bat, busy bat sewing, busy bat sewing co"
 />
 
 <MainLogo />

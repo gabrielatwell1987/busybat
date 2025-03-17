@@ -7,7 +7,7 @@
 <SEO
 	title="Busy Little Bat Sewing &middot; Contact Us"
 	description="Contact Busy Bat"
-	keywords="Contact busy bat, contact busy bat sewing co."
+	keywords="contact busy bat, contact busy bat sewing co"
 />
 
 <section

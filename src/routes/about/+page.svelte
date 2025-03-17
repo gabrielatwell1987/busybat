@@ -6,7 +6,7 @@
 <SEO
 	title="Busy Little Bat Sewing &middot; About Us"
 	description="About Busy Little Bat Sewing Co."
-	keywords="About busy bat, about busy bat sewing co."
+	keywords="about busy bat, about busy bat sewing co"
 />
 
 <main>
