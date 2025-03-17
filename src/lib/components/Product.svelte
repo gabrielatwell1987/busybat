@@ -52,11 +52,11 @@
 	.product-card {
 		border-radius: 8px;
 		overflow: hidden;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 		transition:
 			transform 0.3s ease,
 			box-shadow 0.3s ease;
-		background-color: white;
+		background-color: hsl(0, 0%, 89%);
 		width: 100%;
 
 		&:hover {
@@ -99,6 +99,7 @@
 				font-family: var(--font-semibold);
 				font-size: clamp(var(--h5), 2vw, var(--h4));
 				font-weight: 600;
+				letter-spacing: 2px;
 				text-align: center;
 				grid-row: 1;
 			}
@@ -131,6 +132,7 @@
 				& .star {
 					color: #ddd;
 					font-size: clamp(var(--h6), 1.5vw, var(--h4));
+					-webkit-text-stroke: 1px var(--color-secondary);
 
 					&.filled {
 						color: #ffc107;

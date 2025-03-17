@@ -12,19 +12,19 @@
 	<div class="content">
 		<h2>About page</h2>
 
-		<h5>All about you</h5>
+		<h5>All about us</h5>
 
 		<div class="summary">
-			<p class="width">About Busy Little Bat Sewing Co. and what we do.</p>
+			<p class="width">About <span>Busy Little Bat Sewing Co.</span></p>
+
+			<p class="width indent">We make custom clothing and accessories for all ages and sizes.</p>
 
 			<p class="width indent">
-				We make custom clothing and accessories for all ages and sizes. We specialize in unique and
-				fun designs. We also offer sewing classes for all skill levels. We are a small business that
-				is dedicated to providing quality products and services to our customers. We take pride in
-				our work and strive to make every customer happy. We are passionate about sewing and love
-				sharing our knowledge with others. We are committed to providing a positive and welcoming
-				environment for all of our customers. We look forward to working with you!. environment for
-				all of our customers. We look forward to working with you!
+				We specialize in unique and fun designs. We are a small business that is dedicated to
+				providing quality products and services to our customers. We take pride in our work and
+				strive to make every customer happy. We are very passionate about sewing and love sharing
+				our knowledge with others. We are committed to providing a positive and welcoming
+				environment for all of our customers. We look forward to working with you!
 			</p>
 
 			<p class="width indent">
@@ -89,7 +89,19 @@
 						&:first-child {
 							text-align: center;
 							font-size: clamp(var(--h6), 5vw, var(--h3));
-							font-weight: 800;
+							font-weight: 200;
+							letter-spacing: 3px;
+							margin-bottom: 1.5em;
+
+							& span {
+								font-family: var(--font-bold);
+								font-weight: 900;
+							}
+						}
+
+						&:nth-child(2) {
+							font-size: clamp(var(--h6), 5vw, var(--h5));
+							font-weight: 600;
 						}
 					}
 				}
