@@ -37,21 +37,22 @@
 	.content {
 		display: flex;
 		width: 100%;
-		overflow-x: hidden;
+		overflow-x: visible;
 		height: 100%;
 
 		& .form-container {
 			display: flex;
 			justify-content: center;
-			align-items: center;
-			min-height: 100vh;
+			align-items: flex-start;
 			width: 100%;
 			overflow-y: auto;
-			padding: 1rem 0;
+			padding: 3rem 0 5rem 0;
 			view-transition-name: form-content;
 			overflow-x: hidden;
 			transform: translateY(0);
 			position: relative;
+			min-height: auto;
+			max-height: 100%;
 
 			& form {
 				display: flex;
@@ -61,14 +62,11 @@
 				margin-inline: auto;
 				transform: translateY(0);
 				scale: 1;
-
-				@media (width <= 1950px) {
-					scale: 0.9;
-					margin-block: 1em;
-				}
+				padding-bottom: 1.5rem;
 
 				@media (width <= 500px) {
 					position: absolute;
+					bottom: 2em;
 					left: -9%;
 					transform: translateX(-9%);
 				}
@@ -91,7 +89,7 @@
 					& legend {
 						color: var(--color-gray);
 						font-family: var(--font-regular);
-						font-size: clamp(var(--h6), 2vw, var(--h5));
+						font-size: clamp(var(--h5), 2vw, var(--h4));
 						font-weight: 700;
 						text-align: left;
 						letter-spacing: 3px;
@@ -160,6 +158,8 @@
 				}
 
 				& .send {
+					margin-bottom: 1rem;
+
 					@media (width <= 500px) {
 						transform: translateX(-5%);
 						scale: 1.5;
@@ -193,9 +193,15 @@
 					}
 				}
 
+				@media (width <= 1950px) {
+					scale: 0.9;
+					margin-block: 1em;
+				}
+
 				@media (width <= 1150px) {
 					width: min(80%, 1200px);
 					padding-top: 1.5em;
+					padding-bottom: 2.5rem;
 					margin-inline: auto;
 				}
 
@@ -219,13 +225,30 @@
 				}
 			}
 
+			/* @media (min-height: 901px) {
+				padding-top: 2rem;
+				padding-bottom: 5rem;
+			} */
+
 			@media (width <= 768px) {
-				align-items: center;
-				height: 100vh;
-				padding: 0;
+				align-items: flex-start;
+				max-height: 100vh;
+				height: auto;
+				padding-top: 4rem;
+				padding-bottom: 5rem;
 				width: 100%;
 				transform: translateY(0);
 			}
+
+			/* @media (max-height: 600px) {
+				padding-top: 2rem;
+				padding-bottom: 5rem;
+			}
+
+			@media (min-height: 601px) and (max-height: 900px) {
+				padding-top: 1rem;
+				padding-bottom: 4rem;
+			} */
 		}
 	}
 

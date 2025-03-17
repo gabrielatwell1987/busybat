@@ -60,7 +60,7 @@
 		margin: 0.5rem 0;
 		border-radius: var(--radius);
 		width: 99%;
-		height: 5em;
+		height: 3.5em;
 		box-shadow: 0 0 4px var(--color-gray);
 		z-index: 40;
 		margin-inline: auto;

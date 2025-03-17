@@ -17,7 +17,7 @@
 	section {
 		width: 100vw;
 		height: 100vh;
-		overflow-y: hidden;
+		overflow-y: auto;
 		background-size: auto;
 		background-repeat: repeat;
 		position: relative;
