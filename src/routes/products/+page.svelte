@@ -1,4 +1,5 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 	import pink from '$lib/assets/pink-leo.webp';
 	import Product from '$lib/components/Product.svelte';
@@ -10,9 +11,11 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Busy Little Bat Sewing &middot; Our Products</title>
-</svelte:head>
+<SEO
+	title="Busy Little Bat Sewing &middot; Our Products"
+	description="Busy Bat products"
+	keywords="busy bat products, busy bat sewing co. products"
+/>
 
 <div class="content">
 	{#each products as product}

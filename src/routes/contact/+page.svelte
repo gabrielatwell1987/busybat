@@ -1,11 +1,14 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import bg from '$lib/assets/product-bg.webp';
 </script>
 
-<svelte:head>
-	<title>Busy Little Bat Sewing &middot; Contact Us</title>
-</svelte:head>
+<SEO
+	title="Busy Little Bat Sewing &middot; Contact Us"
+	description="Contact Busy Bat"
+	keywords="Contact busy bat, contact busy bat sewing co."
+/>
 
 <section
 	style="background-image: url({bg}); background-repeat: repeat; background-position: center center; background-size: contain;"

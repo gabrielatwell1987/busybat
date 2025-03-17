@@ -1,10 +1,13 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 </script>
 
-<svelte:head>
-	<title>Busy Little Bat Sewing &middot; About Us</title>
-</svelte:head>
+<SEO
+	title="Busy Little Bat Sewing &middot; About Us"
+	description="About Busy Little Bat Sewing Co."
+	keywords="About busy bat, about busy bat sewing co."
+/>
 
 <main>
 	<VerticalTitle title="About" />
