@@ -26,6 +26,10 @@
 	src: url('/fonts/FiraSans-Black.ttf') format('truetype');
 }
 
+@view-transition {
+	navigation: auto;
+}
+
 :root {
 	/* fonts */
 	--font-regular: 'Fira', sans-serif;

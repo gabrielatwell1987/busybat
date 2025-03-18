@@ -56,36 +56,40 @@
 	}
 
 	::view-transition-old(\*-product-card-\*) {
-		animation: product-fade-out var(--timing) linear forwards !important;
+		animation: product-fade-out var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
 	}
 
 	::view-transition-new(\*-product-card-\*) {
-		animation: product-fade-in var(--timing) linear forwards !important;
+		animation: product-fade-in var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
 	}
 
 	::view-transition-old(products-content) {
-		animation: product-fade-out var(--timing) linear forwards !important;
+		animation: product-fade-out var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
 	}
 
 	::view-transition-new(products-content) {
-		animation: product-fade-in var(--timing) linear forwards !important;
+		animation: product-fade-in var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
 	}
 
 	@keyframes product-fade-in {
 		from {
 			opacity: 0;
+			transform: scale(0.98);
 		}
 		to {
 			opacity: 1;
+			transform: scale(1);
 		}
 	}
 
 	@keyframes product-fade-out {
 		from {
 			opacity: 1;
+			transform: scale(1);
 		}
 		to {
 			opacity: 0;
+			transform: scale(1.02);
 		}
 	}
 </style>
