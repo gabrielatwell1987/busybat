@@ -143,16 +143,17 @@
 
 		&.enlarged {
 			position: fixed;
-			top: 50%;
+			top: 57%;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			width: 50%;
 			max-width: 800px;
 			max-height: 90vh;
 			overflow-y: auto;
-			z-index: 10000;
+			z-index: 999999;
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+			/* margin-top: 3em; */
 		}
 
 		&:not(.enlarged):hover {
@@ -275,12 +276,13 @@
 		position: fixed;
 		inset: 0;
 		background-color: rgba(0, 0, 0, 0.5);
-		z-index: 9999;
+		z-index: 999998;
 	}
 
 	@media (max-width: 768px) {
 		.product-card.enlarged {
 			width: 90%;
+			top: 57%;
 		}
 	}
 </style>

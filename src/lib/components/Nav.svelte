@@ -45,7 +45,7 @@
 
 <style>
 	:global(::view-transition-group(navigation)) {
-		z-index: 9999 !important;
+		z-index: 5000 !important;
 	}
 
 	nav {
@@ -66,7 +66,7 @@
 		margin-inline: auto;
 		view-transition-name: navigation;
 		scale: 1;
-		z-index: 9000;
+		z-index: 5000;
 
 		& .burger {
 			display: none;
@@ -133,7 +133,7 @@
 			& .burger {
 				display: block;
 				position: relative;
-				z-index: 9998;
+				z-index: 4998;
 			}
 
 			& ul {
@@ -147,7 +147,7 @@
 				width: 100%;
 				height: 100vh;
 				background-color: var(--color-primary);
-				z-index: 9997;
+				z-index: 4997;
 				overflow-y: auto;
 				opacity: 1;
 				transition: left 0.5s ease-in-out !important;
