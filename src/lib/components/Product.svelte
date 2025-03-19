@@ -62,9 +62,12 @@
 								footer.style.opacity = '1';
 								footer.style.visibility = 'visible';
 							}
-						}, 300);
+						}, 500);
 					}
 				});
+
+				// Optional: You can also set a custom duration for view transitions
+				document.documentElement.style.setProperty('--view-transition-duration', '1s');
 
 				// Handle ready and finished states
 				transition.ready.then(() => {
@@ -167,6 +170,7 @@
 		cursor: pointer;
 		z-index: 1;
 		will-change: transform, opacity;
+		transform: translateZ(0);
 
 		&:hover {
 			transform: translateY(-5px);
