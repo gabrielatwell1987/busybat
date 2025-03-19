@@ -87,7 +87,7 @@
 					background-color: var(--color-white);
 
 					& legend {
-						color: var(--color-gray);
+						color: var(--color-dark);
 						font-family: var(--font-regular);
 						font-size: clamp(var(--h5), 2vw, var(--h4));
 						font-weight: 700;
@@ -107,7 +107,7 @@
 
 				& label {
 					color: var(--color-gray);
-					font-family: var(--font-regular);
+					font-family: var(--font-semibold);
 					font-size: clamp(var(--h6), 2vw, var(--h5));
 					font-weight: 700;
 					text-align: center;

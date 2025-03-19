@@ -60,6 +60,7 @@
 				padding: 0;
 				color: var(--color-accent);
 				-webkit-text-stroke: 1px var(--color-secondary);
+				text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 			}
 
 			& h5 {
@@ -82,7 +83,7 @@
 					text-align: center;
 
 					&.width {
-						max-width: 1200px;
+						max-width: 1500px;
 						width: 100%;
 						margin-inline: auto;
 						text-align: left;

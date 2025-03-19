@@ -22,9 +22,13 @@
 		margin: 0;
 		border-radius: var(--radius);
 		height: 3em;
-		z-index: 20;
+		z-index: 10;
 		max-width: calc(100% - 2rem);
 		width: fit-content;
+
+		/* .product-card.enlarged ~ & {
+            z-index: 5;
+        } */
 
 		& p {
 			font-family: var(--font-semibold);

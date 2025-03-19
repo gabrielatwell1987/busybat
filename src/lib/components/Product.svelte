@@ -41,11 +41,27 @@
 							.forEach((product) => {
 								product.style.visibility = 'hidden';
 							});
+
+						// Hide footer when product is enlarged - more aggressive approach
+						const footer = document.querySelector('footer');
+						if (footer) {
+							footer.style.zIndex = '1';
+							footer.style.opacity = '0';
+							footer.style.visibility = 'hidden';
+						}
 					} else {
 						setTimeout(() => {
 							document.querySelectorAll('.product-card').forEach((product) => {
 								product.style.visibility = 'visible';
 							});
+
+							// Restore footer z-index
+							const footer = document.querySelector('footer');
+							if (footer) {
+								footer.style.zIndex = '20';
+								footer.style.opacity = '1';
+								footer.style.visibility = 'visible';
+							}
 						}, 300);
 					}
 				});
@@ -68,11 +84,27 @@
 					.forEach((product) => {
 						product.style.visibility = 'hidden';
 					});
+
+				// Add more aggressive footer handling here too
+				const footer = document.querySelector('footer');
+				if (footer) {
+					footer.style.zIndex = '1';
+					footer.style.opacity = '0';
+					footer.style.visibility = 'hidden';
+				}
 			} else {
 				setTimeout(() => {
 					document.querySelectorAll('.product-card').forEach((product) => {
 						product.style.visibility = 'visible';
 					});
+
+					// Add footer visibility restoration
+					const footer = document.querySelector('footer');
+					if (footer) {
+						footer.style.zIndex = '20';
+						footer.style.opacity = '1';
+						footer.style.visibility = 'visible';
+					}
 				}, 300);
 			}
 		}
@@ -153,7 +185,7 @@
 			z-index: 999999;
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-			/* margin-top: 3em; */
+			margin-bottom: 2rem;
 		}
 
 		&:not(.enlarged):hover {
@@ -168,6 +200,7 @@
 
 			.enlarged & {
 				height: 300px;
+				/* height: 275px; */
 			}
 
 			& img {
@@ -192,12 +225,12 @@
 		& .product-info {
 			display: grid;
 			grid-template-rows: auto auto auto 1fr auto;
-			gap: 0.5rem;
+			gap: 0.05rem;
 			padding: 1rem;
 
 			& .product-name {
 				margin: 0;
-				font-family: var(--font-semibold);
+				font-family: var(--font-bold);
 				font-size: clamp(var(--h5), 2vw, var(--h4));
 				font-weight: 600;
 				letter-spacing: 2px;
@@ -208,7 +241,7 @@
 			& .product-price {
 				font-size: 1.4rem;
 				font-weight: bold;
-				color: var(--color-info);
+				color: var(--color-success);
 				margin: 0.5rem 0;
 				grid-row: 3;
 			}
@@ -250,7 +283,7 @@
 			& .add-to-cart-btn {
 				width: 100%;
 				padding: 0.7rem;
-				background-color: var(--color-success);
+				background-color: var(--color-info);
 				color: var(--color-white);
 				border: none;
 				border-radius: var(--radius);
@@ -261,7 +294,7 @@
 				grid-row: 5;
 
 				&:hover:not([disabled]) {
-					background-color: hsl(134, 61%, 31%);
+					background-color: hsl(188, 78%, 31%);
 				}
 
 				&:disabled {
