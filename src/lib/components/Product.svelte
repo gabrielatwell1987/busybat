@@ -70,7 +70,6 @@
 					}, 100);
 				} else {
 					// When closing, start making elements visible DURING the transition
-					// Make them visible with low opacity first
 					otherProducts.forEach((product) => {
 						product.style.visibility = 'visible';
 						product.style.opacity = '0.3'; // Start with low opacity
@@ -156,13 +155,14 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="product-card {isEnlarged ? 'enlarged' : ''}"
 	style="view-transition-name: {context}-product-card-{id}"
 	onclick={toggleEnlargement}
 	onkeydown={(e) => e.key === 'Enter' && toggleEnlargement()}
 	aria-label="View product details"
+	role="button"
+	tabindex="0"
 >
 	<div class="product-image">
 		<img src={imageUrl} alt={name} />
@@ -192,9 +192,12 @@
 </div>
 
 {#if isEnlarged}
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
-	<div class="overlay" onclick={toggleEnlargement}></div>
+	<button
+		class="overlay"
+		onclick={toggleEnlargement}
+		onkeydown={(e) => e.key === 'Enter' && toggleEnlargement()}
+		aria-label="Close enlarged view"
+	></button>
 {/if}
 
 <style>
