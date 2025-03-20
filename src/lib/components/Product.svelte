@@ -249,8 +249,8 @@
 			overflow: hidden;
 
 			.enlarged & {
-				height: 300px;
-				/* height: 275px; */
+				height: 400px;
+				transition: height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 			}
 
 			& img {
@@ -269,6 +269,18 @@
 				justify-content: center;
 				align-items: center;
 				font-weight: bold;
+			}
+
+			@media (max-width: 768px) {
+				.enlarged & {
+					height: 350px;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.enlarged & {
+					height: 200px;
+				}
 			}
 		}
 

@@ -91,8 +91,10 @@
 			}
 
 			& p {
-				font-size: clamp(var(--sm), 1.5vw, var(--h5));
-				font-weight: 600;
+				font-family: var(--font-semibold);
+				font-size: clamp(var(--h6), 1.5vw, var(--h4));
+				font-weight: 800;
+				letter-spacing: 3px;
 				color: var(--color-secondary);
 				margin: 0.5em 0;
 			}

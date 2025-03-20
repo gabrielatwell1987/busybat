@@ -13,13 +13,11 @@
 	<VerticalTitle title="About" />
 
 	<div class="content">
-		<h2>About page</h2>
+		<h5>Busy Little Bat Sewing Co.</h5>
 
-		<h5>All about us</h5>
+		<h2>About us</h2>
 
 		<div class="summary">
-			<p class="width">About <span>Busy Little Bat Sewing Co.</span></p>
-
 			<p class="width indent">We make custom clothing and accessories for all ages and sizes.</p>
 
 			<p class="width indent">
@@ -53,7 +51,7 @@
 
 			& h2 {
 				font-family: var(--font-title);
-				font-size: clamp(var(--h4), 5vw, var(--xl));
+				font-size: clamp(var(--h4), 5vw, var(--xxl));
 				font-weight: 700;
 				letter-spacing: 5px;
 				margin: 0;
@@ -66,10 +64,11 @@
 			& h5 {
 				font-family: var(--font-regular);
 				font-size: clamp(var(--sm), 1.5vw, var(--h6));
-				font-weight: 300;
+				font-weight: 500;
 				font-style: italic;
 				margin: 0;
 				padding: 0;
+				margin-bottom: -1em;
 			}
 
 			& .summary {
@@ -92,20 +91,18 @@
 
 						&:first-child {
 							text-align: center;
-							font-size: clamp(var(--h6), 5vw, var(--h3));
+							font-family: var(--font-bold);
+							font-size: clamp(var(--h5), 5vw, var(--h1));
 							font-weight: 200;
-							letter-spacing: 3px;
+							max-width: 1000px;
+							width: 100%;
+							line-height: 1.25;
+							letter-spacing: 5px;
 							margin-bottom: 1.5em;
-
-							& span {
-								font-family: var(--font-bold);
-								font-weight: 900;
-							}
 						}
 
 						&:nth-child(2) {
 							font-size: clamp(var(--h6), 5vw, var(--h5));
-							font-weight: 600;
 						}
 					}
 				}
