@@ -55,14 +55,6 @@
 		}
 	}
 
-	::view-transition-old(\*-product-card-\*) {
-		animation: product-fade-out var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-	}
-
-	::view-transition-new(\*-product-card-\*) {
-		animation: product-fade-in var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-	}
-
 	::view-transition-old(products-content) {
 		animation: product-fade-out var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
 	}

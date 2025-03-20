@@ -25,90 +25,132 @@
 
 	function toggleEnlargement() {
 		if (document.startViewTransition) {
-			// Add a small delay before starting the transition
-			setTimeout(() => {
-				const transition = document.startViewTransition(() => {
-					isEnlarged = !isEnlarged;
+			// Prepare elements before transition
+			const otherProducts = document.querySelectorAll(
+				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+			);
+			const footer = document.querySelector('footer');
+			const isCurrentlyEnlarged = isEnlarged;
 
-					// Force layout recalculation
-					document.documentElement.scrollTop;
+			// Set custom duration for the transition
+			document.documentElement.style.setProperty('--view-transition-duration', '1.25s');
+			document.documentElement.style.setProperty('--view-transition-delay', '0.2s');
 
-					if (isEnlarged) {
-						document
-							.querySelectorAll(
-								`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-							)
-							.forEach((product) => {
-								product.style.visibility = 'hidden';
-							});
+			// Create a specific style for transition timing
+			const styleEl = document.createElement('style');
+			styleEl.textContent = `
+				::view-transition-old(${context}-product-card-${id}),
+				::view-transition-new(${context}-product-card-${id}) {
+				animation-delay: 0.2s;
+				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+				animation-duration: 1.2s;
+				}
+			`;
+			document.head.appendChild(styleEl);
 
-						// Hide footer when product is enlarged - more aggressive approach
-						const footer = document.querySelector('footer');
+			const transition = document.startViewTransition(() => {
+				isEnlarged = !isEnlarged;
+
+				// Force layout recalculation
+				document.body.offsetHeight;
+
+				if (isEnlarged) {
+					// Hide other elements when enlarging
+					setTimeout(() => {
+						otherProducts.forEach((product) => {
+							product.style.opacity = '0';
+							product.style.visibility = 'hidden';
+						});
+
 						if (footer) {
 							footer.style.zIndex = '1';
 							footer.style.opacity = '0';
 							footer.style.visibility = 'hidden';
 						}
-					} else {
-						setTimeout(() => {
-							document.querySelectorAll('.product-card').forEach((product) => {
-								product.style.visibility = 'visible';
-							});
+					}, 100);
+				} else {
+					// When closing, start making elements visible DURING the transition
+					// Make them visible with low opacity first
+					otherProducts.forEach((product) => {
+						product.style.visibility = 'visible';
+						product.style.opacity = '0.3'; // Start with low opacity
+					});
 
-							// Restore footer z-index
-							const footer = document.querySelector('footer');
-							if (footer) {
-								footer.style.zIndex = '20';
-								footer.style.opacity = '1';
-								footer.style.visibility = 'visible';
-							}
-						}, 500);
+					if (footer) {
+						footer.style.visibility = 'visible';
+						footer.style.opacity = '0.3';
+						footer.style.zIndex = '20';
 					}
-				});
+				}
+			});
 
-				// Optional: You can also set a custom duration for view transitions
-				document.documentElement.style.setProperty('--view-transition-duration', '1s');
+			// For the end of transition
+			transition.finished.then(() => {
+				// Clean up the added style
+				document.head.removeChild(styleEl);
 
-				// Handle ready and finished states
-				transition.ready.then(() => {
-					// Ready to animate
-				});
-			}, 10);
+				if (!isEnlarged) {
+					// When transition is done, make everything fully visible
+					otherProducts.forEach((product) => {
+						product.style.opacity = '1';
+						product.style.transition = 'opacity 0.3s ease';
+					});
+
+					if (footer) {
+						footer.style.opacity = '1';
+					}
+				}
+			});
 		} else {
-			// Fallback for browsers without view transitions
+			// Update fallback version with the same pattern
 			isEnlarged = !isEnlarged;
 
-			// Same visibility logic as before
 			if (isEnlarged) {
-				document
-					.querySelectorAll(
-						`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-					)
-					.forEach((product) => {
-						product.style.visibility = 'hidden';
-					});
-
-				// Add more aggressive footer handling here too
-				const footer = document.querySelector('footer');
-				if (footer) {
-					footer.style.zIndex = '1';
-					footer.style.opacity = '0';
-					footer.style.visibility = 'hidden';
-				}
-			} else {
 				setTimeout(() => {
-					document.querySelectorAll('.product-card').forEach((product) => {
-						product.style.visibility = 'visible';
-					});
+					document
+						.querySelectorAll(
+							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+						)
+						.forEach((product) => {
+							product.style.opacity = '0';
+							product.style.visibility = 'hidden';
+						});
 
-					// Add footer visibility restoration
 					const footer = document.querySelector('footer');
 					if (footer) {
-						footer.style.zIndex = '20';
-						footer.style.opacity = '1';
-						footer.style.visibility = 'visible';
+						footer.style.zIndex = '1';
+						footer.style.opacity = '0';
+						footer.style.visibility = 'hidden';
 					}
-				}, 300);
+				}, 200);
+			} else {
+				// Make elements visible immediately but with fading in
+				const products = document.querySelectorAll('.product-card');
+				const footer = document.querySelector('footer');
+
+				products.forEach((product) => {
+					product.style.visibility = 'visible';
+					product.style.opacity = '0.3';
+					product.style.transition = 'opacity 0.4s ease';
+				});
+
+				if (footer) {
+					footer.style.visibility = 'visible';
+					footer.style.opacity = '0.3';
+					footer.style.zIndex = '20';
+					footer.style.transition = 'opacity 0.4s ease';
+				}
+
+				// Then fade to full opacity
+				setTimeout(() => {
+					products.forEach((product) => {
+						product.style.opacity = '1';
+					});
+
+					if (footer) {
+						footer.style.opacity = '1';
+					}
+				}, 100);
 			}
 		}
 	}
@@ -161,9 +203,9 @@
 		overflow: hidden;
 		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 		transition:
-			transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-			box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-			opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+			transform 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+			box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+			opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 		background-color: hsl(0, 0%, 89%);
 		width: 100%;
 		position: relative;
@@ -190,6 +232,7 @@
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 			margin-bottom: 2rem;
+			animation: enlarge 1s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards;
 		}
 
 		&:not(.enlarged):hover {
@@ -320,6 +363,57 @@
 		.product-card.enlarged {
 			width: 90%;
 			top: 57%;
+		}
+	}
+
+	@keyframes enlarge {
+		0% {
+			transform: translate(-50%, -50%) scale(0.9);
+			opacity: 0.7;
+		}
+		100% {
+			transform: translate(-50%, -50%);
+			opacity: 1;
+		}
+	}
+
+	@keyframes shrink {
+		0% {
+			transform: translate(-50%, -50%);
+			opacity: 1;
+		}
+		100% {
+			transform: translate(-50%, -50%) scale(0.9);
+			opacity: 0.7;
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		::view-transition-old(root),
+		::view-transition-new(root) {
+			animation-delay: 0.2s;
+			animation-duration: 1.2s;
+		}
+
+		/* Target all view transitions for product cards */
+		::view-transition-group(*) {
+			animation-delay: 0.2s;
+			animation-duration: 1.2s;
+			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+		}
+
+		/* Animation for overlay */
+		.overlay {
+			animation: fadeIn 0.5s ease 0.15s both; /* 0.15s delay */
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
 		}
 	}
 </style>
