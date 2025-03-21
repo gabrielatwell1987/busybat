@@ -229,12 +229,11 @@
 			transform: translate(-50%, -50%);
 			width: 50%;
 			max-width: 800px;
-			max-height: 90vh;
-			overflow-y: auto;
+			max-height: 98vh;
+			overflow: hidden;
 			z-index: 999999;
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-			margin-bottom: 2rem;
 			animation: enlarge 1s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards;
 		}
 
@@ -249,7 +248,7 @@
 			overflow: hidden;
 
 			.enlarged & {
-				height: 400px;
+				height: min(40vh, 400px);
 				transition: height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 			}
 
@@ -290,6 +289,11 @@
 			gap: 0.05rem;
 			padding: 1rem;
 
+			.enlarged & {
+				flex: 1;
+				min-height: 0;
+			}
+
 			& .product-name {
 				margin: 0;
 				font-family: var(--font-bold);
@@ -323,6 +327,9 @@
 				&.expanded {
 					line-clamp: initial;
 					-webkit-line-clamp: initial;
+					max-height: 40vh;
+					overflow-y: auto;
+					padding-right: 5px;
 				}
 			}
 
@@ -377,7 +384,8 @@
 	@media (max-width: 768px) {
 		.product-card.enlarged {
 			width: 90%;
-			top: 57%;
+			top: 50%;
+			max-height: 95vh;
 		}
 	}
 

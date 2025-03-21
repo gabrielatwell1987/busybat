@@ -27,7 +27,7 @@
 		align-items: flex-start;
 		height: 100vh;
 		background-color: hsl(0, 0%, 100%);
-		view-transition-name: scale-content;
+		/* view-transition-name: scale-content; */
 		transform: translateY(-6em);
 		position: relative;
 
@@ -39,6 +39,7 @@
 
 		& picture {
 			opacity: 0.25;
+			view-transition-name: scale-content;
 		}
 
 		& img {
@@ -111,10 +112,12 @@
 	}
 
 	::view-transition-old(scale-content) {
+		/* animation: slide-out var(--timing) ease-out forwards; */
 		animation: scale-out var(--timing) ease-out forwards;
 	}
 
 	::view-transition-new(scale-content) {
+		/* animation: slide-in var(--timing) ease-out forwards; */
 		animation: scale-in var(--timing) ease-out forwards;
 	}
 
@@ -139,4 +142,26 @@
 			opacity: 1;
 		}
 	}
+
+	/* @keyframes slide-out {
+		0% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+		100% {
+			transform: translateX(120%);
+			opacity: 0;
+		}
+	} */
+
+	/* @keyframes slide-in {
+		0% {
+			transform: translateX(-120%);
+			opacity: 0;
+		}
+		100% {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	} */
 </style>
