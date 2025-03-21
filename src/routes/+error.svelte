@@ -7,7 +7,7 @@
 	<div class="error">
 		<h2>There was an error</h2>
 
-		<h1>status: {$page.status}</h1>
+		<h1>{$page.status}</h1>
 	</div>
 
 	<div class="error">
