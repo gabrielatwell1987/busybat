@@ -1,7 +1,6 @@
 <script>
 	import SEO from './../lib/data/SEO.svelte';
 	import MainLogo from '$lib/components/MainLogo.svelte';
-	// import Hero from '$lib/components/Hero.svelte';
 </script>
 
 <SEO
@@ -11,5 +10,3 @@
 />
 
 <MainLogo />
-
-<!-- <Hero /> -->
