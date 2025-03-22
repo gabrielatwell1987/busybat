@@ -51,7 +51,7 @@
 
 			& h2 {
 				font-family: var(--font-title);
-				font-size: clamp(var(--h4), 5vw, var(--xxl));
+				font-size: clamp(var(--h4), 15vw, var(--xxl));
 				font-weight: 700;
 				letter-spacing: 5px;
 				margin: 0;
@@ -69,6 +69,10 @@
 				margin: 0;
 				padding: 0;
 				margin-bottom: -1em;
+
+				@media (width <= 850px) {
+					margin-bottom: -0.5em;
+				}
 			}
 
 			& .summary {

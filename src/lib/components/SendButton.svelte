@@ -8,6 +8,7 @@
 	button {
 		font-family: var(--font-semibold);
 		font-size: clamp(var(--h6), 3vw, var(--h3));
+		letter-spacing: 2px;
 		padding: 0.5rem 1rem;
 		background-color: var(--color-accent);
 		color: var(--color-primary);

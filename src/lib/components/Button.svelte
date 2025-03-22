@@ -85,6 +85,7 @@
 		font-family: var(--font-semibold);
 		font-size: clamp(var(--h5), 3vw, var(--h3));
 		font-weight: 600;
+		letter-spacing: 2px;
 		padding: 0.5rem 1rem;
 		background-color: var(--color-accent);
 		color: var(--color-primary);

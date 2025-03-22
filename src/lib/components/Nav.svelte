@@ -27,7 +27,9 @@
 <nav
 	style="background-image: url({bg}); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
 >
-	<Title title="Busy Little Bat Sewing" />
+	<div class="title">
+		<Title title="Busy Little Bat Sewing" />
+	</div>
 
 	<button class="burger" class:open={isOpen} onclick={toggleMenu} aria-label="hamburger menu">
 		<span class="bar"></span>
@@ -67,6 +69,14 @@
 		view-transition-name: navigation;
 		scale: 1;
 		z-index: 5000;
+
+		& .title {
+			opacity: 0.9;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
 
 		& .burger {
 			display: none;

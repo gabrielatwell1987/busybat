@@ -310,10 +310,14 @@
 				color: var(--color-success);
 				margin: 0.5rem 0;
 				grid-row: 3;
+				text-align: right;
 			}
 
 			& .product-description {
-				font-size: clamp(var(--sm), 1.5vw, var(--h6));
+				font-size: clamp(var(--xs), 1.5vw, var(--h6));
+				font-weight: 500;
+				letter-spacing: 0;
+				line-height: 1.25;
 				color: var(--color-gray);
 				margin-bottom: 16px;
 				display: -webkit-box;
@@ -329,7 +333,8 @@
 					-webkit-line-clamp: initial;
 					max-height: 40vh;
 					overflow-y: auto;
-					padding-right: 5px;
+					padding-inline: 0.5rem;
+					font-size: clamp(var(--sm), 1.5vw, var(--h5));
 				}
 			}
 
