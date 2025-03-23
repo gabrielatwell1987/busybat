@@ -31,6 +31,8 @@
 		& section {
 			backdrop-filter: blur(1rem);
 			padding-inline: 1rem;
+			background-color: var(--color-light);
+			border-radius: var(--radius);
 
 			& p {
 				font-family: var(--font-semibold);

@@ -296,6 +296,7 @@
 
 			& .product-name {
 				margin: 0;
+				color: var(--color-dark);
 				font-family: var(--font-bold);
 				font-size: clamp(var(--h5), 2vw, var(--h4));
 				font-weight: 600;

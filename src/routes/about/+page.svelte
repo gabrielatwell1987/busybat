@@ -90,7 +90,7 @@
 						width: 100%;
 						margin-inline: auto;
 						text-align: left;
-						font-size: clamp(var(--sm), 3vw, var(--h5));
+						font-size: clamp(var(--sm), 4vw, var(--h5));
 						font-weight: 500;
 
 						&:first-child {
@@ -99,14 +99,16 @@
 							font-size: clamp(var(--h5), 5vw, var(--h1));
 							font-weight: 200;
 							max-width: 1000px;
-							width: 100%;
+							width: fit-content;
 							line-height: 1.25;
-							letter-spacing: 5px;
 							margin-bottom: 1.5em;
+							padding: 0;
+							text-wrap: balance;
+							color: var(--color-dark);
 						}
 
 						&:nth-child(2) {
-							font-size: clamp(var(--h6), 5vw, var(--h5));
+							font-size: clamp(var(--h6), 6vw, var(--h4));
 						}
 					}
 				}
