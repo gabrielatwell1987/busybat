@@ -160,7 +160,7 @@
 	style="view-transition-name: {context}-product-card-{id}"
 	onclick={toggleEnlargement}
 	onkeydown={(e) => e.key === 'Enter' && toggleEnlargement()}
-	aria-label="View product details"
+	aria-label="View product details for {name}"
 	role="button"
 	tabindex="0"
 >

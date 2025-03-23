@@ -11,6 +11,10 @@
 	<div class="form-container">
 		<form method="POST" action="https://form.taxi/s/226lrszc">
 			<fieldset>
+				<p>
+					<span class="visually-hidden">contact form</span>
+				</p>
+
 				<legend>Message us</legend>
 
 				<label for="name">Name:</label>

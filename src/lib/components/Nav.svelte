@@ -38,9 +38,8 @@
 	</button>
 
 	<ul class:open={isOpen}>
-		<FlippyNav title="Home" url="/" onclick={handleLinkClick} />
-		<FlippyNav title="Products" url="/products" onclick={handleLinkClick} />
 		<FlippyNav title="About" url="/about" onclick={handleLinkClick} />
+		<FlippyNav title="Products" url="/products" onclick={handleLinkClick} />
 		<FlippyNav title="Contact" url="/contact" onclick={handleLinkClick} />
 	</ul>
 </nav>
@@ -114,9 +113,10 @@
 
 		& ul {
 			display: flex;
-			gap: clamp(0.5rem, 2vw, 2rem);
+			gap: clamp(0.5rem, 3vw, 5rem);
 			flex-flow: row wrap;
 		}
+
 		@media (width <= 500px) {
 			width: 95%;
 		}
