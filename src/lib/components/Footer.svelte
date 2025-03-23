@@ -3,12 +3,14 @@
 </script>
 
 <footer>
-	<p>
-		&copy;
-		{year}
-		{name}
-		All rights reserved
-	</p>
+	<section>
+		<p>
+			&copy;
+			{year}
+			{name}
+			All rights reserved
+		</p>
+	</section>
 </footer>
 
 <style>
@@ -26,23 +28,24 @@
 		max-width: calc(100% - 2rem);
 		width: fit-content;
 
-		/* .product-card.enlarged ~ & {
-            z-index: 5;
-        } */
+		& section {
+			backdrop-filter: blur(1rem);
+			padding-inline: 1rem;
 
-		& p {
-			font-family: var(--font-semibold);
-			color: var(--color-secondary);
-			padding: 0 0.5rem;
-			font-size: clamp(var(--sm), 1.2vw, var(--h5));
-			font-weight: 100;
-			text-wrap: nowrap;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+			& p {
+				font-family: var(--font-semibold);
+				color: var(--color-secondary);
+				padding: 0 0.5rem;
+				font-size: clamp(var(--sm), 1.2vw, var(--h5));
+				font-weight: 100;
+				text-wrap: nowrap;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 
-			@media (max-width: 500px) {
-				scale: 0.8;
+				@media (max-width: 500px) {
+					scale: 0.8;
+				}
 			}
 		}
 	}

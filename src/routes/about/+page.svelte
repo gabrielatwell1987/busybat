@@ -12,12 +12,12 @@
 <main>
 	<VerticalTitle title="About" />
 
-	<div class="content">
+	<section class="content">
 		<h5>Busy Little Bat Sewing Co.</h5>
 
 		<h2>About us</h2>
 
-		<div class="summary">
+		<article class="summary">
 			<p class="width indent">We make custom clothing and accessories for all ages and sizes.</p>
 
 			<p class="width indent">
@@ -33,8 +33,8 @@
 				please feel free to contact us. We are always happy to help and look forward to hearing from
 				you!
 			</p>
-		</div>
-	</div>
+		</article>
+	</section>
 </main>
 
 <style>

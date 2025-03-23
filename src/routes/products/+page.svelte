@@ -17,7 +17,7 @@
 	keywords="busy bat products, busy bat sewing co products"
 />
 
-<div class="content">
+<section class="content">
 	{#each products as product}
 		<Product
 			id={product.id}
@@ -31,7 +31,7 @@
 			on:addtocart={handleAddToCart}
 		/>
 	{/each}
-</div>
+</section>
 
 <VerticalTitle title="Products" />
 
