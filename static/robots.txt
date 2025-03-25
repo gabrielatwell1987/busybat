@@ -1,4 +1,13 @@
-User-agent: *
-Disallow:
+export function GET() {
+  return new Response(
+    `User-agent: *
+Allow: /
 
-Sitemap: https://busybat.vercel.app/sitemap.xml
+Sitemap: https://busybatsewing.com/sitemap.xml`,
+    {
+      headers: {
+        'Content-Type': 'text/plain'
+      }
+    }
+  );
+}

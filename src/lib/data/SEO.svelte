@@ -34,8 +34,8 @@
 		{JSON.stringify({
 			"@context": "http://schema.org",
 			"@type": "WebSite",
-			"name": "Busy Bat",
-			"description": "Busy Bat Sewing Co. - Handmade bags and accessories",
+			"name": siteName,
+			"description": description,
 			"url": url
 		})}
 	</script>
