@@ -1,6 +1,8 @@
 <script>
 	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
+	import Image from '$lib/components/Image.svelte';
+	import final from '$lib/assets/small-final.webp';
 </script>
 
 <SEO
@@ -34,6 +36,8 @@
 				you!
 			</p>
 		</article>
+
+		<Image src={final} alt="Busy Little Bat Sewing Co." width="auto" />
 	</section>
 </main>
 
