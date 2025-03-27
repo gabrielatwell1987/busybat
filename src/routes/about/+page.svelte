@@ -2,7 +2,8 @@
 	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 	import Image from '$lib/components/Image.svelte';
-	import final from '$lib/assets/small-final.webp';
+	import card from '$lib/assets/bcard-front.webp';
+	import leopard from '$lib/assets/leopard.webp';
 </script>
 
 <SEO
@@ -30,14 +31,14 @@
 				environment for all of our customers. We look forward to working with you!
 			</p>
 
-			<p class="width indent">
+			<p class="width">
 				If you have any questions or would like to learn more about our products and services,
 				please feel free to contact us. We are always happy to help and look forward to hearing from
 				you!
 			</p>
 		</article>
 
-		<Image src={final} alt="Busy Little Bat Sewing Co." width="auto" />
+		<Image src={card} alt="Busy Little Bat Sewing Co." width="auto" />
 	</section>
 </main>
 
@@ -62,13 +63,13 @@
 				padding: 0;
 				color: var(--color-accent);
 				-webkit-text-stroke: 1px var(--color-secondary);
-				text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+				text-shadow: 2px 4px 4px rgba(100, 100, 100, 0.35);
 			}
 
 			& h5 {
 				font-family: var(--font-regular);
 				font-size: clamp(var(--sm), 1.5vw, var(--h6));
-				font-weight: 500;
+				font-weight: 700;
 				font-style: italic;
 				margin: 0;
 				padding: 0;
@@ -102,7 +103,7 @@
 							font-family: var(--font-bold);
 							font-size: clamp(var(--h5), 5vw, var(--h1));
 							font-weight: 200;
-							max-width: 1000px;
+							max-width: 1200px;
 							width: fit-content;
 							line-height: 1.25;
 							margin-bottom: 1.5em;
@@ -113,6 +114,17 @@
 
 						&:nth-child(2) {
 							font-size: clamp(var(--h6), 6vw, var(--h4));
+						}
+
+						&:nth-child(3) {
+							font-size: clamp(var(--sm), 3vw, var(--h5));
+							font-weight: 800;
+							letter-spacing: 2px;
+							opacity: 0.85;
+
+							@media (width <= 500px) {
+								letter-spacing: 0;
+							}
 						}
 					}
 				}

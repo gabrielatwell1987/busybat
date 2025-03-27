@@ -35,18 +35,19 @@
 			border-radius: var(--radius);
 
 			& p {
-				font-family: var(--font-semibold);
+				font-family: var(--font-regular);
+				font-size: clamp(var(--sm), 1.2vw, var(--h5));
+				/* font-weight: 500; */
+				letter-spacing: 1px;
 				color: var(--color-secondary);
 				padding: 0 0.5rem;
-				font-size: clamp(var(--sm), 1.2vw, var(--h5));
-				font-weight: 100;
 				text-wrap: nowrap;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 
 				@media (max-width: 500px) {
-					scale: 0.8;
+					scale: 0.7;
 				}
 			}
 		}

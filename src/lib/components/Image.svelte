@@ -1,6 +1,6 @@
 <script>
 	/** @type {{src: any, alt: any}} */
-	let { src, alt, width } = $props();
+	let { src, alt, width = 'auto', inline = 'center' } = $props();
 
 	let imageElement;
 
@@ -18,18 +18,31 @@
 	});
 </script>
 
-<img {src} {alt} {width} bind:this={imageElement} />
+<img {src} {alt} {width} bind:this={imageElement} class={inline} />
 
 <style>
 	img {
 		max-width: 100%;
 		height: auto;
 		object-fit: cover;
-		border-radius: 2.5%;
+		border-radius: 10px;
 		z-index: 9;
-		margin-inline: auto;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.left {
+		margin-right: auto;
+		margin-left: 0;
+	}
+
+	.center {
+		margin-inline: auto;
+	}
+
+	.right {
+		margin-left: auto;
+		margin-right: 0;
 	}
 </style>
