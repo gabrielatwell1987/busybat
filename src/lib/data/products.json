@@ -4,18 +4,20 @@
 		"name": "Da beach",
 		"price": 99.99,
 		"imageUrl": "https://images.pexels.com/photos/30840677/pexels-photo-30840677/free-photo-of-scenic-seascape-with-rugged-rock-formations.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-		"description": "A beautiful beach scene",
+		"description": "Son of a beach!",
 		"rating": 4,
-		"inStock": true
+		"inStock": true,
+		"productUrl": "https://images.pexels.com/photos/30840677/pexels-photo-30840677/free-photo-of-scenic-seascape-with-rugged-rock-formations.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
 	},
 	{
 		"id": "2",
 		"name": "Waves",
 		"price": 20.0,
 		"imageUrl": "https://images.pexels.com/photos/1646311/pexels-photo-1646311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-		"description": "Waves crashing in the ocean",
+		"description": "An ocean of emotions",
 		"rating": 2,
-		"inStock": false
+		"inStock": false,
+		"productUrl": "https://images.pexels.com/photos/1646311/pexels-photo-1646311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 	},
 	{
 		"id": "3",
@@ -24,7 +26,8 @@
 		"imageUrl": "photos/archie.webp",
 		"description": "A poodle with an attitude",
 		"rating": 5,
-		"inStock": true
+		"inStock": true,
+		"productUrl": "photos/archie.webp"
 	},
 	{
 		"id": "4",
@@ -33,7 +36,8 @@
 		"imageUrl": "https://images.pexels.com/photos/30926674/pexels-photo-30926674/free-photo-of-elegant-ballet-dancer-in-white-dress-with-red-hearts.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
 		"description": "A dancer who's mentally incompetent",
 		"rating": 2,
-		"inStock": false
+		"inStock": false,
+		"productUrl": "https://images.pexels.com/photos/30926674/pexels-photo-30926674/free-photo-of-elegant-ballet-dancer-in-white-dress-with-red-hearts.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
 	},
 	{
 		"id": "5",
@@ -42,7 +46,8 @@
 		"imageUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		"description": "Head of the kitten mob",
 		"rating": 1,
-		"inStock": true
+		"inStock": true,
+		"productUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 	},
 	{
 		"id": "6",
@@ -51,16 +56,18 @@
 		"imageUrl": "https://images.pexels.com/photos/53207/carnival-venice-eyes-mask-53207.jpeg?auto=compress&cs=tinysrgb&w=600",
 		"description": "A clown face",
 		"rating": 2,
-		"inStock": true
+		"inStock": true,
+		"productUrl": "https://images.pexels.com/photos/53207/carnival-venice-eyes-mask-53207.jpeg?auto=compress&cs=tinysrgb&w=600"
 	},
 	{
 		"id": "7",
 		"name": "Carnival",
 		"price": 10.0,
 		"imageUrl": "https://images.pexels.com/photos/1336429/pexels-photo-1336429.jpeg?auto=compress&cs=tinysrgb&w=600",
-		"description": "A carnival scene",
+		"description": "Home of clown face",
 		"rating": 5,
-		"inStock": false
+		"inStock": false,
+		"productUrl": "https://images.pexels.com/photos/1336429/pexels-photo-1336429.jpeg?auto=compress&cs=tinysrgb&w=600"
 	},
 	{
 		"id": "8",
@@ -69,6 +76,7 @@
 		"imageUrl": "https://images.pexels.com/photos/6518727/pexels-photo-6518727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		"description": "We'll pay you to take this",
 		"rating": 1,
-		"inStock": true
+		"inStock": true,
+		"productUrl": "https://images.pexels.com/photos/6518727/pexels-photo-6518727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 	}
 ]

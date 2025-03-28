@@ -1,7 +1,17 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 
-	let { id, name, price, description, imageUrl, rating, inStock, context = 'default' } = $props();
+	let {
+		id,
+		name,
+		price,
+		description,
+		imageUrl,
+		rating,
+		inStock,
+		context = 'default',
+		productUrl
+	} = $props();
 	let isEnlarged = $state(false);
 
 	const dispatch = createEventDispatcher();
@@ -15,9 +25,18 @@
 	};
 
 	// Function to handle adding to cart
-	function addToCart() {
+	function addToCart(event) {
 		// Prevent the click from triggering the product enlargement
 		event.stopPropagation();
+
+		console.log('Opening URL:', productUrl);
+
+		if (productUrl) {
+			// wait before opening URL
+			setTimeout(() => {
+				window.open(productUrl, '_blank');
+			}, 750);
+		}
 
 		// Dispatch a custom event that parent components can listen to
 		dispatch('addtocart', { id, name, price, imageUrl, quantity: 1 });
@@ -319,7 +338,7 @@
 				font-weight: 500;
 				letter-spacing: 0;
 				line-height: 1.25;
-				color: var(--color-gray);
+				color: var(--color-secondary);
 				margin-bottom: 16px;
 				display: -webkit-box;
 				line-clamp: 3;
@@ -387,33 +406,11 @@
 		z-index: 999998;
 	}
 
-	@media (max-width: 768px) {
+	@media (width <= 768px) {
 		.product-card.enlarged {
 			width: 90%;
 			top: 50%;
 			max-height: 95vh;
-		}
-	}
-
-	@keyframes enlarge {
-		0% {
-			transform: translate(-50%, -50%) scale(0.9);
-			opacity: 0.7;
-		}
-		100% {
-			transform: translate(-50%, -50%);
-			opacity: 1;
-		}
-	}
-
-	@keyframes shrink {
-		0% {
-			transform: translate(-50%, -50%);
-			opacity: 1;
-		}
-		100% {
-			transform: translate(-50%, -50%) scale(0.9);
-			opacity: 0.7;
 		}
 	}
 
@@ -443,6 +440,28 @@
 			to {
 				opacity: 1;
 			}
+		}
+	}
+
+	@keyframes shrink {
+		0% {
+			transform: translate(-50%, -50%);
+			opacity: 1;
+		}
+		100% {
+			transform: translate(-50%, -50%) scale(0.9);
+			opacity: 0.7;
+		}
+	}
+
+	@keyframes enlarge {
+		0% {
+			transform: translate(-50%, -50%) scale(0.9);
+			opacity: 0.7;
+		}
+		100% {
+			transform: translate(-50%, -50%);
+			opacity: 1;
 		}
 	}
 </style>

@@ -28,6 +28,7 @@
 			rating={product.rating}
 			inStock={product.inStock}
 			context="products-page"
+			productUrl={product.productUrl}
 			on:addtocart={handleAddToCart}
 		/>
 	{/each}
