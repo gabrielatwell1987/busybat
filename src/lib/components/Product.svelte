@@ -13,6 +13,7 @@
 		productUrl
 	} = $props();
 	let isEnlarged = $state(false);
+	let isLoading = $state(false);
 
 	const dispatch = createEventDispatcher();
 
@@ -29,12 +30,21 @@
 		// Prevent the click from triggering the product enlargement
 		event.stopPropagation();
 
+		isLoading = true;
+
 		console.log('Opening URL:', productUrl);
 
 		if (productUrl) {
 			// wait before opening URL
 			setTimeout(() => {
 				window.open(productUrl, '_blank');
+
+				isLoading = false;
+			}, 1000);
+		} else {
+			// If no URL, reset loading state immediately
+			setTimeout(() => {
+				isLoading = false;
 			}, 750);
 		}
 
@@ -204,8 +214,16 @@
 
 		<p class="product-description" class:expanded={isEnlarged}>{description}</p>
 
-		<button class="add-to-cart-btn" onclick={addToCart} disabled={!inStock}>
-			{inStock ? 'Add to Cart' : 'Out of Stock'}
+		<button
+			class="add-to-cart-btn {isLoading ? 'loading' : ''}"
+			onclick={addToCart}
+			disabled={!inStock || isLoading}
+		>
+			{#if isLoading}
+				<span class="loading-text">Loading</span>
+			{:else}
+				{inStock ? 'Add to Cart' : 'Out of Stock'}
+			{/if}
 		</button>
 	</div>
 </div>
@@ -395,6 +413,28 @@
 					background-color: var(--color-gray);
 					cursor: not-allowed;
 				}
+
+				&.loading {
+					background-color: var(--color-dark);
+					position: relative;
+					overflow: hidden;
+
+					&::after {
+						content: '';
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						height: 2px;
+						width: 100%;
+						background: linear-gradient(to right, transparent, white, transparent);
+						animation: loading-animation 1.5s infinite;
+					}
+				}
+
+				& .loading-text::after {
+					content: '';
+					animation: loadingDots 1.5s infinite steps(4, jump-none);
+				}
 			}
 		}
 	}
@@ -462,6 +502,33 @@
 		100% {
 			transform: translate(-50%, -50%);
 			opacity: 1;
+		}
+	}
+
+	@keyframes loading-animation {
+		0% {
+			transform: translateX(-100%);
+		}
+		100% {
+			transform: translateX(100%);
+		}
+	}
+
+	@keyframes loadingDots {
+		0% {
+			content: '';
+		}
+		25% {
+			content: '.';
+		}
+		50% {
+			content: '..';
+		}
+		75% {
+			content: '...';
+		}
+		100% {
+			content: '';
 		}
 	}
 </style>
