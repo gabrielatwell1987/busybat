@@ -3,16 +3,18 @@
 	import Nav from '../lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import ViewTransition from '$lib/components/ViewTransition.svelte';
+	import SkipToMain from '$lib/components/SkipToMain.svelte';
 
 	let { children } = $props();
 </script>
 
 <ViewTransition />
+<SkipToMain />
 
 <main>
 	<Nav />
 
-	<div class="slot">
+	<div class="slot" id="main-content">
 		{@render children()}
 	</div>
 
