@@ -5,10 +5,12 @@
 <footer>
 	<section>
 		<p>
-			&copy;
-			{year}
-			{name}
-			All rights reserved
+			<span>
+				&copy;
+				{year}
+				{name}
+				All rights reserved</span
+			>
 		</p>
 	</section>
 </footer>
@@ -19,7 +21,7 @@
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		padding: 1rem;
+		/* padding: 1rem; */
 		background-color: transparent;
 		margin: 0;
 		border-radius: var(--radius);
@@ -30,24 +32,27 @@
 
 		& section {
 			backdrop-filter: blur(1rem);
-			padding-inline: 1rem;
-			background-color: var(--color-light);
+			/* padding-inline: 1rem; */
 			border-radius: var(--radius);
 
 			& p {
 				font-family: var(--font-regular);
-				font-size: clamp(var(--sm), 1.2vw, var(--h5));
-				/* font-weight: 500; */
+				font-size: clamp(var(--xs), 1.2vw, var(--h5));
 				letter-spacing: 1px;
 				color: var(--color-secondary);
-				padding: 0 0.5rem;
 				text-wrap: nowrap;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 
+				& span {
+					background-color: var(--color-light);
+					padding: 0 0.25rem;
+					border-radius: var(--radius);
+				}
+
 				@media (max-width: 500px) {
-					scale: 0.7;
+					scale: 0.85;
 				}
 			}
 		}
