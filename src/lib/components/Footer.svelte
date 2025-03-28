@@ -21,7 +21,6 @@
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		/* padding: 1rem; */
 		background-color: transparent;
 		margin: 0;
 		border-radius: var(--radius);
@@ -32,7 +31,6 @@
 
 		& section {
 			backdrop-filter: blur(1rem);
-			/* padding-inline: 1rem; */
 			border-radius: var(--radius);
 
 			& p {
