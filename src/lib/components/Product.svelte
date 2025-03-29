@@ -29,7 +29,9 @@
 	function addToCart(event) {
 		// Prevent the click from triggering the product enlargement
 		event.stopPropagation();
+		event.preventDefault();
 
+		if (isLoading) return;
 		isLoading = true;
 
 		console.log('Opening URL:', productUrl);
@@ -37,7 +39,11 @@
 		if (productUrl) {
 			// wait before opening URL
 			setTimeout(() => {
-				window.open(productUrl, '_blank');
+				const newWindow = window.open(productUrl, '_blank');
+
+				if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+					window.location.href = productUrl;
+				}
 
 				isLoading = false;
 			}, 1000);
