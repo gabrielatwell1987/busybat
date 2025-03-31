@@ -30,6 +30,12 @@
 	navigation: auto;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
 :root {
 	/* fonts */
 	--font-regular: 'Fira', sans-serif;
