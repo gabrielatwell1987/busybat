@@ -23,7 +23,7 @@
 			font-family: var(--font-bold);
 			font-size: clamp(var(--h5), 2.5vw, var(--h3));
 			font-weight: 900;
-			letter-spacing: 3px;
+			letter-spacing: 1px;
 		}
 
 		&:is(:hover, :focus-within) > * {

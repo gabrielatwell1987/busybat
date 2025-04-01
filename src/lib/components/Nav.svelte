@@ -39,8 +39,8 @@
 
 	<ul class:open={isOpen}>
 		<FlippyNav title="About" url="/about" onclick={handleLinkClick} />
-		<FlippyNav title="Products" url="/products" onclick={handleLinkClick} />
-		<FlippyNav title="Contact" url="/contact" onclick={handleLinkClick} />
+		<FlippyNav title="Creations" url="/products" onclick={handleLinkClick} />
+		<FlippyNav title="Summon Me" url="/contact" onclick={handleLinkClick} />
 	</ul>
 </nav>
 
