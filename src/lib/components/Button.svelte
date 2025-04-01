@@ -82,10 +82,9 @@
 
 <style>
 	.button {
-		font-family: var(--font-semibold);
-		font-size: clamp(var(--h5), 3vw, var(--h3));
-		font-weight: 600;
-		letter-spacing: 2px;
+		font-family: var(--font-title);
+		font-size: clamp(var(--h5), 5vw, var(--h2));
+		letter-spacing: 1px;
 		padding: 0.5rem 1rem;
 		background-color: var(--color-accent);
 		color: var(--color-primary);
@@ -114,7 +113,7 @@
 		}
 
 		@media (width <= 500px) {
-			font-size: clamp(var(--sm), 2vw, var(--h4));
+			font-size: clamp(var(--h5), 2vw, var(--h4));
 			padding: 0.75rem 1.25rem; /* Larger touch target on mobile */
 		}
 	}
