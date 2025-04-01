@@ -13,8 +13,8 @@
 
 <SEO
 	title="Busy Little Bat Sewing &middot; Our Products"
-	description="Busy Bat products"
-	keywords="busy bat products, busy bat sewing co products"
+	description="Busy Little Bat Sewing products"
+	keywords="busy little bat products, busy little bat sewing creations"
 />
 
 <section class="content">

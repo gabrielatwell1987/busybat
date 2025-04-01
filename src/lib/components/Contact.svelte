@@ -15,7 +15,7 @@
 					<span class="visually-hidden">contact form</span>
 				</p>
 
-				<legend>Message us</legend>
+				<legend>Message me</legend>
 
 				<label for="name">Name:</label>
 				<input type="text" id="name" name="name" bind:value={name} required />

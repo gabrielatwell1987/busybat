@@ -8,37 +8,37 @@
 
 <SEO
 	title="Busy Little Bat Sewing &middot; About Us"
-	description="About Busy Little Bat Sewing Co."
-	keywords="about busy bat, about busy bat sewing co"
+	description="About Busy Little Bat Sewing."
+	keywords="about busy little bat sewing, about busy little bat"
 />
 
 <main>
 	<VerticalTitle title="About" />
 
 	<section class="content">
-		<h5>Busy Little Bat Sewing Co.</h5>
+		<h5>Busy Little Bat Sewing</h5>
 
 		<h2>About us</h2>
 
 		<article class="summary">
-			<p class="width indent">We make custom clothing and accessories for all ages and sizes.</p>
+			<p class="width indent">I make custom clothing and accessories for all ages and sizes.</p>
 
 			<p class="width indent">
-				We specialize in unique and fun designs. We are a small business that is dedicated to
-				providing quality products and services to our customers. We take pride in our work and
-				strive to make every customer happy. We are very passionate about sewing and love sharing
-				our knowledge with others. We are committed to providing a positive and welcoming
-				environment for all of our customers. We look forward to working with you!
+				I specialize in unique and fun designs. I are a small business that is dedicated to
+				providing quality products and services to our customers. I take pride in our work and
+				strive to make every customer happy. I are very passionate about sewing and love sharing our
+				knowledge with others. I are committed to providing a positive and welcoming environment for
+				all of our customers. We look forward to working with you!
 			</p>
 
 			<p class="width">
 				If you have any questions or would like to learn more about our products and services,
-				please feel free to contact us. We are always happy to help and look forward to hearing from
+				please feel free to contact us. I am always happy to help and look forward to hearing from
 				you!
 			</p>
 		</article>
 
-		<Image src={card} alt="Busy Little Bat Sewing Co." width="auto" />
+		<Image src={card} alt="Busy Little Bat Sewing" width="auto" />
 	</section>
 </main>
 

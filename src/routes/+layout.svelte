@@ -18,7 +18,7 @@
 		{@render children()}
 	</div>
 
-	<Footer year={new Date().getFullYear()} name="Busy Little Bat Sewing Co." />
+	<Footer year={new Date().getFullYear()} name="Busy Little Bat Sewing." />
 </main>
 
 <style>
