@@ -43,6 +43,8 @@
 		gap: 1em;
 		align-items: stretch;
 		max-width: 1200px;
+		width: 100%;
+		box-sizing: border-box;
 		margin-inline: auto;
 		margin-bottom: 2rem;
 		width: auto;

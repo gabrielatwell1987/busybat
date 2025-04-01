@@ -25,9 +25,9 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		height: auto !important;
+		height: auto;
 		min-height: 100%;
-		overflow-y: auto !important;
+		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 	}
@@ -38,7 +38,7 @@
 		display: flex;
 		flex-direction: column;
 		flex: 1 0 auto;
-		height: auto !important;
+		height: auto;
 		padding-top: 5em;
 	}
 

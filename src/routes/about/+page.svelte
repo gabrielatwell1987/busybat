@@ -13,7 +13,7 @@
 
 <div class="background-wrapper"></div>
 
-<main>
+<div class="about-container">
 	<VerticalTitle title="About" />
 
 	<section class="content">
@@ -69,7 +69,7 @@
 			</div>
 		</article>
 	</section>
-</main>
+</div>
 
 <style>
 	.background-wrapper {
@@ -87,7 +87,7 @@
 		background-attachment: fixed;
 	}
 
-	main {
+	.about-container {
 		height: auto;
 		position: relative;
 		z-index: 6;
