@@ -29,13 +29,14 @@
 		view-transition-name: success-slide;
 
 		& p {
+			font-family: var(--font-semibold);
 			font-size: clamp(var(--h6), 3vw, var(--h3));
-			font-family: var(--font-regular);
 			text-align: center;
 			margin: 0;
 			padding: 0;
 
 			& i {
+				font-family: var(--font-regular);
 				font-size: clamp(var(--xs), 1vw, var(--h6));
 				font-weight: 700;
 			}

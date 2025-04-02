@@ -19,7 +19,7 @@
 	<section class="content">
 		<h2>Welcome to</h2>
 		<h2>Busy Little Bat Sewing</h2>
-		<h2>where dark meets delightful in every stitch.</h2>
+		<h2>where dark meets delightful in every stitch</h2>
 
 		<article class="summary">
 			<p class="width indent">

@@ -47,10 +47,10 @@
 		& .form-container {
 			display: flex;
 			justify-content: center;
-			align-items: flex-start;
+			align-items: center;
 			width: 100%;
 			overflow-y: auto;
-			padding: 3rem 0 5rem 0;
+			padding: 0 0 2rem 0;
 			view-transition-name: form-content;
 			overflow-x: hidden;
 			transform: translateY(0);
