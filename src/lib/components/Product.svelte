@@ -252,13 +252,13 @@
 			transform 0.7s cubic-bezier(0.25, 1, 0.5, 1),
 			box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1),
 			opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-		background-color: hsl(0, 0%, 89%);
 		width: 100%;
 		position: relative;
 		cursor: pointer;
 		z-index: 1;
 		will-change: transform, opacity;
 		transform: translateZ(0);
+		background-color: hsl(0, 0%, 100%);
 
 		&:hover {
 			transform: translateY(-5px);
@@ -304,7 +304,7 @@
 			& .out-of-stock {
 				position: absolute;
 				inset: 0;
-				background-color: rgba(0, 0, 0, 0.6);
+				background-color: hsla(0, 0%, 100%, 0.3);
 				backdrop-filter: blur(2px);
 				color: var(--color-white);
 				display: flex;
@@ -343,7 +343,7 @@
 				font-family: var(--font-bold);
 				font-size: clamp(var(--h5), 2vw, var(--h4));
 				font-weight: 600;
-				letter-spacing: 2px;
+				letter-spacing: 1px;
 				text-align: center;
 				grid-row: 1;
 			}
@@ -358,7 +358,8 @@
 			}
 
 			& .product-description {
-				font-size: clamp(var(--xs), 1.5vw, var(--h6));
+				font-family: var(--font-regular);
+				font-size: clamp(var(--sm), 1.25vw, var(--h6));
 				font-weight: 500;
 				letter-spacing: 0;
 				line-height: 1.25;
@@ -383,13 +384,12 @@
 			}
 
 			& .product-rating {
-				margin: 0.5rem 0;
 				text-align: center;
 				grid-row: 2;
 
 				& .star {
 					color: #ddd;
-					font-size: clamp(var(--h6), 1.5vw, var(--h4));
+					font-size: clamp(var(--sm), 1.25vw, var(--h5));
 					-webkit-text-stroke: 1px var(--color-secondary);
 
 					&.filled {
@@ -401,7 +401,7 @@
 			& .add-to-cart-btn {
 				width: 100%;
 				padding: 0.7rem;
-				background-color: var(--color-info);
+				background-color: var(--color-accent);
 				color: var(--color-white);
 				border: none;
 				border-radius: var(--radius);
@@ -412,7 +412,7 @@
 				grid-row: 5;
 
 				&:hover:not([disabled]) {
-					background-color: hsl(188, 78%, 31%);
+					background-color: hsl(320, 75%, 56%);
 				}
 
 				&:disabled {
