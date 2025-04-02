@@ -215,7 +215,7 @@
 		</div>
 
 		<div class="product-line" class:expanded={isEnlarged}>
-			<h3 class="product-name">{name}</h3>
+			<h3 class="product-name" class:expanded={isEnlarged}>{name}</h3>
 
 			<p class="product-price" class:expanded={isEnlarged}>{formatPrice(price)}</p>
 		</div>
@@ -256,7 +256,7 @@
 			box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1),
 			opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 		width: 100%;
-		height: calc(100% - 2rem);
+		height: auto;
 		position: relative;
 		cursor: pointer;
 		z-index: 1;
@@ -277,7 +277,6 @@
 			width: 50%;
 			max-width: 800px;
 			max-height: 98vh;
-			height: auto;
 			overflow: hidden;
 			z-index: 999999;
 			cursor: default;
@@ -363,10 +362,14 @@
 				margin: 0;
 				color: var(--color-dark);
 				font-family: var(--font-bold);
-				font-size: clamp(var(--h5), 2vw, var(--h3));
+				font-size: clamp(var(--h5), 2vw, var(--h4));
 				font-weight: 600;
 				letter-spacing: 1px;
 				text-align: center;
+
+				&.expanded {
+					font-size: clamp(var(--h5), 2vw, var(--h3));
+				}
 			}
 
 			& .product-price {
