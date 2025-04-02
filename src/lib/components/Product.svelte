@@ -372,6 +372,7 @@
 				overflow: hidden;
 				grid-row: 4;
 				transition: all 0.3s ease;
+				display: none;
 
 				&.expanded {
 					line-clamp: initial;
@@ -380,6 +381,7 @@
 					overflow-y: auto;
 					padding-inline: 0.5rem;
 					font-size: clamp(var(--sm), 1.5vw, var(--h5));
+					display: block;
 				}
 			}
 
