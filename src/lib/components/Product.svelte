@@ -216,7 +216,7 @@
 			{/each}
 		</div>
 
-		<p class="product-price">{formatPrice(price)}</p>
+		<p class="product-price" class:expanded={isEnlarged}>{formatPrice(price)}</p>
 
 		<p class="product-description" class:expanded={isEnlarged}>{description}</p>
 
@@ -224,6 +224,7 @@
 			class="add-to-cart-btn {isLoading ? 'loading' : ''}"
 			onclick={addToCart}
 			disabled={!inStock || isLoading}
+			class:expanded={isEnlarged}
 		>
 			{#if isLoading}
 				<span class="loading-text">Loading</span>
@@ -355,6 +356,11 @@
 				margin: 0.5rem 0;
 				grid-row: 3;
 				text-align: right;
+				display: none;
+
+				&.expanded {
+					display: block;
+				}
 			}
 
 			& .product-description {
@@ -412,6 +418,11 @@
 				font-weight: bold;
 				transition: background-color 0.3s;
 				grid-row: 5;
+				display: none;
+
+				&.expanded {
+					display: block;
+				}
 
 				&:hover:not([disabled]) {
 					background-color: hsl(320, 75%, 56%);
