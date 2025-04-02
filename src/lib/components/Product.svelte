@@ -208,15 +208,17 @@
 	</div>
 
 	<div class="product-info">
-		<h3 class="product-name">{name}</h3>
-
-		<div class="product-rating">
+		<div class="product-rating" class:expanded={isEnlarged}>
 			{#each Array(5) as _, i}
 				<span class="star {i < rating ? 'filled' : ''}">★</span>
 			{/each}
 		</div>
 
-		<p class="product-price" class:expanded={isEnlarged}>{formatPrice(price)}</p>
+		<div class="product-line" class:expanded={isEnlarged}>
+			<h3 class="product-name">{name}</h3>
+
+			<p class="product-price" class:expanded={isEnlarged}>{formatPrice(price)}</p>
+		</div>
 
 		<p class="product-description" class:expanded={isEnlarged}>{description}</p>
 
@@ -336,21 +338,37 @@
 			.enlarged & {
 				flex: 1;
 				min-height: 0;
+				grid-template-rows: auto auto auto 1fr auto;
+			}
+
+			.product-line {
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+				grid-row: 1;
+
+				&.expanded {
+					grid-row: 2;
+					display: flex;
+					justify-content: space-evenly;
+					align-items: center;
+					width: 100%;
+					margin: 0.5rem 0;
+				}
 			}
 
 			& .product-name {
 				margin: 0;
 				color: var(--color-dark);
 				font-family: var(--font-bold);
-				font-size: clamp(var(--h5), 2vw, var(--h4));
+				font-size: clamp(var(--h5), 2vw, var(--h3));
 				font-weight: 600;
 				letter-spacing: 1px;
 				text-align: center;
-				grid-row: 1;
 			}
 
 			& .product-price {
-				font-size: 1.4rem;
+				font-size: clamp(var(--sm), 1.5vw, var(--h4));
 				font-weight: bold;
 				color: var(--color-success);
 				margin: 0.5rem 0;
@@ -394,6 +412,11 @@
 			& .product-rating {
 				text-align: center;
 				grid-row: 2;
+
+				.enlarged & {
+					grid-row: 1;
+					margin-bottom: 0.5rem;
+				}
 
 				& .star {
 					color: #ddd;
