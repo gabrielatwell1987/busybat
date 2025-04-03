@@ -1,82 +1,24 @@
 [
 	{
 		"id": "1",
-		"name": "Da beach",
-		"price": 99.99,
-		"imageUrl": "https://images.pexels.com/photos/30840677/pexels-photo-30840677/free-photo-of-scenic-seascape-with-rugged-rock-formations.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-		"description": "Son of a beach!",
+		"name": "Mini Menace Tote",
+		"price": 90.0,
+		"imageUrl": "/products/skull-bag__forward.webp",
+		"description": "Draped in a ghostly slate blue canvas, the exterior boasts a haunting skull and bird print. An omen of dark beauty that whispers secrets of the beyond.",
+		"sizing": "11in L x 9in H x 10in D.",
 		"rating": 4,
 		"inStock": true,
-		"productUrl": "https://images.pexels.com/photos/30840677/pexels-photo-30840677/free-photo-of-scenic-seascape-with-rugged-rock-formations.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+		"productUrl": "/products/skull-bag__forward.webp"
 	},
 	{
 		"id": "2",
-		"name": "Waves",
-		"price": 20.0,
-		"imageUrl": "https://images.pexels.com/photos/1646311/pexels-photo-1646311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-		"description": "An ocean of emotions",
-		"rating": 2,
-		"inStock": false,
-		"productUrl": "https://images.pexels.com/photos/1646311/pexels-photo-1646311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-	},
-	{
-		"id": "3",
-		"name": "Archie",
-		"price": 100000.0,
-		"imageUrl": "photos/archie.webp",
-		"description": "A poodle with an attitude",
+		"name": "D.H. Upcycled Denim",
+		"price": 330.0,
+		"imageUrl": "/products/tiedie-jacket__front.webp",
+		"description": "The jacket has hand-painted, one-of-a-kind animal print haunting the upper back_conjured with a wicked blend of fabric paints, mixed by my own hands under the watchful glow of the midnight moon. One of a kind.",
+		"sizing": "Size XL",
 		"rating": 5,
 		"inStock": true,
-		"productUrl": "photos/archie.webp"
-	},
-	{
-		"id": "4",
-		"name": "Random dancer",
-		"price": 1,
-		"imageUrl": "https://images.pexels.com/photos/30926674/pexels-photo-30926674/free-photo-of-elegant-ballet-dancer-in-white-dress-with-red-hearts.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-		"description": "A dancer who's mentally incompetent",
-		"rating": 2,
-		"inStock": false,
-		"productUrl": "https://images.pexels.com/photos/30926674/pexels-photo-30926674/free-photo-of-elegant-ballet-dancer-in-white-dress-with-red-hearts.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-	},
-	{
-		"id": "5",
-		"name": "Mcgillacuddy",
-		"price": 50.0,
-		"imageUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-		"description": "Head of the kitten mob",
-		"rating": 1,
-		"inStock": true,
-		"productUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-	},
-	{
-		"id": "6",
-		"name": "What is this?",
-		"price": 20.0,
-		"imageUrl": "https://images.pexels.com/photos/53207/carnival-venice-eyes-mask-53207.jpeg?auto=compress&cs=tinysrgb&w=600",
-		"description": "A clown face",
-		"rating": 2,
-		"inStock": true,
-		"productUrl": "https://images.pexels.com/photos/53207/carnival-venice-eyes-mask-53207.jpeg?auto=compress&cs=tinysrgb&w=600"
-	},
-	{
-		"id": "7",
-		"name": "Carnival",
-		"price": 10.0,
-		"imageUrl": "https://images.pexels.com/photos/1336429/pexels-photo-1336429.jpeg?auto=compress&cs=tinysrgb&w=600",
-		"description": "Home of clown face",
-		"rating": 5,
-		"inStock": false,
-		"productUrl": "https://images.pexels.com/photos/1336429/pexels-photo-1336429.jpeg?auto=compress&cs=tinysrgb&w=600"
-	},
-	{
-		"id": "8",
-		"name": "Speechless",
-		"price": -500.0,
-		"imageUrl": "https://images.pexels.com/photos/6518727/pexels-photo-6518727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-		"description": "We'll pay you to take this",
-		"rating": 1,
-		"inStock": true,
-		"productUrl": "https://images.pexels.com/photos/6518727/pexels-photo-6518727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+		"productUrl": "/products/tiedie-jacket--front.webp"
 	}
 ]
