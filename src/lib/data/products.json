@@ -8,8 +8,7 @@
 		"sizing": "11in L x 9in H x 10in D.",
 		"rating": 4,
 		"inStock": true,
-		"productUrl": "/products/mini-menace__forward.webp",
-		"dropdownImage": "/products/mini-menace-chain__side.webp"
+		"productUrl": "/products/mini-menace__forward.webp"
 	},
 	{
 		"id": "2",
@@ -20,7 +19,6 @@
 		"sizing": "Size XL",
 		"rating": 5,
 		"inStock": true,
-		"productUrl": "/products/dh-jacket__front.webp",
-		"dropdownImage": "/products/dh-size-chart.webp"
+		"productUrl": "/products/dh-jacket__front.webp"
 	}
 ]

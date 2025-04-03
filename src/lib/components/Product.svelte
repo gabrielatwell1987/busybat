@@ -1,5 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import miniMenaceImg from '$lib/assets/mini-menace-chain__side.webp';
+	import dhSizeChart from '$lib/assets/dh-size-chart.webp';
 
 	let {
 		id,
@@ -17,6 +19,12 @@
 	let isLoading = $state(false);
 	let isDropdownOpen = $state(false);
 
+	const dropdownImages = {
+		'1': miniMenaceImg,
+		'2': dhSizeChart
+	};
+
+	const actualDropdownImage = dropdownImages[id] || dropdownImage;
 	const dispatch = createEventDispatcher();
 
 	// For formatting price with currency
@@ -90,6 +98,10 @@
 
 				// Force layout recalculation
 				document.body.offsetHeight;
+
+				if (!isEnlarged) {
+					isDropdownOpen = false;
+				}
 
 				if (isEnlarged) {
 					// Hide other elements when enlarging
@@ -245,10 +257,8 @@
 				</button>
 
 				{#if isDropdownOpen}
-					<!-- <img src="/path-to-a-known-working-image.webp" alt={name} class="dropdown-image" /> -->
-
 					<div class="dropdown-content" id="product-dropdown">
-						<img src={dropdownImage} alt={name} class="dropdown-image" />
+						<img src={actualDropdownImage} alt={name} class="dropdown-image" />
 					</div>
 				{/if}
 			</div>
@@ -284,10 +294,13 @@
 		margin: 0.75rem 0;
 		grid-row: 4;
 		position: relative;
+		display: flex;
+		justify-content: flex-end;
 	}
 
 	.dropdown-toggle {
-		width: 100%;
+		min-width: 20px;
+		width: auto;
 		padding: 0.5rem;
 		background-color: var(--color-dark);
 		color: white;
@@ -315,16 +328,18 @@
 
 	.dropdown-content {
 		position: absolute;
-		left: 0;
-		right: 0;
-		width: 160%;
-		margin-left: -20%;
-		margin-top: 0.5rem;
+		left: auto;
+		right: 100%;
+		max-width: 80vw;
+		width: 400px;
+		margin-left: 0;
+		margin-right: 1rem;
+		margin-top: 0;
 		border-radius: var(--radius);
 		overflow: hidden;
 		animation: slideDown 0.3s ease forwards;
-		z-index: 100;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+		z-index: 200;
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 		background-color: white;
 	}
 
@@ -333,7 +348,7 @@
 		height: auto;
 		display: block;
 		border-radius: var(--radius);
-		max-height: 400px;
+		max-height: 600px;
 		object-fit: contain;
 	}
 
