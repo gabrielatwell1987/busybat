@@ -331,7 +331,7 @@
 		left: auto;
 		right: 100%;
 		max-width: 80vw;
-		width: 400px;
+		width: 600px;
 		margin-left: 0;
 		margin-right: 1rem;
 		margin-top: 0;
@@ -344,11 +344,11 @@
 	}
 
 	.dropdown-image {
+		max-height: 600px;
 		width: 100%;
 		height: auto;
 		display: block;
 		border-radius: var(--radius);
-		max-height: 600px;
 		object-fit: contain;
 	}
 
