@@ -200,7 +200,7 @@
 	tabindex="0"
 >
 	<div class="product-image">
-		<img src={imageUrl} alt={name} />
+		<img src={imageUrl} alt={name} class:zoomed-out={id === '2'} />
 
 		{#if !inStock}
 			<div class="out-of-stock">Out of Stock</div>
@@ -298,12 +298,10 @@
 			position: relative;
 			height: 300px;
 			overflow: hidden;
-			scale: 0.8;
 
 			.enlarged & {
 				height: min(70vh, 400px);
 				transition: height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-				/* overflow-y: auto; */
 			}
 
 			& img {
@@ -508,6 +506,10 @@
 		flex-shrink: 0;
 	}
 
+	.product-image img.zoomed-out {
+		object-fit: contain;
+	}
+
 	@media (width <= 768px) {
 		.product-card.enlarged {
 			width: 90%;
@@ -516,6 +518,8 @@
 			display: flex;
 			flex-direction: column;
 			overflow: hidden;
+			margin-top: 45px;
+			transform: translate(-50%, -40%);
 		}
 
 		.product-card.enlarged .product-info {
