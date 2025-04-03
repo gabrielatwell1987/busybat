@@ -10,10 +10,12 @@
 		rating,
 		inStock,
 		context = 'default',
-		productUrl
+		productUrl,
+		dropdownImage
 	} = $props();
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
+	let isDropdownOpen = $state(false);
 
 	const dispatch = createEventDispatcher();
 
@@ -188,6 +190,13 @@
 			}
 		}
 	}
+
+	function toggleDropdown(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
+		isDropdownOpen = !isDropdownOpen;
+	}
 </script>
 
 <div
@@ -222,6 +231,29 @@
 
 		<p class="product-description" class:expanded={isEnlarged}>{description}</p>
 
+		{#if isEnlarged}
+			<div class="dropdown-container">
+				<button
+					class="dropdown-toggle"
+					onclick={toggleDropdown}
+					onkeydown={(e) => e.key === 'Enter' && toggleDropdown(e)}
+					aria-expanded={isDropdownOpen}
+					aria-controls="product-dropdown"
+				>
+					<span class="visually-hidden">View Details</span>
+					<span class="arrow-icon">{isDropdownOpen ? '▲' : '▼'}</span>
+				</button>
+
+				{#if isDropdownOpen}
+					<!-- <img src="/path-to-a-known-working-image.webp" alt={name} class="dropdown-image" /> -->
+
+					<div class="dropdown-content" id="product-dropdown">
+						<img src={dropdownImage} alt={name} class="dropdown-image" />
+					</div>
+				{/if}
+			</div>
+		{/if}
+
 		<button
 			class="add-to-cart-btn {isLoading ? 'loading' : ''}"
 			onclick={addToCart}
@@ -247,6 +279,64 @@
 {/if}
 
 <style>
+	.dropdown-container {
+		width: 100%;
+		margin: 0.75rem 0;
+		grid-row: 4;
+		position: relative;
+	}
+
+	.dropdown-toggle {
+		width: 100%;
+		padding: 0.5rem;
+		background-color: var(--color-dark);
+		color: white;
+		border: none;
+		border-radius: var(--radius);
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: clamp(var(--sm), 1.25vw, var(--h6));
+		font-weight: 500;
+		transition: background-color 0.3s;
+		z-index: 2;
+		position: relative;
+
+		&:hover {
+			background-color: hsl(220, 10%, 25%);
+		}
+	}
+
+	.arrow-icon {
+		font-size: 0.75em;
+		transition: transform 0.3s;
+	}
+
+	.dropdown-content {
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 160%;
+		margin-left: -20%;
+		margin-top: 0.5rem;
+		border-radius: var(--radius);
+		overflow: hidden;
+		animation: slideDown 0.3s ease forwards;
+		z-index: 100;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+		background-color: white;
+	}
+
+	.dropdown-image {
+		width: 100%;
+		height: auto;
+		display: block;
+		border-radius: var(--radius);
+		max-height: 400px;
+		object-fit: contain;
+	}
+
 	.product-card {
 		border-radius: 8px;
 		overflow: hidden;
@@ -609,6 +699,17 @@
 		}
 		100% {
 			content: '';
+		}
+	}
+
+	@keyframes slideDown {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
 		}
 	}
 </style>
