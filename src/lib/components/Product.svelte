@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	import miniMenaceImg from '$lib/assets/mini-menace-chain__side.webp';
+	import miniMenaceImg from '$lib/assets/mini-menace-chain__open.webp';
 	import dhSizeChart from '$lib/assets/dh-size-chart.webp';
 
 	let {
@@ -242,6 +242,13 @@
 		</div>
 
 		<p class="product-description" class:expanded={isEnlarged}>{description}</p>
+
+		<!-- {#if sizing && isEnlarged}
+			<p class="product-sizing" class:expanded={isEnlarged}>
+				<span class="sizing-label">Size:</span>
+				{sizing}
+			</p>
+		{/if} -->
 
 		{#if isEnlarged}
 			<div class="dropdown-container">
@@ -527,6 +534,26 @@
 					display: block;
 				}
 			}
+
+			/* & .product-sizing {
+				font-family: var(--font-regular);
+				font-size: clamp(var(--sm), 1.25vw, var(--h6));
+				font-weight: 500;
+				color: var(--color-secondary);
+				margin-top: 0.5rem;
+				margin-bottom: 1rem;
+				grid-row: 4;
+				padding-inline: 0.5rem;
+				display: none;
+
+				&.expanded {
+					display: block;
+				}
+			}
+
+			& .sizing-label {
+				font-weight: 600;
+			} */
 
 			& .product-rating {
 				text-align: center;

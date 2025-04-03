@@ -4,8 +4,8 @@
 		"name": "Mini Menace Tote",
 		"price": 90.0,
 		"imageUrl": "/products/mini-menace__forward.webp",
-		"description": "Draped in a ghostly slate blue canvas, the exterior boasts a haunting skull and bird print. An omen of dark beauty that whispers secrets of the beyond.",
-		"sizing": "11in L x 9in H x 10in D.",
+		"description": "Draped in a ghostly slate blue canvas, the exterior boasts a haunting skull and bird print. An omen of dark beauty that whispers secrets of the beyond. Measurements: ",
+		"sizing": "11in L x 9in H x 10in D",
 		"rating": 4,
 		"inStock": true,
 		"productUrl": "/products/mini-menace__forward.webp"
@@ -14,11 +14,11 @@
 		"id": "2",
 		"name": "D.H. Upcycled Denim",
 		"price": 330.0,
-		"imageUrl": "/products/dh-jacket__front.webp",
+		"imageUrl": "/products/dh-jacket__back.webp",
 		"description": "The jacket has hand-painted, one-of-a-kind animal print haunting the upper back_conjured with a wicked blend of fabric paints, mixed by my own hands under the watchful glow of the midnight moon. One of a kind.",
 		"sizing": "Size XL",
 		"rating": 5,
 		"inStock": true,
-		"productUrl": "/products/dh-jacket__front.webp"
+		"productUrl": "/products/dh-jacket__back.webp"
 	}
 ]
