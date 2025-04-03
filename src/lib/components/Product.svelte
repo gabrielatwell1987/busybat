@@ -271,7 +271,7 @@
 
 		&.enlarged {
 			position: fixed;
-			top: 50%;
+			top: 57%;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			width: 50%;
@@ -303,7 +303,7 @@
 			.enlarged & {
 				height: min(70vh, 400px);
 				transition: height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-				overflow-y: auto;
+				/* overflow-y: auto; */
 			}
 
 			& img {
