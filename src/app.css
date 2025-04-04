@@ -36,6 +36,40 @@
 	}
 }
 
+@media (prefers-reduced-motion: reduce) {
+	.product-card {
+		transition: none !important;
+	}
+
+	.enlarged {
+		animation: none !important;
+	}
+
+	.dropdown-content {
+		animation: none !important;
+	}
+
+	.loading::after {
+		animation: none !important;
+		height: 4px;
+		background: white;
+	}
+
+	::view-transition-group(*) {
+		animation: none !important;
+	}
+
+	::view-transition-old(*) {
+		animation: none !important;
+		opacity: 0;
+	}
+
+	::view-transition-new(*) {
+		animation: none !important;
+		opacity: 1;
+	}
+}
+
 :root {
 	/* fonts */
 	--font-regular: 'Fira', sans-serif;

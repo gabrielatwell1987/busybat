@@ -15,9 +15,14 @@
 	}
 </script>
 
-<button class="button" onclick={handleClick} ontouchstart={handleClick} ontouchend={() => {}}>
+<a
+	class="button"
+	{href}
+	target={newTab ? '_blank' : null}
+	rel={newTab ? 'noopener noreferrer' : null}
+>
 	{title}
-</button>
+</a>
 
 <style>
 	.button {

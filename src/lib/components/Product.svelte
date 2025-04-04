@@ -208,14 +208,60 @@
 		event.preventDefault();
 
 		isDropdownOpen = !isDropdownOpen;
+
+		if (isDropdownOpen) {
+			setTimeout(() => {
+				const announcement = document.getElementById(`product-dropdown-${id}`);
+				if (announcement) announcement.setAttribute('aria-live', 'polite');
+			}, 100);
+		}
 	}
+
+	function trapFocus(element) {
+		const focusableElements = element.querySelectorAll(
+			'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+		);
+		const firstElement = focusableElements[0];
+		const lastElement = focusableElements[focusableElements.length - 1];
+
+		// Set initial focus
+		firstElement.focus();
+
+		// Handle tab navigation
+		element.addEventListener('keydown', (e) => {
+			if (e.key === 'Tab') {
+				if (e.shiftKey && document.activeElement === firstElement) {
+					e.preventDefault();
+					lastElement.focus();
+				} else if (!e.shiftKey && document.activeElement === lastElement) {
+					e.preventDefault();
+					firstElement.focus();
+				}
+			}
+		});
+	}
+
+	$effect(() => {
+		if (isEnlarged) {
+			setTimeout(() => {
+				const card = document.querySelector('.product-card.enlarged');
+
+				if (card) trapFocus(card);
+			}, 100);
+		}
+	});
 </script>
 
 <div
 	class="product-card {isEnlarged ? 'enlarged' : ''}"
 	style="view-transition-name: {context}-product-card-{id}"
 	onclick={toggleEnlargement}
-	onkeydown={(e) => e.key === 'Enter' && toggleEnlargement()}
+	onkeydown={(e) => {
+		if (e.target === e.currentTarget) {
+			if (e.key === 'Enter') toggleEnlargement();
+			if (e.key === 'Escape' && isEnlarged) toggleEnlargement();
+		}
+	}}
 	aria-label="View product details for {name}"
 	role="button"
 	tabindex="0"
@@ -247,17 +293,50 @@
 			<div class="dropdown-container">
 				<button
 					class="dropdown-toggle"
-					onclick={toggleDropdown}
-					onkeydown={(e) => e.key === 'Enter' && toggleDropdown(e)}
+					onclick={(e) => {
+						e.stopPropagation();
+						toggleDropdown(event);
+					}}
+					onkeydown={(e) => {
+						if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+							e.preventDefault();
+							e.stopPropagation();
+							toggleDropdown(e);
+						} else if (e.key === 'Escape') {
+							e.preventDefault();
+							if (isDropdownOpen) {
+								// First close the dropdown if it's open
+								isDropdownOpen = false;
+							} else {
+								// If dropdown is closed, close the enlarged product
+								toggleEnlargement();
+							}
+						}
+					}}
 					aria-expanded={isDropdownOpen}
-					aria-controls="product-dropdown"
+					aria-controls="product-dropdown-{id}"
+					aria-label="View additional product details"
 				>
 					<span class="visually-hidden">View Details</span>
 					<span class="arrow-icon">{isDropdownOpen ? '▲' : '▼'}</span>
 				</button>
 
 				{#if isDropdownOpen}
-					<div class="dropdown-content" id="product-dropdown">
+					<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+					<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+					<div
+						class="dropdown-content"
+						id="product-dropdown-{id}"
+						role="region"
+						aria-label="Additional product details"
+						tabindex="0"
+						onkeydown={(e) => {
+							if (e.key === 'Escape') {
+								e.preventDefault();
+								isDropdownOpen = false;
+							}
+						}}
+					>
 						<img src={actualDropdownImage} alt={name} class="dropdown-image" />
 					</div>
 				{/if}
@@ -266,12 +345,22 @@
 
 		<button
 			class="add-to-cart-btn {isLoading ? 'loading' : ''}"
-			onclick={addToCart}
+			onclick={(e) => {
+				e.stopPropagation();
+				addToCart(e);
+			}}
+			onkeydown={(e) => {
+				e.stopPropagation();
+				if (e.key === 'Escape' && isEnlarged) {
+					toggleEnlargement();
+				}
+			}}
 			disabled={!inStock || isLoading}
 			class:expanded={isEnlarged}
+			aria-live="polite"
 		>
 			{#if isLoading}
-				<span class="loading-text">Loading</span>
+				<span class="loading-text" aria-live="polite">Loading</span>
 			{:else}
 				{inStock ? 'Add to Cart' : 'Out of Stock'}
 			{/if}
@@ -526,6 +615,12 @@
 						width: 30px;
 						height: 35px;
 						box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+					}
+
+					&:focus-visible {
+						outline: 3px solid var(--color-secondary);
+						outline-offset: 2px;
+						box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
 					}
 
 					&:hover {
