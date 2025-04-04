@@ -20,6 +20,7 @@
 		width: fit-content;
 		display: grid;
 		place-items: center;
+		-webkit-text-stroke: 1px var(--color-secondary);
 
 		&:hover {
 			background: linear-gradient(

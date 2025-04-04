@@ -37,6 +37,7 @@
 		z-index: 999;
 		position: relative;
 		-webkit-tap-highlight-color: transparent;
+		-webkit-text-stroke: 1px var(--color-secondary);
 		touch-action: manipulation;
 
 		&:hover {
