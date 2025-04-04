@@ -494,6 +494,11 @@
 				justify-content: flex-end;
 				align-items: flex-start;
 
+				@media (max-width: 768px) {
+					position: relative;
+					z-index: 1000;
+				}
+
 				& .dropdown-toggle {
 					width: 40px;
 					height: 40px;
@@ -513,12 +518,22 @@
 					position: relative;
 					aspect-ratio: 1 / 1;
 
+					@media (max-width: 768px) {
+						position: absolute;
+						top: -2em;
+						right: 5%;
+						z-index: 1001;
+						width: 30px;
+						height: 35px;
+						box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+					}
+
 					&:hover {
 						background-color: hsl(220, 10%, 25%);
 					}
 
 					& .arrow-icon {
-						font-size: 1em;
+						font-size: 1.5em;
 						transition: transform 0.3s;
 						display: flex;
 						justify-content: center;
@@ -536,19 +551,34 @@
 					margin-right: 1rem;
 					margin-top: 0;
 					border-radius: var(--radius);
-					overflow: hidden;
 					animation: slideDown 0.3s ease forwards;
 					z-index: 200;
 					box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 					background-color: white;
+					overflow: auto;
+					max-height: 80vh;
 
 					& .dropdown-image {
-						max-height: 600px;
+						max-height: none;
 						width: 100%;
 						height: auto;
 						display: block;
 						border-radius: var(--radius);
 						object-fit: contain;
+					}
+
+					@media (max-width: 768px) {
+						position: fixed;
+						right: 5%;
+						left: 0;
+						top: auto;
+						bottom: 2%;
+						margin-top: 0.5rem;
+						margin-right: 0;
+						max-height: 60vh;
+						min-height: 200px;
+						width: 100%;
+						z-index: 500;
 					}
 				}
 			}
