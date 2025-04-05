@@ -431,8 +431,9 @@
 			overflow: hidden;
 
 			.enlarged & {
-				height: min(70vh, 400px);
+				height: min(70vh, 310px);
 				transition: height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+				padding-top: 1.2rem;
 			}
 
 			& img {
