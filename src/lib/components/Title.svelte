@@ -15,7 +15,7 @@
 			color: var(--color-accent);
 			-webkit-text-stroke: 1px var(--color-secondary);
 			font-family: var(--font-title);
-			font-size: clamp(var(--h5), 5vw, var(--xl));
+			font-size: clamp(var(--h5), 3vw, var(--lg));
 			text-align: center;
 			text-wrap: nowrap;
 			margin: 0;
