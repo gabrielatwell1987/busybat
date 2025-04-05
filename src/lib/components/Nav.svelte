@@ -59,7 +59,7 @@
 		align-items: center;
 		padding: 1rem;
 		background-color: hsl(0, 0%, 100%);
-		margin: 0.5rem 0;
+		margin: 0.25rem 0;
 		border-radius: var(--radius);
 		width: 99%;
 		height: 3.5em;
