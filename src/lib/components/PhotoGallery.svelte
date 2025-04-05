@@ -126,7 +126,6 @@
 			height: calc(100dvh + 5em);
 			padding-bottom: 4em;
 			margin-bottom: 2em;
-			overflow: visible;
 		}
 
 		@media (width <= 500px) {
