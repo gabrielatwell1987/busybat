@@ -39,8 +39,6 @@
 	}
 </script>
 
-<a href="#carousel-controls" class="skip-link">Skip to carousel controls</a>
-
 <VerticalTitle title="Gallery" />
 
 <main
@@ -111,21 +109,6 @@
 </main>
 
 <style>
-	.skip-link {
-		position: absolute;
-		top: -40px;
-		left: 0;
-		background: var(--color-accent, #2563eb);
-		color: white;
-		padding: 8px;
-		z-index: 1000;
-		transition: top 0.2s ease;
-
-		&:focus {
-			top: 0;
-		}
-	}
-
 	.carousel {
 		max-width: 1200px;
 		width: 100%;
@@ -135,7 +118,7 @@
 		overflow: hidden;
 
 		&:focus {
-			outline: 2px solid var(--color-accent);
+			outline: 2px solid var(--color-secondary);
 			outline-offset: 2px;
 		}
 
@@ -190,7 +173,7 @@
 				border: none;
 
 				&:focus {
-					outline: 2px solid var(--color-accent);
+					outline: 2px solid var(--color-secondary);
 					outline-offset: 2px;
 				}
 			}
@@ -213,23 +196,28 @@
 				gap: 10px;
 				z-index: 10;
 
+				@media (width <= 500px) {
+					bottom: -2.5em;
+				}
+
 				& .nav-dot {
-					width: 0.75rem;
-					height: 0.75rem;
+					width: clamp(0.75rem, 2vw, 1rem);
+					height: clamp(0.75rem, 2vw, 1rem);
 					border-radius: 50%;
-					background: rgba(255, 255, 255, 0.5);
+					background: var(--color-accent);
 					cursor: pointer;
 					transition: background 0.3s ease;
 					border: none;
 					padding: 0;
+					margin-right: 1rem;
 
 					&[aria-selected='true'] {
-						background: white;
+						background: var(--color-secondary);
 						transform: scale(1.2);
 					}
 
 					&:focus {
-						outline: 2px solid white;
+						outline: 2px solid var(--color-gray);
 						outline-offset: 2px;
 					}
 				}
