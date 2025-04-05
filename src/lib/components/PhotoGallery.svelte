@@ -122,6 +122,13 @@
 			outline-offset: 2px;
 		}
 
+		@media (width >= 1024px) {
+			height: calc(100dvh + 5em);
+			padding-bottom: 4em;
+			margin-bottom: 2em;
+			overflow: visible;
+		}
+
 		@media (width <= 500px) {
 			height: 70dvh;
 		}
@@ -188,16 +195,31 @@
 
 			& .carousel-nav {
 				position: absolute;
-				bottom: 20px;
+				top: 3em;
 				left: 0;
 				right: 0;
 				display: flex;
 				justify-content: center;
 				gap: 10px;
 				z-index: 10;
+				padding: 0.5rem 0.75rem;
+				background-color: rgba(0, 0, 0, 0.5);
+				border-radius: 20px;
+				width: fit-content;
+				margin-inline: auto;
+
+				@media (width >= 1024px) {
+					top: 1em;
+					z-index: 500;
+				}
+
+				@media (width >= 500px) and (width <= 800px) {
+					top: 2em;
+				}
 
 				@media (width <= 500px) {
-					bottom: -2.5em;
+					top: 0;
+					padding: 0.4rem 0.6rem;
 				}
 
 				& .nav-dot {
@@ -209,16 +231,23 @@
 					transition: background 0.3s ease;
 					border: none;
 					padding: 0;
-					margin-right: 1rem;
+					margin: 0 0.25rem;
+					opacity: 0.6;
 
 					&[aria-selected='true'] {
 						background: var(--color-secondary);
 						transform: scale(1.2);
+						opacity: 1;
 					}
 
 					&:focus {
-						outline: 2px solid var(--color-gray);
+						outline: 2px solid var(--color-white);
 						outline-offset: 2px;
+						opacity: 1;
+					}
+
+					&:hover {
+						opacity: 0.8;
 					}
 				}
 			}
