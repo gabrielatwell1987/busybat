@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	import miniMenaceImg from '$lib/assets/mini-menace-chain__open.webp';
-	import dhSizeChart from '$lib/assets/dh-size-chart.webp';
+	import miniMenaceImg from '$lib/assets/products/mini-menace-chain__open.webp';
+	import dhSizeChart from '$lib/assets/products/dh-size-chart.webp';
 
 	let {
 		id,
