@@ -21,9 +21,11 @@
 			text-decoration: none;
 			color: var(--color-secondary);
 			font-family: var(--font-bold);
-			font-size: clamp(var(--h5), 2.5vw, var(--h3));
+			font-size: clamp(var(--h5), 1.5vw, var(--h4));
 			font-weight: 900;
 			letter-spacing: 1px;
+			margin: 0;
+			padding: 0;
 		}
 
 		&:is(:hover, :focus-within) > * {

@@ -114,7 +114,7 @@
 
 		& ul {
 			display: flex;
-			gap: clamp(0.5rem, 3vw, 5rem);
+			gap: clamp(0.5rem, 2vw, 2rem);
 			flex-flow: row wrap;
 		}
 
