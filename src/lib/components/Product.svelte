@@ -279,12 +279,6 @@
 	</div>
 
 	<div class="product-info">
-		<div class="product-rating" class:expanded={isEnlarged}>
-			{#each Array(5) as _, i}
-				<span class="star {i < rating ? 'filled' : ''}">★</span>
-			{/each}
-		</div>
-
 		<div class="product-line" class:expanded={isEnlarged}>
 			<h3 class="product-name" class:expanded={isEnlarged}>{name}</h3>
 
@@ -556,26 +550,6 @@
 					padding-inline: 0.5rem;
 					font-size: clamp(var(--sm), 1.5vw, var(--h5));
 					display: block;
-				}
-			}
-
-			& .product-rating {
-				text-align: center;
-				grid-row: 2;
-
-				.enlarged & {
-					grid-row: 1;
-					margin-bottom: 0.5rem;
-				}
-
-				& .star {
-					color: #ddd;
-					font-size: clamp(var(--sm), 1.25vw, var(--h5));
-					-webkit-text-stroke: 1px var(--color-secondary);
-
-					&.filled {
-						color: #ffc107;
-					}
 				}
 			}
 
