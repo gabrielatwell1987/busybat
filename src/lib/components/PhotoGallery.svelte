@@ -194,30 +194,30 @@
 
 			& .carousel-nav {
 				position: absolute;
-				top: 3em;
+				bottom: -2em;
 				left: 0;
 				right: 0;
 				display: flex;
 				justify-content: center;
-				gap: 10px;
+				gap: 0.75rem;
 				z-index: 10;
 				padding: 0.5rem 0.75rem;
-				background-color: rgba(0, 0, 0, 0.5);
+				background-color: rgba(0, 0, 0, 0.25);
 				border-radius: 20px;
 				width: fit-content;
 				margin-inline: auto;
 
 				@media (width >= 1024px) {
-					top: 1em;
+					bottom: -3em;
 					z-index: 500;
 				}
 
 				@media (width >= 500px) and (width <= 800px) {
-					top: 2em;
+					bottom: -2em;
 				}
 
 				@media (width <= 500px) {
-					top: 0;
+					bottom: -2.5em;
 					padding: 0.4rem 0.6rem;
 				}
 
@@ -225,7 +225,7 @@
 					width: clamp(0.75rem, 2vw, 1rem);
 					height: clamp(0.75rem, 2vw, 1rem);
 					border-radius: 50%;
-					background: var(--color-accent);
+					background: var(--color-secondary);
 					cursor: pointer;
 					transition: background 0.3s ease;
 					border: none;
@@ -234,15 +234,15 @@
 					opacity: 0.6;
 
 					&[aria-selected='true'] {
-						background: var(--color-secondary);
+						background: var(--color-white);
 						transform: scale(1.2);
-						opacity: 1;
+						opacity: 0.75;
 					}
 
 					&:focus {
-						outline: 2px solid var(--color-white);
+						outline: 1px solid var(--color-white);
 						outline-offset: 2px;
-						opacity: 1;
+						opacity: 0.75;
 					}
 
 					&:hover {
