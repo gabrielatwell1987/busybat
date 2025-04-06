@@ -675,8 +675,8 @@
 						max-height: 60vh;
 						min-height: 200px;
 						width: 100%;
-						z-index: 1000;
-						background-color: white;
+						z-index: 500;
+						background-color: var(--color-white);
 						box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 						overflow: auto;
 
