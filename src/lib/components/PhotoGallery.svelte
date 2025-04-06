@@ -117,6 +117,7 @@
 		margin-inline: auto;
 		position: relative;
 		overflow: hidden;
+		padding-bottom: 5em;
 
 		&:focus {
 			outline: 2px solid var(--color-secondary);
@@ -125,7 +126,7 @@
 
 		@media (width >= 1024px) {
 			height: calc(100dvh + 5em);
-			padding-bottom: 4em;
+			padding-bottom: 6em;
 			margin-bottom: 2em;
 		}
 
@@ -195,7 +196,7 @@
 
 			& .carousel-nav {
 				position: absolute;
-				bottom: -2em;
+				bottom: 1em;
 				left: 0;
 				right: 0;
 				display: flex;
@@ -209,7 +210,7 @@
 				margin-inline: auto;
 
 				@media (width >= 1024px) {
-					bottom: -3em;
+					bottom: 1em;
 					z-index: 500;
 				}
 
