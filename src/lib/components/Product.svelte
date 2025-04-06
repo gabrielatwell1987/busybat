@@ -19,6 +19,7 @@
 	let isLoading = $state(false);
 	let isDropdownOpen = $state(false);
 
+	// for dropdown images
 	const dropdownImages = {
 		'1': miniMenaceImg,
 		'2': dhSizeChart
@@ -68,6 +69,7 @@
 		dispatch('addtocart', { id, name, price, imageUrl, quantity: 1 });
 	}
 
+	// function to handle enlargement and transition
 	function toggleEnlargement() {
 		if (document.startViewTransition) {
 			// Prepare elements before transition
@@ -203,6 +205,7 @@
 		}
 	}
 
+	// Function to handle dropdown toggle
 	function toggleDropdown(event) {
 		event.stopPropagation();
 		event.preventDefault();
@@ -217,6 +220,7 @@
 		}
 	}
 
+	// Function to handle focus trapping
 	function trapFocus(element) {
 		const focusableElements = element.querySelectorAll(
 			'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'

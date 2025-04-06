@@ -2,6 +2,7 @@
 	import ViewTransition from './ViewTransition.svelte';
 	import VerticalTitle from './VerticalTitle.svelte';
 
+	// gallery images
 	const images = [
 		{ src: '/products/mini-menace-chain__side.webp', alt: 'Description 1' },
 		{ src: '/products/mini-menace-chain__forward.webp', alt: 'Description 2' },

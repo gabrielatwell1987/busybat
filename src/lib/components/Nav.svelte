@@ -2,7 +2,7 @@
 	import Title from '$lib/components/Title.svelte';
 	import logo from '$lib/assets/logo.webp';
 	import bg from '$lib/assets/pink-leo.webp';
-	import FlippyNav from '$lib/components/FlippyNav.svelte';
+	import NavLink from '$lib/components/NavLink.svelte';
 	import { goto } from '$app/navigation';
 
 	let isOpen = $state(false);
@@ -38,10 +38,10 @@
 	</button>
 
 	<ul class:open={isOpen}>
-		<FlippyNav title="About" url="/about" onclick={handleLinkClick} />
-		<FlippyNav title="Creations" url="/products" onclick={handleLinkClick} />
-		<FlippyNav title="Gallery" url="/gallery" onclick={handleLinkClick} />
-		<FlippyNav title="Summon Me" url="/contact" onclick={handleLinkClick} />
+		<NavLink title="About" url="/about" onclick={handleLinkClick} />
+		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
+		<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
+		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
 	</ul>
 </nav>
 
