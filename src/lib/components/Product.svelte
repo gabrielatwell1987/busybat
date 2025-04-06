@@ -665,16 +665,32 @@
 
 					@media (max-width: 768px) {
 						position: fixed;
-						right: 5%;
+						top: 15rem;
 						left: 0;
-						top: auto;
-						bottom: 2%;
-						margin-top: 0.5rem;
+						right: 0;
+						bottom: auto;
+						height: auto;
+						margin-top: 0;
 						margin-right: 0;
 						max-height: 60vh;
 						min-height: 200px;
 						width: 100%;
-						z-index: 500;
+						z-index: 1000;
+						background-color: white;
+						box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+						overflow: auto;
+
+						& .dropdown-image {
+							max-height: 70vh;
+							width: auto;
+							max-width: 100%;
+							max-height: 60vh;
+							height: auto;
+							display: block;
+							border-radius: var(--radius);
+							object-fit: contain;
+							margin-inline: auto;
+						}
 					}
 				}
 			}
