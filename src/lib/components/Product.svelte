@@ -106,20 +106,6 @@
 				}
 
 				if (isEnlarged) {
-					// Hide other elements when enlarging
-					// setTimeout(() => {
-					// 	otherProducts.forEach((product) => {
-					// 		product.style.opacity = '0';
-					// 		product.style.visibility = 'hidden';
-					// 	});
-
-					// 	if (footer) {
-					// 		footer.style.zIndex = '1';
-					// 		footer.style.opacity = '0';
-					// 		footer.style.visibility = 'hidden';
-					// 	}
-					// }, 100);
-
 					// Reset scroll position to top when enlarged
 					setTimeout(() => {
 						const productInfo = document.querySelector('.product-card.enlarged .product-info');
