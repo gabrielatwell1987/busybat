@@ -23,6 +23,12 @@
 			title: 'Mini Menace Tote'
 		},
 		{
+			id: 'dh-jacket-front',
+			src: '/products/dh-jacket__front.webp',
+			alt: 'D. Harry jacket from the front',
+			title: 'D. Harry Upcycled Denim'
+		},
+		{
 			id: 'dh-jacket-left',
 			src: '/products/dh-jacket__shoulder-left.webp',
 			alt: 'D. Harry left shoulder',
@@ -38,12 +44,6 @@
 			id: 'dh-jacket-pocket',
 			src: '/products/dh-jacket__pocket.webp',
 			alt: 'D. Harry jacket pocket',
-			title: 'D. Harry Upcycled Denim'
-		},
-		{
-			id: 'dh-jacket-front',
-			src: '/products/dh-jacket__front.webp',
-			alt: 'D. Harry jacket from the front',
 			title: 'D. Harry Upcycled Denim'
 		}
 	];

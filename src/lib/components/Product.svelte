@@ -107,7 +107,28 @@
 
 				if (isEnlarged) {
 					// Hide other elements when enlarging
+					// setTimeout(() => {
+					// 	otherProducts.forEach((product) => {
+					// 		product.style.opacity = '0';
+					// 		product.style.visibility = 'hidden';
+					// 	});
+
+					// 	if (footer) {
+					// 		footer.style.zIndex = '1';
+					// 		footer.style.opacity = '0';
+					// 		footer.style.visibility = 'hidden';
+					// 	}
+					// }, 100);
+
+					// Reset scroll position to top when enlarged
 					setTimeout(() => {
+						const productInfo = document.querySelector('.product-card.enlarged .product-info');
+						if (productInfo) {
+							productInfo.scrollTo({ top: 0, behavior: 'instant' });
+							productInfo.scrollTop = 0;
+						}
+
+						// Hide other elements when enlarging
 						otherProducts.forEach((product) => {
 							product.style.opacity = '0';
 							product.style.visibility = 'hidden';
@@ -119,6 +140,15 @@
 							footer.style.visibility = 'hidden';
 						}
 					}, 100);
+
+					// Try again after a slightly longer delay to ensure it works
+					setTimeout(() => {
+						const productInfo = document.querySelector('.product-card.enlarged .product-info');
+						if (productInfo) {
+							productInfo.scrollTo({ top: 0, behavior: 'instant' });
+							productInfo.scrollTop = 0;
+						}
+					}, 300);
 				} else {
 					// When closing, start making elements visible DURING the transition
 					otherProducts.forEach((product) => {
@@ -139,6 +169,15 @@
 				// Clean up the added style
 				document.head.removeChild(styleEl);
 
+				if (isEnlarged) {
+					// Final attempt to reset scroll after transition completes
+					const productInfo = document.querySelector('.product-card.enlarged .product-info');
+					if (productInfo) {
+						productInfo.scrollTo({ top: 0, behavior: 'instant' });
+						productInfo.scrollTop = 0;
+					}
+				}
+
 				if (!isEnlarged) {
 					// When transition is done, make everything fully visible
 					otherProducts.forEach((product) => {
@@ -157,6 +196,12 @@
 
 			if (isEnlarged) {
 				setTimeout(() => {
+					// Reset scroll position in fallback mode
+					const productInfo = document.querySelector('.product-card.enlarged .product-info');
+					if (productInfo) {
+						productInfo.scrollTop = 0;
+					}
+
 					document
 						.querySelectorAll(
 							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
