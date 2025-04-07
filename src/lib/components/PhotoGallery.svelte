@@ -4,10 +4,26 @@
 
 	// gallery images
 	const images = [
-		{ src: '/products/mini-menace-chain__side.webp', alt: 'Description 1' },
-		{ src: '/products/mini-menace-chain__forward.webp', alt: 'Description 2' },
-		{ src: '/products/dh-jacket__shoulder-left.webp', alt: 'Description 3' },
-		{ src: '/products/dh-jacket__shoulder-right.webp', alt: 'Description 4' }
+		{
+			src: '/products/mini-menace-chain__side.webp',
+			alt: 'Description 1',
+			title: 'Mini Menace Tote'
+		},
+		{
+			src: '/products/mini-menace-chain__forward.webp',
+			alt: 'Description 2',
+			title: 'Mini Menace Tote'
+		},
+		{
+			src: '/products/dh-jacket__shoulder-left.webp',
+			alt: 'Description 3',
+			title: 'D. Harry Upcycled Denim'
+		},
+		{
+			src: '/products/dh-jacket__shoulder-right.webp',
+			alt: 'Description 4',
+			title: 'D. Harry Upcycled Denim'
+		}
 	];
 
 	// Active slide state
@@ -66,6 +82,10 @@
 					aria-hidden={currentSlide !== i}
 				>
 					<img src={image.src} alt={image.alt || `Product image ${i + 1}`} />
+
+					{#if image.title}
+						<div class="slide-title">{image.title}</div>
+					{/if}
 				</div>
 			{/each}
 		</div>
@@ -146,11 +166,34 @@
 				& .carousel-slide {
 					min-width: 100%;
 					box-sizing: border-box;
+					position: relative;
 
 					& img {
 						width: 100%;
 						height: auto;
 						display: block;
+					}
+
+					& .slide-title {
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						width: fit-content;
+						margin-inline: auto;
+						color: var(--color-white);
+						padding: 0.5rem 0.75rem;
+						background-color: rgba(0, 0, 0, 0.3);
+						border-radius: var(--radius);
+						text-align: center;
+						font-family: var(--font-bold);
+						font-size: clamp(var(--h6), 2.5vw, var(--h4));
+						letter-spacing: 2px;
+						opacity: 1;
+
+						@media (width <= 500px) {
+							padding: 0.15rem 0.5rem;
+						}
 					}
 				}
 			}
