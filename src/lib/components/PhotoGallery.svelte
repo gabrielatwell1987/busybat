@@ -6,22 +6,37 @@
 	const images = [
 		{
 			src: '/products/mini-menace-chain__side.webp',
-			alt: 'Description 1',
+			alt: 'Mini Menace Tote from the side',
 			title: 'Mini Menace Tote'
 		},
 		{
 			src: '/products/mini-menace-chain__forward.webp',
-			alt: 'Description 2',
+			alt: 'Mini Menace Tote',
+			title: 'Mini Menace Tote'
+		},
+		{
+			src: '/products/mini-menace-chain__open.webp',
+			alt: 'inside the Mini Menace Tote',
 			title: 'Mini Menace Tote'
 		},
 		{
 			src: '/products/dh-jacket__shoulder-left.webp',
-			alt: 'Description 3',
+			alt: 'D. Harry left shoulder',
 			title: 'D. Harry Upcycled Denim'
 		},
 		{
 			src: '/products/dh-jacket__shoulder-right.webp',
-			alt: 'Description 4',
+			alt: 'D. Harry right shoulder',
+			title: 'D. Harry Upcycled Denim'
+		},
+		{
+			src: '/products/dh-jacket__pocket.webp',
+			alt: 'D. Harry jacket pocket',
+			title: 'D. Harry Upcycled Denim'
+		},
+		{
+			src: '/products/dh-jacket__front.webp',
+			alt: 'D. Harry jacket from the front',
 			title: 'D. Harry Upcycled Denim'
 		}
 	];
@@ -167,11 +182,18 @@
 					min-width: 100%;
 					box-sizing: border-box;
 					position: relative;
+					height: 70vh;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					overflow: hidden;
 
 					& img {
 						width: 100%;
 						height: auto;
 						display: block;
+						object-fit: contain;
+						max-height: 70vh;
 					}
 
 					& .slide-title {
@@ -239,7 +261,7 @@
 
 			& .carousel-nav {
 				position: absolute;
-				bottom: 1em;
+				bottom: 2em;
 				left: 0;
 				right: 0;
 				display: flex;
@@ -253,7 +275,7 @@
 				margin-inline: auto;
 
 				@media (width >= 1024px) {
-					bottom: 1em;
+					bottom: 2em;
 					z-index: 500;
 				}
 
