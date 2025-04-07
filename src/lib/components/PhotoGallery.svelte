@@ -5,36 +5,43 @@
 	// gallery images
 	const images = [
 		{
+			id: 'mini-menace-side',
 			src: '/products/mini-menace-chain__side.webp',
 			alt: 'Mini Menace Tote from the side',
 			title: 'Mini Menace Tote'
 		},
 		{
+			id: 'mini-menace-forward',
 			src: '/products/mini-menace-chain__forward.webp',
 			alt: 'Mini Menace Tote',
 			title: 'Mini Menace Tote'
 		},
 		{
+			id: 'mini-menace-open',
 			src: '/products/mini-menace-chain__open.webp',
 			alt: 'inside the Mini Menace Tote',
 			title: 'Mini Menace Tote'
 		},
 		{
+			id: 'dh-jacket-left',
 			src: '/products/dh-jacket__shoulder-left.webp',
 			alt: 'D. Harry left shoulder',
 			title: 'D. Harry Upcycled Denim'
 		},
 		{
+			id: 'dh-jacket-right',
 			src: '/products/dh-jacket__shoulder-right.webp',
 			alt: 'D. Harry right shoulder',
 			title: 'D. Harry Upcycled Denim'
 		},
 		{
+			id: 'dh-jacket-pocket',
 			src: '/products/dh-jacket__pocket.webp',
 			alt: 'D. Harry jacket pocket',
 			title: 'D. Harry Upcycled Denim'
 		},
 		{
+			id: 'dh-jacket-front',
 			src: '/products/dh-jacket__front.webp',
 			alt: 'D. Harry jacket from the front',
 			title: 'D. Harry Upcycled Denim'
@@ -42,7 +49,7 @@
 	];
 
 	// Active slide state
-	let currentSlide = 0;
+	let currentSlide = $state(0);
 
 	// Function to handle slide change
 	function changeSlide(index) {
@@ -53,6 +60,10 @@
 		} else {
 			currentSlide = index;
 		}
+
+		// Update URL hash without scrolling
+		const id = images[currentSlide].id;
+		history.replaceState(null, '', `#${id}`);
 	}
 
 	// Keyboard navigation handler
@@ -69,6 +80,41 @@
 		}
 		event.preventDefault();
 	}
+
+	// Function to find slide index by ID
+	function findSlideIndexById(id) {
+		return images.findIndex((image) => image.id === id);
+	}
+
+	// Function to navigate to slide by ID
+	function navigateToSlide(id) {
+		const index = findSlideIndexById(id);
+		if (index !== -1) {
+			changeSlide(index);
+		}
+	}
+
+	// Handle URL hash changes
+	function handleHashChange() {
+		const hash = window.location.hash;
+		if (hash) {
+			const slideId = hash.substring(1); // Remove the # character
+			navigateToSlide(slideId);
+		}
+	}
+
+	$effect(() => {
+		// Check for hash on initial load
+		handleHashChange();
+
+		// Listen for hash changes
+		window.addEventListener('hashchange', handleHashChange);
+
+		// Clean up on component destroy
+		return () => {
+			window.removeEventListener('hashchange', handleHashChange);
+		};
+	});
 </script>
 
 <VerticalTitle title="Gallery" />
@@ -90,6 +136,7 @@
 		>
 			{#each images as image, i}
 				<div
+					id="slide-{image.id}"
 					class="carousel-slide"
 					role="group"
 					aria-roledescription="slide"
