@@ -1,6 +1,6 @@
 <script>
-	import Title from '$lib/components/Title.svelte';
-	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
+	import Title from '$lib/components/layout/Title.svelte';
+	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 </script>
 
 <section>
