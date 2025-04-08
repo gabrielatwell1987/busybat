@@ -1,6 +1,6 @@
 <script>
-	import ViewTransition from './ViewTransition.svelte';
-	import VerticalTitle from './VerticalTitle.svelte';
+	import ViewTransition from '$lib/data/ViewTransition.svelte';
+	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 
 	// gallery images
 	const images = [

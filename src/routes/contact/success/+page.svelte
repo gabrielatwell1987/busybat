@@ -1,5 +1,5 @@
 <script>
-	import Success from '$lib/components/Success.svelte';
+	import Success from '$lib/components/contact/Success.svelte';
 </script>
 
 <Success />

@@ -2,8 +2,8 @@
 	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
 	import pink from '$lib/assets/pink-leo.webp';
-	import Product from '$lib/components/Product.svelte';
-	import products from '$lib/data/products.json';
+	import Product from '$lib/components/products/Product.svelte';
+	import products from '$lib/components/products/products.json';
 
 	function handleAddToCart(event) {
 		console.log('Added to cart:', event.detail);

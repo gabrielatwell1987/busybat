@@ -1,8 +1,8 @@
 <script>
 	import '../app.css';
-	import Nav from '../lib/components/Nav.svelte';
+	import Nav from '../lib/components/navigation/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import ViewTransition from '$lib/components/ViewTransition.svelte';
+	import ViewTransition from '$lib/data/ViewTransition.svelte';
 	import SkipToMain from '$lib/components/SkipToMain.svelte';
 
 	let { children } = $props();

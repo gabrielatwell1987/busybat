@@ -1,6 +1,6 @@
 <script>
 	import SEO from './../lib/data/SEO.svelte';
-	import Hero from '$lib/components/Hero.svelte';
+	import Hero from '$lib/components/hero/Hero.svelte';
 </script>
 
 <SEO
