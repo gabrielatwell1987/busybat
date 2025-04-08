@@ -1,6 +1,6 @@
 <script>
-	import SendButton from '$lib/components/SendButton.svelte';
-	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
+	import SendButton from '$lib/components/layout/SendButton.svelte';
+	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
 	let name = $state('');
 	let email = $state('');

@@ -1,6 +1,6 @@
 <script>
 	import SEO from '$lib/data/SEO.svelte';
-	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
+	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 	import pink from '$lib/assets/pink-leo.webp';
 	import Product from '$lib/components/products/Product.svelte';
 	import products from '$lib/components/products/products.json';

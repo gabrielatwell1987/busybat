@@ -1,9 +1,9 @@
 <script>
-	import Title from '$lib/components/Title.svelte';
+	import { goto } from '$app/navigation';
+	import Title from '$lib/components/layout/Title.svelte';
 	import logo from '$lib/assets/logo.webp';
 	import bg from '$lib/assets/pink-leo.webp';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
-	import { goto } from '$app/navigation';
 
 	let isOpen = $state(false);
 

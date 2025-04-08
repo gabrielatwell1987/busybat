@@ -1,8 +1,8 @@
 <script>
 	import SEO from '$lib/data/SEO.svelte';
-	import VerticalTitle from '$lib/components/VerticalTitle.svelte';
-	import Image from '$lib/components/Image.svelte';
-	import Button from '$lib/components/Button.svelte';
+	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
+	import Image from '$lib/components/layout/Image.svelte';
+	import Button from '$lib/components/layout/Button.svelte';
 </script>
 
 <SEO
