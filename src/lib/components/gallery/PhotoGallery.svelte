@@ -26,25 +26,25 @@
 			id: 'dh-jacket-front',
 			src: '/products/dh-jacket__front.webp',
 			alt: 'D. Harry jacket from the front',
-			title: 'D. Harry Upcycled Denim'
+			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dh-jacket-left',
 			src: '/products/dh-jacket__shoulder-left.webp',
 			alt: 'D. Harry left shoulder',
-			title: 'D. Harry Upcycled Denim'
+			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dh-jacket-right',
 			src: '/products/dh-jacket__shoulder-right.webp',
 			alt: 'D. Harry right shoulder',
-			title: 'D. Harry Upcycled Denim'
+			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dh-jacket-pocket',
 			src: '/products/dh-jacket__pocket.webp',
 			alt: 'D. Harry jacket pocket',
-			title: 'D. Harry Upcycled Denim'
+			title: 'D. Harry Denim Jacket'
 		}
 	];
 
