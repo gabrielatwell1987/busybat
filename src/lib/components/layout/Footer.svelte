@@ -6,11 +6,10 @@
 	<section>
 		<p>
 			<span>
-				&copy;
+				<span class="copyright">&copy;</span>
 				{year}
-				{name}
-				All rights reserved</span
-			>
+			</span>
+			{name}. All rights reserved
 		</p>
 	</section>
 </footer>
@@ -47,9 +46,23 @@
 					background-color: var(--color-light);
 					padding: 0 0.25rem;
 					border-radius: var(--radius);
+					display: flex;
+					align-items: center;
+
+					& .copyright {
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						line-height: 1;
+						padding-right: 2px;
+						position: relative;
+						top: calc(0.15em * var(--font-scale, 1));
+						font-size: clamp(var(--h5), 1.2vw, var(--h4));
+					}
 				}
 
 				@media (max-width: 500px) {
+					--font-scale: 0.85;
 					scale: 0.85;
 				}
 			}

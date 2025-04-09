@@ -11,7 +11,7 @@
 		left: 1em;
 		border: 2px solid var(--color-secondary);
 		border-radius: 5px;
-		background-color: transparent;
+		background-color: var(--color-accent);
 		color: var(--color-secondary);
 		padding: 0.5rem 0.75rem;
 		position: absolute;
