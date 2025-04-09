@@ -13,7 +13,9 @@
 		inStock,
 		context = 'default',
 		productUrl,
-		dropdownImage
+		dropdownImage,
+		category,
+		imageFit = 'cover'
 	} = $props();
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
@@ -24,7 +26,7 @@
 		'1': miniMenaceImg,
 		'2': dhSizeChart
 	};
-
+	const useContainFit = id === '2' || imageFit === 'contain' || category === 'Bags';
 	const actualDropdownImage = dropdownImages[id] || dropdownImage;
 	const dispatch = createEventDispatcher();
 
@@ -302,7 +304,7 @@
 	tabindex="0"
 >
 	<div class="product-image">
-		<img src={imageUrl} alt={name} class:zoomed-out={id === '2'} />
+		<img src={imageUrl} alt={name} class:zoomed-out={useContainFit} />
 
 		{#if !inStock}
 			<div class="out-of-stock">Out of Stock</div>
