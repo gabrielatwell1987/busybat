@@ -26,11 +26,6 @@
 		// If no category is set on the product, consider it uncategorized
 		if (!product.category) return selectedCategory !== 'All';
 
-		// Log for debugging
-		console.log(
-			`Checking: "${product.name}", Category: "${product.category}", Selected: "${selectedCategory}", Match: ${product.category === selectedCategory}`
-		);
-
 		return selectedCategory !== 'All' && product.category !== selectedCategory;
 	}
 
@@ -102,7 +97,7 @@
 			border: 1px solid var(--color-secondary);
 			background-color: var(--color-white);
 			font-family: var(--font-regular);
-			font-size: var(--h6);
+			font-size: clamp(var(--sm), 1.5vw, var(--h5));
 			cursor: pointer;
 		}
 
