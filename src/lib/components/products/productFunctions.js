@@ -37,41 +37,10 @@ export function trapFocus(element) {
 }
 
 // Factory function for adding to cart
-// export function createAddToCartHandler(productData, setState, dispatch) {
-// 	return function addToCart(event) {
-// 		// Prevent bubbling
-// 		event.stopPropagation();
-// 		event.preventDefault();
-
-// 		const { id, name, price, imageUrl, productUrl } = productData;
-
-// 		if (setState.isLoading) return;
-// 		setState.isLoading(true);
-
-// 		console.log('Opening URL:', productUrl);
-
-// 		if (productUrl) {
-// 			// Wait before opening URL
-// 			setTimeout(() => {
-// 				const newWindow = window.open(productUrl, '_blank');
-
-// 				if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-// 					window.location.href = productUrl;
-// 				}
-
-// 				setState.isLoading(false);
-// 			}, 1000);
-// 		} else {
-// 			// If no URL, reset loading state immediately
-// 			setTimeout(() => {
-// 				setState.isLoading(false);
-// 			}, 750);
-// 		}
-
-// 		// Dispatch a custom event that parent components can listen to
-// 		dispatch('addtocart', { id, name, price, imageUrl, quantity: 1 });
-// 	};
-// }
+export function handleAddToCart(e) {
+	e.stopPropagation(); // Prevent triggering the card click event
+	console.log('Add to cart button clicked for product');
+}
 
 // Factory function for dropdown toggle
 export function createToggleDropdownHandler(setState) {

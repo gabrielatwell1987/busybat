@@ -5,6 +5,7 @@
 	import {
 		formatPrice,
 		trapFocus,
+		handleAddToCart,
 		createToggleDropdownHandler,
 		createToggleEnlargementHandler
 	} from './productFunctions.js';
@@ -51,59 +52,8 @@
 	// Product data for cart
 	const productData = { id, name, price, imageUrl, productUrl };
 
-	// function createAddToCartHandler(productData, setState, dispatch) {
-	// 	return function addToCart(event) {
-	// 		console.log('Add to cart button clicked!');
-	// 		// Prevent bubbling
-	// 		event.stopPropagation();
-	// 		event.preventDefault();
-
-	// 		const { id, name, price, imageUrl, productUrl } = productData;
-
-	// 		console.log('Product being added:', { id, name, price });
-
-	// 		if (setState.isLoading()) {
-	// 			console.log('Button is in loading state, ignoring click');
-	// 			return;
-	// 		}
-	// 		setState.isLoading(true);
-
-	// 		console.log('Opening URL:', productUrl);
-
-	// 		if (productUrl) {
-	// 			// Wait before opening URL
-	// 			setTimeout(() => {
-	// 				const newWindow = window.open(productUrl, '_blank');
-
-	// 				if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-	// 					window.location.href = productUrl;
-	// 				}
-
-	// 				setState.isLoading(false);
-	// 			}, 1000);
-	// 		} else {
-	// 			// If no URL, reset loading state immediately
-	// 			setTimeout(() => {
-	// 				setState.isLoading(false);
-	// 			}, 750);
-	// 		}
-
-	// 		// Dispatch a custom event that parent components can listen to
-	// 		dispatch('addtocart', { id, name, price, imageUrl, quantity: 1 });
-	// 		console.log('Event dispatched for product:', name);
-	// 	};
-	// }
-
-	// Create handler functions using the factories
-	// const addToCart = createAddToCartHandler(productData, setState, dispatch);
 	const toggleDropdown = createToggleDropdownHandler(setState);
 	const toggleEnlargement = createToggleEnlargementHandler(contextData, setState);
-
-	function handleAddToCart(e) {
-		e.stopPropagation(); // Prevent triggering the card click event
-		console.log('Add to cart button clicked for product:', name);
-		console.log('Product details:', { id, name, price });
-	}
 
 	$effect(() => {
 		if (isEnlarged) {
