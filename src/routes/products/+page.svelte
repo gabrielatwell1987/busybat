@@ -10,10 +10,10 @@
 	let selectedCategory = $state('All');
 	const containFitCategories = $state(['Bags', 'Wall Art', 'Accessories']);
 
-	function handleAddToCart(event) {
-		console.log('Added to cart:', event.detail);
-		// cart logic here
-	}
+	// function handleAddToCart(event) {
+	// 	console.log('Added to cart:', event.detail);
+	// 	// cart logic here
+	// }
 
 	function onCategoryChange(category) {
 		selectedCategory = category;
@@ -53,7 +53,6 @@
 				productUrl={product.productUrl}
 				category={product.category}
 				imageFit={getImageFit(product.category)}
-				on:addtocart={handleAddToCart}
 			/>
 		</article>
 	{/each}
