@@ -2,6 +2,13 @@
 	import { createEventDispatcher } from 'svelte';
 	import miniMenaceImg from '$lib/assets/dropdown/mini-menace-chain__open.webp';
 	import dhSizeChart from '$lib/assets/dropdown/dh-size-chart.webp';
+	import {
+		formatPrice,
+		trapFocus,
+		createAddToCartHandler,
+		createToggleDropdownHandler,
+		createToggleEnlargementHandler
+	} from './productFunctions.js';
 
 	let {
 		id,
@@ -17,6 +24,7 @@
 		category,
 		imageFit = 'cover'
 	} = $props();
+
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
 	let isDropdownOpen = $state(false);
@@ -30,253 +38,24 @@
 	const actualDropdownImage = dropdownImages[id] || dropdownImage;
 	const dispatch = createEventDispatcher();
 
-	// For formatting price with currency
-	const formatPrice = (value) => {
-		return new Intl.NumberFormat('en-US', {
-			style: 'currency',
-			currency: 'USD'
-		}).format(value);
+	// Create state getters and setters for our factory functions
+	const setState = {
+		isEnlarged: (val) => (val !== undefined ? (isEnlarged = val) : isEnlarged),
+		isLoading: (val) => (val !== undefined ? (isLoading = val) : isLoading),
+		isDropdownOpen: (val) => (val !== undefined ? (isDropdownOpen = val) : isDropdownOpen),
+		id: () => id
 	};
 
-	// Function to handle adding to cart
-	function addToCart(event) {
-		// Prevent the click from triggering the product enlargement
-		event.stopPropagation();
-		event.preventDefault();
+	// Create context data object
+	const contextData = { id, context };
 
-		if (isLoading) return;
-		isLoading = true;
+	// Product data for cart
+	const productData = { id, name, price, imageUrl, productUrl };
 
-		console.log('Opening URL:', productUrl);
-
-		if (productUrl) {
-			// wait before opening URL
-			setTimeout(() => {
-				const newWindow = window.open(productUrl, '_blank');
-
-				if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-					window.location.href = productUrl;
-				}
-
-				isLoading = false;
-			}, 1000);
-		} else {
-			// If no URL, reset loading state immediately
-			setTimeout(() => {
-				isLoading = false;
-			}, 750);
-		}
-
-		// Dispatch a custom event that parent components can listen to
-		dispatch('addtocart', { id, name, price, imageUrl, quantity: 1 });
-	}
-
-	// function to handle enlargement and transition
-	function toggleEnlargement() {
-		if (document.startViewTransition) {
-			// Prepare elements before transition
-			const otherProducts = document.querySelectorAll(
-				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-			);
-			const footer = document.querySelector('footer');
-			const isCurrentlyEnlarged = isEnlarged;
-
-			// Set custom duration for the transition
-			document.documentElement.style.setProperty('--view-transition-duration', '1.25s');
-			document.documentElement.style.setProperty('--view-transition-delay', '0.2s');
-
-			// Create a specific style for transition timing
-			const styleEl = document.createElement('style');
-			styleEl.textContent = `
-				::view-transition-old(${context}-product-card-${id}),
-				::view-transition-new(${context}-product-card-${id}) {
-				animation-delay: 0.2s;
-				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
-				animation-duration: 1.2s;
-				}
-			`;
-			document.head.appendChild(styleEl);
-
-			const transition = document.startViewTransition(() => {
-				isEnlarged = !isEnlarged;
-
-				// Force layout recalculation
-				document.body.offsetHeight;
-
-				if (!isEnlarged) {
-					isDropdownOpen = false;
-				}
-
-				if (isEnlarged) {
-					// Reset scroll position to top when enlarged
-					setTimeout(() => {
-						const productInfo = document.querySelector('.product-card.enlarged .product-info');
-						if (productInfo) {
-							productInfo.scrollTo({ top: 0, behavior: 'instant' });
-							productInfo.scrollTop = 0;
-						}
-
-						// Hide other elements when enlarging
-						otherProducts.forEach((product) => {
-							product.style.opacity = '0';
-							product.style.visibility = 'hidden';
-						});
-
-						if (footer) {
-							footer.style.zIndex = '1';
-							footer.style.opacity = '0';
-							footer.style.visibility = 'hidden';
-						}
-					}, 100);
-
-					// Try again after a slightly longer delay to ensure it works
-					setTimeout(() => {
-						const productInfo = document.querySelector('.product-card.enlarged .product-info');
-						if (productInfo) {
-							productInfo.scrollTo({ top: 0, behavior: 'instant' });
-							productInfo.scrollTop = 0;
-						}
-					}, 300);
-				} else {
-					// When closing, start making elements visible DURING the transition
-					otherProducts.forEach((product) => {
-						product.style.visibility = 'visible';
-						product.style.opacity = '0.3'; // Start with low opacity
-					});
-
-					if (footer) {
-						footer.style.visibility = 'visible';
-						footer.style.opacity = '0.3';
-						footer.style.zIndex = '20';
-					}
-				}
-			});
-
-			// For the end of transition
-			transition.finished.then(() => {
-				// Clean up the added style
-				document.head.removeChild(styleEl);
-
-				if (isEnlarged) {
-					// Final attempt to reset scroll after transition completes
-					const productInfo = document.querySelector('.product-card.enlarged .product-info');
-					if (productInfo) {
-						productInfo.scrollTo({ top: 0, behavior: 'instant' });
-						productInfo.scrollTop = 0;
-					}
-				}
-
-				if (!isEnlarged) {
-					// When transition is done, make everything fully visible
-					otherProducts.forEach((product) => {
-						product.style.opacity = '1';
-						product.style.transition = 'opacity 0.3s ease';
-					});
-
-					if (footer) {
-						footer.style.opacity = '1';
-					}
-				}
-			});
-		} else {
-			// Update fallback version with the same pattern
-			isEnlarged = !isEnlarged;
-
-			if (isEnlarged) {
-				setTimeout(() => {
-					// Reset scroll position in fallback mode
-					const productInfo = document.querySelector('.product-card.enlarged .product-info');
-					if (productInfo) {
-						productInfo.scrollTop = 0;
-					}
-
-					document
-						.querySelectorAll(
-							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-						)
-						.forEach((product) => {
-							product.style.opacity = '0';
-							product.style.visibility = 'hidden';
-						});
-
-					const footer = document.querySelector('footer');
-					if (footer) {
-						footer.style.zIndex = '1';
-						footer.style.opacity = '0';
-						footer.style.visibility = 'hidden';
-					}
-				}, 200);
-			} else {
-				// Make elements visible immediately but with fading in
-				const products = document.querySelectorAll('.product-card');
-				const footer = document.querySelector('footer');
-
-				products.forEach((product) => {
-					product.style.visibility = 'visible';
-					product.style.opacity = '0.3';
-					product.style.transition = 'opacity 0.4s ease';
-				});
-
-				if (footer) {
-					footer.style.visibility = 'visible';
-					footer.style.opacity = '0.3';
-					footer.style.zIndex = '20';
-					footer.style.transition = 'opacity 0.4s ease';
-				}
-
-				// Then fade to full opacity
-				setTimeout(() => {
-					products.forEach((product) => {
-						product.style.opacity = '1';
-					});
-
-					if (footer) {
-						footer.style.opacity = '1';
-					}
-				}, 100);
-			}
-		}
-	}
-
-	// Function to handle dropdown toggle
-	function toggleDropdown(event) {
-		event.stopPropagation();
-		event.preventDefault();
-
-		isDropdownOpen = !isDropdownOpen;
-
-		if (isDropdownOpen) {
-			setTimeout(() => {
-				const announcement = document.getElementById(`product-dropdown-${id}`);
-				if (announcement) announcement.setAttribute('aria-live', 'polite');
-			}, 100);
-		}
-	}
-
-	// Function to handle focus trapping
-	function trapFocus(element) {
-		const focusableElements = element.querySelectorAll(
-			'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-		);
-		const firstElement = focusableElements[0];
-		const lastElement = focusableElements[focusableElements.length - 1];
-
-		// Set initial focus
-		firstElement.focus();
-
-		// Handle tab navigation
-		element.addEventListener('keydown', (e) => {
-			if (e.key === 'Tab') {
-				if (e.shiftKey && document.activeElement === firstElement) {
-					e.preventDefault();
-					lastElement.focus();
-				} else if (!e.shiftKey && document.activeElement === lastElement) {
-					e.preventDefault();
-					firstElement.focus();
-				}
-			}
-		});
-	}
+	// Create handler functions using the factories
+	const addToCart = createAddToCartHandler(productData, setState, dispatch);
+	const toggleDropdown = createToggleDropdownHandler(setState);
+	const toggleEnlargement = createToggleEnlargementHandler(contextData, setState);
 
 	$effect(() => {
 		if (isEnlarged) {
