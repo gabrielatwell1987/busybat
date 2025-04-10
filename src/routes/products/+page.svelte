@@ -39,9 +39,9 @@
 
 <ProductFilter {products} {onCategoryChange} />
 
-<section class="content">
+<section class="products">
 	{#each products as product}
-		<div class="product-wrapper" class:hidden={shouldHideProduct(product)}>
+		<article class="product-wrapper" class:hidden={shouldHideProduct(product)}>
 			<Product
 				id={product.id}
 				name={product.name}
@@ -55,14 +55,14 @@
 				imageFit={getImageFit(product.category)}
 				on:addtocart={handleAddToCart}
 			/>
-		</div>
+		</article>
 	{/each}
 </section>
 
 <VerticalTitle title="Products" />
 
 <style>
-	.content {
+	.products {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 1em;
