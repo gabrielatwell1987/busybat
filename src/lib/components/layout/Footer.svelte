@@ -5,11 +5,10 @@
 <footer>
 	<section>
 		<p>
-			<span>
-				<span class="copyright">&copy;</span>
-				{year}
-			</span>
-			{name}. All rights reserved
+			&copy;
+			{year}
+
+			{name} All rights reserved
 		</p>
 	</section>
 </footer>
@@ -22,44 +21,34 @@
 		transform: translateX(-50%);
 		background-color: transparent;
 		margin: 0;
+		padding: 0;
+		line-height: 1;
 		border-radius: var(--radius);
-		height: 3em;
 		z-index: 10;
 		max-width: calc(100% - 2rem);
 		width: fit-content;
+		box-shadow: 0 0 5px var(--color-accent);
 
 		& section {
 			backdrop-filter: blur(1rem);
 			border-radius: var(--radius);
+			margin: 0;
+			padding: 0;
 
 			& p {
+				background-color: var(--color-accent);
+				color: var(--color-secondary);
 				font-family: var(--font-regular);
 				font-size: clamp(var(--xs), 1.2vw, var(--h5));
+				font-weight: 700;
 				letter-spacing: 1px;
-				color: var(--color-secondary);
 				text-wrap: nowrap;
-				display: flex;
+				display: inline-flex;
 				justify-content: center;
 				align-items: center;
-
-				& span {
-					background-color: var(--color-light);
-					padding: 0 0.25rem;
-					border-radius: var(--radius);
-					display: flex;
-					align-items: center;
-
-					& .copyright {
-						display: inline-flex;
-						align-items: center;
-						justify-content: center;
-						line-height: 1;
-						padding-right: 2px;
-						position: relative;
-						top: calc(0.15em * var(--font-scale, 1));
-						font-size: clamp(var(--h5), 1.2vw, var(--h4));
-					}
-				}
+				margin: 0;
+				padding: 0.15em 0.5em;
+				line-height: 1;
 
 				@media (max-width: 500px) {
 					--font-scale: 0.85;
