@@ -27,7 +27,6 @@
 		z-index: 10;
 		max-width: calc(100% - 2rem);
 		width: fit-content;
-		box-shadow: 0 0 5px var(--color-accent);
 
 		& section {
 			backdrop-filter: blur(1rem);
@@ -36,12 +35,10 @@
 			padding: 0;
 
 			& p {
-				background-color: var(--color-accent);
 				color: var(--color-secondary);
 				font-family: var(--font-regular);
 				font-size: clamp(var(--xs), 1.2vw, var(--h5));
 				font-weight: 700;
-				letter-spacing: 1px;
 				text-wrap: nowrap;
 				display: inline-flex;
 				justify-content: center;
@@ -53,6 +50,8 @@
 				@media (max-width: 500px) {
 					--font-scale: 0.85;
 					scale: 0.85;
+					display: flex;
+					justify-content: center;
 				}
 			}
 		}
