@@ -4,6 +4,7 @@
 	import logo from '$lib/assets/logo.webp';
 	import bg from '$lib/assets/pink-leo.webp';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
+	import CartIcon from '$lib/components/products/CartIcon.svelte';
 
 	let isOpen = $state(false);
 
@@ -43,6 +44,8 @@
 		<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
 		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
 	</ul>
+
+	<CartIcon />
 </nav>
 
 <style>

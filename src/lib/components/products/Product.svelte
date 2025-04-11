@@ -5,7 +5,6 @@
 	import {
 		formatPrice,
 		trapFocus,
-		handleAddToCart,
 		createToggleDropdownHandler,
 		createToggleEnlargementHandler
 	} from './productFunctions.js';
@@ -22,7 +21,8 @@
 		productUrl,
 		dropdownImage,
 		category,
-		imageFit = 'cover'
+		imageFit = 'cover',
+		addToCart
 	} = $props();
 
 	let isEnlarged = $state(false);
@@ -50,7 +50,7 @@
 	const contextData = { id, context };
 
 	// Product data for cart
-	const productData = { id, name, price, imageUrl, productUrl };
+	const productData = { id, name, price, imageUrl, productUrl, quantity: 1 };
 
 	const toggleDropdown = createToggleDropdownHandler(setState);
 	const toggleEnlargement = createToggleEnlargementHandler(contextData, setState);
@@ -154,7 +154,14 @@
 				class="add-to-cart-btn {isLoading ? 'loading' : ''}"
 				onclick={(e) => {
 					e.stopPropagation();
-					handleAddToCart(e);
+					if (addToCart) {
+						addToCart(productData);
+						// Optional: Show feedback
+						isLoading = true;
+						setTimeout(() => {
+							isLoading = false;
+						}, 500);
+					}
 				}}
 				onkeydown={(e) => {
 					e.stopPropagation();
@@ -167,7 +174,7 @@
 				aria-live="polite"
 			>
 				{#if isLoading}
-					<span class="loading-text" aria-live="polite">Loading</span>
+					<span class="loading-text">Added!</span>
 				{:else}
 					{inStock ? 'Add to Cart' : 'Out of Stock'}
 				{/if}

@@ -6,14 +6,10 @@
 	import Product from '$lib/components/products/Product.svelte';
 	import products from '$lib/components/products/productList.json';
 	import ProductFilter from '$lib/components/products/ProductFilter.svelte';
+	import { addToCart } from '$lib/components/products/CartStore.svelte';
 
 	let selectedCategory = $state('All');
 	const containFitCategories = $state(['Bags', 'Wall Art', 'Accessories']);
-
-	// function handleAddToCart(event) {
-	// 	console.log('Added to cart:', event.detail);
-	// 	// cart logic here
-	// }
 
 	function onCategoryChange(category) {
 		selectedCategory = category;
@@ -53,6 +49,7 @@
 				productUrl={product.productUrl}
 				category={product.category}
 				imageFit={getImageFit(product.category)}
+				{addToCart}
 			/>
 		</article>
 	{/each}
