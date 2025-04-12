@@ -168,7 +168,7 @@
 				aria-live="polite"
 			>
 				{#if isLoading}
-					<span class="loading-text">Added!</span>
+					<span class="loading-text">Loading</span>
 				{:else}
 					{inStock ? 'Add to Cart' : 'Out of Stock'}
 				{/if}
@@ -486,6 +486,8 @@
 
 			& .add-to-cart-btn {
 				width: 100%;
+				min-height: 2.8rem;
+				height: 2.8rem;
 				padding: 0.7rem;
 				background-color: var(--color-accent);
 				color: var(--color-white);
@@ -497,9 +499,13 @@
 				transition: background-color 0.3s;
 				grid-row: 5;
 				display: none;
+				line-height: 1;
+				letter-spacing: 2px;
 
 				&.expanded {
-					display: block;
+					display: flex;
+					align-items: center;
+					justify-content: center;
 				}
 
 				&:hover:not([disabled]) {
@@ -512,25 +518,26 @@
 				}
 
 				&.loading {
-					background-color: var(--color-dark);
+					background-color: hsl(320, 75%, 45%);
 					position: relative;
 					overflow: hidden;
 
-					&::after {
-						content: '';
-						position: absolute;
-						bottom: 0;
-						left: 0;
-						height: 2px;
-						width: 100%;
-						background: linear-gradient(to right, transparent, white, transparent);
-						animation: loading-animation 1.5s infinite;
+					& .loading-text {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						height: 100%;
+						letter-spacing: 0.5px;
+						position: relative;
 					}
-				}
 
-				& .loading-text::after {
-					content: '';
-					animation: loadingDots 1.5s infinite steps(4, jump-none);
+					& .loading-text::after {
+						content: '';
+						animation: loadingDots 1s steps(1, end) infinite;
+						margin-left: 4px;
+						min-width: 24px;
+						text-align: left;
+					}
 				}
 			}
 		}
@@ -636,20 +643,19 @@
 	}
 
 	@keyframes loadingDots {
-		0% {
-			content: '';
-		}
-		25% {
-			content: '.';
-		}
-		50% {
-			content: '..';
-		}
-		75% {
-			content: '...';
-		}
+		0%,
 		100% {
 			content: '';
+		}
+		15% {
+			content: '.';
+		}
+		30% {
+			content: '..';
+		}
+		45%,
+		85% {
+			content: '...';
 		}
 	}
 
