@@ -7,34 +7,38 @@
 	} from '$lib/components/products/CartStore.svelte';
 
 	// Get reactive cart data from the store
-	const { cart, customerEmail, isProcessingPayment, setEmail } = getCartData();
+	let cart = $state([]);
+	let customerEmail = $state('');
+	let isProcessingPayment = $state(false);
 
-	// Fix cartTotal calculation to ensure it always returns a valid number
-	let cartTotal = $state(
+	// Initialize cart data
+	$effect(() => {
+		const data = getCartData();
+		cart = data.cart;
+		customerEmail = data.customerEmail;
+		isProcessingPayment = data.isProcessingPayment;
+	});
+
+	// Calculate cart total reactively
+	let cartTotal = $derived(
 		cart.reduce((sum, item) => {
-			const price = parseFloat(item.price) || 0; // Ensure price is a valid number
-			const quantity = parseInt(item.quantity, 10) || 0; // Ensure quantity is a valid number
+			const price = parseFloat(item.price) || 0;
+			const quantity = parseInt(item.quantity, 10) || 0;
 			return sum + price * quantity;
 		}, 0)
 	);
 
-	$effect(() => {
-		console.log('Cart in page component:', cart);
-	});
-
-	// Fix cartTotal calculation to ensure it updates reactively
-	$effect(() => {
-		cartTotal = cart.reduce((sum, item) => {
-			const price = parseFloat(item.price) || 0; // Ensure price is a valid number
-			const quantity = parseInt(item.quantity, 10) || 0; // Ensure quantity is a valid number
-			return sum + price * quantity;
-		}, 0);
-	});
-
-	// Handler to ensure item removal with proper ID
+	// Handlers for cart actions
 	function handleRemoveItem(id) {
-		console.log('Remove button clicked for item:', id);
 		removeFromCart(id);
+	}
+
+	function handleUpdateQuantity(id, newQuantity) {
+		updateQuantity(id, newQuantity);
+	}
+
+	function handleSetEmail(e) {
+		customerEmail = e.target.value;
 	}
 </script>
 
@@ -63,16 +67,15 @@
 						<p class="item-price">${item.price.toFixed(2)}</p>
 
 						<div class="quantity-controls">
-							<button onclick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+							<button onclick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>-</button>
 							<span>{item.quantity}</span>
-							<button onclick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+							<button onclick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>+</button>
 						</div>
 					</div>
 
 					<div class="item-total">
 						<p>${(item.price * item.quantity).toFixed(2)}</p>
-
-						<button class="remove-btn" onclick={() => handleRemoveItem(item.id)}> Remove </button>
+						<button class="remove-btn" onclick={() => handleRemoveItem(item.id)}>Remove</button>
 					</div>
 				</div>
 			{/each}
@@ -88,7 +91,7 @@
 						type="email"
 						placeholder="Your email"
 						value={customerEmail}
-						onchange={(e) => setEmail(e.target.value)}
+						onchange={handleSetEmail}
 						required
 					/>
 
