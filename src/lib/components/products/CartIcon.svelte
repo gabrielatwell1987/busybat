@@ -1,6 +1,9 @@
 <script>
 	import { getCartData } from './CartStore.svelte';
 
+	// Accept class and onclick props
+	let { class: className = '', onclick = undefined } = $props();
+
 	// Get cart data from the store with Svelte 5 reactivity
 	const { cart } = getCartData();
 
@@ -16,7 +19,7 @@
 	});
 </script>
 
-<a href="/cart" class="cart-icon-wrapper">
+<a href="/cart" class="cart-icon-wrapper {className}" {onclick}>
 	<div class="cart-icon">
 		<!-- SVG Cart Icon -->
 		<svg
@@ -55,6 +58,7 @@
 			align-items: center;
 			justify-content: center;
 			cursor: pointer;
+			scale: 1.5;
 		}
 
 		& .cart-count {

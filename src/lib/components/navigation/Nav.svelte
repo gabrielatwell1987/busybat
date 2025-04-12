@@ -39,13 +39,18 @@
 	</button>
 
 	<ul class:open={isOpen}>
+		<li class="mobile-cart">
+			<CartIcon onclick={handleLinkClick} />
+		</li>
 		<NavLink title="About" url="/about" onclick={handleLinkClick} />
 		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
 		<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
 		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
 	</ul>
 
-	<CartIcon />
+	<div class="cart-container desktop-cart">
+		<CartIcon />
+	</div>
 </nav>
 
 <style>
@@ -126,6 +131,14 @@
 		}
 	}
 
+	.mobile-cart {
+		display: none;
+	}
+
+	.desktop-cart {
+		display: block;
+	}
+
 	@media (width <= 1150px) {
 		ul {
 			scale: 0.9;
@@ -144,7 +157,12 @@
 			border-radius: 0;
 			padding: 0.05rem 1rem;
 
+			& .desktop-cart {
+				display: none;
+			}
+
 			& .burger {
+				order: 3;
 				display: block;
 				position: relative;
 				z-index: 4998;
@@ -168,6 +186,11 @@
 				transform: none !important;
 				margin: 0;
 				scale: 1;
+
+				& .mobile-cart {
+					display: block;
+					list-style: none;
+				}
 
 				&.open {
 					left: -12%;
