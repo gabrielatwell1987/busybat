@@ -89,14 +89,6 @@
 				</div>
 
 				<div class="checkout-form">
-					<input
-						type="email"
-						placeholder="Your email"
-						value={customerEmail}
-						onchange={handleSetEmail}
-						required
-					/>
-
 					<button
 						class="checkout-btn"
 						onclick={handleCheckout}
@@ -330,14 +322,6 @@
 					flex-direction: column;
 					gap: 1rem;
 					margin: 1.5rem 0;
-
-					& input {
-						padding: 0.75rem;
-						border: 1px solid #ddd;
-						border-radius: var(--radius);
-						font-size: clamp(var(--sm), 2vw, var(--h6));
-						font-weight: 600;
-					}
 
 					& .checkout-btn {
 						background-color: var(--color-accent);
