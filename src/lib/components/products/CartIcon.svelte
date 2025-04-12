@@ -24,7 +24,7 @@
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
-			stroke-width={navOpen ? '3' : '2'}
+			stroke-width={navOpen ? '2' : '2'}
 			stroke-linecap="round"
 			stroke-linejoin="round"
 		>
