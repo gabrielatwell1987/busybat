@@ -67,15 +67,17 @@
 						<p class="item-price">${item.price.toFixed(2)}</p>
 
 						<div class="quantity-controls">
-							<button onclick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>-</button>
-							<span>{item.quantity}</span>
-							<button onclick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>+</button>
+							<div class="controls-row">
+								<button onclick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>-</button>
+								<span>{item.quantity}</span>
+								<button onclick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>+</button>
+							</div>
+							<button class="remove-btn" onclick={() => handleRemoveItem(item.id)}>Remove</button>
 						</div>
 					</div>
 
 					<div class="item-total">
 						<p>${(item.price * item.quantity).toFixed(2)}</p>
-						<button class="remove-btn" onclick={() => handleRemoveItem(item.id)}>Remove</button>
 					</div>
 				</div>
 			{/each}
@@ -124,6 +126,15 @@
 		max-width: 960px;
 		margin: 2rem auto;
 		padding: 1rem;
+
+		@media (width <= 768px) {
+			margin: 1rem auto;
+		}
+
+		@media (width <= 500px) {
+			padding: 0.5rem;
+			margin: 0.5rem auto;
+		}
 	}
 
 	.empty-cart {
@@ -138,6 +149,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
+
+		@media (width <= 768px) {
+			gap: 1rem;
+		}
 	}
 
 	.cart-item {
@@ -147,6 +162,53 @@
 		padding: 1.5rem;
 		border: 1px solid #eee;
 		border-radius: 8px;
+
+		@media (width <= 768px) {
+			grid-template-columns: 100px 1fr;
+			grid-template-areas:
+				'image details'
+				'image price';
+			gap: 1rem;
+			padding: 1rem;
+			position: relative;
+
+			& .item-image {
+				grid-area: image;
+			}
+
+			& .item-details {
+				grid-area: details;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+
+				& h3 {
+					font-size: clamp(var(--sm), 1.5vw, var(--h5));
+					margin: 0;
+				}
+			}
+
+			& .item-total {
+				grid-area: price;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				justify-content: flex-end;
+				align-items: flex-start;
+
+				& p {
+					margin: 0;
+					font-weight: 900;
+					color: var(--color-success);
+				}
+			}
+		}
+
+		@media (width <= 500px) {
+			grid-template-columns: 80px 1fr;
+			gap: 0.75rem;
+			padding: 0.75rem;
+		}
 	}
 
 	.item-image img,
@@ -158,30 +220,116 @@
 		background-color: #f0f0f0;
 	}
 
-	.quantity-controls {
+	.item-details {
 		display: flex;
-		align-items: center;
-		gap: 1rem;
-		margin-top: 0.5rem;
+		flex-direction: column;
+		gap: 0.5rem;
 
-		& button {
-			width: 30px;
-			height: 30px;
-			border-radius: 50%;
-			border: none;
-			background-color: #f1f1f1;
-			cursor: pointer;
+		& h3 {
+			margin: 0;
+			font-size: clamp(var(--sm), 1.5vw, var(--h5));
+			font-family: var(--font-bold);
+		}
+
+		& .item-price {
+			margin: 0;
+			color: var(--color-info);
+			font-weight: 200;
+			font-size: clamp(var(--sm), 1.5vw, var(--h6));
 		}
 	}
 
-	.remove-btn {
-		font-family: var(--font-regular);
-		font-size: clamp(var(--sm), 2vw, var(--h6));
-		color: var(--color-danger);
-		background: none;
-		border: none;
-		cursor: pointer;
-		margin-top: 1rem;
+	.item-total {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.75rem;
+
+		& p {
+			margin: 0;
+			font-weight: 700;
+			color: var(--color-success);
+			font-size: clamp(var(--sm), 1.5vw, var(--h5));
+		}
+
+		@media (width <= 768px) {
+			align-items: flex-start;
+		}
+	}
+
+	.quantity-controls {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-top: 0.5rem;
+		flex-wrap: wrap;
+
+		@media (width <= 768px) {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+
+		& .controls-row {
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+
+			@media (width <= 500px) {
+				gap: 0.5rem;
+			}
+
+			& button {
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				border: none;
+				background-color: var(--color-accent);
+				color: var(--color-white);
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: bold;
+				font-size: 1.2rem;
+				padding: 0;
+				transition: background-color 0.2s ease;
+				margin: 0;
+
+				&:hover {
+					background-color: hsl(320, 75%, 56%);
+				}
+
+				&:active {
+					transform: scale(0.95);
+				}
+			}
+
+			& span {
+				min-width: 1.5rem;
+				text-align: center;
+				font-weight: 600;
+			}
+		}
+
+		& .remove-btn {
+			font-family: var(--font-regular);
+			font-size: var(--sm);
+			color: var(--color-danger);
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 0;
+			margin: 0;
+			transition: color 0.2s ease;
+			width: auto;
+			height: auto;
+			margin-left: 1em;
+
+			&:hover {
+				color: hsl(0, 75%, 45%);
+			}
+		}
 	}
 
 	.cart-summary {
