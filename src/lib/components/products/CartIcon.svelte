@@ -1,8 +1,8 @@
 <script>
 	import { getCartData } from './CartStore.svelte';
 
-	// Accept class and onclick props
-	let { class: className = '', onclick = undefined } = $props();
+	// Accept class, onclick, and navOpen props
+	let { class: className = '', onclick = undefined, navOpen = false } = $props();
 
 	// Get cart data from the store
 	let cart = $state([]);
@@ -24,7 +24,7 @@
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
-			stroke-width="2"
+			stroke-width={navOpen ? '3' : '2'}
 			stroke-linecap="round"
 			stroke-linejoin="round"
 		>

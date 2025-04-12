@@ -40,7 +40,7 @@
 
 	<ul class:open={isOpen}>
 		<li class="mobile-cart">
-			<CartIcon onclick={handleLinkClick} />
+			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>
 		<NavLink title="About" url="/about" onclick={handleLinkClick} />
 		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
@@ -49,7 +49,7 @@
 	</ul>
 
 	<div class="cart-container desktop-cart">
-		<CartIcon />
+		<CartIcon navOpen={isOpen} />
 	</div>
 </nav>
 
@@ -187,9 +187,13 @@
 				margin: 0;
 				scale: 1;
 
-				& .mobile-cart {
+				& li.mobile-cart {
 					display: block;
 					list-style: none;
+
+					& :global(.cart-icon) {
+						color: var(--color-secondary);
+					}
 				}
 
 				&.open {
