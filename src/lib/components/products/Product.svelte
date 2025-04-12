@@ -29,37 +29,46 @@
 	let isLoading = $state(false);
 	let isDropdownOpen = $state(false);
 
-	// for dropdown images
 	const dropdownImages = {
 		'1': miniMenaceImg,
 		'2': dhSizeChart
 	};
 	const useContainFit = id === '2' || imageFit === 'contain' || category === 'Bags';
+
 	const actualDropdownImage = dropdownImages[id] || dropdownImage;
 	const dispatch = createEventDispatcher();
-
-	// Create state getters and setters for our factory functions
-	const setState = {
-		isEnlarged: (val) => (val !== undefined ? (isEnlarged = val) : isEnlarged),
-		isLoading: (val) => (val !== undefined ? (isLoading = val) : isLoading),
-		isDropdownOpen: (val) => (val !== undefined ? (isDropdownOpen = val) : isDropdownOpen),
-		id: () => id
-	};
-
-	// Create context data object
-	const contextData = { id, context };
 
 	// Product data for cart
 	const productData = { id, name, price, imageUrl, productUrl, quantity: 1 };
 
-	const toggleDropdown = createToggleDropdownHandler(setState);
-	const toggleEnlargement = createToggleEnlargementHandler(contextData, setState);
+	// Handle add to cart with proper state updates
+	async function handleAddToCart(e) {
+		e.stopPropagation();
+		if (addToCart && !isLoading) {
+			isLoading = true;
+			addToCart(productData);
+			await new Promise((resolve) => setTimeout(resolve, 500));
+			isLoading = false;
+		}
+	}
+
+	const toggleDropdown = createToggleDropdownHandler({
+		isDropdownOpen: (val) => (val !== undefined ? (isDropdownOpen = val) : isDropdownOpen),
+		id: () => id
+	});
+
+	const toggleEnlargement = createToggleEnlargementHandler(
+		{ id, context },
+		{
+			isEnlarged: (val) => (val !== undefined ? (isEnlarged = val) : isEnlarged),
+			isDropdownOpen: (val) => (val !== undefined ? (isDropdownOpen = val) : isDropdownOpen)
+		}
+	);
 
 	$effect(() => {
 		if (isEnlarged) {
 			setTimeout(() => {
 				const card = document.querySelector('.product-card.enlarged');
-
 				if (card) trapFocus(card);
 			}, 100);
 		}
@@ -82,7 +91,6 @@
 >
 	<div class="product-image">
 		<img src={imageUrl} alt={name} class:zoomed-out={useContainFit} />
-
 		{#if !inStock}
 			<div class="out-of-stock">Out of Stock</div>
 		{/if}
@@ -91,7 +99,6 @@
 	<div class="product-info">
 		<div class="product-line" class:expanded={isEnlarged}>
 			<h3 class="product-name" class:expanded={isEnlarged}>{name}</h3>
-
 			<p class="product-price" class:expanded={isEnlarged}>{formatPrice(price)}</p>
 		</div>
 
@@ -101,10 +108,7 @@
 			<div class="dropdown-container">
 				<button
 					class="dropdown-toggle"
-					onclick={(e) => {
-						e.stopPropagation();
-						toggleDropdown(event);
-					}}
+					onclick={toggleDropdown}
 					onkeydown={(e) => {
 						if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
 							e.preventDefault();
@@ -152,17 +156,7 @@
 
 			<button
 				class="add-to-cart-btn {isLoading ? 'loading' : ''}"
-				onclick={(e) => {
-					e.stopPropagation();
-					if (addToCart) {
-						addToCart(productData);
-						// Optional: Show feedback
-						isLoading = true;
-						setTimeout(() => {
-							isLoading = false;
-						}, 500);
-					}
-				}}
+				onclick={handleAddToCart}
 				onkeydown={(e) => {
 					e.stopPropagation();
 					if (e.key === 'Escape' && isEnlarged) {

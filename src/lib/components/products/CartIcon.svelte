@@ -4,24 +4,19 @@
 	// Accept class and onclick props
 	let { class: className = '', onclick = undefined } = $props();
 
-	// Get cart data from the store with Svelte 5 reactivity
-	const { cart } = getCartData();
-
-	// Use $derived to calculate total quantity across all items
-	let itemCount = $derived(
-		Array.isArray(cart) ? cart.reduce((total, item) => total + (item.quantity || 0), 0) : 0
-	);
-
-	// Debug to check reactivity - will re-run when cart changes
+	// Get cart data from the store
+	let cart = $state([]);
 	$effect(() => {
-		console.log('Cart updated:', cart);
-		console.log('Current item count:', itemCount);
+		const data = getCartData();
+		cart = data.cart;
 	});
+
+	// Calculate total items in cart
+	let itemCount = $derived(cart.reduce((total, item) => total + (item.quantity || 0), 0));
 </script>
 
 <a href="/cart" class="cart-icon-wrapper {className}" {onclick}>
 	<div class="cart-icon">
-		<!-- SVG Cart Icon -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="24"
@@ -38,9 +33,10 @@
 			<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
 		</svg>
 
-		<!-- Badge with count - only show when items exist -->
 		{#if itemCount > 0}
-			<span class="cart-count">{itemCount}</span>
+			<span class="cart-count" role="status" aria-label="Cart items: {itemCount}">
+				{itemCount}
+			</span>
 		{/if}
 	</div>
 </a>
@@ -59,23 +55,35 @@
 			justify-content: center;
 			cursor: pointer;
 			scale: 1.5;
-		}
 
-		& .cart-count {
-			position: absolute;
-			top: -8px;
-			right: -8px;
-			background: var(--color-accent, #ff3e00);
-			color: white;
-			border-radius: 50%;
-			min-width: 18px;
-			height: 18px;
-			font-size: 12px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-weight: bold;
-			padding: 0 4px;
+			& .cart-count {
+				position: absolute;
+				top: -8px;
+				right: -8px;
+				background: var(--color-danger);
+				color: white;
+				border-radius: 50%;
+				min-width: 1rem;
+				height: 1rem;
+				font-size: 12px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: bold;
+				animation: pop 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			}
+		}
+	}
+
+	@keyframes pop {
+		0% {
+			transform: scale(0);
+		}
+		70% {
+			transform: scale(1.2);
+		}
+		100% {
+			transform: scale(1);
 		}
 	}
 </style>
