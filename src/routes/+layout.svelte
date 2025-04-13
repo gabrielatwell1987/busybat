@@ -4,10 +4,12 @@
 	import Nav from '$lib/components/navigation/Nav.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import SkipToMain from '$lib/components/layout/SkipToMain.svelte';
+	import LocalStorage from '$lib/components/layout/localStorage.svelte';
 
 	let { children } = $props();
 </script>
 
+<LocalStorage />
 <ViewTransition />
 <SkipToMain />
 

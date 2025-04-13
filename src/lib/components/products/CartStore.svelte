@@ -1,9 +1,27 @@
 <script module>
 	import { loadStripe } from '@stripe/stripe-js';
+	import { browser } from '$app/environment';
+
+	// Initialize state from localStorage or default values
+	let savedCart = [];
+	let savedEmail = '';
+
+	if (browser) {
+		try {
+			const saved = localStorage.getItem('busybat_cart');
+			if (saved) {
+				const { cart: loadedCart, customerEmail: loadedEmail } = JSON.parse(saved);
+				savedCart = loadedCart;
+				savedEmail = loadedEmail;
+			}
+		} catch (e) {
+			console.error('Error loading cart from localStorage:', e);
+		}
+	}
 
 	// Create reactive state with runes
-	let cart = $state([]);
-	let customerEmail = $state('');
+	let cart = $state(savedCart);
+	let customerEmail = $state(savedEmail);
 	let isProcessingPayment = $state(false);
 
 	// Initialize Stripe
