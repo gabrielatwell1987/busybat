@@ -227,7 +227,7 @@
 
 		&.enlarged {
 			position: fixed;
-			top: 57%;
+			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			width: 50%;
@@ -243,6 +243,7 @@
 			padding-bottom: 0;
 			-webkit-overflow-scrolling: touch;
 			overscroll-behavior: contain;
+			margin: 0;
 		}
 
 		&:not(.enlarged):hover {
@@ -310,6 +311,8 @@
 				grid-template-rows: auto auto auto 1fr auto;
 				gap: 1rem;
 				scroll-padding-top: 1rem;
+				scroll-behavior: auto;
+				scrollbar-gutter: stable;
 			}
 
 			.product-line {
@@ -462,13 +465,13 @@
 	@media (width <= 768px) {
 		.product-card.enlarged {
 			width: 90%;
-			top: 50%;
 			height: 90vh;
 			display: flex;
 			flex-direction: column;
 			overflow: hidden;
-			margin-top: 45px;
-			transform: translate(-50%, -40%);
+			top: 50%;
+			transform: translate(-50%, -50%);
+			margin: 0;
 		}
 
 		.product-card.enlarged .product-info {
