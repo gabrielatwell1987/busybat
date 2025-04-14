@@ -2,7 +2,7 @@
 	import miniMenaceImg from '$lib/assets/dropdown/mini-menace-chain__open.webp';
 	import dhSizeChart from '$lib/assets/dropdown/dh-size-chart.webp';
 
-	let { id, name, isEnlarged, onClose } = $props();
+	let { id, name, isEnlarged, onClose, onStateChange } = $props();
 	let isDropdownOpen = $state(false);
 
 	const dropdownImages = {
@@ -11,6 +11,20 @@
 	};
 
 	const actualDropdownImage = dropdownImages[id];
+
+	$effect(() => {
+		onStateChange?.(isDropdownOpen);
+		if (isDropdownOpen) {
+			// When opening dropdown, hide other products
+			const otherProducts = document.querySelectorAll(
+				`.product-card:not([style*="view-transition-name: products-page-product-card-${id}"])`
+			);
+			otherProducts.forEach((product) => {
+				product.style.opacity = '0';
+				product.style.visibility = 'hidden';
+			});
+		}
+	});
 
 	function toggleDropdown(e) {
 		e?.stopPropagation();
@@ -25,10 +39,8 @@
 		} else if (e.key === 'Escape') {
 			e.preventDefault();
 			if (isDropdownOpen) {
-				// First close the dropdown if it's open
 				isDropdownOpen = false;
 			} else {
-				// If dropdown is closed, close the enlarged product
 				onClose?.();
 			}
 		}

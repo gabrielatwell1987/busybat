@@ -28,6 +28,7 @@
 
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
+	let isDropdownOpened = $state(false);
 
 	const dropdownImages = {
 		'1': miniMenaceImg,
@@ -73,6 +74,49 @@
 			}, 100);
 		}
 	});
+
+	function handleDropdownState(isOpen) {
+		isDropdownOpened = isOpen;
+		const otherProducts = document.querySelectorAll(
+			`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+		);
+		const footer = document.querySelector('footer');
+
+		// Only restore visibility when both dropdown is closed AND product is not enlarged
+		if (!isOpen && !isEnlarged) {
+			otherProducts.forEach((product) => {
+				product.style.removeProperty('visibility');
+				product.style.opacity = '1';
+				product.style.transition = 'opacity 0.3s ease';
+			});
+			if (footer) {
+				footer.style.removeProperty('visibility');
+				footer.style.opacity = '1';
+				footer.style.zIndex = '20';
+			}
+		}
+	}
+
+	$effect(() => {
+		// When un-enlarging, check if dropdown is also closed before restoring visibility
+		if (!isEnlarged && !isDropdownOpened) {
+			const otherProducts = document.querySelectorAll(
+				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+			);
+			const footer = document.querySelector('footer');
+
+			otherProducts.forEach((product) => {
+				product.style.removeProperty('visibility');
+				product.style.opacity = '1';
+				product.style.transition = 'opacity 0.3s ease';
+			});
+			if (footer) {
+				footer.style.removeProperty('visibility');
+				footer.style.opacity = '1';
+				footer.style.zIndex = '20';
+			}
+		}
+	});
 </script>
 
 <div
@@ -105,7 +149,13 @@
 		<p class="product-description" class:expanded={isEnlarged}>{@html description}</p>
 
 		{#if isEnlarged}
-			<ProductDropdown {id} {name} {isEnlarged} onClose={toggleEnlargement} />
+			<ProductDropdown
+				{id}
+				{name}
+				{isEnlarged}
+				onClose={toggleEnlargement}
+				onStateChange={handleDropdownState}
+			/>
 
 			<button
 				class="add-to-cart-btn {isLoading ? 'loading' : ''}"

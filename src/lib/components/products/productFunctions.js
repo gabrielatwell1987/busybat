@@ -63,134 +63,97 @@ export function createToggleDropdownHandler(setState) {
 export function createToggleEnlargementHandler(contextData, setState) {
 	return function toggleEnlargement() {
 		const { id, context } = contextData;
+		const otherProducts = document.querySelectorAll(
+			`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+		);
+		const footer = document.querySelector('footer');
 
 		if (browser && document.startViewTransition) {
-			// Prepare elements before transition
-			const otherProducts = document.querySelectorAll(
-				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-			);
-			const footer = document.querySelector('footer');
-
-			// Set custom duration for the transition
 			document.documentElement.style.setProperty('--view-transition-duration', '1.25s');
 			document.documentElement.style.setProperty('--view-transition-delay', '0.2s');
 
-			// Create a specific style for transition timing
 			const styleEl = document.createElement('style');
 			styleEl.textContent = `
-        ::view-transition-old(${context}-product-card-${id}),
-        ::view-transition-new(${context}-product-card-${id}) {
-          animation-delay: 0.2s;
-          animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
-          animation-duration: 1.2s;
-        }
-      `;
+				::view-transition-old(${context}-product-card-${id}),
+				::view-transition-new(${context}-product-card-${id}) {
+					animation-delay: 0.2s;
+					animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+					animation-duration: 1.2s;
+				}
+			`;
 			document.head.appendChild(styleEl);
 
 			const transition = document.startViewTransition(() => {
 				setState.isEnlarged(!setState.isEnlarged());
-
-				// Force layout recalculation
 				document.body.offsetHeight;
 
-				// Reset dropdown state when closing
 				if (!setState.isEnlarged()) {
 					setState.isDropdownOpen(false);
-				}
-
-				if (setState.isEnlarged()) {
-					// Reset scroll position to top when enlarged
-					setTimeout(() => {
-						const productInfo = document.querySelector('.product-card.enlarged .product-info');
-						if (productInfo) {
-							productInfo.scrollTo({ top: 0, behavior: 'instant' });
-							productInfo.scrollTop = 0;
+					// Only restore visibility if dropdown is also closed
+					if (!setState.isDropdownOpen()) {
+						otherProducts.forEach((product) => {
+							product.style.removeProperty('visibility');
+							product.style.opacity = '0.3';
+							product.style.transition = 'opacity 0.5s ease';
+						});
+						if (footer) {
+							footer.style.removeProperty('visibility');
+							footer.style.opacity = '0.3';
+							footer.style.zIndex = '20';
+							footer.style.transition = 'opacity 0.5s ease';
 						}
-
-						// Hide other elements when enlarging
+					}
+				} else {
+					setTimeout(() => {
 						otherProducts.forEach((product) => {
 							product.style.opacity = '0';
 							product.style.visibility = 'hidden';
 						});
-
 						if (footer) {
 							footer.style.zIndex = '1';
 							footer.style.opacity = '0';
 							footer.style.visibility = 'hidden';
 						}
 					}, 100);
-
-					// Try again after a slightly longer delay to ensure it works
-					setTimeout(() => {
-						const productInfo = document.querySelector('.product-card.enlarged .product-info');
-						if (productInfo) {
-							productInfo.scrollTo({ top: 0, behavior: 'instant' });
-							productInfo.scrollTop = 0;
-						}
-					}, 300);
-				} else {
-					// When closing, start making elements visible DURING the transition
-					otherProducts.forEach((product) => {
-						product.style.visibility = 'visible';
-						product.style.opacity = '0.3'; // Start with low opacity
-					});
-
-					if (footer) {
-						footer.style.visibility = 'visible';
-						footer.style.opacity = '0.3';
-						footer.style.zIndex = '20';
-					}
 				}
 			});
 
-			// For the end of transition
 			transition.finished.then(() => {
-				// Clean up the added style
 				document.head.removeChild(styleEl);
 
 				if (setState.isEnlarged()) {
-					// Final attempt to reset scroll after transition completes
 					const productInfo = document.querySelector('.product-card.enlarged .product-info');
 					if (productInfo) {
 						productInfo.scrollTo({ top: 0, behavior: 'instant' });
 						productInfo.scrollTop = 0;
 					}
-				}
-
-				if (!setState.isEnlarged()) {
-					// When transition is done, make everything fully visible
-					otherProducts.forEach((product) => {
-						product.style.opacity = '1';
-						product.style.transition = 'opacity 0.3s ease';
-					});
-
-					if (footer) {
-						footer.style.opacity = '1';
+				} else {
+					// Only fade in other products if dropdown is also closed
+					if (!setState.isDropdownOpen()) {
+						otherProducts.forEach((product) => {
+							product.style.opacity = '1';
+						});
+						if (footer) {
+							footer.style.opacity = '1';
+						}
 					}
 				}
 			});
 		} else {
-			// Fallback for browsers without View Transitions API
 			setState.isEnlarged(!setState.isEnlarged());
 
 			if (setState.isEnlarged()) {
 				setTimeout(() => {
-					// Reset scroll position in fallback mode
 					const productInfo = document.querySelector('.product-card.enlarged .product-info');
 					if (productInfo) {
 						productInfo.scrollTop = 0;
 					}
 
-					document
-						.querySelectorAll(
-							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-						)
-						.forEach((product) => {
-							product.style.opacity = '0';
-							product.style.visibility = 'hidden';
-						});
+					otherProducts.forEach((product) => {
+						product.style.opacity = '0';
+						product.style.visibility = 'hidden';
+					});
 
-					const footer = document.querySelector('footer');
 					if (footer) {
 						footer.style.zIndex = '1';
 						footer.style.opacity = '0';
@@ -198,33 +161,30 @@ export function createToggleEnlargementHandler(contextData, setState) {
 					}
 				}, 200);
 			} else {
-				// Make elements visible immediately but with fading in
-				const products = document.querySelectorAll('.product-card');
-				const footer = document.querySelector('footer');
-
-				products.forEach((product) => {
-					product.style.visibility = 'visible';
-					product.style.opacity = '0.3';
-					product.style.transition = 'opacity 0.4s ease';
-				});
-
-				if (footer) {
-					footer.style.visibility = 'visible';
-					footer.style.opacity = '0.3';
-					footer.style.zIndex = '20';
-					footer.style.transition = 'opacity 0.4s ease';
-				}
-
-				// Then fade to full opacity
-				setTimeout(() => {
-					products.forEach((product) => {
-						product.style.opacity = '1';
+				// Only restore visibility if dropdown is also closed
+				if (!setState.isDropdownOpen()) {
+					otherProducts.forEach((product) => {
+						product.style.removeProperty('visibility');
+						product.style.opacity = '0.3';
+						product.style.transition = 'opacity 0.4s ease';
 					});
 
 					if (footer) {
-						footer.style.opacity = '1';
+						footer.style.removeProperty('visibility');
+						footer.style.opacity = '0.3';
+						footer.style.zIndex = '20';
+						footer.style.transition = 'opacity 0.4s ease';
 					}
-				}, 100);
+
+					setTimeout(() => {
+						otherProducts.forEach((product) => {
+							product.style.opacity = '1';
+						});
+						if (footer) {
+							footer.style.opacity = '1';
+						}
+					}, 100);
+				}
 			}
 		}
 	};
