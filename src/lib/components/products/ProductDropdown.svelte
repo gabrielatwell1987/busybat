@@ -48,39 +48,39 @@
 </script>
 
 <div class="dropdown-container">
-    <div class="toggle-wrapper">
-        <button
-            class="dropdown-toggle"
-            onclick={toggleDropdown}
-            onkeydown={handleKeydown}
-            aria-expanded={isDropdownOpen}
-            aria-controls="product-dropdown-{id}"
-            aria-label="View additional product details"
-        >
-            <span class="visually-hidden">View Details</span>
-            <span class="arrow-icon">{isDropdownOpen ? '▲' : '▼'}</span>
-        </button>
-    </div>
+	<div class="toggle-wrapper">
+		<button
+			class="dropdown-toggle"
+			onclick={toggleDropdown}
+			onkeydown={handleKeydown}
+			aria-expanded={isDropdownOpen}
+			aria-controls="product-dropdown-{id}"
+			aria-label="View additional product details"
+		>
+			<span class="visually-hidden">View Details</span>
+			<span class="arrow-icon">{isDropdownOpen ? '▲' : '▼'}</span>
+		</button>
+	</div>
 
-    {#if isDropdownOpen}
-        <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-        <div
-            class="dropdown-content"
-            id="product-dropdown-{id}"
-            role="region"
-            aria-label="Additional product details"
-            tabindex="0"
-            onkeydown={(e) => {
-                if (e.key === 'Escape') {
-                    e.preventDefault();
-                    isDropdownOpen = false;
-                }
-            }}
-        >
-            <img src={actualDropdownImage} alt={name} class="dropdown-image" />
-        </div>
-    {/if}
+	{#if isDropdownOpen}
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+		<div
+			class="dropdown-content"
+			id="product-dropdown-{id}"
+			role="region"
+			aria-label="Additional product details"
+			tabindex="0"
+			onkeydown={(e) => {
+				if (e.key === 'Escape') {
+					e.preventDefault();
+					isDropdownOpen = false;
+				}
+			}}
+		>
+			<img src={actualDropdownImage} alt={name} class="dropdown-image" />
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -99,12 +99,12 @@
 			z-index: 1000;
 		}
 
-        & .toggle-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 1rem;
-        }
+		& .toggle-wrapper {
+			width: 100%;
+			display: flex;
+			justify-content: flex-end;
+			padding-right: 1rem;
+		}
 
 		& .dropdown-toggle {
 			width: 35px;
