@@ -9,6 +9,7 @@
 		createToggleEnlargementHandler
 	} from './productFunctions.js';
 	import ProductDropdown from './ProductDropdown.svelte';
+	import { getCartData } from './CartStore.svelte';
 
 	let {
 		id,
@@ -29,6 +30,16 @@
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
 	let isDropdownOpened = $state(false);
+	let isAddedToCart = $state(false); // New state to track if item was added to cart
+
+	// Get cart data
+	let cart = $state([]);
+	$effect(() => {
+		const data = getCartData();
+		cart = data.cart;
+		// Check if this item is in the cart
+		isAddedToCart = cart.some((item) => item.id === id);
+	});
 
 	const dropdownImages = {
 		'1': miniMenaceImg,
@@ -45,11 +56,12 @@
 	// Handle add to cart with proper state updates
 	async function handleAddToCart(e) {
 		e.stopPropagation();
-		if (addToCart && !isLoading) {
+		if (addToCart && !isLoading && !isAddedToCart) {
 			isLoading = true;
 			addToCart(productData);
 			await new Promise((resolve) => setTimeout(resolve, 500));
 			isLoading = false;
+			isAddedToCart = true;
 		}
 	}
 
@@ -76,28 +88,6 @@
 		}
 	);
 
-	$effect(() => {
-		if (isEnlarged) {
-			// Reset scroll immediately when enlarged
-			const productInfo = document.querySelector('.product-card.enlarged .product-info');
-			if (productInfo) {
-				productInfo.scrollTop = 0;
-			}
-			// Focus handling
-			const card = document.querySelector('.product-card.enlarged');
-			if (card) trapFocus(card);
-		}
-	});
-
-	$effect(() => {
-		if (isEnlarged) {
-			setTimeout(() => {
-				const card = document.querySelector('.product-card.enlarged');
-				if (card) trapFocus(card);
-			}, 100);
-		}
-	});
-
 	function handleDropdownState(isOpen) {
 		isDropdownOpened = isOpen;
 		// Only handle visibility restoration when un-enlarging
@@ -119,6 +109,28 @@
 			}
 		}
 	}
+
+	$effect(() => {
+		if (isEnlarged) {
+			// Reset scroll immediately when enlarged
+			const productInfo = document.querySelector('.product-card.enlarged .product-info');
+			if (productInfo) {
+				productInfo.scrollTop = 0;
+			}
+			// Focus handling
+			const card = document.querySelector('.product-card.enlarged');
+			if (card) trapFocus(card);
+		}
+	});
+
+	$effect(() => {
+		if (isEnlarged) {
+			setTimeout(() => {
+				const card = document.querySelector('.product-card.enlarged');
+				if (card) trapFocus(card);
+			}, 100);
+		}
+	});
 
 	$effect(() => {
 		// When un-enlarging, ensure visibility is restored regardless of dropdown state
@@ -181,7 +193,7 @@
 			/>
 
 			<button
-				class="add-to-cart-btn {isLoading ? 'loading' : ''}"
+				class="add-to-cart-btn {isLoading ? 'loading' : ''} {isAddedToCart ? 'added' : ''}"
 				onclick={handleAddToCart}
 				onkeydown={(e) => {
 					e.stopPropagation();
@@ -189,12 +201,14 @@
 						toggleEnlargement();
 					}
 				}}
-				disabled={!inStock || isLoading}
+				disabled={!inStock || isLoading || isAddedToCart}
 				class:expanded={isEnlarged}
 				aria-live="polite"
 			>
 				{#if isLoading}
 					<span class="loading-text">Loading</span>
+				{:else if isAddedToCart}
+					Added to Cart ✓
 				{:else}
 					{inStock ? 'Add to Cart' : 'Out of Stock'}
 				{/if}
@@ -250,10 +264,6 @@
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 			animation: enlarge 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-			padding-bottom: 0;
-			-webkit-overflow-scrolling: touch;
-			overscroll-behavior: contain;
-			margin: 0;
 		}
 
 		&:not(.enlarged):hover {
@@ -429,6 +439,11 @@
 				&:disabled {
 					background-color: var(--color-gray);
 					cursor: not-allowed;
+
+					&.added {
+						background-color: var(--color-dark);
+						opacity: 0.9;
+					}
 				}
 
 				&.loading {
@@ -451,6 +466,10 @@
 						margin-left: 4px;
 						min-width: 24px;
 						text-align: left;
+					}
+					&.added {
+						background-color: var(--color-dark);
+						cursor: default;
 					}
 				}
 			}
