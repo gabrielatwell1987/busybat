@@ -64,7 +64,10 @@
 
 					<div class="item-details">
 						<h3>{item.name}</h3>
-						<p class="item-price">${item.price.toFixed(2)}</p>
+						<div class="item-price">
+							<span class="label">Price:</span>
+							<span class="value">${item.price.toFixed(2)}</span>
+						</div>
 
 						<div class="quantity-controls">
 							<div class="controls-row">
@@ -77,6 +80,7 @@
 					</div>
 
 					<div class="item-total">
+						<span class="label">Total:</span>
 						<p>${(item.price * item.quantity).toFixed(2)}</p>
 					</div>
 				</div>
@@ -201,9 +205,21 @@
 
 					& .item-price {
 						margin: 0;
-						color: var(--color-info);
-						font-weight: 200;
-						font-size: clamp(var(--sm), 1.5vw, var(--h6));
+						display: flex;
+						align-items: center;
+						gap: 0.5rem;
+						
+						& .label {
+							color: var(--color-secondary);
+							font-family: var(--font-regular);
+							font-size: clamp(var(--sm), 2vw, var(--h6));
+						}
+						
+						& .value {
+							color: var(--color-info);
+							font-weight: 200;
+							font-size: clamp(var(--sm), 1.5vw, var(--h6));
+						}
 					}
 
 					& .quantity-controls {
@@ -284,14 +300,21 @@
 
 				& .item-total {
 					display: flex;
-					flex-direction: column;
-					align-items: flex-end;
-					gap: 0.75rem;
+					flex-direction: row;
+					align-items: center;
+					gap: 0.5rem;
+					justify-content: flex-end;
 
 					@media (width <= 768px) {
 						grid-area: price;
 						align-items: flex-start;
 						justify-content: flex-end;
+					}
+
+					& .label {
+						color: var(--color-secondary);
+						font-family: var(--font-regular);
+						font-size: clamp(var(--sm), 2vw, var(--h6));
 					}
 
 					& p {
