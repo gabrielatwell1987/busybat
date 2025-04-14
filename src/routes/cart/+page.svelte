@@ -208,13 +208,13 @@
 						display: flex;
 						align-items: center;
 						gap: 0.5rem;
-						
+
 						& .label {
 							color: var(--color-secondary);
 							font-family: var(--font-regular);
 							font-size: clamp(var(--sm), 2vw, var(--h6));
 						}
-						
+
 						& .value {
 							color: var(--color-info);
 							font-weight: 200;
@@ -334,7 +334,8 @@
 
 				& .subtotal {
 					display: flex;
-					justify-content: space-between;
+					justify-content: center;
+					gap: 1rem;
 					font-family: var(--font-regular);
 					font-size: clamp(var(--sm), 2vw, var(--h6));
 					margin-bottom: 1.5rem;
