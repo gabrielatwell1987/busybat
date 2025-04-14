@@ -133,7 +133,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	line-height: 1.5;
-	cursor: url('/icons/spider-web.svg'), auto;
+	cursor: url('/icons/bat.svg'), auto;
 }
 
 a {
