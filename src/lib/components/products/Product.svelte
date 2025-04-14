@@ -68,6 +68,19 @@
 
 	$effect(() => {
 		if (isEnlarged) {
+			// Reset scroll immediately when enlarged
+			const productInfo = document.querySelector('.product-card.enlarged .product-info');
+			if (productInfo) {
+				productInfo.scrollTop = 0;
+			}
+			// Focus handling
+			const card = document.querySelector('.product-card.enlarged');
+			if (card) trapFocus(card);
+		}
+	});
+
+	$effect(() => {
+		if (isEnlarged) {
 			setTimeout(() => {
 				const card = document.querySelector('.product-card.enlarged');
 				if (card) trapFocus(card);
@@ -226,7 +239,7 @@
 			z-index: 999999;
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-			animation: enlarge 1s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards;
+			animation: enlarge 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 			padding-bottom: 0;
 			-webkit-overflow-scrolling: touch;
 			overscroll-behavior: contain;
@@ -282,17 +295,21 @@
 		& .product-info {
 			display: grid;
 			grid-template-rows: auto auto auto 1fr auto;
-			gap: 0.05rem;
+			gap: 0.5rem;
 			padding: 1rem;
+			scroll-behavior: instant;
 
 			.enlarged & {
 				flex: 1;
 				overflow-y: auto;
 				-webkit-overflow-scrolling: touch;
 				overscroll-behavior: contain;
+				padding: 1rem;
 				padding-bottom: 2rem;
 				display: grid;
 				grid-template-rows: auto auto auto 1fr auto;
+				gap: 1rem;
+				scroll-padding-top: 1rem;
 			}
 
 			.product-line {
@@ -300,14 +317,12 @@
 				justify-content: space-evenly;
 				align-items: center;
 				grid-row: 1;
+				margin-bottom: 0.5rem;
 
 				&.expanded {
-					grid-row: 2;
-					display: flex;
-					justify-content: space-evenly;
-					align-items: center;
-					width: 100%;
-					margin: 0.5rem 0;
+					grid-row: 1;
+					margin: 0;
+					padding-bottom: 0.25rem;
 				}
 			}
 
@@ -352,9 +367,10 @@
 				-webkit-line-clamp: 3;
 				-webkit-box-orient: vertical;
 				overflow: hidden;
-				grid-row: 4;
+				grid-row: 3;
 				transition: all 0.3s ease;
 				display: none;
+				margin-top: 0.5rem;
 
 				&.expanded {
 					line-clamp: initial;
@@ -364,6 +380,7 @@
 					padding-inline: 0.5rem;
 					font-size: clamp(var(--sm), 1.5vw, var(--h5));
 					display: block;
+					padding-top: 0.25rem;
 				}
 			}
 
@@ -384,6 +401,7 @@
 				display: none;
 				line-height: 1;
 				letter-spacing: 2px;
+				margin-top: auto;
 
 				&.expanded {
 					display: flex;
@@ -468,14 +486,14 @@
 	@media (prefers-reduced-motion: no-preference) {
 		::view-transition-old(root),
 		::view-transition-new(root) {
-			animation-delay: 0.2s;
-			animation-duration: 1.2s;
+			animation-delay: 0s;
+			animation-duration: 0.5s;
 		}
 
 		/* Target all view transitions for product cards */
 		::view-transition-group(*) {
-			animation-delay: 0.2s;
-			animation-duration: 1.2s;
+			animation-delay: 0s;
+			animation-duration: 0.5s;
 			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 		}
 
