@@ -14,15 +14,17 @@
 
 	$effect(() => {
 		onStateChange?.(isDropdownOpen);
-		if (isDropdownOpen) {
-			// When opening dropdown, hide other products
+		// Only control visibility when the product is enlarged
+		if (isEnlarged) {
 			const otherProducts = document.querySelectorAll(
 				`.product-card:not([style*="view-transition-name: products-page-product-card-${id}"])`
 			);
-			otherProducts.forEach((product) => {
-				product.style.opacity = '0';
-				product.style.visibility = 'hidden';
-			});
+			if (isDropdownOpen) {
+				otherProducts.forEach((product) => {
+					product.style.opacity = '0';
+					product.style.visibility = 'hidden';
+				});
+			}
 		}
 	});
 

@@ -61,7 +61,17 @@
 	const toggleEnlargement = createToggleEnlargementHandler(
 		{ id, context },
 		{
-			isEnlarged: (val) => (val !== undefined ? (isEnlarged = val) : isEnlarged),
+			isEnlarged: (val) => {
+				if (val !== undefined) {
+					isEnlarged = val;
+					// When un-enlarging, always close the dropdown
+					if (!val) {
+						isDropdownOpen = false;
+						isDropdownOpened = false;
+					}
+				}
+				return isEnlarged;
+			},
 			isDropdownOpen: (val) => (val !== undefined ? (isDropdownOpen = val) : isDropdownOpen)
 		}
 	);
@@ -90,13 +100,13 @@
 
 	function handleDropdownState(isOpen) {
 		isDropdownOpened = isOpen;
-		const otherProducts = document.querySelectorAll(
-			`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-		);
-		const footer = document.querySelector('footer');
-
-		// Only restore visibility when both dropdown is closed AND product is not enlarged
+		// Only handle visibility restoration when un-enlarging
 		if (!isOpen && !isEnlarged) {
+			const otherProducts = document.querySelectorAll(
+				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+			);
+			const footer = document.querySelector('footer');
+
 			otherProducts.forEach((product) => {
 				product.style.removeProperty('visibility');
 				product.style.opacity = '1';
@@ -111,8 +121,8 @@
 	}
 
 	$effect(() => {
-		// When un-enlarging, check if dropdown is also closed before restoring visibility
-		if (!isEnlarged && !isDropdownOpened) {
+		// When un-enlarging, ensure visibility is restored regardless of dropdown state
+		if (!isEnlarged) {
 			const otherProducts = document.querySelectorAll(
 				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
 			);
