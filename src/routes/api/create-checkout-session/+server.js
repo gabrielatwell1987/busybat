@@ -56,27 +56,27 @@ export async function POST({ request, url }) {
 				allowed_countries: ['US', 'CA']
 			},
 			shipping_options: [
-				{
-					shipping_rate_data: {
-						type: 'fixed_amount',
-						fixed_amount: {
-							amount: 0,
-							currency: 'usd'
-						},
-						display_name: 'Free Shipping (over $200)',
-						delivery_estimate: {
-							minimum: {
-								unit: 'business_day',
-								value: 5
-							},
-							maximum: {
-								unit: 'business_day',
-								value: 7
-							}
-						},
-						tax_behavior: 'exclusive' // Make shipping taxable
-					}
-				},
+				// {
+				// 	shipping_rate_data: {
+				// 		type: 'fixed_amount',
+				// 		fixed_amount: {
+				// 			amount: 0,
+				// 			currency: 'usd'
+				// 		},
+				// 		display_name: 'Free Shipping (over $200)',
+				// 		delivery_estimate: {
+				// 			minimum: {
+				// 				unit: 'business_day',
+				// 				value: 5
+				// 			},
+				// 			maximum: {
+				// 				unit: 'business_day',
+				// 				value: 7
+				// 			}
+				// 		},
+				// 		tax_behavior: 'exclusive' // Make shipping taxable
+				// 	}
+				// },
 				{
 					shipping_rate_data: {
 						type: 'fixed_amount',
