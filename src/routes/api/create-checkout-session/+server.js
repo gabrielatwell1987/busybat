@@ -18,7 +18,8 @@ export async function POST({ request, url }) {
 		const lineItems = items.map((item) => {
 			// Create product data object
 			const productData = {
-				name: item.name
+				name: item.name,
+				tax_code: 'txcd_99999999' // Add tax code for physical goods
 			};
 
 			// Convert relative URL to absolute if needed
@@ -39,7 +40,8 @@ export async function POST({ request, url }) {
 				price_data: {
 					currency: 'usd',
 					product_data: productData,
-					unit_amount: Math.round(item.price * 100)
+					unit_amount: Math.round(item.price * 100),
+					tax_behavior: 'exclusive' // Make sure tax is calculated on top of this price
 				},
 				quantity: item.quantity
 			};
@@ -50,6 +52,57 @@ export async function POST({ request, url }) {
 			payment_method_types: ['card'],
 			line_items: lineItems,
 			mode: 'payment',
+			shipping_address_collection: {
+				allowed_countries: ['US', 'CA']
+			},
+			shipping_options: [
+				{
+					shipping_rate_data: {
+						type: 'fixed_amount',
+						fixed_amount: {
+							amount: 1000,
+							currency: 'usd'
+						},
+						display_name: 'Standard Shipping',
+						delivery_estimate: {
+							minimum: {
+								unit: 'business_day',
+								value: 5
+							},
+							maximum: {
+								unit: 'business_day',
+								value: 7
+							}
+						},
+						tax_behavior: 'exclusive' // Make shipping taxable
+					}
+				},
+				{
+					shipping_rate_data: {
+						type: 'fixed_amount',
+						fixed_amount: {
+							amount: 2500,
+							currency: 'usd'
+						},
+						display_name: 'Express Shipping',
+						delivery_estimate: {
+							minimum: {
+								unit: 'business_day',
+								value: 1
+							},
+							maximum: {
+								unit: 'business_day',
+								value: 2
+							}
+						},
+						tax_behavior: 'exclusive' // Make shipping taxable
+					}
+				}
+			],
+			automatic_tax: {
+				enabled: true
+			},
+			billing_address_collection: 'required', // Required for tax calculation
 			success_url: `${url.origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${url.origin}/checkout/canceled`,
 			customer_email: customerEmail || undefined
