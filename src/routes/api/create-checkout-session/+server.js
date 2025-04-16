@@ -60,10 +60,10 @@ export async function POST({ request, url }) {
 					shipping_rate_data: {
 						type: 'fixed_amount',
 						fixed_amount: {
-							amount: 1000,
+							amount: 0,
 							currency: 'usd'
 						},
-						display_name: 'Standard Shipping',
+						display_name: 'Free Shipping (over $200)',
 						delivery_estimate: {
 							minimum: {
 								unit: 'business_day',
@@ -81,18 +81,18 @@ export async function POST({ request, url }) {
 					shipping_rate_data: {
 						type: 'fixed_amount',
 						fixed_amount: {
-							amount: 2500,
+							amount: 1000,
 							currency: 'usd'
 						},
-						display_name: 'Express Shipping',
+						display_name: 'USPS Ground',
 						delivery_estimate: {
 							minimum: {
 								unit: 'business_day',
-								value: 1
+								value: 5
 							},
 							maximum: {
 								unit: 'business_day',
-								value: 2
+								value: 7
 							}
 						},
 						tax_behavior: 'exclusive' // Make shipping taxable
