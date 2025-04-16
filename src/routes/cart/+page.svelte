@@ -70,11 +70,11 @@
 						</div>
 
 						<div class="quantity-controls">
-							<div class="controls-row">
+							<!-- <div class="controls-row">
 								<button onclick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>-</button>
 								<span>{item.quantity}</span>
 								<button onclick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>+</button>
-							</div>
+							</div> -->
 							<button class="remove-btn" onclick={() => handleRemoveItem(item.id)}>Remove</button>
 						</div>
 					</div>
@@ -259,7 +259,7 @@
 							gap: 0.5rem;
 						}
 
-						& .controls-row {
+						/* & .controls-row {
 							display: flex;
 							align-items: center;
 							gap: 0.75rem;
@@ -299,7 +299,7 @@
 								text-align: center;
 								font-weight: 600;
 							}
-						}
+						} */
 
 						& .remove-btn {
 							font-family: var(--font-regular);
