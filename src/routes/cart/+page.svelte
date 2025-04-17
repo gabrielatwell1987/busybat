@@ -24,7 +24,7 @@
 		cart.reduce((sum, item) => {
 			const price = parseFloat(item.price) || 0;
 			const quantity = parseInt(item.quantity, 10) || 0;
-			return sum + price * quantity;
+			return sum + price * quantity + 10; // Adding $10 shipping per item
 		}, 0)
 	);
 
@@ -68,6 +68,10 @@
 							<span class="label">Price:</span>
 							<span class="value">${item.price.toFixed(2)}</span>
 						</div>
+						<div class="item-price">
+							<span class="label">Shipping:</span>
+							<span class="value">$10.00</span>
+						</div>
 
 						<div class="quantity-controls">
 							<!-- <div class="controls-row">
@@ -81,7 +85,7 @@
 
 					<div class="item-total">
 						<span class="label">Total:</span>
-						<p>${(item.price * item.quantity).toFixed(2)}</p>
+						<p>${(item.price * item.quantity + 10).toFixed(2)}</p>
 					</div>
 				</div>
 			{/each}
