@@ -74,11 +74,6 @@
 						</div>
 
 						<div class="quantity-controls">
-							<!-- <div class="controls-row">
-								<button onclick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>-</button>
-								<span>{item.quantity}</span>
-								<button onclick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>+</button>
-							</div> -->
 							<button class="remove-btn" onclick={() => handleRemoveItem(item.id)}>Remove</button>
 						</div>
 					</div>
@@ -189,7 +184,8 @@
 					grid-template-columns: 100px 1fr;
 					grid-template-areas:
 						'image details'
-						'image price';
+						'image price'
+						'image controls';
 					gap: 1rem;
 					padding: 1rem;
 					position: relative;
@@ -204,15 +200,20 @@
 				& .item-image {
 					@media (width <= 768px) {
 						grid-area: image;
+						height: 100%;
 					}
 
 					& img,
 					& .placeholder-image {
 						width: 100%;
-						height: 100px;
+						height: 100%;
 						object-fit: cover;
 						border-radius: 4px;
 						background-color: #f0f0f0;
+
+						@media (width <= 768px) {
+							object-fit: contain;
+						}
 					}
 				}
 
@@ -258,66 +259,26 @@
 						flex-wrap: wrap;
 
 						@media (width <= 768px) {
+							grid-area: controls;
 							flex-direction: column;
 							align-items: flex-start;
 							gap: 0.5rem;
+							margin-top: 0;
 						}
 
-						/* & .controls-row {
-							display: flex;
-							align-items: center;
-							gap: 0.75rem;
-
-							@media (width <= 500px) {
-								gap: 0.5rem;
-							}
-
-							& button {
-								width: 28px;
-								height: 28px;
-								border-radius: 50%;
-								border: none;
-								background-color: var(--color-accent);
-								color: var(--color-white);
-								cursor: pointer;
-								display: flex;
-								align-items: center;
-								justify-content: center;
-								font-weight: bold;
-								font-size: 1.2rem;
-								padding: 0;
-								transition: background-color 0.2s ease;
-								margin: 0;
-
-								&:hover {
-									background-color: hsl(320, 75%, 56%);
-								}
-
-								&:active {
-									transform: scale(0.95);
-								}
-							}
-
-							& span {
-								min-width: 1.5rem;
-								text-align: center;
-								font-weight: 600;
-							}
-						} */
-
 						& .remove-btn {
-							font-family: var(--font-regular);
-							font-size: var(--sm);
+							font-family: var(--font-semibold);
+							font-size: clamp(var(--sm), 2vw, var(--h5));
 							color: var(--color-danger);
 							background: none;
-							border: none;
+							border: 1px solid var(--color-danger);
+							border-radius: var(--radius);
 							cursor: pointer;
-							padding: 0;
+							padding: 0.25rem 0.5rem;
 							margin: 0;
 							transition: color 0.2s ease;
 							width: auto;
 							height: auto;
-							margin-left: 1em;
 
 							&:hover {
 								color: hsl(0, 75%, 45%);
@@ -336,7 +297,8 @@
 					@media (width <= 768px) {
 						grid-area: price;
 						align-items: flex-start;
-						justify-content: flex-end;
+						justify-content: flex-start;
+						padding-top: 0.5rem;
 					}
 
 					& .label {
@@ -364,8 +326,8 @@
 					display: flex;
 					justify-content: center;
 					gap: 1rem;
-					font-family: var(--font-regular);
-					font-size: clamp(var(--sm), 2vw, var(--h6));
+					font-family: var(--font-semibold);
+					font-size: clamp(var(--sm), 2vw, var(--h5));
 					margin-bottom: 1.5rem;
 				}
 
