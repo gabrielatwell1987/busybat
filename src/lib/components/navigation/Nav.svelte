@@ -42,10 +42,18 @@
 		<li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>
-		<NavLink title="About" url="/about" onclick={handleLinkClick} />
-		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
-		<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
-		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
+		<div class="nav-link-wrapper">
+			<NavLink title="About" url="/about" onclick={handleLinkClick} />
+		</div>
+		<div class="nav-link-wrapper">
+			<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
+		</div>
+		<div class="nav-link-wrapper">
+			<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
+		</div>
+		<div class="nav-link-wrapper">
+			<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
+		</div>
 	</ul>
 
 	<div class="cart-container desktop-cart">
@@ -181,23 +189,81 @@
 				background-color: var(--color-primary);
 				z-index: 4997;
 				overflow-y: auto;
-				opacity: 1;
-				transition: left 0.5s ease-in-out !important;
+				transition: left 0.6s cubic-bezier(0.65, 0, 0.35, 1) !important;
 				transform: none !important;
 				margin: 0;
 				scale: 1;
 
-				& li.mobile-cart {
-					display: block;
-					list-style: none;
+				& li {
+					opacity: 0;
+					transform: translateX(100px);
+					transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+					pointer-events: none;
+				}
 
-					& :global(.cart-icon) {
-						color: var(--color-secondary);
-					}
+				& .nav-link-wrapper {
+					opacity: 0;
+					transform: translateX(100px);
+					transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+					pointer-events: none;
 				}
 
 				&.open {
 					left: -12%;
+
+					& li {
+						opacity: 1;
+						transform: translateX(0);
+						pointer-events: all;
+
+						&:nth-child(1) {
+							transition-delay: 0.4s;
+						}
+						&:nth-child(2) {
+							transition-delay: 0.5s;
+						}
+						&:nth-child(3) {
+							transition-delay: 0.6s;
+						}
+						&:nth-child(4) {
+							transition-delay: 0.7s;
+						}
+						&:nth-child(5) {
+							transition-delay: 0.8s;
+						}
+					}
+
+					& .nav-link-wrapper {
+						opacity: 1;
+						transform: translateX(0);
+						pointer-events: all;
+
+						&:nth-child(2) {
+							transition-delay: 0.4s;
+						}
+						&:nth-child(3) {
+							transition-delay: 0.5s;
+						}
+						&:nth-child(4) {
+							transition-delay: 0.6s;
+						}
+						&:nth-child(5) {
+							transition-delay: 0.7s;
+						}
+					}
+
+					& li.mobile-cart {
+						display: block;
+						list-style: none;
+						opacity: 1;
+						transform: translateX(0);
+						transition-delay: 0.3s;
+						pointer-events: all;
+
+						& :global(.cart-icon) {
+							color: var(--color-secondary);
+						}
+					}
 				}
 			}
 		}

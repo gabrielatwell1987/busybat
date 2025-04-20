@@ -15,25 +15,31 @@
 
 		> * {
 			display: block;
-			transition:
-				transform var(--transition-duration) var(--timing-function),
-				translate 0ms calc(var(--transition-duration) / 2);
 			text-decoration: none;
 			color: var(--color-secondary);
 			font-family: var(--font-bold);
 			font-size: clamp(var(--h5), 1.5vw, var(--h4));
 			font-weight: 900;
-			letter-spacing: 1px;
+			letter-spacing: 5px;
 			margin: 0;
 			padding: 0;
+
+			@media (min-width: 501px) {
+				transition:
+					transform var(--transition-duration) var(--timing-function),
+					translate 0ms calc(var(--transition-duration) / 2),
+					color 0.3s ease;
+			}
 		}
 
 		&:is(:hover, :focus-within) > * {
-			transform: translateY(-2lh);
-			translate: 0 2lh;
 			color: var(--color-accent);
-			transition: color var(--transition-duration) var(--timing-function);
 			-webkit-text-stroke: 1px var(--color-secondary);
+
+			@media (min-width: 501px) {
+				transform: translateY(-2lh);
+				translate: 0 2lh;
+			}
 		}
 
 		&:focus-within {
@@ -43,20 +49,6 @@
 			> *:focus {
 				outline: none;
 			}
-		}
-	}
-
-	@media (width <= 500px) {
-		.quick-flip > * {
-			letter-spacing: 5px;
-		}
-
-		.quick-flip:is(:hover, :focus-within) > * {
-			border-bottom: none;
-			transform: none;
-			translate: 0;
-			color: var(--color-accent);
-			-webkit-text-stroke: 0px var(--color-secondary);
 		}
 	}
 </style>
