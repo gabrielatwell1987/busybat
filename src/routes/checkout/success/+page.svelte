@@ -46,12 +46,30 @@
 		text-align: center;
 		padding: 2rem;
 
+		& h1 {
+			font-size: clamp(var(--h6), 5vw, var(--h1));
+			letter-spacing: 4px;
+			color: var(--color-accent);
+			-webkit-text-stroke: 1px var(--color-secondary);
+
+			@media (width <= 500px) {
+				letter-spacing: 0;
+			}
+		}
+
 		& .success-message {
 			margin: 2rem 0;
 			padding: 1.5rem;
-			background-color: #f0fff0;
+			background-color: var(--color-primary);
 			border-radius: 8px;
-			border-left: 4px solid #4caf50;
+			border-left: 4px solid var(--color-accent);
+			text-align: left;
+
+			& p {
+				font-family: var(--font-regular);
+				font-size: clamp(var(--sm), 1.5vw, var(--h5));
+				color: var(--color-secondary);
+			}
 
 			& .order-id {
 				font-family: monospace;
@@ -64,13 +82,23 @@
 
 		& .continue-button {
 			display: inline-block;
-			margin-top: 2rem;
+			margin-top: 1rem;
 			padding: 0.75rem 1.5rem;
-			background-color: #4caf50;
-			color: white;
+			background-color: var(--color-success);
+			color: var(--color-white);
 			text-decoration: none;
 			border-radius: 4px;
-			font-weight: bold;
+			font-family: var(--font-semibold);
+			font-size: clamp(var(--sm), 2vw, var(--h5));
+			letter-spacing: 2px;
+
+			@media (width <= 500px) {
+				letter-spacing: 0;
+			}
+
+			&:hover {
+				background-color: hsl(134, 61%, 31%);
+			}
 		}
 	}
 </style>
