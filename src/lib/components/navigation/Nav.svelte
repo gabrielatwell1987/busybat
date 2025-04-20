@@ -134,6 +134,13 @@
 			flex-flow: row wrap;
 		}
 
+		& .desktop-cart {
+			display: flex;
+			align-items: center;
+			margin-right: 1rem;
+			position: relative;
+		}
+
 		@media (width <= 500px) {
 			width: 95%;
 		}
@@ -148,14 +155,28 @@
 	}
 
 	@media (width <= 1150px) {
+		nav {
+			padding: 0.75rem;
+		}
 		ul {
-			scale: 0.9;
+			margin: 0 0.75rem;
+			transform: scale(0.9);
+			transform-origin: center;
 		}
 	}
 
 	@media (width <= 980px) {
+		nav {
+			padding: 0.5rem;
+			& .desktop-cart {
+				margin-right: 0.5rem;
+				transform: scale(0.85);
+				transform-origin: center right;
+			}
+		}
 		ul {
-			scale: 0.8;
+			margin: 0 0.5rem;
+			transform: scale(0.85);
 		}
 	}
 

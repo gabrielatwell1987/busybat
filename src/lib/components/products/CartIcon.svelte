@@ -55,6 +55,8 @@
 			justify-content: center;
 			cursor: pointer;
 			scale: 1.5;
+			transform-origin: center right;
+			margin-right: 4px;
 
 			& .cart-count {
 				position: absolute;
