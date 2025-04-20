@@ -12,6 +12,8 @@
 		--timing-function: cubic-bezier(0.66, 0, 0.34, 1);
 		overflow-y: clip;
 		list-style: none;
+		margin: 0;
+		padding: 0;
 
 		> * {
 			display: block;
@@ -23,6 +25,12 @@
 			letter-spacing: 5px;
 			margin: 0;
 			padding: 0;
+			white-space: nowrap;
+
+			@media (width <= 600px) {
+				font-size: clamp(var(--h6), 1.25vw, var(--h5));
+				letter-spacing: 2px;
+			}
 
 			@media (min-width: 501px) {
 				transition:

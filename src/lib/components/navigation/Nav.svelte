@@ -78,13 +78,13 @@
 		margin: 0.25rem 0;
 		border-radius: var(--radius);
 		width: 99%;
-		height: 3.5em;
+		min-height: 3.5em;
+		height: auto;
 		box-shadow: 0 0 4px var(--color-gray);
-		z-index: 40;
+		z-index: 5000;
 		margin-inline: auto;
 		view-transition-name: navigation;
 		scale: 1;
-		z-index: 5000;
 
 		& .title {
 			opacity: 0.9;
@@ -130,8 +130,10 @@
 
 		& ul {
 			display: flex;
-			gap: clamp(0.5rem, 2vw, 2rem);
+			gap: clamp(0.5rem, 1.75vw, 2rem);
 			flex-flow: row wrap;
+			margin: 0;
+			padding: 0;
 		}
 
 		& .desktop-cart {
@@ -177,6 +179,19 @@
 		ul {
 			margin: 0 0.5rem;
 			transform: scale(0.85);
+		}
+	}
+
+	@media (width <= 600px) {
+		nav {
+			height: auto;
+			padding: 0.5rem;
+			margin: 0;
+			width: 100%;
+			border-radius: 0;
+		}
+		ul {
+			gap: 0.25rem;
 		}
 	}
 
