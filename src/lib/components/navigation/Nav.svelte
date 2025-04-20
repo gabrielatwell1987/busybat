@@ -199,7 +199,9 @@
 		nav {
 			justify-content: space-between;
 			border-radius: 0;
-			padding: 0.05rem 1rem;
+			padding: 0.05rem 1rem 0.05rem 1rem;
+			margin: 0;
+			width: 100%;
 
 			& .desktop-cart {
 				display: none;
@@ -210,6 +212,7 @@
 				display: block;
 				position: relative;
 				z-index: 4998;
+				margin-right: 0.5rem;
 			}
 
 			& ul {
@@ -245,7 +248,7 @@
 				}
 
 				&.open {
-					left: -12%;
+					left: 0;
 
 					& li {
 						opacity: 1;
