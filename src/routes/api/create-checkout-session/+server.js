@@ -19,7 +19,7 @@ export async function POST({ request, url }) {
 			// Create product data object
 			const productData = {
 				name: item.name,
-				tax_code: 'txcd_99999999' // Add tax code for physical goods
+				tax_code: 'txcd_35010000',  // Tax code for general clothing
 			};
 
 			// Convert relative URL to absolute if needed
@@ -56,27 +56,6 @@ export async function POST({ request, url }) {
 				allowed_countries: ['US', 'CA']
 			},
 			shipping_options: [
-				// {
-				// 	shipping_rate_data: {
-				// 		type: 'fixed_amount',
-				// 		fixed_amount: {
-				// 			amount: 0,
-				// 			currency: 'usd'
-				// 		},
-				// 		display_name: 'Free Shipping (over $200)',
-				// 		delivery_estimate: {
-				// 			minimum: {
-				// 				unit: 'business_day',
-				// 				value: 5
-				// 			},
-				// 			maximum: {
-				// 				unit: 'business_day',
-				// 				value: 7
-				// 			}
-				// 		},
-				// 		tax_behavior: 'exclusive' // Make shipping taxable
-				// 	}
-				// },
 				{
 					shipping_rate_data: {
 						type: 'fixed_amount',
@@ -103,8 +82,8 @@ export async function POST({ request, url }) {
 				enabled: true
 			},
 			billing_address_collection: 'required', // Required for tax calculation
-			success_url: `${url.origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${url.origin}/checkout/canceled`,
+			success_url: new URL('/checkout/success', url.origin).toString() + '?session_id={CHECKOUT_SESSION_ID}',
+			cancel_url: new URL('/checkout/canceled', url.origin).toString(),
 			customer_email: customerEmail || undefined
 		});
 
