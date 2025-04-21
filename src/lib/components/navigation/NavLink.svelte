@@ -26,10 +26,15 @@
 			margin: 0;
 			padding: 0;
 			white-space: nowrap;
+			text-align: center;
 
 			@media (width <= 600px) {
 				font-size: clamp(var(--h6), 1.25vw, var(--h5));
 				letter-spacing: 2px;
+				padding: 0.5rem;
+				width: 100%;
+				text-align: center;
+				letter-spacing: 3px;
 			}
 
 			@media (min-width: 501px) {

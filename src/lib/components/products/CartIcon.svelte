@@ -47,6 +47,9 @@
 		position: relative;
 		color: inherit;
 		text-decoration: none;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
 
 		& .cart-icon {
 			position: relative;
@@ -55,24 +58,32 @@
 			justify-content: center;
 			cursor: pointer;
 			scale: 1.5;
-			transform-origin: center right;
-			margin-right: 4px;
+			transform-origin: center;
+			margin: 0;
+			padding: 0;
 
 			& .cart-count {
 				position: absolute;
-				top: -8px;
-				right: -8px;
+				top: -6px;
+				right: -6px;
 				background: var(--color-danger);
 				color: white;
 				border-radius: 50%;
-				min-width: 1rem;
-				height: 1rem;
-				font-size: 12px;
+				min-width: 0.75rem;
+				height: 0.75rem;
+				font-size: clamp(var(--xs), 1vw, var(--xs));
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				text-align: center;
 				font-weight: bold;
-				animation: pop 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+				padding: 0.1rem;
+				line-height: 0;
+				box-sizing: content-box;
+
+				@media (width <= 500px) {
+					padding-left: 0.35rem;
+				}
 			}
 		}
 	}

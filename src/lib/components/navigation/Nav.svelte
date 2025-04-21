@@ -42,18 +42,18 @@
 		<li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>
-		<div class="nav-link-wrapper">
-			<NavLink title="About" url="/about" onclick={handleLinkClick} />
-		</div>
-		<div class="nav-link-wrapper">
-			<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
-		</div>
-		<div class="nav-link-wrapper">
-			<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
-		</div>
-		<div class="nav-link-wrapper">
-			<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
-		</div>
+		<!-- <div class="nav-link-wrapper"> -->
+		<NavLink title="About" url="/about" onclick={handleLinkClick} />
+		<!-- </div> -->
+		<!-- <div class="nav-link-wrapper"> -->
+		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
+		<!-- </div> -->
+		<!-- <div class="nav-link-wrapper"> -->
+		<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
+		<!-- </div> -->
+		<!-- <div class="nav-link-wrapper"> -->
+		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
+		<!-- </div> -->
 	</ul>
 
 	<div class="cart-container desktop-cart">
@@ -150,6 +150,32 @@
 
 	.mobile-cart {
 		display: none;
+
+		@media (width <= 500px) {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+
+			:global(.cart-icon) {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				text-decoration: none;
+				color: var(--color-secondary);
+				font-family: var(--font-bold);
+				font-size: clamp(var(--h5), 1.5vw, var(--h4));
+				font-weight: 900;
+				letter-spacing: 5px;
+				margin: 0;
+				padding: 0;
+				white-space: nowrap;
+				text-align: center;
+			}
+		}
 	}
 
 	.desktop-cart {
@@ -170,6 +196,7 @@
 	@media (width <= 980px) {
 		nav {
 			padding: 0.5rem;
+
 			& .desktop-cart {
 				margin-right: 0.5rem;
 				transform: scale(0.85);
@@ -190,6 +217,7 @@
 			width: 100%;
 			border-radius: 0;
 		}
+
 		ul {
 			gap: 0.25rem;
 		}
@@ -199,7 +227,7 @@
 		nav {
 			justify-content: space-between;
 			border-radius: 0;
-			padding: 0.05rem 1rem 0.05rem 1rem;
+			padding: 0.05rem 1rem;
 			margin: 0;
 			width: 100%;
 
@@ -217,38 +245,38 @@
 
 			& ul {
 				position: fixed;
-				top: 0;
-				left: -120%;
+				inset: 0;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				gap: 3.5rem;
-				width: 100%;
+				gap: 3.25rem;
+				width: 100vw;
 				height: 100vh;
 				background-color: var(--color-primary);
 				z-index: 4997;
 				overflow-y: auto;
-				transition: left 0.6s cubic-bezier(0.65, 0, 0.35, 1) !important;
-				transform: none !important;
+				transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) !important;
 				margin: 0;
-				scale: 1;
+				padding: 0;
+				transform: translateX(-100%);
+				left: 0;
+				right: 0;
 
 				& li {
 					opacity: 0;
-					transform: translateX(100px);
+					transform: translateX(0);
 					transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 					pointer-events: none;
-				}
-
-				& .nav-link-wrapper {
-					opacity: 0;
-					transform: translateX(100px);
-					transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-					pointer-events: none;
+					text-align: center;
+					width: 100%;
+					padding: 0;
+					margin: 0;
 				}
 
 				&.open {
+					transform: translateX(0);
 					left: 0;
+					right: 0;
 
 					& li {
 						opacity: 1;
@@ -272,35 +300,34 @@
 						}
 					}
 
-					& .nav-link-wrapper {
-						opacity: 1;
-						transform: translateX(0);
-						pointer-events: all;
-
-						&:nth-child(2) {
-							transition-delay: 0.4s;
-						}
-						&:nth-child(3) {
-							transition-delay: 0.5s;
-						}
-						&:nth-child(4) {
-							transition-delay: 0.6s;
-						}
-						&:nth-child(5) {
-							transition-delay: 0.7s;
-						}
-					}
-
 					& li.mobile-cart {
-						display: block;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 100%;
 						list-style: none;
 						opacity: 1;
 						transform: translateX(0);
 						transition-delay: 0.3s;
 						pointer-events: all;
+						margin: 0;
+						padding: 0.5rem 0;
+
+						& :global(.cart-icon-wrapper) {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							width: auto;
+							height: auto;
+						}
 
 						& :global(.cart-icon) {
 							color: var(--color-secondary);
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							margin: 0;
+							padding: 0;
 						}
 					}
 				}
