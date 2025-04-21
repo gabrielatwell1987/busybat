@@ -240,7 +240,7 @@
 				display: block;
 				position: relative;
 				z-index: 4998;
-				margin-right: 0.5rem;
+				margin-right: 0.75rem;
 			}
 
 			& ul {
@@ -249,7 +249,7 @@
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				gap: 3.25rem;
+				gap: 3rem;
 				width: 100vw;
 				height: 100vh;
 				background-color: var(--color-primary);

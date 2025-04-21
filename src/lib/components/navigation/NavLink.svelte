@@ -29,7 +29,7 @@
 			text-align: center;
 
 			@media (width <= 600px) {
-				font-size: clamp(var(--h6), 1.25vw, var(--h5));
+				font-size: clamp(var(--h5), 1.5vw, var(--h5));
 				letter-spacing: 2px;
 				padding: 0.5rem;
 				width: 100%;
