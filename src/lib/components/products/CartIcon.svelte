@@ -69,20 +69,27 @@
 				background: var(--color-danger);
 				color: white;
 				border-radius: 50%;
-				min-width: 0.75rem;
-				height: 0.75rem;
+				width: 1rem;
+				height: 1rem;
 				font-size: clamp(var(--xs), 1vw, var(--xs));
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				text-align: center;
+				display: grid;
+				place-items: center;
 				font-weight: bold;
-				padding: 0.1rem;
 				line-height: 0;
-				box-sizing: content-box;
+				padding: 0;
+				box-sizing: border-box;
 
 				@media (width <= 500px) {
-					padding-left: 0.35rem;
+					width: 1.1rem;
+					height: 1.1rem;
+					line-height: 0;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					&::before {
+						content: '\200A'; /* Unicode for hair space */
+					}
 				}
 			}
 		}
