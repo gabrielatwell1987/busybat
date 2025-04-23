@@ -354,6 +354,7 @@
 				}
 
 				& .continue-shopping {
+					color: var(--color-dark);
 					margin-top: 1rem;
 					text-align: center;
 				}
