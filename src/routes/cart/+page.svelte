@@ -344,8 +344,14 @@
 						border-radius: 4px;
 						padding: 1rem;
 						font-family: var(--font-regular);
-						font-size: clamp(var(--sm), 2vw, var(--h6));
+						font-size: clamp(var(--sm), 3vw, var(--h5));
+						font-weight: 600;
+						letter-spacing: 1px;
 						cursor: pointer;
+
+						@media (width <= 500px) {
+							letter-spacing: 0;
+						}
 
 						&:disabled {
 							background-color: #cccccc;
@@ -357,6 +363,18 @@
 					color: var(--color-dark);
 					margin-top: 1rem;
 					text-align: center;
+					font-family: var(--font-regular);
+					font-size: clamp(var(--sm), 3vw, var(--h5));
+					letter-spacing: 2px;
+					font-weight: 600;
+
+					@media (width <= 500px) {
+						letter-spacing: 0;
+					}
+
+					&:hover {
+						text-decoration: underline;
+					}
 				}
 			}
 		}
