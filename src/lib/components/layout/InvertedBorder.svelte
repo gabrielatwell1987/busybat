@@ -13,38 +13,74 @@
 </div>
 
 <style>
+	@property --angle {
+		syntax: '<angle>';
+		initial-value: 0deg;
+		inherits: false;
+	}
+
 	.inverted-border {
 		position: relative;
 		width: 80vw;
 		height: auto;
-		background-color: var(--color-secondary);
-		padding: 0.75rem 1rem;
+		padding: 1.5rem;
 		margin-inline: auto;
 		display: grid;
-		align-items: center;
-		mask: radial-gradient(20px at 40px 40px, transparent 98%, black) -40px -40px;
-		grid-template-areas:
-			'title img'
-			'text img'
-			'text .';
+		grid-template-columns: 1fr auto 5rem;
+		grid-template-areas: 'content img .';
+		gap: 1rem;
 		margin-block: 3em;
+		place-items: center;
 
-		&:before {
+		@media (width <= 768px) {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				'content'
+				'img';
+			padding: 1rem;
+		}
+
+		/* Container for content with background */
+		&::before {
 			content: '';
 			position: absolute;
-			width: 40px;
-			height: 40px;
-			margin: -20px;
-			border-radius: 50%;
-			box-shadow: 0 0 0 250px transparent;
+			inset: 7px;
+			background-color: var(--color-secondary);
+			mask: radial-gradient(20px at 40px 40px, transparent 98%, black) -40px -40px;
+			-webkit-mask: radial-gradient(20px at 40px 40px, transparent 98%, black) -40px -40px;
+			z-index: 1;
+		}
+
+		/* Animated border that follows scooped corners */
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: conic-gradient(
+				from var(--angle),
+				transparent 20%,
+				var(--color-dark),
+				var(--color-accent)
+			);
+			-webkit-mask: radial-gradient(20px at 40px 40px, transparent 98%, black) -40px -40px;
+			mask: radial-gradient(20px at 40px 40px, transparent 98%, black) -40px -40px;
+			z-index: 0;
+			animation: spin 2.5s linear infinite;
 		}
 
 		& .content {
+			grid-area: content;
+			position: relative;
+			z-index: 2;
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
 			align-items: center;
-			margin-block: 3em;
+			justify-content: center;
+			text-align: center;
+			width: 100%;
+			gap: 1rem;
+			align-self: center;
+			margin-inline: auto;
 
 			& h2 {
 				color: var(--color-accent);
@@ -68,20 +104,33 @@
 				font-weight: 300;
 				line-height: 1.1;
 				margin-inline: auto;
+				max-width: 65ch;
 			}
 		}
 
 		& img {
-			max-width: clamp(10em, 3vw, 15em);
-			width: 100%;
-			height: auto;
-			object-fit: cover;
 			grid-area: img;
-			margin-top: 1em;
+			position: relative;
+			z-index: 2;
+			width: clamp(10em, 3vw, 15em);
+			height: auto;
+			object-fit: contain;
+			align-self: center;
+			justify-self: center;
 
-			@media (width <= 500px) {
-				margin-top: 0;
+			@media (width >= 768px) {
+				width: clamp(10em, 3vw, 15em);
 			}
+
+			@media (width <= 768px) {
+				margin: 0;
+			}
+		}
+	}
+
+	@keyframes spin {
+		to {
+			--angle: 360deg;
 		}
 	}
 </style>
