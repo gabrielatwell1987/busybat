@@ -17,7 +17,7 @@
 	<VerticalTitle title="About" />
 
 	<section class="content">
-		<h2>Welcome to</h2>
+		<h2>welcome to</h2>
 		<h2>Busy Little Bat Sewing</h2>
 		<h2>where dark meets delightful in every stitch</h2>
 
@@ -115,8 +115,9 @@
 			}
 
 			& h2 {
-				font-family: var(--font-semibold);
-				font-size: clamp(var(--h6), 5vw, var(--h1));
+				font-family: var(--font-regular);
+				font-size: clamp(var(--h6), 5vw, var(--h5));
+				font-weight: 200;
 				margin: 0;
 				padding: 0;
 				color: var(--color-secondary);
@@ -125,7 +126,7 @@
 				text-align: center;
 				width: 100%;
 				max-width: 800px;
-				opacity: 0.85;
+				opacity: 0.75;
 
 				@media (width <= 768px) {
 					width: 100%;
@@ -134,7 +135,7 @@
 				&:nth-of-type(2) {
 					margin-top: -0.5em;
 					font-family: var(--font-title);
-					font-size: clamp(var(--h5), 5vw, var(--h1));
+					font-size: clamp(var(--h5), 5vw, var(--lg));
 					font-weight: 700;
 					color: var(--color-accent);
 					-webkit-text-stroke: 1px var(--color-secondary);
@@ -151,10 +152,12 @@
 					line-height: 1.35;
 					font-family: var(--font-semibold);
 					font-size: clamp(var(--xs), 3vw, var(--h5));
-					font-weight: 300;
+					font-weight: 600;
 					color: var(--color-secondary);
 					-webkit-text-stroke: none;
 					text-shadow: none;
+					text-wrap: balance;
+					opacity: 1;
 				}
 			}
 

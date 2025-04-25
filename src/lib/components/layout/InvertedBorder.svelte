@@ -58,6 +58,7 @@
 			inset: 0;
 			background: conic-gradient(
 				from var(--angle),
+				var(--color-accent),
 				transparent 20%,
 				var(--color-dark),
 				var(--color-accent)
@@ -65,7 +66,7 @@
 			-webkit-mask: radial-gradient(20px at 40px 40px, transparent 98%, black) -40px -40px;
 			mask: radial-gradient(20px at 40px 40px, transparent 98%, black) -40px -40px;
 			z-index: 0;
-			animation: spin 2.5s linear infinite;
+			animation: spin 3.5s linear infinite;
 		}
 
 		& .content {
