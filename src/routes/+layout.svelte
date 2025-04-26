@@ -5,13 +5,34 @@
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import SkipToMain from '$lib/components/layout/SkipToMain.svelte';
 	import LocalStorage from '$lib/components/layout/localStorage.svelte';
+	import LoadingSpinner from '$lib/components/layout/LoadingSpinner.svelte';
 
 	let { children } = $props();
+	let isPageLoaded = $state(false);
+
+	// Handle page load state
+	$effect(() => {
+		if (typeof window !== 'undefined') {
+			if (document.readyState === 'complete') {
+				isPageLoaded = true;
+			} else {
+				window.addEventListener('load', () => {
+					isPageLoaded = true;
+				});
+			}
+		}
+	});
 </script>
 
 <LocalStorage />
 <ViewTransition />
 <SkipToMain />
+
+{#if !isPageLoaded}
+	<div class="loading-container">
+		<LoadingSpinner size="15em" />
+	</div>
+{/if}
 
 <main>
 	<Nav />
@@ -27,8 +48,9 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		height: auto;
-		min-height: 100%;
+		width: 100%;
+		height: 100%;
+		min-height: 100vh;
 		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
@@ -49,5 +71,18 @@
 		position: relative;
 		margin-top: 2em;
 		padding: 1em;
+	}
+
+	.loading-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: white;
+		z-index: 9999;
 	}
 </style>
