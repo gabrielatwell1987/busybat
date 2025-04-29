@@ -112,6 +112,10 @@
 	--timing: 1s;
 }
 
+* {
+	scrollbar-color: var(--color-accent) var(--color-secondary);
+}
+
 html {
 	height: 100%;
 	position: relative;
