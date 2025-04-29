@@ -41,7 +41,7 @@
 				I specialize in upcycling old denim, flannels and t-shirts into items for those who dare to
 				stand out. Each stitch weaves a web of gothic glamour, gutter-punk horror and eerie every
 				day wear. My creations are made with a touch of magic and a whole lot of love. I create
-				sustainable, wearable art the blends the macabre with sustainability proving that fashion
+				sustainable, wearable art that blends the macabre with sustainability proving that fashion
 				can be both distinctive and kind to the planet. I believe that each ghastly creature on this
 				planet has the power to change lives and bring about unsettlingly meaningful change.
 			</p>
