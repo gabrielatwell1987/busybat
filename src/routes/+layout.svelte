@@ -63,13 +63,13 @@
 		flex-direction: column;
 		flex: 1 0 auto;
 		height: auto;
-	}
 
-	.slot {
-		flex: 1 0 auto;
-		position: relative;
-		margin-top: 0;
-		padding: 1em;
+		& .slot {
+			flex: 1 0 auto;
+			position: relative;
+			margin-top: 0;
+			padding: 1em;
+		}
 	}
 
 	.loading-container {

@@ -70,8 +70,7 @@
 		margin: 0;
 		border-radius: 0;
 		width: 100%;
-		min-height: 3.5em;
-		height: auto;
+		height: 3em;
 		box-shadow: 0 0 4px var(--color-gray);
 		z-index: 5000;
 		margin-inline: auto;
@@ -98,7 +97,7 @@
 				width: 2rem;
 				height: 0.25rem;
 				background-color: var(--color-secondary);
-				margin: 0.5rem;
+				margin: 0.45rem;
 				border-radius: 10px;
 				transition: all 0.3s linear;
 			}
@@ -222,6 +221,7 @@
 			padding: 0.05rem 1rem;
 			margin: 0;
 			width: 100%;
+			height: 3.25em;
 
 			& .desktop-cart {
 				display: none;

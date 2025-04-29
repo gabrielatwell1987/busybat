@@ -31,9 +31,7 @@
 		justify-content: center;
 
 		@media (width <= 500px) {
-			width: 100%;
-			max-width: 100%;
-			position: fixed;
+			width: 85%;
 		}
 
 		& section {
@@ -66,7 +64,7 @@
 
 				@media (width <= 500px) {
 					scale: 0.85;
-					width: 100%;
+					/* width: 100%; */
 					display: flex;
 					justify-content: center;
 					text-align: center;
