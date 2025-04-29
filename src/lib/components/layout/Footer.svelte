@@ -15,7 +15,7 @@
 
 <style>
 	footer {
-		position: absolute;
+		position: relative;
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
@@ -27,12 +27,28 @@
 		z-index: 10;
 		max-width: calc(100% - 2rem);
 		width: fit-content;
+		display: flex;
+		justify-content: center;
+
+		@media (width <= 500px) {
+			width: 100%;
+			max-width: 100%;
+			position: fixed;
+		}
 
 		& section {
 			backdrop-filter: blur(1rem);
 			border-radius: var(--radius);
+			background-color: hsl(0, 0%, 94%);
 			margin: 0;
-			padding: 0;
+			padding: 0.25rem 0.5rem;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+
+			@media (width <= 500px) {
+				padding: 0.01rem;
+			}
 
 			& p {
 				color: var(--color-secondary);
@@ -46,12 +62,14 @@
 				margin: 0;
 				padding: 0.15em 0.5em;
 				line-height: 1;
+				text-align: center;
 
-				@media (max-width: 500px) {
-					--font-scale: 0.85;
+				@media (width <= 500px) {
 					scale: 0.85;
+					width: 100%;
 					display: flex;
 					justify-content: center;
+					text-align: center;
 				}
 			}
 		}

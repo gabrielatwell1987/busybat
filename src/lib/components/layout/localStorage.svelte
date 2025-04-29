@@ -34,5 +34,3 @@
 		localStorage.setItem('busybat_cart', JSON.stringify({ cart, customerEmail }));
 	});
 </script>
-
-# filepath: src/lib/components/layout/localStorage.svelte

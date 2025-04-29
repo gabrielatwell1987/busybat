@@ -63,13 +63,12 @@
 		flex-direction: column;
 		flex: 1 0 auto;
 		height: auto;
-		padding-top: 5em;
 	}
 
 	.slot {
 		flex: 1 0 auto;
 		position: relative;
-		margin-top: 2em;
+		margin-top: 0;
 		padding: 1em;
 	}
 

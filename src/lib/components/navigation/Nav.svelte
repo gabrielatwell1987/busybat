@@ -42,18 +42,11 @@
 		<li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>
-		<!-- <div class="nav-link-wrapper"> -->
+
 		<NavLink title="About" url="/about" onclick={handleLinkClick} />
-		<!-- </div> -->
-		<!-- <div class="nav-link-wrapper"> -->
 		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
-		<!-- </div> -->
-		<!-- <div class="nav-link-wrapper"> -->
 		<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
-		<!-- </div> -->
-		<!-- <div class="nav-link-wrapper"> -->
 		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
-		<!-- </div> -->
 	</ul>
 
 	<div class="cart-container desktop-cart">
@@ -67,17 +60,16 @@
 	}
 
 	nav {
-		position: absolute;
+		position: relative;
 		top: 0;
-		left: 0;
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
 		padding: 1rem;
 		background-color: hsl(0, 0%, 100%);
-		margin: 0.25rem 0;
-		border-radius: var(--radius);
-		width: 99%;
+		margin: 0;
+		border-radius: 0;
+		width: 100%;
 		min-height: 3.5em;
 		height: auto;
 		box-shadow: 0 0 4px var(--color-gray);
