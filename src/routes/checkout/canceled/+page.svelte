@@ -53,7 +53,7 @@
 			display: inline-block;
 			margin-top: 1rem;
 			padding: 0.75rem 1.5rem;
-			background-color: var(--color-success);
+			background-color: var(--color-accent);
 			color: var(--color-white);
 			text-decoration: none;
 			border-radius: 4px;
@@ -66,7 +66,7 @@
 			}
 
 			&:hover {
-				background-color: hsl(134, 61%, 31%);
+				background-color: hsl(320, 75%, 56%);
 			}
 		}
 	}
