@@ -67,7 +67,7 @@
 		& .slot {
 			flex: 1 0 auto;
 			position: relative;
-			margin-top: 0;
+			margin-block: 5em;
 			padding: 1em;
 		}
 	}

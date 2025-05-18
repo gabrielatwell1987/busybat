@@ -175,7 +175,7 @@
 
 	@media (width <= 1150px) {
 		nav {
-			padding: 0.75rem;
+			padding: 1em;
 		}
 		ul {
 			margin: 0 0.75rem;
@@ -183,20 +183,36 @@
 			transform-origin: center;
 		}
 	}
-
 	@media (width <= 980px) {
 		nav {
 			padding: 0.5rem;
 
 			& .desktop-cart {
-				margin-right: 0.5rem;
+				margin-right: 3em;
 				transform: scale(0.85);
-				transform-origin: center right;
+				transform-origin: center;
+				position: relative;
+				right: 0;
 			}
 		}
 		ul {
 			margin: 0 0.5rem;
 			transform: scale(0.85);
+		}
+	}
+	@media (600px <= width <= 865px) {
+		nav {
+			height: 4.5em;
+			padding: 0.75rem;
+			margin: 0;
+			width: 100%;
+		}
+
+		ul {
+			gap: 0.5rem;
+			flex-wrap: nowrap;
+			justify-content: center;
+			padding: 0 0.5rem;
 		}
 	}
 
@@ -211,6 +227,15 @@
 
 		ul {
 			gap: 0.25rem;
+		}
+	}
+
+	@media (500px <= width <= 990px) {
+		.desktop-cart {
+			position: relative;
+			right: 0;
+			margin-right: 0.25rem;
+			transform: scale(0.8);
 		}
 	}
 
