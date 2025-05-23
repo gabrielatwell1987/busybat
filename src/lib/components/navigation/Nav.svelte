@@ -113,7 +113,7 @@
 			}
 
 			&.open .bar:nth-child(3) {
-				transform: rotate(-45deg) translate(0.25rem, -0.8rem);
+				transform: rotate(-45deg) translate(0.25rem, -0.75rem);
 				transition: transform 0.3s linear;
 				background-color: var(--color-dark);
 			}
@@ -257,7 +257,7 @@
 				display: block;
 				position: relative;
 				z-index: 4998;
-				margin-right: 0.75rem;
+				margin-right: 1.2rem;
 			}
 
 			& ul {
