@@ -37,7 +37,11 @@
 
 <section class="products">
 	{#each products as product}
-		<article class="product-wrapper" class:hidden={shouldHideProduct(product)}>
+		<article
+			class="product-wrapper"
+			class:hidden={shouldHideProduct(product)}
+			style="view-transition-name: product-{product.id};"
+		>
 			<Product
 				id={product.id}
 				name={product.name}
@@ -70,7 +74,6 @@
 		margin-bottom: 2rem;
 		width: auto;
 		height: auto;
-		view-transition-name: products-content;
 		padding: 1rem;
 
 		@media (width <= 500px) {
@@ -80,40 +83,18 @@
 
 		& .product-wrapper {
 			width: 100%;
+			transition: opacity 0.2s ease;
 		}
 	}
 
-	::view-transition-old(products-content) {
-		animation: product-fade-out var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-	}
-
-	::view-transition-new(products-content) {
-		animation: product-fade-in var(--timing) cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+	/* Global view transition styles for individual products */
+	:global([style*='view-transition-name: product-']::view-transition-old(*)),
+	:global([style*='view-transition-name: product-']::view-transition-new(*)) {
+		animation-duration: 0.4s;
+		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.hidden {
 		display: none;
-	}
-
-	@keyframes product-fade-in {
-		from {
-			opacity: 0;
-			transform: scale(0.98);
-		}
-		to {
-			opacity: 1;
-			transform: scale(1);
-		}
-	}
-
-	@keyframes product-fade-out {
-		from {
-			opacity: 1;
-			transform: scale(1);
-		}
-		to {
-			opacity: 0;
-			transform: scale(1.02);
-		}
 	}
 </style>

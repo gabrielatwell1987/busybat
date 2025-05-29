@@ -93,39 +93,35 @@
 		}
 	}
 
-	/* View transition styles for category filtering */
-	:global(::view-transition-group(category-filter)) {
-		animation-duration: 1ms;
-		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	:global(::view-transition-old(products-content)) {
+		animation: content-fade-out 200ms forwards;
 	}
 
-	:global(::view-transition-old(category-filter)) {
-		animation-name: filter-fade-out;
+	:global(::view-transition-new(products-content)) {
+		animation: content-fade-in 5s forwards;
 	}
 
-	:global(::view-transition-new(category-filter)) {
-		animation-name: filter-fade-in;
-	}
-
-	@keyframes filter-fade-out {
-		from {
+	@keyframes content-fade-out {
+		0% {
 			opacity: 1;
-			transform: translateY(0);
 		}
-		to {
+		5% {
+			scale: 0;
+		}
+		100% {
 			opacity: 0;
-			transform: translateY(-10px);
 		}
 	}
 
-	@keyframes filter-fade-in {
-		from {
+	@keyframes content-fade-in {
+		0% {
 			opacity: 0;
-			transform: translateY(10px);
 		}
-		to {
+		10% {
+			scale: 1;
+		}
+		100% {
 			opacity: 1;
-			transform: translateY(0);
 		}
 	}
 </style>
