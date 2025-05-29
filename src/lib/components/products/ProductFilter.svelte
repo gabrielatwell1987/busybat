@@ -17,28 +17,10 @@
 				}
 			});
 		}
-	});
-
-	// View transition function for smooth category changes
-	function triggerViewTransition(callback) {
-		if (!browser || !document.startViewTransition) {
-			// Fallback for browsers that don't support view transitions
-			callback();
-			return;
-		}
-
-		document.startViewTransition(() => {
-			callback();
-		});
-	}
-
-	// Handle category change with view transition
+	}); // Handle category change
 	function handleCategoryChange(event) {
 		const newCategory = event.target.value;
-
-		triggerViewTransition(() => {
-			selectedCategory = newCategory;
-		});
+		selectedCategory = newCategory;
 	}
 
 	// Notify parent when category changes
@@ -90,38 +72,6 @@
 			font-family: var(--font-regular);
 			font-size: var(--h6);
 			color: var(--color-dark);
-		}
-	}
-
-	:global(::view-transition-old(products-content)) {
-		animation: content-fade-out 200ms forwards;
-	}
-
-	:global(::view-transition-new(products-content)) {
-		animation: content-fade-in 5s forwards;
-	}
-
-	@keyframes content-fade-out {
-		0% {
-			opacity: 1;
-		}
-		5% {
-			scale: 0;
-		}
-		100% {
-			opacity: 0;
-		}
-	}
-
-	@keyframes content-fade-in {
-		0% {
-			opacity: 0;
-		}
-		10% {
-			scale: 1;
-		}
-		100% {
-			opacity: 1;
 		}
 	}
 </style>
