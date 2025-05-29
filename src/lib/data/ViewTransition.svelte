@@ -30,13 +30,13 @@
 	}
 
 	:root::view-transition-old(root) {
-		animation: var(--timing) cubic-bezier(0.37, 0.06, 0.6, 0.91) both out;
-		animation-delay: 0.5s;
+		animation: none;
+		transform: scale(1);
 	}
 
 	:root::view-transition-new(root) {
-		animation: var(--timing) cubic-bezier(0.37, 0.06, 0.6, 0.91) 1s both in;
-		animation-delay: 0.5s;
+		animation: none;
+		transform: scale(1);
 	}
 
 	@supports (-webkit-touch-callout: none) {
