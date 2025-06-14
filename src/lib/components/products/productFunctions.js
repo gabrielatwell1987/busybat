@@ -67,18 +67,17 @@ export function createToggleEnlargementHandler(contextData, setState) {
 			`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
 		);
 		const footer = document.querySelector('footer');
-
 		if (browser && document.startViewTransition) {
-			document.documentElement.style.setProperty('--view-transition-duration', '1.25s');
-			document.documentElement.style.setProperty('--view-transition-delay', '0.2s');
+			document.documentElement.style.setProperty('--view-transition-duration', '0.15s');
+			document.documentElement.style.setProperty('--view-transition-delay', '0.05s');
 
 			const styleEl = document.createElement('style');
 			styleEl.textContent = `
                 ::view-transition-old(${context}-product-card-${id}),
                 ::view-transition-new(${context}-product-card-${id}) {
-                    animation-delay: 0.2s;
-                    animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
-                    animation-duration: 1.2s;
+                    animation-delay: 0.05s;
+                    animation-timing-function: cubic-bezier(0.15, 0.1, 0.15, 1);
+                    animation-duration: 0.15s;
                 }
             `;
 			document.head.appendChild(styleEl);
@@ -95,7 +94,7 @@ export function createToggleEnlargementHandler(contextData, setState) {
 							productInfo.scrollTo({ top: 0, behavior: 'instant' });
 							productInfo.scrollTop = 0;
 						}
-					}, 100);
+					}, 80);
 				}
 
 				if (!setState.isEnlarged()) {
@@ -104,13 +103,13 @@ export function createToggleEnlargementHandler(contextData, setState) {
 						otherProducts.forEach((product) => {
 							product.style.removeProperty('visibility');
 							product.style.opacity = '0.3';
-							product.style.transition = 'opacity 0.5s ease';
+							product.style.transition = 'opacity 0.35s ease';
 						});
 						if (footer) {
 							footer.style.removeProperty('visibility');
 							footer.style.opacity = '0.3';
 							footer.style.zIndex = '20';
-							footer.style.transition = 'opacity 0.5s ease';
+							footer.style.transition = 'opacity 0.35s ease';
 						}
 					}
 				} else {
@@ -124,7 +123,7 @@ export function createToggleEnlargementHandler(contextData, setState) {
 							footer.style.opacity = '0';
 							footer.style.visibility = 'hidden';
 						}
-					}, 200);
+					}, 150);
 				}
 			});
 

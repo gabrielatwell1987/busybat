@@ -22,7 +22,8 @@
 		dropdownImage,
 		category,
 		imageFit = 'cover',
-		addToCart
+		addToCart,
+		style = ''
 	} = $props();
 
 	let isEnlarged = $state(false);
@@ -147,7 +148,7 @@
 
 <div
 	class="product-card {isEnlarged ? 'enlarged' : ''} product-id-{id}"
-	style="view-transition-name: {context}-product-card-{id}"
+	style="{style}; view-transition-name: {context}-product-card-{id}"
 	onclick={toggleEnlargement}
 	onkeydown={(e) => {
 		if (e.target === e.currentTarget) {

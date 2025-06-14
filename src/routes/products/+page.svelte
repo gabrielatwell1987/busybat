@@ -37,11 +37,7 @@
 
 <section class="products">
 	{#each products as product}
-		<div
-			class="product-container"
-			class:hidden={shouldHideProduct(product)}
-			style="view-transition-name: product-{product.id};"
-		>
+		{#if !shouldHideProduct(product)}
 			<Product
 				id={product.id}
 				name={product.name}
@@ -55,8 +51,9 @@
 				imageFit={getImageFit(product.category)}
 				{addToCart}
 				dropdownImage={product.dropdown}
+				style="view-transition-name: product-{product.id};"
 			/>
-		</div>
+		{/if}
 	{/each}
 </section>
 
@@ -80,12 +77,6 @@
 			grid-template-columns: 1fr;
 			gap: 1.5em;
 		}
-
-		& .product-container {
-			width: 100%;
-			transition: opacity 0.2s ease;
-			z-index: 1;
-		}
 	}
 
 	/* Global view transition styles for individual products */
@@ -93,9 +84,5 @@
 	:global([style*='view-transition-name: product-']::view-transition-new(*)) {
 		animation-duration: 0.4s;
 		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	}
-
-	.hidden {
-		display: none;
 	}
 </style>
