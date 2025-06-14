@@ -37,8 +37,8 @@
 
 <section class="products">
 	{#each products as product}
-		<article
-			class="product-wrapper"
+		<div
+			class="product-container"
 			class:hidden={shouldHideProduct(product)}
 			style="view-transition-name: product-{product.id};"
 		>
@@ -55,7 +55,7 @@
 				imageFit={getImageFit(product.category)}
 				{addToCart}
 			/>
-		</article>
+		</div>
 	{/each}
 </section>
 
@@ -75,15 +75,15 @@
 		width: auto;
 		height: auto;
 		padding: 1rem;
-
 		@media (width <= 500px) {
 			grid-template-columns: 1fr;
 			gap: 1.5em;
 		}
 
-		& .product-wrapper {
+		& .product-container {
 			width: 100%;
 			transition: opacity 0.2s ease;
+			z-index: 1;
 		}
 	}
 

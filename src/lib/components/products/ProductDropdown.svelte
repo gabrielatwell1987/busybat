@@ -1,16 +1,8 @@
 <script>
-	import miniMenaceImg from '$lib/assets/dropdown/mini-menace-chain__open.webp';
-	import dhSizeChart from '$lib/assets/dropdown/dh-size-chart.webp';
-
-	let { id, name, isEnlarged, onClose, onStateChange } = $props();
+	let { id, name, isEnlarged, onClose, onStateChange, dropdownImage = null } = $props();
 	let isDropdownOpen = $state(false);
 
-	const dropdownImages = {
-		'1': miniMenaceImg,
-		'2': dhSizeChart
-	};
-
-	const actualDropdownImage = dropdownImages[id];
+	const actualDropdownImage = dropdownImage;
 
 	$effect(() => {
 		onStateChange?.(isDropdownOpen);

@@ -7,7 +7,8 @@
 		"description": "<p style='text-indent: 1rem'>Handmade with 100% cotton canvas and 100% cotton lining, the Mini Menace Tote is crafted for the busiest of bats. The ghostly slate blue canvas exterior boasts a haunting skull and bird print. But venture inside and you'll find a dark rainbow stripe lining with (1) zip pocket, (1) slide pocket with heart-shaped magnet closure, and (6) card slots for ease & organization. All brass-colored hardware, skull adorned zipper pulls, and an upcycled chain belt converted into a shoulder strap that is detachable.<br> <b>Measurements: 11in L x 9in H x 5in D. Handle Drop: 5in</b></p> <br> <a target='_blank' href='/gallery#mini-menace-side' style='color: var(--color-info); font-family: var(--font-semibold);'>See the Mini Menace Tote in action!</a>",
 		"category": "Bags",
 		"inStock": true,
-		"productUrl": "/products/mini-menace__forward.webp"
+		"productUrl": "/products/mini-menace__forward.webp",
+		"dropdown": "/products/mini-menace-chain__open.webp"
 	},
 	{
 		"id": "2",
@@ -17,6 +18,7 @@
 		"description": "<p style='text-indent: 1rem'>Risen from the grave of ordinary fashion, this upcycled Victorious denim jacket began as a simple grey soul before taking a bewitching dip in a cauldron of tie-die paint. Reborn with the siren of punk herself--Debbie Harry. Featuring patches from creators like Project Pinup and Wildflower Company. Hand painted animal print haunting the upper back with a wicked blend of fabric paints, mixed by my own hands under the watchful glow of the midnight moon.  <br> <b>Size: XL</b></p> <br> <a target='_blank' href='/gallery#dh-jacket-front' style='color: var(--color-info); font-family: var(--font-semibold);'>See D. Harry Denim Jacket pictures!</a>",
 		"category": "Clothing",
 		"inStock": true,
-		"productUrl": "/products/dh-jacket__back.webp"
+		"productUrl": "/products/dh-jacket__back.webp",
+		"dropdown": "/products/dh-size-chart.webp"
 	}
 ]

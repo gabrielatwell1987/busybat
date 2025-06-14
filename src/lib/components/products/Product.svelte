@@ -1,7 +1,5 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	import miniMenaceImg from '$lib/assets/dropdown/mini-menace-chain__open.webp';
-	import dhSizeChart from '$lib/assets/dropdown/dh-size-chart.webp';
 	import {
 		formatPrice,
 		trapFocus,
@@ -10,7 +8,6 @@
 	} from './productFunctions.js';
 	import ProductDropdown from './ProductDropdown.svelte';
 	import { getCartData } from './CartStore.svelte';
-
 	let {
 		id,
 		name,
@@ -21,6 +18,7 @@
 		inStock,
 		context = 'default',
 		productUrl,
+		dropdown,
 		dropdownImage,
 		category,
 		imageFit = 'cover',
@@ -40,14 +38,7 @@
 		// Check if this item is in the cart
 		isAddedToCart = cart.some((item) => item.id === id);
 	});
-
-	const dropdownImages = {
-		'1': miniMenaceImg,
-		'2': dhSizeChart
-	};
 	const useContainFit = id === '2' || imageFit === 'contain' || category === 'Bags';
-
-	const actualDropdownImage = dropdownImages[id] || dropdownImage;
 	const dispatch = createEventDispatcher();
 
 	// Product data for cart
@@ -155,7 +146,7 @@
 </script>
 
 <div
-	class="product-card {isEnlarged ? 'enlarged' : ''}"
+	class="product-card {isEnlarged ? 'enlarged' : ''} product-id-{id}"
 	style="view-transition-name: {context}-product-card-{id}"
 	onclick={toggleEnlargement}
 	onkeydown={(e) => {
@@ -182,7 +173,6 @@
 		</div>
 
 		<p class="product-description" class:expanded={isEnlarged}>{@html description}</p>
-
 		{#if isEnlarged}
 			<ProductDropdown
 				{id}
@@ -190,6 +180,7 @@
 				{isEnlarged}
 				onClose={toggleEnlargement}
 				onStateChange={handleDropdownState}
+				dropdownImage={dropdown ?? dropdownImage}
 			/>
 
 			<button
@@ -601,5 +592,24 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
+	}
+
+	/* Specific styles for the mini menace product (id 1) */
+	:global(.product-id-1 .dropdown-container .toggle-wrapper) {
+		position: absolute;
+		top: -1rem;
+		right: 0;
+		z-index: 999;
+	}
+
+	:global(.product-id-1 .dropdown-toggle) {
+		position: absolute;
+		z-index: 9999;
+	}
+
+	/* Make sure the D. Harry product works too */
+	:global(.product-id-2 .dropdown-container),
+	:global(.product-id-2 .dropdown-toggle) {
+		z-index: 999;
 	}
 </style>
