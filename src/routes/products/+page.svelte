@@ -54,6 +54,7 @@
 				category={product.category}
 				imageFit={getImageFit(product.category)}
 				{addToCart}
+				dropdownImage={product.dropdown}
 			/>
 		</div>
 	{/each}
