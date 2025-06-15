@@ -94,7 +94,7 @@
 				font-family: var(--font-semibold);
 				font-size: clamp(var(--h6), 1.5vw, var(--h4));
 				font-weight: 800;
-				letter-spacing: 3px;
+				letter-spacing: 0px;
 				color: var(--color-secondary);
 				margin: 0.5em 0;
 			}

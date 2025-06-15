@@ -127,6 +127,7 @@
 				width: 100%;
 				max-width: 800px;
 				opacity: 0.75;
+				letter-spacing: -1px;
 
 				@media (width <= 768px) {
 					width: 100%;
@@ -167,6 +168,7 @@
 				max-width: 1500px;
 				padding: 0 1rem;
 				box-sizing: border-box;
+				letter-spacing: 0px;
 
 				& .contact-me {
 					display: flex;
