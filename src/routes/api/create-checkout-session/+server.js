@@ -35,9 +35,9 @@ export async function POST({ request, url }) {
 
 				// For development/localhost, use a placeholder image since Stripe can't access local files
 				if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
-					// Use a placeholder image service for development
-					productData.images = [`https://picsum.photos/400/400?random=${item.id}`];
-					console.log('Using placeholder image for development:', productData.images[0]);
+					// Use higher resolution placeholder for development (1200x1200)
+					productData.images = [`https://picsum.photos/1200/1200?random=${item.id}`];
+					console.log('Using high-res placeholder image for development:', productData.images[0]);
 				} else {
 					productData.images = [imageUrl];
 					console.log('Added image to Stripe product:', imageUrl);
@@ -48,7 +48,14 @@ export async function POST({ request, url }) {
 
 			// Only add description if it exists and isn't empty
 			if (item.description && item.description.trim() !== '') {
-				productData.description = item.description;
+				// Clean up HTML from description for Stripe (Stripe doesn't support HTML)
+				const cleanDescription = item.description
+					.replace(/<[^>]*>/g, '') // Remove HTML tags
+					.replace(/&middot;/g, '·') // Replace HTML entities
+					.replace(/&nbsp;/g, ' ')
+					.trim();
+
+				productData.description = cleanDescription;
 			}
 
 			return {
