@@ -8,6 +8,7 @@
 	} from './productFunctions.js';
 	import ProductDropdown from './ProductDropdown.svelte';
 	import { getCartData } from './CartStore.svelte';
+
 	let {
 		id,
 		name,
@@ -25,11 +26,10 @@
 		addToCart,
 		style = ''
 	} = $props();
-
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
 	let isDropdownOpened = $state(false);
-	let isAddedToCart = $state(false); // New state to track if item was added to cart
+	let isAddedToCart = $state(false);
 
 	// Get cart data
 	let cart = $state([]);
@@ -39,9 +39,9 @@
 		// Check if this item is in the cart
 		isAddedToCart = cart.some((item) => item.id === id);
 	});
+
 	const useContainFit = id === '2' || imageFit === 'contain' || category === 'Bags';
 	const dispatch = createEventDispatcher();
-
 	// Product data for cart
 	const productData = { id, name, price, imageUrl, productUrl, quantity: 1 };
 
