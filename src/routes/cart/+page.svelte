@@ -5,20 +5,11 @@
 		updateQuantity,
 		handleCheckout
 	} from '$lib/components/products/CartStore.svelte';
-
-	// Get reactive cart data from the store
-	let cart = $state([]);
-	let customerEmail = $state('');
-	let isProcessingPayment = $state(false);
-
-	// Initialize cart data
-	$effect(() => {
-		const data = getCartData();
-		cart = data.cart;
-		customerEmail = data.customerEmail;
-		isProcessingPayment = data.isProcessingPayment;
-	});
-
+	// Get reactive cart data from the store - use the actual state references
+	let cartData = $derived(getCartData());
+	let cart = $derived(cartData.cart);
+	let customerEmail = $derived(cartData.customerEmail);
+	let isProcessingPayment = $derived(cartData.isProcessingPayment);
 	// Calculate cart total reactively
 	let cartTotal = $derived(
 		cart.reduce((sum, item) => {
@@ -35,10 +26,6 @@
 
 	function handleUpdateQuantity(id, newQuantity) {
 		updateQuantity(id, newQuantity);
-	}
-
-	function handleSetEmail(e) {
-		customerEmail = e.target.value;
 	}
 </script>
 

@@ -6,43 +6,43 @@
 	const images = [
 		{
 			id: 'mini-menace-side',
-			src: '/products/mini-menace-chain__side.webp',
+			src: '/products/mini.menace/mini-menace-chain__side.webp',
 			alt: 'Mini Menace Tote from the side',
 			title: 'Mini Menace Tote'
 		},
 		{
 			id: 'mini-menace-forward',
-			src: '/products/mini-menace-chain__forward.webp',
+			src: '/products/mini.menace/mini-menace-chain__forward.webp',
 			alt: 'Mini Menace Tote',
 			title: 'Mini Menace Tote'
 		},
 		{
 			id: 'mini-menace-open',
-			src: '/products/mini-menace-chain__open.webp',
+			src: '/products/mini.menace/mini-menace-chain__open.webp',
 			alt: 'inside the Mini Menace Tote',
 			title: 'Mini Menace Tote'
 		},
 		{
 			id: 'dh-jacket-front',
-			src: '/products/dh-jacket__front.webp',
+			src: '/products/d.harry/dh-jacket__front.webp',
 			alt: 'D. Harry jacket from the front',
 			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dh-jacket-left',
-			src: '/products/dh-jacket__shoulder-left.webp',
+			src: '/products/d.harry/dh-jacket__shoulder-left.webp',
 			alt: 'D. Harry left shoulder',
 			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dh-jacket-right',
-			src: '/products/dh-jacket__shoulder-right.webp',
+			src: '/products/d.harry/dh-jacket__shoulder-right.webp',
 			alt: 'D. Harry right shoulder',
 			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dh-jacket-pocket',
-			src: '/products/dh-jacket__pocket.webp',
+			src: '/products/d.harry/dh-jacket__pocket.webp',
 			alt: 'D. Harry jacket pocket',
 			title: 'D. Harry Denim Jacket'
 		}

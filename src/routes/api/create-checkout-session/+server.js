@@ -16,19 +16,34 @@ export async function POST({ request, url }) {
 
 		// Format line items for Stripe with URL validation
 		const lineItems = items.map((item) => {
+			console.log('Processing item for Stripe:', item); // Debug log
+
 			// Create product data object
 			const productData = {
 				name: item.name,
-				tax_code: 'txcd_35010000',  // Tax code for general clothing
+				tax_code: 'txcd_35010000' // Tax code for general clothing
 			};
 
 			// Convert relative URL to absolute if needed
 			if (item.imageUrl) {
+				let imageUrl;
 				if (item.imageUrl.startsWith('/')) {
-					productData.images = [`${url.origin}${item.imageUrl}`];
+					imageUrl = `${url.origin}${item.imageUrl}`;
 				} else if (isValidHttpUrl(item.imageUrl)) {
-					productData.images = [item.imageUrl];
+					imageUrl = item.imageUrl;
 				}
+
+				// For development/localhost, use a placeholder image since Stripe can't access local files
+				if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+					// Use a placeholder image service for development
+					productData.images = [`https://picsum.photos/400/400?random=${item.id}`];
+					console.log('Using placeholder image for development:', productData.images[0]);
+				} else {
+					productData.images = [imageUrl];
+					console.log('Added image to Stripe product:', imageUrl);
+				}
+			} else {
+				console.log('No imageUrl found for item:', item.name); // Debug log
 			}
 
 			// Only add description if it exists and isn't empty
@@ -82,7 +97,8 @@ export async function POST({ request, url }) {
 				enabled: true
 			},
 			billing_address_collection: 'required', // Required for tax calculation
-			success_url: new URL('/checkout/success', url.origin).toString() + '?session_id={CHECKOUT_SESSION_ID}',
+			success_url:
+				new URL('/checkout/success', url.origin).toString() + '?session_id={CHECKOUT_SESSION_ID}',
 			cancel_url: new URL('/checkout/canceled', url.origin).toString(),
 			customer_email: customerEmail || undefined
 		});

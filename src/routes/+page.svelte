@@ -16,7 +16,7 @@
 	<InvertedBorder
 		title="Handmade Goods"
 		text="Custom handmade bags, clothing, and accessories. Everything is made by hand in Las Vegas, Nevada."
-		src="/products/dh-jacket__back.webp"
+		src="/products/d.harry/dh-jacket__back.webp"
 		alt="debbie harry jacket"
 	/>
 </section>

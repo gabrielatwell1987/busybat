@@ -80,6 +80,8 @@
 		isProcessingPayment = true;
 
 		try {
+			console.log('Cart items being sent to checkout:', cart); // Debug log
+
 			const response = await fetch('/api/create-checkout-session', {
 				method: 'POST',
 				headers: {
