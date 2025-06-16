@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://busybat.vercel.app/</loc>
+    <loc>https://busybatsewing.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://busybat.vercel.app/about</loc>
+    <loc>https://busybatsewing.com/about</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://busybat.vercel.app/products</loc>
+    <loc>https://busybatsewing.com/products</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://busybat.vercel.app/contact</loc>
+    <loc>https://busybatsewing.com/contact</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
