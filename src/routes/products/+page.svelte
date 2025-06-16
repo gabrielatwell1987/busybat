@@ -62,20 +62,27 @@
 <style>
 	.products {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 		gap: 1em;
 		align-items: stretch;
+		justify-content: center;
 		max-width: 1200px;
 		width: 100%;
 		box-sizing: border-box;
 		margin-inline: auto;
 		margin-bottom: 2rem;
-		width: auto;
-		height: auto;
-		padding: 1rem;
+		padding: 0 1rem;
+
+		@media (width <= 768px) {
+			grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+			justify-items: center;
+			padding: 0 0.5rem;
+		}
+
 		@media (width <= 500px) {
 			grid-template-columns: 1fr;
-			gap: 1.5em;
+			justify-items: center;
+			max-width: 350px;
 		}
 	}
 
