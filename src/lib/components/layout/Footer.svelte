@@ -37,7 +37,7 @@
 		& section {
 			backdrop-filter: blur(1rem);
 			border-radius: var(--radius);
-			background-color: hsl(0, 0%, 94%);
+			background-color: var(--color-lighter-accent);
 			margin: 0;
 			padding: 0.25rem 0.5rem;
 			width: 100%;

@@ -55,6 +55,7 @@
 		--color-fade-primary: hsl(0, 0%, 74%);
 		--color-secondary: hsl(300, 33%, 9%);
 		--color-accent: hsl(320, 75%, 66%);
+		--color-lighter-accent: hsl(320, 75%, 86%);
 		--color-success: hsl(134, 61%, 41%);
 		--color-danger: hsl(354, 70%, 54%);
 		--color-warning: hsl(45, 100%, 51%);
