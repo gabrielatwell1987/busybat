@@ -20,16 +20,5 @@
 		"inStock": true,
 		"productUrl": "/products/d.harry/dh-jacket__back.webp",
 		"dropdown": "/products/d.harry/dh-size-chart.webp"
-	},
-	{
-		"id": "3",
-		"name": "testing",
-		"price": 330.0,
-		"imageUrl": "https://imgs.search.brave.com/oJHulVIwD5ZWiuYHylbUg4TBZNkzTsNEl3mWyuL0PAM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWRjcmF3bC5j/b20vZ2FicmllbC1h/dHdlbGwvZ2Ficmll/bF9hdHdlbGxfMzY1/OTk5NzE4NC5qcGc",
-		"description": "<p style='text-indent: 1rem'>Testing</p> <br> <a target='_blank' href='/gallery#dh-jacket-front' style='color: var(--color-info); font-family: var(--font-semibold);'>Mcgee</a>",
-		"category": "Clothing",
-		"inStock": true,
-		"productUrl": "https://imgs.search.brave.com/oJHulVIwD5ZWiuYHylbUg4TBZNkzTsNEl3mWyuL0PAM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWRjcmF3bC5j/b20vZ2FicmllbC1h/dHdlbGwvZ2Ficmll/bF9hdHdlbGxfMzY1/OTk5NzE4NC5qcGc",
-		"dropdown": "https://imgs.search.brave.com/oJHulVIwD5ZWiuYHylbUg4TBZNkzTsNEl3mWyuL0PAM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWRjcmF3bC5j/b20vZ2FicmllbC1h/dHdlbGwvZ2Ficmll/bF9hdHdlbGxfMzY1/OTk5NzE4NC5qcGc"
 	}
 ]
