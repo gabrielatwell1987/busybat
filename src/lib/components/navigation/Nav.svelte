@@ -160,7 +160,7 @@
 				font-family: var(--font-bold);
 				font-size: clamp(var(--h5), 1.5vw, var(--h4));
 				font-weight: 900;
-				letter-spacing: 5px;
+				letter-spacing: 1px;
 				margin: 0;
 				padding: 0;
 				white-space: nowrap;

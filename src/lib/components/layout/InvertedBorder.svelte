@@ -92,7 +92,7 @@
 				padding: 0;
 				font-family: var(--font-title);
 				font-size: clamp(var(--h6), 7vw, var(--lg));
-				letter-spacing: 3px;
+				letter-spacing: -1px;
 				text-wrap: balance;
 			}
 
@@ -106,6 +106,7 @@
 				line-height: 1.1;
 				margin-inline: auto;
 				max-width: 65ch;
+				letter-spacing: 0px;
 			}
 		}
 

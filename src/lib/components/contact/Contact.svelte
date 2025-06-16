@@ -15,7 +15,7 @@
 					<span class="visually-hidden">contact form</span>
 				</p>
 
-				<legend>Message me</legend>
+				<legend>Message Us</legend>
 
 				<label for="name">Name:</label>
 				<input type="text" id="name" name="name" bind:value={name} required />
@@ -96,7 +96,7 @@
 						font-size: clamp(var(--h5), 2vw, var(--h4));
 						font-weight: 700;
 						text-align: left;
-						letter-spacing: 3px;
+						letter-spacing: -1px;
 						padding-inline: 1rem;
 
 						@media (width <= 500px) {
@@ -115,7 +115,7 @@
 					font-size: clamp(var(--h6), 2vw, var(--h5));
 					font-weight: 700;
 					text-align: center;
-					letter-spacing: 3px;
+					letter-spacing: 0px;
 
 					@media (width <= 500px) {
 						transform: translateX(-5%);
@@ -229,11 +229,6 @@
 				}
 			}
 
-			/* @media (min-height: 901px) {
-				padding-top: 2rem;
-				padding-bottom: 5rem;
-			} */
-
 			@media (width <= 768px) {
 				align-items: flex-start;
 				max-height: 100vh;
@@ -243,16 +238,6 @@
 				width: 100%;
 				transform: translateY(0);
 			}
-
-			/* @media (max-height: 600px) {
-				padding-top: 2rem;
-				padding-bottom: 5rem;
-			}
-
-			@media (min-height: 601px) and (max-height: 900px) {
-				padding-top: 1rem;
-				padding-bottom: 4rem;
-			} */
 		}
 	}
 

@@ -22,15 +22,15 @@
 			font-family: var(--font-bold);
 			font-size: clamp(var(--h5), 1.5vw, var(--h4));
 			font-weight: 900;
-			letter-spacing: 5px;
+			letter-spacing: 1px;
 			margin: 0;
 			padding: 0;
 			white-space: nowrap;
 			text-align: center;
 
-			@media (width <= 600px) {
+			@media (width <= 768px) {
 				font-size: clamp(var(--h5), 1.5vw, var(--h5));
-				letter-spacing: 2px;
+				letter-spacing: 0px;
 				padding: 0.5rem;
 				width: 100%;
 				text-align: center;

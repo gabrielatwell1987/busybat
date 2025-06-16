@@ -64,7 +64,6 @@
 
 				@media (width <= 500px) {
 					scale: 0.85;
-					/* width: 100%; */
 					display: flex;
 					justify-content: center;
 					text-align: center;

@@ -30,6 +30,7 @@
 			margin-bottom: 3em;
 			margin-right: 0;
 			z-index: 5;
+			letter-spacing: -1px;
 
 			@media (width <= 768px) {
 				margin-bottom: 12em;

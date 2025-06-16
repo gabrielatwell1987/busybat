@@ -20,7 +20,7 @@
 		font-family: var(--font-bold);
 		font-size: clamp(0.8rem, 1vw, 0.9rem);
 		font-weight: 700;
-		letter-spacing: 5px;
+		letter-spacing: 1px;
 	}
 
 	.skip-link:not(:focus) {

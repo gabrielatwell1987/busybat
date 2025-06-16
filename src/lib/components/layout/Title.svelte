@@ -19,6 +19,7 @@
 			text-align: center;
 			text-wrap: nowrap;
 			margin: 0;
+			letter-spacing: -1px;
 		}
 	}
 </style>

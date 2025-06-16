@@ -8,7 +8,7 @@
 	button {
 		font-family: var(--font-title);
 		font-size: clamp(var(--h6), 5vw, var(--h1));
-		letter-spacing: 2px;
+		letter-spacing: 1px;
 		padding: 0.5rem 1rem;
 		background-color: var(--color-accent);
 		color: var(--color-primary);
