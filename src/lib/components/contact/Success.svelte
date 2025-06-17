@@ -23,21 +23,22 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		min-height: 90vh;
+		min-height: 65vh;
 		gap: 1rem;
 		transform: translateY(-2em);
 		view-transition-name: success-slide;
 
 		& p {
 			font-family: var(--font-semibold);
-			font-size: clamp(var(--h6), 3vw, var(--h3));
+			font-size: clamp(var(--h6), 4vw, var(--h2));
+			letter-spacing: -1px;
 			text-align: center;
 			margin: 0;
 			padding: 0;
 
 			& i {
 				font-family: var(--font-regular);
-				font-size: clamp(var(--xs), 1vw, var(--h6));
+				font-size: clamp(var(--sm), 2vw, var(--h5));
 				font-weight: 700;
 			}
 		}

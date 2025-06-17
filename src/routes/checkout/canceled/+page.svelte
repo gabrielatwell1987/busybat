@@ -25,7 +25,7 @@
 
 		& h1 {
 			font-size: clamp(var(--h6), 5vw, var(--h1));
-			letter-spacing: 4px;
+			letter-spacing: -1px;
 			color: var(--color-accent);
 			-webkit-text-stroke: 1px var(--color-secondary);
 
@@ -59,11 +59,7 @@
 			border-radius: 4px;
 			font-family: var(--font-semibold);
 			font-size: clamp(var(--sm), 2vw, var(--h5));
-			letter-spacing: 2px;
-
-			@media (width <= 500px) {
-				letter-spacing: 0;
-			}
+			letter-spacing: 1px;
 
 			&:hover {
 				background-color: hsl(320, 75%, 56%);

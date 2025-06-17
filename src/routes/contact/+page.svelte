@@ -19,7 +19,7 @@
 <style>
 	section {
 		width: 100vw;
-		height: 100vh;
+		height: 100%;
 		overflow-y: auto;
 		background-size: auto;
 		background-repeat: repeat;

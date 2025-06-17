@@ -48,13 +48,13 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 100%;
 			overflow-y: auto;
-			padding: 0 0 2rem 0;
+			padding: 0;
 			view-transition-name: form-content;
 			overflow-x: hidden;
 			transform: translateY(0);
 			position: relative;
+			width: 100%;
 			min-height: auto;
 			max-height: 100%;
 

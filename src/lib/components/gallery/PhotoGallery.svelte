@@ -250,9 +250,10 @@
 						right: 0;
 						width: fit-content;
 						margin-inline: auto;
-						color: var(--color-white);
+						background-color: var(--color-primary);
+						color: var(--color-dark);
 						padding: 0.5rem 0.75rem;
-						background-color: rgba(0, 0, 0, 0.3);
+						border: 1px solid var(--color-dark);
 						border-radius: var(--radius);
 						text-align: center;
 						font-family: var(--font-bold);
@@ -283,7 +284,7 @@
 				top: 50%;
 				transform: translateY(-50%);
 				padding: 0.75rem 1rem;
-				background: rgba(0, 0, 0, 0.7);
+				background: var(--color-dark);
 				color: white;
 				cursor: pointer;
 				border-radius: 10%;
@@ -293,7 +294,7 @@
 				border: none;
 
 				&:focus {
-					outline: 2px solid var(--color-secondary);
+					outline: 2px solid var(--color-dark);
 					outline-offset: 2px;
 				}
 			}
@@ -316,7 +317,7 @@
 				gap: 0.75rem;
 				z-index: 10;
 				padding: 0.5rem 0.75rem;
-				background-color: rgba(0, 0, 0, 0.25);
+				background-color: var(--color-dark);
 				border-radius: 20px;
 				width: fit-content;
 				margin-inline: auto;
@@ -339,16 +340,15 @@
 					width: clamp(0.75rem, 2vw, 1rem);
 					height: clamp(0.75rem, 2vw, 1rem);
 					border-radius: 50%;
-					background: var(--color-secondary);
+					background: var(--color-light);
 					cursor: pointer;
 					transition: background 0.3s ease;
 					border: none;
 					padding: 0;
 					margin: 0 0.25rem;
-					opacity: 0.6;
 
 					&[aria-selected='true'] {
-						background: var(--color-white);
+						background: var(--color-accent);
 						transform: scale(1.2);
 						opacity: 0.75;
 					}

@@ -135,7 +135,7 @@
 			font-family: var(--font-title);
 			font-size: clamp(var(--h3), 5vw, var(--lg));
 			text-align: center;
-			letter-spacing: 2px;
+			letter-spacing: -1px;
 
 			@media (width <= 500px) {
 				margin: 0;
@@ -217,6 +217,11 @@
 						margin: 0;
 						font-size: clamp(var(--sm), 1.5vw, var(--h5));
 						font-family: var(--font-bold);
+						letter-spacing: -1px;
+
+						@media (width <= 768px) {
+							letter-spacing: 0px;
+						}
 					}
 
 					& .item-price {
@@ -266,6 +271,7 @@
 							transition: color 0.2s ease;
 							width: auto;
 							height: auto;
+							letter-spacing: 1px;
 
 							&:hover {
 								color: hsl(0, 75%, 45%);
@@ -332,13 +338,9 @@
 						padding: 1rem;
 						font-family: var(--font-regular);
 						font-size: clamp(var(--sm), 3vw, var(--h5));
-						font-weight: 600;
+						font-weight: 500;
 						letter-spacing: 1px;
 						cursor: pointer;
-
-						@media (width <= 500px) {
-							letter-spacing: 0;
-						}
 
 						&:disabled {
 							background-color: #cccccc;
@@ -352,12 +354,8 @@
 					text-align: center;
 					font-family: var(--font-regular);
 					font-size: clamp(var(--sm), 3vw, var(--h5));
-					letter-spacing: 2px;
+					letter-spacing: 0px;
 					font-weight: 600;
-
-					@media (width <= 500px) {
-						letter-spacing: 0;
-					}
 
 					&:hover {
 						text-decoration: underline;
