@@ -128,6 +128,7 @@
 
 	<div class="post-form">
 		<h2>{editingPost ? 'Edit Post' : 'Create New Post'}</h2>
+
 		<form
 			onsubmit={(e) => {
 				e.preventDefault();
@@ -265,7 +266,6 @@
 
 			& h2 {
 				color: var(--color-accent);
-				-webkit-text-stroke: 1px var(--color-secondary);
 				font-size: clamp(var(--h6), 3vw, var(--h4));
 				margin-bottom: 1.5rem;
 			}
