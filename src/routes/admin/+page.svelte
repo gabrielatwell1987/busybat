@@ -265,7 +265,7 @@
 			margin-bottom: 3rem;
 
 			& h2 {
-				color: var(--color-accent);
+				color: var(--color-secondary);
 				font-size: clamp(var(--h6), 3vw, var(--h4));
 				margin-bottom: 1.5rem;
 			}
