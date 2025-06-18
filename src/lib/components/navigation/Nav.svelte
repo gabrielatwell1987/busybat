@@ -42,10 +42,10 @@
 		<li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>
-
 		<NavLink title="About" url="/about" onclick={handleLinkClick} />
 		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
 		<NavLink title="Gallery" url="/gallery" onclick={handleLinkClick} />
+		<NavLink title="Blog" url="/blog" onclick={handleLinkClick} />
 		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
 	</ul>
 
@@ -266,7 +266,7 @@
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				gap: 3rem;
+				gap: 1rem;
 				width: 100vw;
 				height: 100vh;
 				background-color: var(--color-primary);
