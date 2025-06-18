@@ -48,6 +48,7 @@
 	<div class="login-card">
 		<div class="login-header">
 			<h1>Admin Login</h1>
+
 			<p>Please sign in to access the admin dashboard</p>
 		</div>
 
@@ -103,6 +104,11 @@
 		justify-content: center;
 		background: transparent;
 		padding: 1rem;
+		margin-top: -8em;
+
+		@media (width <= 768px) {
+			margin-top: -4em;
+		}
 
 		& .login-card {
 			background: var(--color-white);
@@ -110,7 +116,7 @@
 			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 			padding: 2.5rem;
 			width: 100%;
-			max-width: 400px;
+			max-width: 600px;
 
 			& .login-header {
 				text-align: center;
@@ -118,7 +124,7 @@
 
 				& h1 {
 					margin: 0 0 0.5rem 0;
-					font-size: clamp(var(--h5), 4vw, var(--lg));
+					font-size: clamp(var(--h3), 4vw, var(--lg));
 					color: var(--color-accent);
 					-webkit-text-stroke: 1px var(--color-secondary);
 				}
@@ -145,6 +151,10 @@
 			}
 			& .login-form {
 				margin-bottom: 2rem;
+
+				@media (width <= 768px) {
+					width: 70vw;
+				}
 
 				& .form-group {
 					margin-bottom: 1.5rem;
