@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
 	let { data } = $props();
 
@@ -113,6 +114,8 @@
 		}
 	}
 </script>
+
+<VerticalTitle title="Admin Dashboard" />
 
 <div class="admin-container">
 	<header class="admin-header">

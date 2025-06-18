@@ -1,4 +1,6 @@
 <script>
+	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
+
 	let { data } = $props();
 
 	let posts = $state([]);
@@ -31,6 +33,8 @@
 	<title>Blog - Latest Posts</title>
 	<meta name="description" content="Read our latest blog posts and updates" />
 </svelte:head>
+
+<VerticalTitle title="Blog" />
 
 <div class="blog-container">
 	<section class="admin">

@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
 	let username = $state('');
 	let password = $state('');
@@ -43,6 +44,8 @@
 	<title>Admin Login</title>
 	<meta name="description" content="Admin login page" />
 </svelte:head>
+
+<VerticalTitle title="Admin Login" />
 
 <div class="login-container">
 	<div class="login-card">
