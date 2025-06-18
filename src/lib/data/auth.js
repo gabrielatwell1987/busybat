@@ -1,14 +1,17 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-const SECRET = 'your-secret-key'; // Replace with env variable in production
+// Use environment variables in production, fallback to defaults for development
+const SECRET = process.env.JWT_SECRET || 'your-secret-key'; // Replace with env variable in production
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'BusiestBat702!';
 
 // Initialize admin credentials - this will be called when needed
 let adminPasswordHash = null;
 
 async function getAdminPasswordHash() {
 	if (!adminPasswordHash) {
-		adminPasswordHash = await bcrypt.hash('BusiestBat702!', 10);
+		adminPasswordHash = await bcrypt.hash(ADMIN_PASSWORD, 10);
 	}
 	return adminPasswordHash;
 }
@@ -24,7 +27,7 @@ export function verifyToken(token) {
 export async function authenticate(username, password) {
 	const adminHash = await getAdminPasswordHash();
 
-	if (username === 'admin' && (await bcrypt.compare(password, adminHash))) {
+	if (username === ADMIN_USERNAME && (await bcrypt.compare(password, adminHash))) {
 		return jwt.sign({ username }, SECRET, { expiresIn: '1h' });
 	}
 	return null;

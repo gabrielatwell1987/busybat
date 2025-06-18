@@ -8,11 +8,22 @@
 	let editingPost = $state(null);
 	let posts = $state([]);
 	let loading = $state(false);
+	let storageStatus = $state(null);
 
-	// Load posts on component mount
+	// Load posts and storage status on component mount
 	$effect(() => {
 		loadPosts();
+		checkStorageStatus();
 	});
+
+	async function checkStorageStatus() {
+		try {
+			const res = await fetch('/api/storage-status');
+			storageStatus = await res.json();
+		} catch (error) {
+			console.error('Failed to check storage status:', error);
+		}
+	}
 
 	async function loadPosts() {
 		loading = true;
@@ -113,6 +124,13 @@
 				<button onclick={logout} class="logout-btn">Logout</button>
 			</div>
 		</div>
+
+		{#if storageStatus}
+			<div class="storage-status" class:warning={!storageStatus.isFileSystemWritable}>
+				<span class="status-indicator" class:active={storageStatus.isFileSystemWritable}></span>
+				<span class="status-text">{storageStatus.statusMessage}</span>
+			</div>
+		{/if}
 	</header>
 
 	<div class="post-form">
@@ -424,6 +442,38 @@
 			}
 		}
 
+		& .storage-status {
+			margin-top: 1rem;
+			padding: 0.75rem 1rem;
+			border-radius: var(--radius);
+			background: rgba(0, 123, 255, 0.1);
+			border: 1px solid rgba(0, 123, 255, 0.3);
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			font-size: clamp(var(--xs), 1vw, var(--sm));
+
+			&.warning {
+				background: rgba(255, 193, 7, 0.1);
+				border-color: rgba(255, 193, 7, 0.3);
+				color: #856404;
+			}
+
+			& .status-indicator {
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: #dc3545;
+
+				&.active {
+					background: #28a745;
+				}
+			}
+
+			& .status-text {
+				font-weight: 500;
+			}
+		}
 		@media (max-width: 768px) {
 			padding: 0 1rem 1rem;
 
@@ -440,6 +490,12 @@
 						align-self: stretch;
 						justify-content: space-between;
 					}
+				}
+
+				& .storage-status {
+					margin-top: 1rem;
+					margin-left: 0;
+					margin-right: 0;
 				}
 			}
 
