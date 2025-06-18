@@ -9,9 +9,12 @@
 	import LoadingSpinner from '$lib/components/layout/LoadingSpinner.svelte';
 	let { children } = $props();
 	let isPageLoaded = $state(false);
-
-	// Create canonical URL from current page
-	let canonicalUrl = $derived($page.url.origin + $page.url.pathname);
+	let canonicalUrl = $derived(() => {
+		const { origin, pathname } = $page.url;
+		// Remove trailing slash except for root path, and ensure consistent formatting
+		const normalizedPath = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+		return `${origin}${normalizedPath}`;
+	});
 
 	// Handle page load state
 	$effect(() => {
