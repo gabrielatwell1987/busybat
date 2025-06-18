@@ -161,6 +161,7 @@
 				<button type="submit" disabled={loading || !title.trim() || !content.trim()}>
 					{loading ? 'Saving...' : editingPost ? 'Update Post' : 'Create Post'}
 				</button>
+
 				{#if editingPost}
 					<button type="button" onclick={cancelEdit} disabled={loading}> Cancel </button>
 				{/if}
@@ -280,7 +281,6 @@
 					color: var(--color-secondary);
 					font-size: clamp(var(--sm), 1vw, var(--h6));
 				}
-
 				& input[type='text'],
 				& textarea {
 					width: 100%;
@@ -290,6 +290,7 @@
 					font-size: clamp(var(--sm), 1vw, var(--h6));
 					font-family: inherit;
 					color: var(--color-secondary);
+					box-sizing: border-box;
 
 					&:focus {
 						outline: none;
@@ -382,8 +383,7 @@
 				& .post-header {
 					& h3 {
 						margin: 0 0 0.5rem 0;
-						color: var(--color-accent);
-						-webkit-text-stroke: 1px var(--color-secondary);
+						color: var(--color-secondary);
 						font-size: clamp(var(--sm), 2vw, var(--h5));
 					}
 

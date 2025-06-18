@@ -1,4 +1,6 @@
 <script>
+	let { data } = $props();
+
 	let posts = $state([]);
 	let loading = $state(true);
 	let error = $state(null);
@@ -32,7 +34,11 @@
 
 <div class="blog-container">
 	<section class="admin">
-		<a href="/login">Admin Login</a>
+		{#if data.user}
+			<a href="/admin">Admin Dashboard</a>
+		{:else}
+			<a href="/login">Admin Login</a>
+		{/if}
 	</section>
 
 	<header class="blog-header">
@@ -87,6 +93,10 @@
 		padding: 2rem;
 
 		& .admin {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+
 			a {
 				font-size: clamp(--h6, 2vw, --h5);
 				font-weight: 600;
