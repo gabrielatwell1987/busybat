@@ -73,6 +73,16 @@ export async function getPosts() {
 	return await loadInitialPosts();
 }
 
+// Get a single post by ID
+export async function getPostById(id) {
+	const posts = await getPosts();
+	const post = posts.find((p) => p.id === Number(id));
+
+	if (!post) throw new Error('Post not found');
+
+	return post;
+}
+
 // Create a new post
 export async function createPost(post) {
 	const posts = await getPosts();
@@ -85,7 +95,9 @@ export async function createPost(post) {
 		updatedAt: new Date().toISOString()
 	};
 	const updatedPosts = [...posts, newPost];
+
 	await savePosts(updatedPosts);
+
 	return newPost;
 }
 
@@ -93,9 +105,11 @@ export async function createPost(post) {
 export async function updatePost(id, postData) {
 	const posts = await getPosts();
 	const index = posts.findIndex((p) => p.id === Number(id));
+
 	if (index === -1) throw new Error('Post not found');
 
 	const updatedPosts = [...posts];
+
 	updatedPosts[index] = {
 		...updatedPosts[index],
 		...postData,
@@ -103,6 +117,7 @@ export async function updatePost(id, postData) {
 	};
 
 	await savePosts(updatedPosts);
+
 	return updatedPosts[index];
 }
 
@@ -110,5 +125,6 @@ export async function updatePost(id, postData) {
 export async function deletePost(id) {
 	const posts = await getPosts();
 	const filteredPosts = posts.filter((p) => p.id !== Number(id));
+
 	await savePosts(filteredPosts);
 }

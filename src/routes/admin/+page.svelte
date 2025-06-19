@@ -3,9 +3,10 @@
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
 	let { data } = $props();
-
 	let title = $state('');
 	let content = $state('');
+	let imageFile = $state(null);
+	let imagePreview = $state(null);
 	let editingPost = $state(null);
 	let posts = $state([]);
 	let loading = $state(false);
@@ -67,19 +68,29 @@
 		loading = true;
 		try {
 			const endpoint = editingPost ? `/api/posts/edit/${editingPost.id}` : '/api/posts/create';
+
+			// Create FormData for file upload
+			const formData = new FormData();
+			formData.append('title', title.trim());
+			formData.append('content', content.trim());
+			if (imageFile) {
+				formData.append('image', imageFile);
+			}
+
 			const response = await fetch(endpoint, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ title: title.trim(), content: content.trim() })
+				body: formData // Don't set Content-Type header, let browser set it for FormData
 			});
 
 			if (response.ok) {
 				title = '';
 				content = '';
+				clearImage();
 				editingPost = null;
 				await loadPosts();
 			} else {
-				alert('Failed to save post');
+				const error = await response.text();
+				alert(`Failed to save post: ${error}`);
 			}
 		} catch (error) {
 			console.error('Failed to save post:', error);
@@ -88,17 +99,46 @@
 			loading = false;
 		}
 	}
-
 	function editPost(post) {
 		editingPost = post;
 		title = post.title;
 		content = post.content;
+		// Set image preview if post has an image
+		if (post.image) {
+			imagePreview = post.image;
+			imageFile = null; // Clear any new file selection
+		} else {
+			clearImage();
+		}
 	}
 	function cancelEdit() {
 		editingPost = null;
 		title = '';
 		content = '';
+		clearImage();
 	}
+
+	function handleImageChange(event) {
+		const file = event.target.files?.[0];
+		if (file) {
+			imageFile = file;
+			// Create preview URL
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				imagePreview = e.target?.result;
+			};
+			reader.readAsDataURL(file);
+		}
+	}
+
+	function clearImage() {
+		imageFile = null;
+		imagePreview = null;
+		// Clear the file input
+		const fileInput = document.getElementById('image');
+		if (fileInput) fileInput.value = '';
+	}
+
 	function togglePostExpansion(postId) {
 		if (expandedPosts.has(postId)) {
 			expandedPosts.delete(postId);
@@ -114,6 +154,7 @@
 			button.setAttribute('aria-expanded', expanded.toString());
 		}
 	}
+
 	async function deletePost(id) {
 		// More accessible confirmation
 		const confirmed = confirm(
@@ -169,6 +210,7 @@
 		>
 			<div class="form-group">
 				<label for="title">Title:</label>
+
 				<input
 					id="title"
 					type="text"
@@ -178,12 +220,14 @@
 					required
 					aria-describedby="title-help"
 				/>
+
 				<small id="title-help" class="form-help">Enter a descriptive title for your blog post</small
 				>
 			</div>
 
 			<div class="form-group">
 				<label for="content">Content:</label>
+
 				<textarea
 					id="content"
 					bind:value={content}
@@ -193,9 +237,32 @@
 					required
 					aria-describedby="content-help"
 				></textarea>
+
 				<small id="content-help" class="form-help"
 					>Write your blog post content. You can use line breaks and paragraphs.</small
 				>
+			</div>
+			<div class="form-group">
+				<label for="image">Image:</label>
+
+				<input
+					id="image"
+					type="file"
+					accept="image/*"
+					onchange={handleImageChange}
+					disabled={loading}
+					aria-describedby="image-help"
+				/>
+
+				<small id="image-help" class="form-help"
+					>Select an image file for your blog post (optional)</small
+				>
+				{#if imagePreview}
+					<div class="image-preview">
+						<img src={imagePreview} alt="Preview of selected file" />
+						<button type="button" onclick={clearImage} class="remove-image-btn">Remove</button>
+					</div>
+				{/if}
 			</div>
 
 			<div class="form-actions">
@@ -212,6 +279,7 @@
 
 	<div class="posts-section">
 		<h2>Manage Posts ({posts.length})</h2>
+
 		{#if loading && posts.length === 0}
 			<p class="loading" aria-live="polite">Loading posts...</p>
 		{:else if posts.length === 0}
@@ -245,7 +313,14 @@
 								id="post-content-{post.id}"
 								aria-labelledby="post-title-{post.id}"
 							>
-								<p>{post.content}</p>
+								{#if post.image}
+									<div class="post-image">
+										<img src={post.image} alt="Featured image for {post.title}" />
+									</div>
+								{/if}
+								<div class="post-text">
+									<p>{post.content}</p>
+								</div>
 							</div>
 						{/if}
 						<div class="post-actions">
@@ -369,6 +444,7 @@
 					font-size: clamp(var(--sm), 1vw, var(--h6));
 				}
 				& input[type='text'],
+				& input[type='file'],
 				& textarea {
 					width: 100%;
 					padding: 0.75rem;
@@ -388,6 +464,65 @@
 					&:focus-visible {
 						outline: 2px solid var(--color-accent);
 						outline-offset: 2px;
+					}
+				}
+
+				& input[type='file'] {
+					padding: 0.5rem 0.75rem;
+					cursor: pointer;
+
+					&::file-selector-button {
+						padding: 0.5rem 1rem;
+						margin-right: 1rem;
+						border: none;
+						border-radius: var(--radius);
+						background-color: var(--color-accent);
+						color: var(--color-primary);
+						cursor: pointer;
+						font-size: clamp(var(--xs), 1vw, var(--sm));
+
+						&:hover {
+							background-color: var(--color-primary);
+							color: var(--color-accent);
+						}
+					}
+				}
+
+				& .image-preview {
+					margin-top: 1rem;
+					padding: 1rem;
+					border: 1px solid var(--color-fade-primary);
+					border-radius: var(--radius);
+					background-color: var(--color-white);
+
+					& img {
+						max-width: 200px;
+						max-height: 200px;
+						width: auto;
+						height: auto;
+						object-fit: cover;
+						border-radius: var(--radius);
+						display: block;
+						margin-bottom: 0.75rem;
+					}
+
+					& .remove-image-btn {
+						background-color: var(--color-danger);
+						color: var(--color-white);
+						border: none;
+						padding: 0.5rem 1rem;
+						border-radius: var(--radius);
+						font-size: clamp(var(--xs), 1vw, var(--sm));
+						cursor: pointer;
+
+						&:hover {
+							background-color: var(--color-dark);
+						}
+
+						&:focus {
+							outline: none;
+							box-shadow: 0 0 0 3px rgba(var(--color-danger), 0.3);
+						}
 					}
 				}
 
@@ -555,17 +690,30 @@
 						margin-bottom: 1rem;
 					}
 				}
-
 				& .post-content {
 					margin-bottom: 1.5rem;
 					border-top: 1px solid var(--color-fade-primary);
 					padding: 1rem;
 					animation: slideDown 0.3s ease-out;
-					max-height: 200px;
+					max-height: 300px;
 					overflow-y: auto;
 					background-color: var(--color-white);
 					border-radius: 0 0 var(--radius) var(--radius);
 					position: relative;
+
+					& .post-image {
+						margin-bottom: 1rem;
+
+						& img {
+							max-width: 100%;
+							max-height: 150px;
+							width: auto;
+							height: auto;
+							object-fit: cover;
+							border-radius: var(--radius);
+							border: 1px solid var(--color-fade-primary);
+						}
+					}
 
 					/* Custom scrollbar styling */
 					&::-webkit-scrollbar {
@@ -585,14 +733,15 @@
 							background: var(--color-secondary);
 						}
 					}
-
-					& p {
-						margin: 0;
-						line-height: 1.6;
-						color: var(--color-secondary);
-						font-size: clamp(var(--sm), 1vw, var(--h6));
-						white-space: pre-wrap;
-						word-wrap: break-word;
+					& .post-text {
+						& p {
+							margin: 0;
+							line-height: 1.6;
+							color: var(--color-secondary);
+							font-size: clamp(var(--sm), 1vw, var(--h6));
+							white-space: pre-wrap;
+							word-wrap: break-word;
+						}
 					}
 
 					@media (width <= 768px) {

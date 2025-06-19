@@ -83,28 +83,35 @@
 			{#each posts as post (post.id)}
 				<article class="post-card" aria-labelledby="post-title-{post.id}">
 					<header class="post-header">
-						<div class="post-title-section">
-							<h2 id="post-title-{post.id}">{post.title}</h2>
-							<button
-								class="expand-button"
-								onclick={() => togglePostExpansion(post.id)}
-								aria-label={expandedPosts.has(post.id) ? 'Collapse post' : 'Expand post'}
-								aria-expanded={expandedPosts.has(post.id)}
-								aria-controls="post-content-{post.id}"
-							>
-								<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
-									{expandedPosts.has(post.id) ? '▼' : '▶'}
-								</span>
-							</button>
-						</div>
-						<div class="post-meta">
-							<time datetime={post.createdAt}>
-								{new Date(post.createdAt).toLocaleDateString('en-US', {
-									year: 'numeric',
-									month: 'long',
-									day: 'numeric'
-								})}
-							</time>
+						{#if post.image}
+							<div class="post-thumbnail">
+								<img src={post.image} alt="Thumbnail for {post.title}" />
+							</div>
+						{/if}
+						<div class="post-header-content">
+							<div class="post-title-section">
+								<h2 id="post-title-{post.id}">{post.title}</h2>
+								<button
+									class="expand-button"
+									onclick={() => togglePostExpansion(post.id)}
+									aria-label={expandedPosts.has(post.id) ? 'Collapse post' : 'Expand post'}
+									aria-expanded={expandedPosts.has(post.id)}
+									aria-controls="post-content-{post.id}"
+								>
+									<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
+										{expandedPosts.has(post.id) ? '▼' : '▶'}
+									</span>
+								</button>
+							</div>
+							<div class="post-meta">
+								<time datetime={post.createdAt}>
+									{new Date(post.createdAt).toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric'
+									})}
+								</time>
+							</div>
 						</div>
 					</header>
 					{#if expandedPosts.has(post.id)}
@@ -113,7 +120,14 @@
 							id="post-content-{post.id}"
 							aria-labelledby="post-title-{post.id}"
 						>
-							<p>{post.content}</p>
+							{#if post.image}
+								<div class="post-image">
+									<img src={post.image} alt="Featured image for {post.title}" />
+								</div>
+							{/if}
+							<div class="post-text">
+								<p>{post.content}</p>
+							</div>
 						</div>
 					{/if}
 				</article>
@@ -234,7 +248,43 @@
 			}
 
 			& .post-header {
+				display: flex;
+				gap: 1rem;
 				padding: 1.5rem 1.5rem 1rem;
+
+				& .post-thumbnail {
+					flex-shrink: 0;
+
+					& img {
+						width: 80px;
+						height: 80px;
+						object-fit: cover;
+						border-radius: 8px;
+						border: 1px solid #ddd;
+						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+					}
+
+					@media (width <= 768px) {
+						& img {
+							width: 60px;
+							height: 60px;
+						}
+					}
+				}
+
+				& .post-header-content {
+					flex: 1;
+					min-width: 0; /* Allows content to shrink properly */
+				}
+
+				@media (width <= 768px) {
+					flex-direction: column;
+					gap: 0.75rem;
+
+					& .post-thumbnail {
+						align-self: center;
+					}
+				}
 
 				& h2 {
 					margin: 0 0 0.75rem 0;
@@ -312,11 +362,44 @@
 				padding: 1.5rem;
 				border-top: 1px solid #eee;
 				animation: slideDown 0.3s ease-out;
-				max-height: 200px;
+				max-height: 400px;
 				overflow-y: auto;
 				background-color: #fafafa;
 				border-radius: 0 0 12px 12px;
 				position: relative;
+
+				& .post-image {
+					margin-bottom: 1.5rem;
+					text-align: center;
+
+					& img {
+						max-width: 100%;
+						max-height: 250px;
+						width: auto;
+						height: auto;
+						object-fit: cover;
+						border-radius: 8px;
+						box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+						border: 1px solid #ddd;
+					}
+
+					@media (width <= 768px) {
+						& img {
+							max-height: 200px;
+						}
+					}
+				}
+
+				& .post-text {
+					& p {
+						margin: 0;
+						line-height: 1.7;
+						color: #555;
+						font-size: 1rem;
+						white-space: pre-wrap;
+						word-wrap: break-word;
+					}
+				}
 
 				/* Custom scrollbar styling */
 				&::-webkit-scrollbar {
@@ -336,18 +419,10 @@
 						background: #a8a8a8;
 					}
 				}
-				& p {
-					margin: 0;
-					line-height: 1.7;
-					color: #555;
-					font-size: 1rem;
-					white-space: pre-wrap;
-					word-wrap: break-word;
-				}
 
 				@media (width <= 768px) {
 					padding: 1rem;
-					max-height: 250px;
+					max-height: 350px;
 				}
 			}
 		}
