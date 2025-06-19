@@ -51,6 +51,7 @@
 			goto('/login');
 		}
 	}
+
 	async function createOrUpdatePost() {
 		if (!title.trim() || !content.trim()) {
 			// Use alert with better accessibility
@@ -99,6 +100,7 @@
 			loading = false;
 		}
 	}
+
 	function editPost(post) {
 		editingPost = post;
 		title = post.title;
@@ -111,6 +113,7 @@
 			clearImage();
 		}
 	}
+
 	function cancelEdit() {
 		editingPost = null;
 		title = '';
@@ -157,9 +160,7 @@
 
 	async function deletePost(id) {
 		// More accessible confirmation
-		const confirmed = confirm(
-			'Are you sure you want to delete this post? This action cannot be undone.'
-		);
+		const confirmed = confirm('Are you sure you want to delete this post?');
 
 		if (!confirmed) {
 			return;
