@@ -10,6 +10,7 @@
 	let posts = $state([]);
 	let loading = $state(false);
 	let storageStatus = $state(null);
+	let expandedPosts = $state(new Set());
 
 	// Load posts and storage status on component mount
 	$effect(() => {
@@ -86,11 +87,19 @@
 		title = post.title;
 		content = post.content;
 	}
-
 	function cancelEdit() {
 		editingPost = null;
 		title = '';
 		content = '';
+	}
+
+	function togglePostExpansion(postId) {
+		if (expandedPosts.has(postId)) {
+			expandedPosts.delete(postId);
+		} else {
+			expandedPosts.add(postId);
+		}
+		expandedPosts = new Set(expandedPosts);
 	}
 
 	async function deletePost(id) {
@@ -184,15 +193,28 @@
 				{#each posts as post (post.id)}
 					<div class="post-card">
 						<div class="post-header">
-							<h3>{post.title}</h3>
+							<div class="post-title-section">
+								<h3>{post.title}</h3>
+								<button
+									class="expand-button"
+									onclick={() => togglePostExpansion(post.id)}
+									aria-label={expandedPosts.has(post.id) ? 'Collapse post' : 'Expand post'}
+								>
+									<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
+										{expandedPosts.has(post.id) ? '▼' : '▶'}
+									</span>
+								</button>
+							</div>
 							<div class="post-meta">
 								<small>Created: {new Date(post.createdAt).toLocaleDateString()}</small>
 							</div>
 						</div>
 
-						<div class="post-content">
-							<p>{post.content}</p>
-						</div>
+						{#if expandedPosts.has(post.id)}
+							<div class="post-content">
+								<p>{post.content}</p>
+							</div>
+						{/if}
 
 						<div class="post-actions">
 							<button onclick={() => editPost(post)} disabled={loading} class="edit-btn">
@@ -214,12 +236,15 @@
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 2rem 2rem;
+
+		@media (width <= 768px) {
+			padding: 0 1rem 1rem;
+		}
 		& .admin-header {
 			background: var(--color-light);
 			margin: 0 -2rem 2rem -2rem;
 			padding: 1.5rem 2rem;
 			border-bottom: 1px solid var(--color-fade-primary);
-
 			& .header-content {
 				display: flex;
 				justify-content: space-between;
@@ -260,6 +285,22 @@
 						}
 					}
 				}
+
+				@media (width <= 768px) {
+					flex-direction: column;
+					gap: 1rem;
+					align-items: flex-start;
+
+					& .header-actions {
+						align-self: stretch;
+						justify-content: space-between;
+					}
+				}
+			}
+
+			@media (width <= 768px) {
+				margin: 0 -1rem 2rem -1rem;
+				padding: 1rem;
 			}
 		}
 		& .post-form {
@@ -306,7 +347,6 @@
 					min-height: 150px;
 				}
 			}
-
 			& .form-actions {
 				display: flex;
 				gap: 1rem;
@@ -321,6 +361,10 @@
 						border: 1px solid var(--color-accent);
 					}
 				}
+			}
+
+			@media (width <= 768px) {
+				padding: 1.5rem;
 			}
 		}
 		& button {
@@ -375,6 +419,10 @@
 				display: grid;
 				gap: 1.5rem;
 				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+
+				@media (width <= 768px) {
+					grid-template-columns: 1fr;
+				}
 			}
 			& .post-card {
 				background: var(--color-white);
@@ -390,6 +438,39 @@
 						font-size: clamp(var(--sm), 2vw, var(--h5));
 					}
 
+					& .post-title-section {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						margin-bottom: 0.5rem;
+
+						& .expand-button {
+							background: none;
+							border: none;
+							cursor: pointer;
+							padding: 0.25rem;
+							border-radius: var(--radius);
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							transition: background-color 0.2s ease;
+
+							&:hover {
+								background-color: var(--color-fade-primary);
+							}
+
+							& .expand-icon {
+								font-size: clamp(var(--sm), 1vw, var(--h5));
+								color: var(--color-secondary);
+								transition: transform 0.2s ease;
+
+								&.expanded {
+									transform: rotate(0deg);
+								}
+							}
+						}
+					}
+
 					& .post-meta {
 						color: var(--color-gray);
 						font-size: clamp(var(--xs), 1vw, var(--sm));
@@ -399,12 +480,57 @@
 
 				& .post-content {
 					margin-bottom: 1.5rem;
+					border-top: 1px solid var(--color-fade-primary);
+					padding: 1rem;
+					animation: slideDown 0.3s ease-out;
+					max-height: 200px;
+					overflow-y: auto;
+					background-color: var(--color-white);
+					border-radius: 0 0 var(--radius) var(--radius);
+					position: relative;
+
+					/* Custom scrollbar styling */
+					&::-webkit-scrollbar {
+						width: 8px;
+					}
+
+					&::-webkit-scrollbar-track {
+						background: var(--color-light);
+						border-radius: 4px;
+					}
+
+					&::-webkit-scrollbar-thumb {
+						background: var(--color-gray);
+						border-radius: 4px;
+
+						&:hover {
+							background: var(--color-secondary);
+						}
+					}
 
 					& p {
 						margin: 0;
 						line-height: 1.6;
 						color: var(--color-secondary);
 						font-size: clamp(var(--sm), 1vw, var(--h6));
+						white-space: pre-wrap;
+						word-wrap: break-word;
+					}
+
+					@media (width <= 768px) {
+						max-height: 200px;
+						padding: 0.75rem;
+					}
+				}
+
+				@keyframes slideDown {
+					from {
+						opacity: 0;
+						transform: translateY(-10px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
 					}
 				}
 
@@ -435,36 +561,6 @@
 						}
 					}
 				}
-			}
-		}
-
-		@media (max-width: 768px) {
-			padding: 0 1rem 1rem;
-
-			& .admin-header {
-				margin: 0 -1rem 2rem -1rem;
-				padding: 1rem;
-
-				& .header-content {
-					flex-direction: column;
-					gap: 1rem;
-					align-items: flex-start;
-
-					& .header-actions {
-						align-self: stretch;
-						justify-content: space-between;
-					}
-				}
-			}
-
-			& .posts-section {
-				& .posts-grid {
-					grid-template-columns: 1fr;
-				}
-			}
-
-			& .post-form {
-				padding: 1.5rem;
 			}
 		}
 	}

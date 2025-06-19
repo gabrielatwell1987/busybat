@@ -2,10 +2,10 @@
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
 	let { data } = $props();
-
 	let posts = $state([]);
 	let loading = $state(true);
 	let error = $state(null);
+	let expandedPosts = $state(new Set());
 
 	$effect(() => {
 		loadPosts();
@@ -26,6 +26,15 @@
 		} finally {
 			loading = false;
 		}
+	}
+
+	function togglePostExpansion(postId) {
+		if (expandedPosts.has(postId)) {
+			expandedPosts.delete(postId);
+		} else {
+			expandedPosts.add(postId);
+		}
+		expandedPosts = new Set(expandedPosts);
 	}
 </script>
 
@@ -69,7 +78,18 @@
 			{#each posts as post (post.id)}
 				<article class="post-card">
 					<header class="post-header">
-						<h2>{post.title}</h2>
+						<div class="post-title-section">
+							<h2>{post.title}</h2>
+							<button
+								class="expand-button"
+								onclick={() => togglePostExpansion(post.id)}
+								aria-label={expandedPosts.has(post.id) ? 'Collapse post' : 'Expand post'}
+							>
+								<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
+									{expandedPosts.has(post.id) ? '▼' : '▶'}
+								</span>
+							</button>
+						</div>
 						<div class="post-meta">
 							<time datetime={post.createdAt}>
 								{new Date(post.createdAt).toLocaleDateString('en-US', {
@@ -81,9 +101,11 @@
 						</div>
 					</header>
 
-					<div class="post-content">
-						<p>{post.content}</p>
-					</div>
+					{#if expandedPosts.has(post.id)}
+						<div class="post-content">
+							<p>{post.content}</p>
+						</div>
+					{/if}
 				</article>
 			{/each}
 		</div>
@@ -95,6 +117,10 @@
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 2rem;
+
+		@media (width <= 768px) {
+			padding: 1rem;
+		}
 
 		& .admin {
 			display: flex;
@@ -125,6 +151,16 @@
 				margin: 0 auto;
 				line-height: 1.6;
 			}
+
+			@media (width <= 768px) {
+				& h1 {
+					font-size: 2rem;
+				}
+
+				& p {
+					font-size: 1rem;
+				}
+			}
 		}
 
 		& .loading,
@@ -152,11 +188,15 @@
 				}
 			}
 		}
-
 		& .posts-grid {
 			display: grid;
 			gap: 2rem;
 			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+			@media (width <= 768px) {
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+			}
 		}
 
 		& .post-card {
@@ -175,7 +215,6 @@
 
 			& .post-header {
 				padding: 1.5rem 1.5rem 1rem;
-				border-bottom: 1px solid #eee;
 
 				& h2 {
 					margin: 0 0 0.75rem 0;
@@ -184,54 +223,112 @@
 					line-height: 1.3;
 				}
 
+				& .post-title-section {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					margin-bottom: 0.75rem;
+
+					& .expand-button {
+						background: none;
+						border: none;
+						cursor: pointer;
+						padding: 0.5rem;
+						border-radius: 6px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						transition: background-color 0.2s ease;
+
+						&:hover {
+							background-color: #f0f0f0;
+						}
+
+						& .expand-icon {
+							font-size: clamp(var(--sm), 1vw, var(--h5));
+							color: var(--color-secondary);
+							transition: transform 0.2s ease;
+
+							&.expanded {
+								transform: rotate(0deg);
+							}
+						}
+					}
+				}
 				& .post-meta {
 					color: #666;
 					font-size: 0.9rem;
 				}
-			}
 
-			& .post-content {
-				padding: 1rem 1.5rem 1.5rem;
-
-				& p {
-					margin: 0;
-					line-height: 1.7;
-					color: #555;
-					font-size: 1rem;
-				}
-			}
-		}
-
-		@media (max-width: 768px) {
-			padding: 1rem;
-
-			& .blog-header {
-				& h1 {
-					font-size: 2rem;
-				}
-
-				& p {
-					font-size: 1rem;
-				}
-			}
-
-			& .posts-grid {
-				grid-template-columns: 1fr;
-				gap: 1.5rem;
-			}
-
-			& .post-card {
-				& .post-header {
+				@media (width <= 768px) {
 					padding: 1rem 1rem 0.75rem;
 
 					& h2 {
 						font-size: 1.25rem;
 					}
+
+					& .post-title-section {
+						& .expand-button {
+							padding: 0.25rem;
+
+							& .expand-icon {
+								font-size: 0.9em;
+							}
+						}
+					}
+				}
+			}
+			& .post-content {
+				padding: 1.5rem;
+				border-top: 1px solid #eee;
+				animation: slideDown 0.3s ease-out;
+				max-height: 200px;
+				overflow-y: auto;
+				background-color: #fafafa;
+				border-radius: 0 0 12px 12px;
+				position: relative;
+
+				/* Custom scrollbar styling */
+				&::-webkit-scrollbar {
+					width: 8px;
 				}
 
-				& .post-content {
-					padding: 0.75rem 1rem 1rem;
+				&::-webkit-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 4px;
 				}
+
+				&::-webkit-scrollbar-thumb {
+					background: #c1c1c1;
+					border-radius: 4px;
+
+					&:hover {
+						background: #a8a8a8;
+					}
+				}
+				& p {
+					margin: 0;
+					line-height: 1.7;
+					color: #555;
+					font-size: 1rem;
+					white-space: pre-wrap;
+					word-wrap: break-word;
+				}
+
+				@media (width <= 768px) {
+					padding: 1rem;
+					max-height: 250px;
+				}
+			}
+		}
+		@keyframes slideDown {
+			from {
+				opacity: 0;
+				transform: translateY(-10px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
 			}
 		}
 	}
