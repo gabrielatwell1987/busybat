@@ -103,13 +103,14 @@
 	}
 
 	async function deletePost(id) {
-		if (!confirm('Are you sure you want to delete this post?')) {
-			return;
-		}
+		// if (!confirm('Are you sure you want to delete this post?')) {
+		// 	return;
+		// }
 
 		loading = true;
 		try {
 			const response = await fetch(`/api/posts/delete/${id}`, { method: 'POST' });
+
 			if (response.ok) {
 				await loadPosts();
 			} else {
@@ -117,6 +118,7 @@
 			}
 		} catch (error) {
 			console.error('Failed to delete post:', error);
+
 			alert('Failed to delete post');
 		} finally {
 			loading = false;
@@ -133,6 +135,7 @@
 
 			<div class="header-actions">
 				<span class="welcome">Welcome, {data.user.username}!</span>
+
 				<button onclick={logout} class="logout-btn">Logout</button>
 			</div>
 		</div>
@@ -195,6 +198,7 @@
 						<div class="post-header">
 							<div class="post-title-section">
 								<h3>{post.title}</h3>
+
 								<button
 									class="expand-button"
 									onclick={() => togglePostExpansion(post.id)}
@@ -220,6 +224,7 @@
 							<button onclick={() => editPost(post)} disabled={loading} class="edit-btn">
 								Edit
 							</button>
+
 							<button onclick={() => deletePost(post.id)} disabled={loading} class="delete-btn">
 								Delete
 							</button>
@@ -414,11 +419,11 @@
 				padding: 2rem;
 				font-size: clamp(var(--sm), 1vw, var(--h6));
 			}
-
 			& .posts-grid {
 				display: grid;
 				gap: 1.5rem;
 				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+				align-items: start;
 
 				@media (width <= 768px) {
 					grid-template-columns: 1fr;
@@ -430,6 +435,7 @@
 				border-radius: var(--radius);
 				padding: 1.5rem;
 				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				height: fit-content;
 
 				& .post-header {
 					& h3 {

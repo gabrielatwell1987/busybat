@@ -192,18 +192,19 @@
 			display: grid;
 			gap: 2rem;
 			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+			align-items: start;
 
 			@media (width <= 768px) {
 				grid-template-columns: 1fr;
 				gap: 1.5rem;
 			}
 		}
-
 		& .post-card {
 			background: white;
 			border-radius: 12px;
 			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 			overflow: hidden;
+			height: fit-content;
 			transition:
 				transform 0.2s ease,
 				box-shadow 0.2s ease;
