@@ -293,6 +293,7 @@
 						<div class="post-header">
 							<div class="post-title-section">
 								<h3 id="post-title-{post.id}">{post.title}</h3>
+
 								<button
 									class="expand-button"
 									onclick={() => togglePostExpansion(post.id)}
@@ -635,19 +636,25 @@
 				padding: 1.5rem;
 				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 				height: fit-content;
-
 				& .post-header {
 					& h3 {
 						margin: 0 0 0.5rem 0;
 						color: var(--color-secondary);
 						font-size: clamp(var(--sm), 2vw, var(--h5));
+						word-wrap: break-word;
+						overflow-wrap: break-word;
+						hyphens: auto;
+						line-height: 1.4;
+						flex: 1;
+						min-width: 0;
 					}
 
 					& .post-title-section {
 						display: flex;
-						align-items: center;
+						align-items: flex-start;
 						justify-content: space-between;
 						margin-bottom: 0.5rem;
+						gap: 0.75rem;
 						& .expand-button {
 							background: none;
 							border: none;
@@ -658,6 +665,8 @@
 							align-items: center;
 							justify-content: center;
 							transition: background-color 0.2s ease;
+							flex-shrink: 0;
+							margin-top: 0.125rem;
 
 							&:hover {
 								background-color: var(--color-fade-primary);

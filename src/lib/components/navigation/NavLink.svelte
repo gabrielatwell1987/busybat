@@ -24,7 +24,7 @@
 			font-weight: 900;
 			letter-spacing: 1px;
 			margin: 0;
-			margin-right: 0.5rem;
+			margin-right: clamp(0.25rem, 1vw, 0.5rem);
 			padding: 0;
 			white-space: nowrap;
 			text-align: center;
