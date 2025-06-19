@@ -6,6 +6,8 @@ export async function POST({ cookies, params }) {
 	if (!verifyToken(cookies.get('token'))) {
 		return json({ error: 'Unauthorized' }, { status: 401 });
 	}
+
 	await deletePost(params.id);
+
 	return json({ success: true });
 }

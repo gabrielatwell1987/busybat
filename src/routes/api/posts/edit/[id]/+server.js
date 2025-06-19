@@ -1,6 +1,9 @@
 import { json } from '@sveltejs/kit';
 import { updatePost, getPostById } from '$lib/data/storage.js';
 import { verifyToken } from '$lib/data/auth.js';
+import { put, del } from '@vercel/blob';
+import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
+import { dev } from '$app/environment';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -20,9 +23,7 @@ export async function POST({ request, cookies, params }) {
 		}
 
 		const postData = { title, content };
-		let imagePath = null;
-
-		// Handle image upload if present
+		let imagePath = null; // Handle image upload if present
 		if (imageFile && imageFile.size > 0) {
 			// Validate file type
 			if (!imageFile.type.startsWith('image/')) {
@@ -34,36 +35,69 @@ export async function POST({ request, cookies, params }) {
 				return json({ error: 'Image file too large (max 5MB)' }, { status: 400 });
 			}
 
-			// Create unique filename
-			const fileExtension = path.extname(imageFile.name);
-			const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}${fileExtension}`;
-			const uploadDir = path.join(process.cwd(), 'static', 'uploads');
-			const filePath = path.join(uploadDir, fileName); // Ensure upload directory exists
-
 			try {
-				await fs.mkdir(uploadDir, { recursive: true });
-			} catch {
-				console.warn('Upload directory already exists or could not be created');
-			}
+				// Get file extension from the original filename
+				const fileExtension = imageFile.name.split('.').pop() || 'jpg';
+				const fileName = `blog-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExtension}`;
 
-			// Save file
-			try {
-				const arrayBuffer = await imageFile.arrayBuffer();
-				const buffer = new Uint8Array(arrayBuffer);
-				await fs.writeFile(filePath, buffer);
-				imagePath = `/uploads/${fileName}`;
-				postData.image = imagePath;
+				// Use Vercel Blob in production or local storage in development
+				if (BLOB_READ_WRITE_TOKEN && !dev) {
+					// Production: Use Vercel Blob
+					const blob = await put(fileName, imageFile, {
+						access: 'public',
+						token: BLOB_READ_WRITE_TOKEN
+					});
+					imagePath = blob.url;
 
-				// Optional: Clean up old image file
-				try {
-					const existingPost = await getPostById(params.id);
-					if (existingPost && existingPost.image && existingPost.image !== imagePath) {
-						const oldImagePath = path.join(process.cwd(), 'static', existingPost.image);
-						await fs.unlink(oldImagePath);
+					// Clean up old image file from blob storage
+					try {
+						const existingPost = await getPostById(params.id);
+						if (existingPost && existingPost.image && existingPost.image !== imagePath) {
+							// Only delete if it's a blob URL
+							if (
+								existingPost.image.includes('vercel-blob') ||
+								existingPost.image.includes('blob.vercel-storage')
+							) {
+								await del(existingPost.image, { token: BLOB_READ_WRITE_TOKEN });
+							}
+						}
+					} catch (error) {
+						console.warn('Could not clean up old image:', error);
 					}
-				} catch (error) {
-					console.warn('Could not clean up old image:', error);
+				} else {
+					// Development: Use local file system
+					const uploadDir = path.join(process.cwd(), 'static', 'uploads');
+					const filePath = path.join(uploadDir, fileName);
+
+					// Ensure upload directory exists
+					try {
+						await fs.mkdir(uploadDir, { recursive: true });
+					} catch {
+						console.warn('Upload directory already exists or could not be created');
+					}
+
+					// Save file locally
+					const arrayBuffer = await imageFile.arrayBuffer();
+					const buffer = new Uint8Array(arrayBuffer);
+					await fs.writeFile(filePath, buffer);
+					imagePath = `/uploads/${fileName}`;
+
+					// Clean up old local image file
+					try {
+						const existingPost = await getPostById(params.id);
+						if (existingPost && existingPost.image && existingPost.image !== imagePath) {
+							// Only delete if it's a local file path
+							if (existingPost.image.startsWith('/uploads/')) {
+								const oldImagePath = path.join(process.cwd(), 'static', existingPost.image);
+								await fs.unlink(oldImagePath);
+							}
+						}
+					} catch (error) {
+						console.warn('Could not clean up old image:', error);
+					}
 				}
+
+				postData.image = imagePath;
 			} catch (error) {
 				console.error('Failed to save image:', error);
 				return json({ error: 'Failed to save image' }, { status: 500 });

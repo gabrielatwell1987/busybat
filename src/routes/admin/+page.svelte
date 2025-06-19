@@ -160,6 +160,7 @@
 		const confirmed = confirm(
 			'Are you sure you want to delete this post? This action cannot be undone.'
 		);
+
 		if (!confirmed) {
 			return;
 		}
