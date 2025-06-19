@@ -50,10 +50,17 @@
 			goto('/login');
 		}
 	}
-
 	async function createOrUpdatePost() {
 		if (!title.trim() || !content.trim()) {
-			alert('Please fill in both title and content');
+			// Use alert with better accessibility
+			const message = 'Please fill in both title and content';
+			alert(message);
+			// Focus the first empty field
+			if (!title.trim()) {
+				document.getElementById('title')?.focus();
+			} else if (!content.trim()) {
+				document.getElementById('content')?.focus();
+			}
 			return;
 		}
 
@@ -92,7 +99,6 @@
 		title = '';
 		content = '';
 	}
-
 	function togglePostExpansion(postId) {
 		if (expandedPosts.has(postId)) {
 			expandedPosts.delete(postId);
@@ -100,12 +106,22 @@
 			expandedPosts.add(postId);
 		}
 		expandedPosts = new Set(expandedPosts);
-	}
 
+		// Announce the change to screen readers
+		const expanded = expandedPosts.has(postId);
+		const button = document.querySelector(`[aria-controls="post-content-${postId}"]`);
+		if (button) {
+			button.setAttribute('aria-expanded', expanded.toString());
+		}
+	}
 	async function deletePost(id) {
-		// if (!confirm('Are you sure you want to delete this post?')) {
-		// 	return;
-		// }
+		// More accessible confirmation
+		const confirmed = confirm(
+			'Are you sure you want to delete this post? This action cannot be undone.'
+		);
+		if (!confirmed) {
+			return;
+		}
 
 		loading = true;
 		try {
@@ -132,11 +148,12 @@
 	<header class="admin-header">
 		<div class="header-content">
 			<h1>Admin Dashboard</h1>
-
 			<div class="header-actions">
 				<span class="welcome">Welcome, {data.user.username}!</span>
 
-				<button onclick={logout} class="logout-btn">Logout</button>
+				<button onclick={logout} class="logout-btn" aria-label="Logout from admin dashboard"
+					>Logout</button
+				>
 			</div>
 		</div>
 	</header>
@@ -158,7 +175,11 @@
 					bind:value={title}
 					placeholder="Enter post title..."
 					disabled={loading}
+					required
+					aria-describedby="title-help"
 				/>
+				<small id="title-help" class="form-help">Enter a descriptive title for your blog post</small
+				>
 			</div>
 
 			<div class="form-group">
@@ -169,7 +190,12 @@
 					placeholder="Write your post content here..."
 					rows="10"
 					disabled={loading}
+					required
+					aria-describedby="content-help"
 				></textarea>
+				<small id="content-help" class="form-help"
+					>Write your blog post content. You can use line breaks and paragraphs.</small
+				>
 			</div>
 
 			<div class="form-actions">
@@ -186,23 +212,23 @@
 
 	<div class="posts-section">
 		<h2>Manage Posts ({posts.length})</h2>
-
 		{#if loading && posts.length === 0}
-			<p class="loading">Loading posts...</p>
+			<p class="loading" aria-live="polite">Loading posts...</p>
 		{:else if posts.length === 0}
 			<p class="no-posts">No posts yet. Create your first post above!</p>
 		{:else}
-			<div class="posts-grid">
+			<div class="posts-grid" role="region" aria-label="Blog posts management">
 				{#each posts as post (post.id)}
-					<div class="post-card">
+					<article class="post-card" aria-labelledby="post-title-{post.id}">
 						<div class="post-header">
 							<div class="post-title-section">
-								<h3>{post.title}</h3>
-
+								<h3 id="post-title-{post.id}">{post.title}</h3>
 								<button
 									class="expand-button"
 									onclick={() => togglePostExpansion(post.id)}
 									aria-label={expandedPosts.has(post.id) ? 'Collapse post' : 'Expand post'}
+									aria-expanded={expandedPosts.has(post.id)}
+									aria-controls="post-content-{post.id}"
 								>
 									<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
 										{expandedPosts.has(post.id) ? '▼' : '▶'}
@@ -213,23 +239,35 @@
 								<small>Created: {new Date(post.createdAt).toLocaleDateString()}</small>
 							</div>
 						</div>
-
 						{#if expandedPosts.has(post.id)}
-							<div class="post-content">
+							<div
+								class="post-content"
+								id="post-content-{post.id}"
+								aria-labelledby="post-title-{post.id}"
+							>
 								<p>{post.content}</p>
 							</div>
 						{/if}
-
 						<div class="post-actions">
-							<button onclick={() => editPost(post)} disabled={loading} class="edit-btn">
+							<button
+								onclick={() => editPost(post)}
+								disabled={loading}
+								class="edit-btn"
+								aria-label="Edit {post.title}"
+							>
 								Edit
 							</button>
 
-							<button onclick={() => deletePost(post.id)} disabled={loading} class="delete-btn">
+							<button
+								onclick={() => deletePost(post.id)}
+								disabled={loading}
+								class="delete-btn"
+								aria-label="Delete {post.title}"
+							>
 								Delete
 							</button>
 						</div>
-					</div>
+					</article>
 				{/each}
 			</div>
 		{/if}
@@ -344,7 +382,21 @@
 					&:focus {
 						outline: none;
 						border-color: var(--color-accent);
+						box-shadow: 0 0 0 3px rgba(var(--color-accent), 0.2);
 					}
+
+					&:focus-visible {
+						outline: 2px solid var(--color-accent);
+						outline-offset: 2px;
+					}
+				}
+
+				& .form-help {
+					display: block;
+					margin-top: 0.25rem;
+					color: var(--color-gray);
+					font-size: clamp(var(--xs), 1vw, var(--sm));
+					line-height: 1.4;
 				}
 
 				& textarea {
@@ -379,6 +431,16 @@
 			font-size: clamp(var(--xs), 1vw, var(--h6));
 			cursor: pointer;
 			transition: background-color 0.2s;
+
+			&:focus {
+				outline: none;
+				box-shadow: 0 0 0 3px rgba(var(--color-accent), 0.3);
+			}
+
+			&:focus-visible {
+				outline: 2px solid var(--color-accent);
+				outline-offset: 2px;
+			}
 
 			&[type='submit'] {
 				background: var(--color-info);
@@ -449,7 +511,6 @@
 						align-items: center;
 						justify-content: space-between;
 						margin-bottom: 0.5rem;
-
 						& .expand-button {
 							background: none;
 							border: none;
@@ -463,6 +524,17 @@
 
 							&:hover {
 								background-color: var(--color-fade-primary);
+							}
+
+							&:focus {
+								outline: none;
+								background-color: var(--color-fade-primary);
+								box-shadow: 0 0 0 2px var(--color-accent);
+							}
+
+							&:focus-visible {
+								outline: 2px solid var(--color-accent);
+								outline-offset: 2px;
 							}
 
 							& .expand-icon {

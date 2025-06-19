@@ -27,7 +27,6 @@
 			loading = false;
 		}
 	}
-
 	function togglePostExpansion(postId) {
 		if (expandedPosts.has(postId)) {
 			expandedPosts.delete(postId);
@@ -35,6 +34,13 @@
 			expandedPosts.add(postId);
 		}
 		expandedPosts = new Set(expandedPosts);
+
+		// Announce the change to screen readers
+		const expanded = expandedPosts.has(postId);
+		const button = document.querySelector(`[aria-controls="post-content-${postId}"]`);
+		if (button) {
+			button.setAttribute('aria-expanded', expanded.toString());
+		}
 	}
 </script>
 
@@ -46,11 +52,11 @@
 <VerticalTitle title="Blog" />
 
 <div class="blog-container">
-	<section class="admin">
+	<section class="admin" aria-label="Admin navigation">
 		{#if data.user}
-			<a href="/admin">Admin Dashboard</a>
+			<a href="/admin" aria-label="Go to admin dashboard">Admin Dashboard</a>
 		{:else}
-			<a href="/login">Admin Login</a>
+			<a href="/login" aria-label="Go to admin login">Admin Login</a>
 		{/if}
 	</section>
 
@@ -59,31 +65,32 @@
 
 		<p>Stay up to date with our latest news and insights</p>
 	</header>
-
 	{#if loading}
-		<div class="loading">
+		<div class="loading" role="status" aria-live="polite">
 			<p>Loading posts...</p>
 		</div>
 	{:else if error}
-		<div class="error">
+		<div class="error" role="alert" aria-live="assertive">
 			<p>Failed to load posts: {error}</p>
-			<button onclick={loadPosts}>Try Again</button>
+			<button onclick={loadPosts} aria-label="Retry loading blog posts">Try Again</button>
 		</div>
 	{:else if posts.length === 0}
 		<div class="no-posts">
 			<p>No blog posts available yet. Check back soon!</p>
 		</div>
 	{:else}
-		<div class="posts-grid">
+		<div class="posts-grid" role="main" aria-label="Blog posts">
 			{#each posts as post (post.id)}
-				<article class="post-card">
+				<article class="post-card" aria-labelledby="post-title-{post.id}">
 					<header class="post-header">
 						<div class="post-title-section">
-							<h2>{post.title}</h2>
+							<h2 id="post-title-{post.id}">{post.title}</h2>
 							<button
 								class="expand-button"
 								onclick={() => togglePostExpansion(post.id)}
 								aria-label={expandedPosts.has(post.id) ? 'Collapse post' : 'Expand post'}
+								aria-expanded={expandedPosts.has(post.id)}
+								aria-controls="post-content-{post.id}"
 							>
 								<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
 									{expandedPosts.has(post.id) ? '▼' : '▶'}
@@ -100,9 +107,12 @@
 							</time>
 						</div>
 					</header>
-
 					{#if expandedPosts.has(post.id)}
-						<div class="post-content">
+						<div
+							class="post-content"
+							id="post-content-{post.id}"
+							aria-labelledby="post-title-{post.id}"
+						>
 							<p>{post.content}</p>
 						</div>
 					{/if}
@@ -170,7 +180,6 @@
 			padding: 3rem;
 			color: var(--color-warning);
 		}
-
 		& .error {
 			color: var(--color-danger);
 
@@ -185,6 +194,16 @@
 
 				&:hover {
 					background: var(--color-primary);
+				}
+
+				&:focus {
+					outline: none;
+					box-shadow: 0 0 0 2px var(--color-accent);
+				}
+
+				&:focus-visible {
+					outline: 2px solid var(--color-accent);
+					outline-offset: 2px;
 				}
 			}
 		}
@@ -229,7 +248,6 @@
 					align-items: center;
 					justify-content: space-between;
 					margin-bottom: 0.75rem;
-
 					& .expand-button {
 						background: none;
 						border: none;
@@ -243,6 +261,17 @@
 
 						&:hover {
 							background-color: #f0f0f0;
+						}
+
+						&:focus {
+							outline: none;
+							background-color: #f0f0f0;
+							box-shadow: 0 0 0 2px var(--color-accent);
+						}
+
+						&:focus-visible {
+							outline: 2px solid var(--color-accent);
+							outline-offset: 2px;
 						}
 
 						& .expand-icon {

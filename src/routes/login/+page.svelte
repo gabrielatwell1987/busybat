@@ -6,10 +6,15 @@
 	let password = $state('');
 	let error = $state('');
 	let loading = $state(false);
-
 	async function login() {
 		if (!username.trim() || !password.trim()) {
 			error = 'Please enter both username and password';
+			// Focus the first empty field for better UX
+			if (!username.trim()) {
+				document.getElementById('username')?.focus();
+			} else {
+				document.getElementById('password')?.focus();
+			}
 			return;
 		}
 
@@ -38,6 +43,19 @@
 			loading = false;
 		}
 	}
+
+	// Enhanced keyboard support
+	function handleKeyDown(event) {
+		// Allow Enter key to submit form from any input
+		if (
+			event.key === 'Enter' &&
+			(event.target.id === 'username' || event.target.id === 'password')
+		) {
+			if (username.trim() && password.trim()) {
+				login();
+			}
+		}
+	}
 </script>
 
 <svelte:head>
@@ -54,9 +72,8 @@
 
 			<p>Please sign in to access the admin dashboard</p>
 		</div>
-
 		{#if error}
-			<div class="error-message">
+			<div class="error-message" role="alert" aria-live="polite" id="error-message">
 				<p>{error}</p>
 			</div>
 		{/if}
@@ -77,6 +94,9 @@
 					placeholder="Enter your username"
 					disabled={loading}
 					required
+					aria-describedby={error ? 'error-message' : undefined}
+					autocomplete="username"
+					onkeydown={handleKeyDown}
 				/>
 			</div>
 
@@ -89,6 +109,9 @@
 					placeholder="Enter your password"
 					disabled={loading}
 					required
+					aria-describedby={error ? 'error-message' : undefined}
+					autocomplete="current-password"
+					onkeydown={handleKeyDown}
 				/>
 			</div>
 
@@ -179,10 +202,15 @@
 						transition: border-color 0.2s;
 						box-sizing: border-box;
 						color: var(--color-secondary);
-
 						&:focus {
 							outline: none;
 							border-color: var(--color-accent);
+							box-shadow: 0 0 0 3px rgba(var(--color-accent), 0.2);
+						}
+
+						&:focus-visible {
+							outline: 2px solid var(--color-accent);
+							outline-offset: 2px;
 						}
 
 						&:disabled {
@@ -191,7 +219,6 @@
 						}
 					}
 				}
-
 				& button {
 					width: 100%;
 					padding: 0.875rem;
@@ -208,6 +235,16 @@
 						background: var(--color-primary);
 						color: var(--color-accent);
 						border: 1px solid var(--color-accent);
+					}
+
+					&:focus {
+						outline: none;
+						box-shadow: 0 0 0 3px rgba(var(--color-accent), 0.3);
+					}
+
+					&:focus-visible {
+						outline: 2px solid var(--color-accent);
+						outline-offset: 2px;
 					}
 
 					&:disabled {
