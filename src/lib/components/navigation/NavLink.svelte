@@ -20,28 +20,28 @@
 			text-decoration: none;
 			color: var(--color-secondary);
 			font-family: var(--font-bold);
-			font-size: clamp(var(--h5), 1.5vw, var(--h4));
+			font-size: clamp(var(--sm), 1.25vw, var(--h4));
 			font-weight: 900;
 			letter-spacing: 1px;
 			margin: 0;
+			margin-right: 0.5rem;
 			padding: 0;
 			white-space: nowrap;
 			text-align: center;
 
-			@media (width <= 768px) {
-				font-size: clamp(var(--h5), 1.5vw, var(--h5));
-				letter-spacing: 0px;
-				padding: 0.5rem;
-				width: 100%;
-				text-align: center;
-				letter-spacing: 3px;
+			@media (600px <= width <= 768px) {
+				font-size: clamp(var(--sm), 2.5vw, var(--h5));
 			}
 
-			@media (min-width: 501px) {
+			@media (width >= 501px) {
 				transition:
 					transform var(--transition-duration) var(--timing-function),
 					translate 0ms calc(var(--transition-duration) / 2),
 					color 0.3s ease;
+			}
+
+			@media (width <= 500px) {
+				font-size: var(--h5);
 			}
 		}
 
