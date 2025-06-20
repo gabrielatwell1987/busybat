@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { deletePost } from '$lib/data/storage.js';
+import { deletePost } from '$lib/data/kv-storage.js';
 import { verifyToken } from '$lib/data/auth.js';
 
 export async function POST({ cookies, params }) {

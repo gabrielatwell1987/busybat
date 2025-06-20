@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { createPost } from '$lib/data/storage.js';
+import { createPost } from '$lib/data/kv-storage.js';
 import { verifyToken } from '$lib/data/auth.js';
 import { put } from '@vercel/blob';
 import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
