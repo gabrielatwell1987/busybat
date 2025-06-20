@@ -25,7 +25,7 @@ Your app will work locally without any KV setup - it will use fallback default p
 2. Click **Connect Project** and select your `busybat` project
 3. Vercel will automatically add these environment variables to your project:
    - `KV_URL`
-   - `KV_REST_API_URL` 
+   - `KV_REST_API_URL`
    - `KV_REST_API_TOKEN`
    - `KV_REST_API_READ_ONLY_TOKEN`
 
@@ -56,17 +56,18 @@ vercel --prod
 ✅ **Fast performance** - Redis is very fast for read/write operations  
 ✅ **Generous free tier** - Vercel KV has a good free tier  
 ✅ **Automatic backups** - Vercel handles backup and maintenance  
-✅ **No complex setup** - Much simpler than traditional databases  
+✅ **No complex setup** - Much simpler than traditional databases
 
 ## Fallback Behavior
 
 - **Local development without KV**: Uses default posts, new posts are lost on restart
-- **Production without KV**: Uses default posts, new posts are lost on restart  
+- **Production without KV**: Uses default posts, new posts are lost on restart
 - **With KV connected**: Full persistence and cross-device sync
 
 ## Cost
 
 Vercel KV has a generous free tier:
+
 - 30,000 commands per month
 - 256 MB storage
 - For a typical blog, this will handle hundreds of posts and thousands of page views
