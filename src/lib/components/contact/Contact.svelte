@@ -41,8 +41,14 @@
 	.content {
 		display: flex;
 		width: 100%;
-		overflow-x: visible;
+		overflow-x: hidden;
 		height: 100%;
+		min-height: 100vh;
+
+		@media (width <= 768px) {
+			overflow-x: hidden;
+			width: 100vw;
+		}
 
 		& .form-container {
 			display: flex;
@@ -54,7 +60,7 @@
 			transform: translateY(0);
 			position: relative;
 			width: 100%;
-			min-height: auto;
+			min-height: 100vh;
 			max-height: 100%;
 
 			& form {
@@ -66,13 +72,6 @@
 				transform: translateY(0);
 				scale: 1;
 				padding-bottom: 1.5rem;
-
-				@media (width <= 500px) {
-					position: absolute;
-					bottom: 2em;
-					left: -9%;
-					transform: translateX(-9%);
-				}
 
 				& fieldset {
 					border: none;
@@ -97,9 +96,8 @@
 						text-align: left;
 						letter-spacing: -1px;
 						padding-inline: 1rem;
-
 						@media (width <= 500px) {
-							transform: translateY(0);
+							transform: none;
 						}
 					}
 
@@ -107,7 +105,6 @@
 						border: none;
 					}
 				}
-
 				& label {
 					color: var(--color-gray);
 					font-family: var(--font-semibold);
@@ -117,16 +114,17 @@
 					letter-spacing: 0px;
 
 					@media (width <= 500px) {
-						transform: translateX(-5%);
+						transform: none;
 					}
 				}
-
 				& input,
 				& textarea {
 					font-family: var(--font-regular);
 					font-size: clamp(var(--h6), 2vw, var(--h4));
 					padding-block: 0.1rem;
 					border-radius: calc(var(--radius) * 3);
+					width: 100%;
+					box-sizing: border-box;
 
 					background-color: rgba(255, 255, 255, 0.9);
 					backdrop-filter: blur(8px);
@@ -135,8 +133,15 @@
 					outline: none;
 					transition: all 0.3s ease-in-out;
 
+					@media (width <= 768px) {
+						font-size: 1rem;
+						width: 100%;
+						box-sizing: border-box;
+					}
+
 					@media (width <= 500px) {
-						transform: translateX(-5%);
+						transform: none;
+						font-size: 0.9rem;
 					}
 				}
 
@@ -162,10 +167,9 @@
 
 				& .send {
 					margin-bottom: 1rem;
-
 					@media (width <= 500px) {
-						transform: translateX(-5%);
-						scale: 1.5;
+						transform: none;
+						scale: 1.2;
 						margin-top: 1em;
 					}
 				}
@@ -211,31 +215,52 @@
 				@media (width <= 980px) {
 					width: min(85%, 900px);
 				}
-
 				@media (width <= 768px) {
-					width: 90%;
+					width: 90vw;
+					max-width: 90vw;
 					transform: translateY(0);
-					margin-inline: auto;
-					scale: 0.75;
-					margin-right: 5em;
+					margin: 0 auto;
+					scale: 1;
+					box-sizing: border-box;
+					padding: 0;
 
 					& fieldset {
-						padding: 1em 0.75em;
+						padding: 1rem;
 						width: 100%;
 						box-sizing: border-box;
 						box-shadow: none;
+						margin: 0;
+						border: none;
+					}
+				}
+
+				@media (width <= 500px) {
+					width: 95vw;
+					max-width: 95vw;
+					transform: none;
+					margin: 0 auto;
+					scale: 1;
+
+					& fieldset {
+						padding: 0.75rem;
 					}
 				}
 			}
 
 			@media (width <= 768px) {
-				align-items: flex-start;
-				max-height: 100vh;
-				height: auto;
-				padding-top: 4rem;
-				padding-bottom: 5rem;
+				align-items: center;
+				justify-content: center;
+				max-height: none;
+				height: 100vh;
+				min-height: 100vh;
+				/* padding: 0.5rem; */
 				width: 100%;
 				transform: translateY(0);
+				overflow-x: hidden;
+				overflow-y: auto;
+				box-sizing: border-box;
+				scroll-behavior: smooth;
+				margin-right: 2em;
 			}
 		}
 	}
