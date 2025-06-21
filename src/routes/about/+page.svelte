@@ -102,7 +102,6 @@
 			display: grid;
 			place-items: center;
 			margin-bottom: 5em;
-			view-transition-name: slide-content;
 			width: 100%;
 			max-width: 1500px;
 			padding: 0;
@@ -238,32 +237,6 @@
 					}
 				}
 			}
-		}
-	}
-
-	::view-transition-old(slide-content) {
-		animation: slide-down var(--timing) ease-out forwards;
-	}
-
-	::view-transition-new(slide-content) {
-		animation: slide-up var(--timing) ease-out forwards;
-	}
-
-	@keyframes slide-up {
-		0% {
-			transform: translateY(-100%);
-		}
-		100% {
-			transform: translateY(0);
-		}
-	}
-
-	@keyframes slide-down {
-		0% {
-			transform: translateY(0);
-		}
-		100% {
-			transform: translateY(100%);
 		}
 	}
 </style>

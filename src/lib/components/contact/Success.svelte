@@ -26,7 +26,6 @@
 		min-height: 65vh;
 		gap: 1rem;
 		transform: translateY(-2em);
-		view-transition-name: success-slide;
 
 		& p {
 			font-family: var(--font-semibold);
@@ -45,36 +44,6 @@
 
 		@media (width <= 500px) {
 			transform: translateY(-5em);
-		}
-	}
-
-	::view-transition-old(success-slide) {
-		animation: success-slide-old 0.75s forwards ease-out;
-	}
-
-	::view-transition-new(success-slide) {
-		animation: success-slide-new 1s forwards ease-out;
-	}
-
-	@keyframes success-slide-new {
-		from {
-			opacity: 0;
-			transform: translateY(-5em);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	@keyframes success-slide-old {
-		to {
-			opacity: 0;
-			transform: translateY(5em);
-		}
-		from {
-			opacity: 1;
-			transform: translateY(0);
 		}
 	}
 </style>

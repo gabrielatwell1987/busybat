@@ -51,7 +51,7 @@
 
 <VerticalTitle title="Blog" />
 
-<div class="blog-container">
+<main class="blog-container">
 	<section class="admin" aria-label="Admin navigation">
 		{#if data.user}
 			<a href="/admin" aria-label="Go to admin dashboard">Admin Dashboard</a>
@@ -134,7 +134,7 @@
 			{/each}
 		</div>
 	{/if}
-</div>
+</main>
 
 <style>
 	.blog-container {

@@ -38,7 +38,6 @@
 
 		& picture {
 			opacity: 0.25;
-			view-transition-name: scale-content;
 		}
 
 		& img {
@@ -107,36 +106,6 @@
 				margin-bottom: 6em;
 				transform: translateY(0);
 			}
-		}
-	}
-
-	::view-transition-old(scale-content) {
-		animation: scale-out var(--timing) ease-out forwards;
-	}
-
-	::view-transition-new(scale-content) {
-		animation: scale-in var(--timing) ease-out forwards;
-	}
-
-	@keyframes scale-out {
-		0% {
-			transform: scale(1);
-			opacity: 1;
-		}
-		100% {
-			transform: scale(1.25);
-			opacity: 0;
-		}
-	}
-
-	@keyframes scale-in {
-		0% {
-			transform: scale(0.8);
-			opacity: 0;
-		}
-		100% {
-			transform: scale(1);
-			opacity: 1;
 		}
 	}
 </style>

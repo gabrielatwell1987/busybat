@@ -50,7 +50,6 @@
 			align-items: center;
 			overflow-y: auto;
 			padding: 0;
-			view-transition-name: form-content;
 			overflow-x: hidden;
 			transform: translateY(0);
 			position: relative;
@@ -238,37 +237,6 @@
 				width: 100%;
 				transform: translateY(0);
 			}
-		}
-	}
-
-	::view-transition-old(form-content) {
-		animation: move-down var(--timing) ease-out forwards;
-	}
-
-	::view-transition-new(form-content) {
-		animation: move-up var(--timing) ease-out forwards;
-	}
-
-	@keyframes move-down {
-		0% {
-			translate: 0 0;
-			opacity: 1;
-		}
-		100% {
-			translate: 0 100%;
-
-			opacity: 0;
-		}
-	}
-
-	@keyframes move-up {
-		0% {
-			translate: 0 100%;
-			opacity: 0;
-		}
-		100% {
-			translate: 0 0;
-			opacity: 1;
 		}
 	}
 </style>
