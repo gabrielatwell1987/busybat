@@ -36,11 +36,11 @@
 	}
 	@supports (-webkit-touch-callout: none) {
 		:root::view-transition-old(root) {
-			animation: 0.7s cubic-bezier(0.4, 0, 1, 1) both crossfade-out-safari;
+			animation: 1s cubic-bezier(0.4, 0, 1, 1) both crossfade-out-safari;
 		}
 
 		:root::view-transition-new(root) {
-			animation: 0.4s cubic-bezier(0, 0, 0.2, 1) both crossfade-in-safari;
+			animation: 1.2s cubic-bezier(0, 0, 0.2, 1) both crossfade-in-safari;
 		}
 	}
 	@keyframes crossfade-out {
