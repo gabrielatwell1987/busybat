@@ -536,17 +536,6 @@
 		}
 	}
 
-	@keyframes shrink {
-		0% {
-			transform: translate(-50%, -50%);
-			opacity: 1;
-		}
-		100% {
-			transform: translate(-50%, -50%) scale(0.9);
-			opacity: 0.7;
-		}
-	}
-
 	@keyframes enlarge {
 		0% {
 			transform: translate(-50%, -50%) scale(0.9);
