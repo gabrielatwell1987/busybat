@@ -36,11 +36,13 @@
 	}
 	@supports (-webkit-touch-callout: none) {
 		:root::view-transition-old(root) {
-			animation: 1s cubic-bezier(0.4, 0, 1, 1) both crossfade-out-safari;
+			animation: 0.15s cubic-bezier(0.4, 0, 1, 1) both crossfade-out-safari;
+			animation-delay: 0.5s;
 		}
 
 		:root::view-transition-new(root) {
-			animation: 1.2s cubic-bezier(0, 0, 0.2, 1) both crossfade-in-safari;
+			animation: 0.5s cubic-bezier(0, 0, 0.2, 1) both crossfade-in-safari;
+			animation-delay: 0.5s;
 		}
 	}
 	@keyframes crossfade-out {
@@ -57,7 +59,7 @@
 	@keyframes crossfade-in {
 		from {
 			opacity: 0;
-			transform: scale(1.09) translateX(10px);
+			transform: scale(1.05) translateX(10px);
 		}
 		to {
 			opacity: 1;
@@ -68,22 +70,18 @@
 	@keyframes crossfade-out-safari {
 		from {
 			opacity: 1;
-			transform: scale(1) translateX(0);
 		}
 		to {
-			opacity: 0.3;
-			transform: scale(0.98) translateX(-8px);
+			opacity: 0.65;
 		}
 	}
 
 	@keyframes crossfade-in-safari {
 		from {
-			opacity: 0.3;
-			transform: scale(1.02) translateX(8px);
+			opacity: 0.65;
 		}
 		to {
 			opacity: 1;
-			transform: scale(1) translateX(0);
 		}
 	}
 </style>
