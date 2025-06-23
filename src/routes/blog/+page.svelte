@@ -298,6 +298,7 @@
 					align-items: center;
 					justify-content: space-between;
 					margin-bottom: 0.75rem;
+
 					& .expand-button {
 						background: none;
 						border: none;
@@ -308,14 +309,15 @@
 						align-items: center;
 						justify-content: center;
 						transition: background-color 0.2s ease;
+						font-size: clamp(var(--h4), 1.5vw, var(--h4));
 
 						&:hover {
-							background-color: #f0f0f0;
+							background-color: var(--color-primary);
 						}
 
 						&:focus {
 							outline: none;
-							background-color: #f0f0f0;
+							background-color: var(--color-primary);
 							box-shadow: 0 0 0 2px var(--color-accent);
 						}
 
@@ -325,7 +327,6 @@
 						}
 
 						& .expand-icon {
-							font-size: clamp(var(--sm), 1vw, var(--h5));
 							color: var(--color-secondary);
 							transition: transform 0.2s ease;
 

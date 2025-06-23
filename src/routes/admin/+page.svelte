@@ -427,6 +427,7 @@
 		& .post-form {
 			background: var(--color-light);
 			padding: 2rem;
+			border: 1px solid var(--color-fade-primary);
 			border-radius: var(--radius);
 			margin-bottom: 3rem;
 
@@ -559,7 +560,7 @@
 			}
 
 			@media (width <= 768px) {
-				padding: 1.5rem;
+				padding: 0.5rem;
 			}
 		}
 		& button {
@@ -636,6 +637,7 @@
 				padding: 1.5rem;
 				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 				height: fit-content;
+
 				& .post-header {
 					& h3 {
 						margin: 0 0 0.5rem 0;
@@ -655,6 +657,7 @@
 						justify-content: space-between;
 						margin-bottom: 0.5rem;
 						gap: 0.75rem;
+
 						& .expand-button {
 							background: none;
 							border: none;
@@ -667,14 +670,15 @@
 							transition: background-color 0.2s ease;
 							flex-shrink: 0;
 							margin-top: 0.125rem;
+							font-size: clamp(var(--h6), 2vw, var(--h4));
 
 							&:hover {
-								background-color: var(--color-fade-primary);
+								background-color: var(--color-primary);
 							}
 
 							&:focus {
 								outline: none;
-								background-color: var(--color-fade-primary);
+								background-color: var(--color-primary);
 								box-shadow: 0 0 0 2px var(--color-accent);
 							}
 
@@ -684,7 +688,6 @@
 							}
 
 							& .expand-icon {
-								font-size: clamp(var(--sm), 1vw, var(--h5));
 								color: var(--color-secondary);
 								transition: transform 0.2s ease;
 
