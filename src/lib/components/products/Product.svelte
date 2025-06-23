@@ -509,19 +509,20 @@
 			max-height: 200px;
 		}
 	}
-
 	@media (prefers-reduced-motion: no-preference) {
-		::view-transition-old(root),
-		::view-transition-new(root) {
-			animation-delay: 0s;
-			animation-duration: 0.5s;
-		}
+		@supports (view-transition-name: none) {
+			::view-transition-old(root),
+			::view-transition-new(root) {
+				animation-delay: 0s;
+				animation-duration: 0.5s;
+			}
 
-		/* Target all view transitions for product cards */
-		::view-transition-group(*) {
-			animation-delay: 0s;
-			animation-duration: 0.5s;
-			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+			/* Target all view transitions for product cards */
+			::view-transition-group(*) {
+				animation-delay: 0s;
+				animation-duration: 0.5s;
+				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+			}
 		}
 
 		/* Animation for overlay */
