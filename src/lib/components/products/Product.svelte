@@ -106,11 +106,13 @@
 		if (isEnlarged) {
 			// Reset scroll immediately when enlarged
 			const productInfo = document.querySelector('.product-card.enlarged .product-info');
+
 			if (productInfo) {
 				productInfo.scrollTop = 0;
 			}
 			// Focus handling
 			const card = document.querySelector('.product-card.enlarged');
+
 			if (card) trapFocus(card);
 		}
 	});
@@ -119,6 +121,7 @@
 		if (isEnlarged) {
 			setTimeout(() => {
 				const card = document.querySelector('.product-card.enlarged');
+
 				if (card) trapFocus(card);
 			}, 100);
 		}
