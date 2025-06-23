@@ -37,21 +37,21 @@
 		& section {
 			backdrop-filter: blur(1rem);
 			border-radius: var(--radius);
-			background-color: var(--color-lighter-accent);
 			margin: 0;
+			margin-bottom: var(--xs);
 			padding: 0.25rem 0.5rem;
 			width: 100%;
 			display: flex;
 			justify-content: center;
 
-			@media (width <= 500px) {
+			@media (width <= 768px) {
 				padding: 0.01rem;
 			}
 
 			& p {
 				color: var(--color-secondary);
 				font-family: var(--font-regular);
-				font-size: clamp(var(--xs), 1.2vw, var(--h5));
+				font-size: clamp(var(--sm), 1.2vw, var(--h5));
 				font-weight: 700;
 				text-wrap: nowrap;
 				display: inline-flex;
@@ -62,8 +62,8 @@
 				line-height: 1;
 				text-align: center;
 
-				@media (width <= 500px) {
-					scale: 0.85;
+				@media (width <= 768px) {
+					scale: 0.8;
 					display: flex;
 					justify-content: center;
 					text-align: center;

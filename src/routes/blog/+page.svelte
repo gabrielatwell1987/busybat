@@ -65,6 +65,7 @@
 
 		<p>Stay up to date with our latest news and insights</p>
 	</header>
+
 	{#if loading}
 		<div class="loading" role="status" aria-live="polite">
 			<p>Loading posts...</p>
@@ -72,6 +73,7 @@
 	{:else if error}
 		<div class="error" role="alert" aria-live="assertive">
 			<p>Failed to load posts: {error}</p>
+
 			<button onclick={loadPosts} aria-label="Retry loading blog posts">Try Again</button>
 		</div>
 	{:else if posts.length === 0}
@@ -88,9 +90,11 @@
 								<img src={post.image} alt="Thumbnail for {post.title}" />
 							</div>
 						{/if}
+
 						<div class="post-header-content">
 							<div class="post-title-section">
 								<h2 id="post-title-{post.id}">{post.title}</h2>
+
 								<button
 									class="expand-button"
 									onclick={() => togglePostExpansion(post.id)}
@@ -103,6 +107,7 @@
 									</span>
 								</button>
 							</div>
+
 							<div class="post-meta">
 								<time datetime={post.createdAt}>
 									{new Date(post.createdAt).toLocaleDateString('en-US', {
@@ -125,6 +130,7 @@
 									<img src={post.image} alt="Featured image for {post.title}" />
 								</div>
 							{/if}
+
 							<div class="post-text">
 								<p>{post.content}</p>
 							</div>
@@ -143,7 +149,7 @@
 		padding: 2rem;
 
 		@media (width <= 768px) {
-			padding: 1rem;
+			padding: 0.5rem;
 		}
 
 		& .admin {
@@ -229,7 +235,7 @@
 
 			@media (width <= 768px) {
 				grid-template-columns: 1fr;
-				gap: 1.5rem;
+				gap: 1rem;
 			}
 		}
 		& .post-card {

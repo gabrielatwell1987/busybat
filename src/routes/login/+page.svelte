@@ -72,6 +72,7 @@
 
 			<p>Please sign in to access the admin dashboard</p>
 		</div>
+
 		{#if error}
 			<div class="error-message" role="alert" aria-live="polite" id="error-message">
 				<p>{error}</p>
@@ -87,6 +88,7 @@
 		>
 			<div class="form-group">
 				<label for="username">Username</label>
+
 				<input
 					id="username"
 					type="text"
@@ -102,6 +104,7 @@
 
 			<div class="form-group">
 				<label for="password">Password</label>
+
 				<input
 					id="password"
 					type="password"
@@ -133,7 +136,7 @@
 		margin-top: -8em;
 
 		@media (width <= 768px) {
-			margin-top: -4em;
+			margin-top: -7em;
 		}
 
 		& .login-card {
@@ -143,6 +146,10 @@
 			padding: 2.5rem;
 			width: 100%;
 			max-width: 600px;
+
+			@media (width <= 768px) {
+				width: 90vw;
+			}
 
 			& .login-header {
 				text-align: center;
@@ -175,11 +182,12 @@
 					font-size: clamp(var(--xs), 1vw, var(--sm));
 				}
 			}
+
 			& .login-form {
 				margin-bottom: 2rem;
 
 				@media (width <= 768px) {
-					width: 70vw;
+					width: 85vw;
 				}
 
 				& .form-group {
@@ -202,6 +210,7 @@
 						transition: border-color 0.2s;
 						box-sizing: border-box;
 						color: var(--color-secondary);
+
 						&:focus {
 							outline: none;
 							border-color: var(--color-accent);
@@ -228,6 +237,7 @@
 					border-radius: var(--radius);
 					font-size: clamp(var(--sm), 1vw, var(--h6));
 					font-weight: 600;
+					letter-spacing: 1px;
 					cursor: pointer;
 					transition: background-color 0.2s;
 

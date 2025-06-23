@@ -244,6 +244,7 @@
 					>Write your blog post content. You can use line breaks and paragraphs.</small
 				>
 			</div>
+
 			<div class="form-group">
 				<label for="image">Image:</label>
 
@@ -310,6 +311,7 @@
 								<small>Created: {new Date(post.createdAt).toLocaleDateString()}</small>
 							</div>
 						</div>
+
 						{#if expandedPosts.has(post.id)}
 							<div
 								class="post-content"
@@ -326,6 +328,7 @@
 								</div>
 							</div>
 						{/if}
+
 						<div class="post-actions">
 							<button
 								onclick={() => editPost(post)}
@@ -359,13 +362,14 @@
 		padding: 0 2rem 2rem;
 
 		@media (width <= 768px) {
-			padding: 0 1rem 1rem;
+			padding: 0 0.75rem 0.75rem;
 		}
 		& .admin-header {
 			background: var(--color-light);
 			margin: 0 -2rem 2rem -2rem;
 			padding: 1.5rem 2rem;
 			border-bottom: 1px solid var(--color-fade-primary);
+
 			& .header-content {
 				display: flex;
 				justify-content: space-between;
@@ -399,6 +403,8 @@
 						border-radius: var(--radius);
 						cursor: pointer;
 						font-size: clamp(var(--xs), 1vw, var(--sm));
+						font-weight: 600;
+						letter-spacing: 1px;
 						transition: background-color 0.2s;
 
 						&:hover {
@@ -447,6 +453,7 @@
 					color: var(--color-secondary);
 					font-size: clamp(var(--sm), 1vw, var(--h6));
 				}
+
 				& input[type='text'],
 				& input[type='file'],
 				& textarea {
@@ -484,6 +491,7 @@
 						color: var(--color-primary);
 						cursor: pointer;
 						font-size: clamp(var(--xs), 1vw, var(--sm));
+						letter-spacing: 1px;
 
 						&:hover {
 							background-color: var(--color-primary);
@@ -550,6 +558,7 @@
 				& button {
 					color: var(--color-primary);
 					background-color: var(--color-accent);
+					letter-spacing: 1px;
 
 					&:hover {
 						background-color: var(--color-primary);
@@ -634,9 +643,13 @@
 				background: var(--color-white);
 				border: 1px solid var(--color-fade-primary);
 				border-radius: var(--radius);
-				padding: 1.5rem;
+				padding: 1rem;
 				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 				height: fit-content;
+
+				@media (width <= 768px) {
+					padding: 0.5rem;
+				}
 
 				& .post-header {
 					& h3 {
@@ -783,22 +796,26 @@
 						background: var(--color-success);
 						color: var(--color-white);
 						font-size: clamp(var(--xs), 1vw, var(--sm));
+						font-weight: 600;
+						letter-spacing: 1px;
 						padding: 0.5rem 1rem;
 						border-radius: var(--radius);
 
 						&:hover:not(:disabled) {
-							background: var(--color-info);
+							background: hsl(134, 61%, 31%);
 						}
 					}
 					& .delete-btn {
 						background: var(--color-danger);
 						color: var(--color-white);
 						font-size: clamp(var(--xs), 1vw, var(--sm));
+						font-weight: 600;
+						letter-spacing: 1px;
 						padding: 0.5rem 1rem;
 						border-radius: var(--radius);
 
 						&:hover:not(:disabled) {
-							background: var(--color-dark);
+							background: hsl(354, 70%, 44%);
 						}
 					}
 				}
