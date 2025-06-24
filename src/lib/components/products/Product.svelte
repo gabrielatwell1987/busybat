@@ -104,6 +104,9 @@
 
 	$effect(() => {
 		if (isEnlarged) {
+			// Add class to body to handle global z-index issues
+			document.body.classList.add('product-enlarged');
+
 			// Reset scroll immediately when enlarged
 			const productInfo = document.querySelector('.product-card.enlarged .product-info');
 
@@ -114,6 +117,9 @@
 			const card = document.querySelector('.product-card.enlarged');
 
 			if (card) trapFocus(card);
+		} else {
+			// Remove class when not enlarged
+			document.body.classList.remove('product-enlarged');
 		}
 	});
 
@@ -492,7 +498,7 @@
 			display: flex;
 			flex-direction: column;
 			overflow: hidden;
-			top: 57.5%;
+			top: 50%;
 			transform: translate(-50%, -50%);
 			margin: 0;
 		}
@@ -585,6 +591,21 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
+	}
+
+	/* globals */
+	/* Ensure NavBar stays behind during transition */
+	:global(nav, header, .navbar) {
+		z-index: 1;
+	}
+
+	/* When product is enlarged, ensure NavBar is behind overlay */
+	:global(body.product-enlarged nav),
+	:global(body.product-enlarged header),
+	:global(body.product-enlarged .navbar) {
+		z-index: 1;
+		opacity: 0.45;
+		transition: opacity 0.3s ease;
 	}
 
 	/* Specific styles for the mini menace product (id 1) */
