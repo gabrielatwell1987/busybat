@@ -407,6 +407,10 @@
 						letter-spacing: 1px;
 						transition: background-color 0.2s;
 
+						@media (width <= 768px) {
+							letter-spacing: 0;
+						}
+
 						&:hover {
 							background: var(--color-dark);
 						}
@@ -493,6 +497,10 @@
 						font-size: clamp(var(--xs), 1vw, var(--sm));
 						letter-spacing: 1px;
 
+						@media (width <= 768px) {
+							letter-spacing: 0;
+						}
+
 						&:hover {
 							background-color: var(--color-primary);
 							color: var(--color-accent);
@@ -559,6 +567,10 @@
 					color: var(--color-primary);
 					background-color: var(--color-accent);
 					letter-spacing: 1px;
+
+					@media (width <= 768px) {
+						letter-spacing: 0;
+					}
 
 					&:hover {
 						background-color: var(--color-primary);
@@ -801,6 +813,10 @@
 						padding: 0.5rem 1rem;
 						border-radius: var(--radius);
 
+						@media (width <= 768px) {
+							letter-spacing: 0;
+						}
+
 						&:hover:not(:disabled) {
 							background: hsl(134, 61%, 31%);
 						}
@@ -813,6 +829,10 @@
 						letter-spacing: 1px;
 						padding: 0.5rem 1rem;
 						border-radius: var(--radius);
+
+						@media (width <= 768px) {
+							letter-spacing: 0;
+						}
 
 						&:hover:not(:disabled) {
 							background: hsl(354, 70%, 44%);

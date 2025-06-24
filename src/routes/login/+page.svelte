@@ -241,6 +241,10 @@
 					cursor: pointer;
 					transition: background-color 0.2s;
 
+					@media (width <= 768px) {
+						letter-spacing: 0;
+					}
+
 					&:hover:not(:disabled) {
 						background: var(--color-primary);
 						color: var(--color-accent);
