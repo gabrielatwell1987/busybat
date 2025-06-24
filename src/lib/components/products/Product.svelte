@@ -136,6 +136,19 @@
 			// Remove class when not enlarged
 			document.body.classList.remove('product-enlarged');
 
+			// Reset product card z-index FIRST
+			const card = document.querySelector(`.product-card.product-id-${id}`);
+			if (card) {
+				card.style.removeProperty('z-index');
+				card.style.removeProperty('position');
+			}
+
+			// Reset any enlarged cards
+			const enlargedCard = document.querySelector('.product-card.enlarged');
+			if (enlargedCard) {
+				enlargedCard.style.removeProperty('z-index');
+			}
+
 			// Reset NavBar styles when not enlarged
 			const navElements = document.querySelectorAll('nav, header, .navbar');
 			navElements.forEach((el) => {

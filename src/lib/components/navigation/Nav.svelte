@@ -227,7 +227,7 @@
 				order: 3;
 				display: block;
 				position: relative;
-				z-index: 6;
+				z-index: 12;
 				margin-right: 1.2rem;
 			}
 
@@ -241,7 +241,7 @@
 				width: 100vw;
 				height: 100vh;
 				background-color: var(--color-primary);
-				z-index: 5;
+				z-index: 11;
 				overflow-y: auto;
 				transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) !important;
 				margin: 0;
