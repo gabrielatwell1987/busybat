@@ -26,7 +26,7 @@
 		height: auto;
 		object-fit: cover;
 		border-radius: 10px;
-		z-index: 9;
+		z-index: 2;
 		display: flex;
 		justify-content: center;
 		align-items: center;

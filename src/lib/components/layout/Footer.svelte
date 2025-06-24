@@ -24,7 +24,7 @@
 		padding: 0;
 		line-height: 1;
 		border-radius: var(--radius);
-		z-index: 10;
+		z-index: 4;
 		max-width: calc(100% - 2rem);
 		width: fit-content;
 		display: flex;

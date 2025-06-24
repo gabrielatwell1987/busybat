@@ -56,7 +56,7 @@
 
 <style>
 	:global(::view-transition-group(navigation)) {
-		z-index: 5000 !important;
+		z-index: 7;
 	}
 
 	nav {
@@ -72,7 +72,7 @@
 		width: 100%;
 		height: 3em;
 		box-shadow: 0 0 4px var(--color-gray);
-		z-index: 5000;
+		z-index: 7;
 		margin-inline: auto;
 		view-transition-name: navigation;
 		scale: 1;
@@ -90,7 +90,7 @@
 			background-color: transparent;
 			border: none;
 			cursor: pointer;
-			z-index: 20;
+			z-index: 4;
 
 			.bar {
 				display: block;
@@ -227,7 +227,7 @@
 				order: 3;
 				display: block;
 				position: relative;
-				z-index: 4998;
+				z-index: 6;
 				margin-right: 1.2rem;
 			}
 
@@ -241,7 +241,7 @@
 				width: 100vw;
 				height: 100vh;
 				background-color: var(--color-primary);
-				z-index: 4997;
+				z-index: 5;
 				overflow-y: auto;
 				transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) !important;
 				margin: 0;

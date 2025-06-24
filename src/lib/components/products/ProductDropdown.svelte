@@ -90,7 +90,7 @@
 
 		@media (max-width: 768px) {
 			position: relative;
-			z-index: 1000;
+			z-index: 3;
 		}
 
 		& .toggle-wrapper {
@@ -151,7 +151,7 @@
 			margin: 0 auto;
 			border-radius: var(--radius);
 			animation: slideDown 0.3s ease forwards;
-			z-index: 200;
+			z-index: 2;
 			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 			background-color: white;
 			overflow: hidden;

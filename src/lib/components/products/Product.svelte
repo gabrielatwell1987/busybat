@@ -243,7 +243,6 @@
 			transform: translateY(-5px);
 			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 		}
-
 		&.enlarged {
 			position: fixed;
 			top: 50%;
@@ -255,7 +254,7 @@
 			display: flex;
 			flex-direction: column;
 			overflow: hidden;
-			z-index: 999999;
+			z-index: 9;
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 			animation: enlarge 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -470,12 +469,11 @@
 			}
 		}
 	}
-
 	.overlay {
 		position: fixed;
 		inset: 0;
 		background-color: rgba(0, 0, 0, 0.5);
-		z-index: 999998;
+		z-index: 8;
 	}
 
 	.product-card.enlarged .product-image {
@@ -593,17 +591,19 @@
 		position: absolute;
 		top: -1rem;
 		right: 0;
-		z-index: 999;
+		z-index: 2;
 	}
-
 	:global(.product-id-1 .dropdown-toggle) {
 		position: absolute;
-		z-index: 9999;
+		z-index: 3;
 	}
 
 	/* Make sure the D. Harry product works too */
 	:global(.product-id-2 .dropdown-container),
 	:global(.product-id-2 .dropdown-toggle) {
-		z-index: 999;
+		z-index: 2;
+	}
+	:global(::view-transition-group(*product-card*)) {
+		z-index: 9;
 	}
 </style>

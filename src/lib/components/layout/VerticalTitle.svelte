@@ -12,7 +12,7 @@
 		right: 1rem;
 		top: 50%;
 		transform: translateY(-50%);
-		z-index: 10;
+		z-index: 4;
 
 		@media (width <= 500px) {
 			right: 2rem;
@@ -29,7 +29,7 @@
 			writing-mode: vertical-lr;
 			margin-bottom: 3em;
 			margin-right: 0;
-			z-index: 5;
+			z-index: 3;
 			letter-spacing: -1px;
 
 			@media (width <= 768px) {

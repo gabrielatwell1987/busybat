@@ -92,6 +92,6 @@
 		justify-content: center;
 		align-items: center;
 		background: white;
-		z-index: 9999;
+		z-index: 6;
 	}
 </style>

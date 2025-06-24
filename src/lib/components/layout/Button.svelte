@@ -39,7 +39,7 @@
 		text-decoration: none;
 		display: inline-block;
 		text-align: center;
-		z-index: 999;
+		z-index: 3;
 		position: relative;
 		-webkit-tap-highlight-color: transparent;
 		-webkit-text-stroke: 1px var(--color-secondary);

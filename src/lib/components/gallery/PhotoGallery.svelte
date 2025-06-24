@@ -275,7 +275,7 @@
 				right: 0;
 				bottom: 0;
 				pointer-events: none;
-				z-index: 5;
+				z-index: 3;
 			}
 
 			& .prev-slide,
@@ -289,7 +289,7 @@
 				cursor: pointer;
 				border-radius: 10%;
 				font-size: clamp(1rem, 2vw, 2rem);
-				z-index: 10;
+				z-index: 4;
 				pointer-events: auto;
 				border: none;
 
@@ -315,7 +315,7 @@
 				display: flex;
 				justify-content: center;
 				gap: 0.75rem;
-				z-index: 10;
+				z-index: 4;
 				padding: 0.5rem 0.75rem;
 				background-color: var(--color-dark);
 				border-radius: 20px;
@@ -324,7 +324,7 @@
 
 				@media (width >= 1024px) {
 					bottom: 2em;
-					z-index: 500;
+					z-index: 5;
 				}
 
 				@media (width >= 500px) and (width <= 800px) {

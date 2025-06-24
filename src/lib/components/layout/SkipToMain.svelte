@@ -15,7 +15,7 @@
 		color: var(--color-secondary);
 		padding: 0.5rem 0.75rem;
 		position: absolute;
-		z-index: 100;
+		z-index: 6;
 		text-decoration: none;
 		font-family: var(--font-bold);
 		font-size: clamp(0.8rem, 1vw, 0.9rem);
