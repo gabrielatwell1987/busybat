@@ -528,17 +528,18 @@
 			top: 50%;
 			transform: translate(-50%, -50%);
 			margin: 0;
-		}
+			z-index: 10;
 
-		.product-card.enlarged .product-info {
-			flex: 1;
-			overflow-y: auto;
-			-webkit-overflow-scrolling: touch;
-		}
+			& .product-info {
+				flex: 1;
+				overflow-y: auto;
+				-webkit-overflow-scrolling: touch;
+			}
 
-		.product-card.enlarged .product-image {
-			flex-shrink: 0;
-			max-height: 200px;
+			& .product-image {
+				flex-shrink: 0;
+				max-height: 200px;
+			}
 		}
 	}
 	@media (prefers-reduced-motion: no-preference) {
@@ -559,7 +560,7 @@
 
 		/* Animation for overlay */
 		.overlay {
-			animation: fadeIn 0.5s ease 0.15s both; /* 0.15s delay */
+			animation: fadeIn 0.5s ease 0.15s both;
 		}
 
 		@keyframes fadeIn {
@@ -618,12 +619,6 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
-	}
-
-	/* globals */
-	/* Ensure NavBar stays behind during transition */
-	:global(nav, header, .navbar) {
-		z-index: 1;
 	}
 
 	/* When product is enlarged, ensure NavBar is behind overlay */
