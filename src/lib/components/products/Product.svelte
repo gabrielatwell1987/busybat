@@ -238,6 +238,7 @@
 		will-change: transform, opacity;
 		transform: translateZ(0);
 		background-color: hsl(0, 0%, 100%);
+		margin-top: 1em;
 
 		&:hover {
 			transform: translateY(-5px);
