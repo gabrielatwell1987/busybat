@@ -498,7 +498,7 @@
 						letter-spacing: 1px;
 
 						@media (width <= 768px) {
-							letter-spacing: -1px;
+							letter-spacing: 0px;
 						}
 
 						&:hover {
