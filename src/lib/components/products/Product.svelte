@@ -244,6 +244,7 @@
 			transform: translateY(-5px);
 			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 		}
+
 		&.enlarged {
 			position: fixed;
 			top: 50%;
@@ -484,7 +485,6 @@
 	.product-image img.zoomed-out {
 		object-fit: contain;
 	}
-
 	@media (width <= 768px) {
 		.product-card.enlarged {
 			width: 90%;
@@ -492,7 +492,7 @@
 			display: flex;
 			flex-direction: column;
 			overflow: hidden;
-			top: 50%;
+			top: 57.5%;
 			transform: translate(-50%, -50%);
 			margin: 0;
 		}
