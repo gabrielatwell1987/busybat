@@ -107,6 +107,13 @@
 			// Add class to body to handle global z-index issues
 			document.body.classList.add('product-enlarged');
 
+			// Immediately force NavBar behind with JavaScript (optimized for speed)
+			const navElements = document.querySelectorAll('nav, header, .navbar');
+			for (let i = 0; i < navElements.length; i++) {
+				const el = navElements[i];
+				el.style.cssText += ';z-index:1;opacity:0.45';
+			}
+
 			// Reset scroll immediately when enlarged
 			const productInfo = document.querySelector('.product-card.enlarged .product-info');
 
@@ -116,10 +123,20 @@
 			// Focus handling
 			const card = document.querySelector('.product-card.enlarged');
 
-			if (card) trapFocus(card);
+			if (card) {
+				trapFocus(card);
+				card.style.zIndex = '10';
+			}
 		} else {
 			// Remove class when not enlarged
 			document.body.classList.remove('product-enlarged');
+
+			// Reset NavBar styles when not enlarged
+			const navElements = document.querySelectorAll('nav, header, .navbar');
+			navElements.forEach((el) => {
+				el.style.removeProperty('z-index');
+				el.style.removeProperty('opacity');
+			});
 		}
 	});
 
@@ -128,8 +145,18 @@
 			setTimeout(() => {
 				const card = document.querySelector('.product-card.enlarged');
 
-				if (card) trapFocus(card);
-			}, 100);
+				if (card) {
+					trapFocus(card);
+					card.style.zIndex = '10';
+				}
+
+				// Extra backup to force NavBar behind (optimized for speed)
+				const navElements = document.querySelectorAll('nav, header, .navbar');
+				for (let i = 0; i < navElements.length; i++) {
+					const el = navElements[i];
+					el.style.cssText += ';z-index:1;opacity:0.45';
+				}
+			}, 5);
 		}
 	});
 
@@ -519,13 +546,13 @@
 			::view-transition-old(root),
 			::view-transition-new(root) {
 				animation-delay: 0s;
-				animation-duration: 0.5s;
+				animation-duration: 0.25s;
 			}
 
 			/* Target all view transitions for product cards */
 			::view-transition-group(*) {
 				animation-delay: 0s;
-				animation-duration: 0.5s;
+				animation-duration: 0.25s;
 				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 			}
 		}
@@ -605,7 +632,6 @@
 	:global(body.product-enlarged .navbar) {
 		z-index: 1;
 		opacity: 0.45;
-		transition: opacity 0.3s ease;
 	}
 
 	/* Specific styles for the mini menace product (id 1) */
