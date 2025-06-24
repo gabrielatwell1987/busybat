@@ -111,7 +111,12 @@
 			const navElements = document.querySelectorAll('nav, header, .navbar');
 			for (let i = 0; i < navElements.length; i++) {
 				const el = navElements[i];
-				el.style.cssText += ';z-index:1;opacity:0.45';
+				// On mobile, completely hide the navbar. On desktop, just grey it out.
+				if (window.innerWidth <= 768) {
+					el.style.cssText += ';display:none';
+				} else {
+					el.style.cssText += ';z-index:1;opacity:0.25';
+				}
 			}
 
 			// Reset scroll immediately when enlarged
@@ -136,6 +141,7 @@
 			navElements.forEach((el) => {
 				el.style.removeProperty('z-index');
 				el.style.removeProperty('opacity');
+				el.style.removeProperty('display');
 			});
 		}
 	});
@@ -154,7 +160,12 @@
 				const navElements = document.querySelectorAll('nav, header, .navbar');
 				for (let i = 0; i < navElements.length; i++) {
 					const el = navElements[i];
-					el.style.cssText += ';z-index:1;opacity:0.45';
+					// On mobile, completely hide the navbar. On desktop, just grey it out.
+					if (window.innerWidth <= 768) {
+						el.style.cssText += ';display:none';
+					} else {
+						el.style.cssText += ';z-index:1;opacity:0.45';
+					}
 				}
 			}, 5);
 		}
@@ -619,14 +630,6 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
-	}
-
-	/* When product is enlarged, ensure NavBar is behind overlay */
-	:global(body.product-enlarged nav),
-	:global(body.product-enlarged header),
-	:global(body.product-enlarged .navbar) {
-		z-index: 1;
-		opacity: 0.45;
 	}
 
 	/* Specific styles for the mini menace product (id 1) */
