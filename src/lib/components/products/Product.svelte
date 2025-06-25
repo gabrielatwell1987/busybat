@@ -574,8 +574,16 @@
 				animation-duration: 0.25s;
 			}
 
-			/* Target all view transitions for product cards */
-			::view-transition-group(*) {
+			/* Target specific product card view transitions */
+			::view-transition-group(*product-card*) {
+				animation-delay: 0s;
+				animation-duration: 0.25s;
+				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+			}
+
+			/* Target the old and new states of product card transitions */
+			::view-transition-old(*product-card*),
+			::view-transition-new(*product-card*) {
 				animation-delay: 0s;
 				animation-duration: 0.25s;
 				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
