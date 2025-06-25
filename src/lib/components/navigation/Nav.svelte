@@ -42,7 +42,7 @@
 		<li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>
-		<NavLink title="Origins" url="/about" onclick={handleLinkClick} />
+		<NavLink title="About" url="/about" onclick={handleLinkClick} />
 		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
 		<NavLink title="Visions" url="/gallery" onclick={handleLinkClick} />
 		<NavLink title="Chronicles" url="/blog" onclick={handleLinkClick} />
