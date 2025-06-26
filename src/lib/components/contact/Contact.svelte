@@ -7,6 +7,8 @@
 	let message = $state('');
 </script>
 
+<VerticalTitle title="Contact" class="vertical-title" />
+
 <div class="content">
 	<div class="form-container">
 		<form method="POST" action="https://form.taxi/s/226lrszc">
@@ -33,20 +35,16 @@
 			</fieldset>
 		</form>
 	</div>
-
-	<VerticalTitle title="Contact" class="vertical-title" />
 </div>
 
 <style>
 	.content {
 		display: flex;
 		width: 100%;
-		overflow-x: hidden;
-		height: 100%;
-		min-height: 100vh;
+		overflow: hidden;
+		height: 100vh;
 
 		@media (width <= 768px) {
-			overflow-x: hidden;
 			width: 100vw;
 		}
 
@@ -54,14 +52,12 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			overflow-y: auto;
+			overflow: hidden;
 			padding: 0;
-			overflow-x: hidden;
 			transform: translateY(0);
 			position: relative;
 			width: 100%;
-			min-height: 100vh;
-			max-height: 100%;
+			height: 100vh;
 
 			& form {
 				display: flex;
@@ -96,6 +92,7 @@
 						text-align: left;
 						letter-spacing: -1px;
 						padding-inline: 1rem;
+
 						@media (width <= 500px) {
 							transform: none;
 						}
@@ -218,7 +215,7 @@
 				@media (width <= 768px) {
 					width: 90vw;
 					max-width: 90vw;
-					transform: translateY(0);
+					transform: translateY(-2em);
 					margin: 0 auto;
 					scale: 1;
 					box-sizing: border-box;
@@ -231,36 +228,54 @@
 						box-shadow: none;
 						margin: 0;
 						border: none;
+						position: relative;
+						z-index: 1;
+
+						& legend {
+							position: relative;
+							z-index: 2;
+							background-color: var(--color-white);
+							padding-inline: 1rem;
+							padding-block: 0.5rem;
+							margin-bottom: 1rem;
+						}
 					}
 				}
 
 				@media (width <= 500px) {
 					width: 95vw;
 					max-width: 95vw;
-					transform: none;
+					transform: translateY(-2em);
 					margin: 0 auto;
+					margin-top: 0;
 					scale: 1;
 
 					& fieldset {
 						padding: 0.75rem;
+						padding-top: 0;
+
+						& legend {
+							position: relative;
+							z-index: 2;
+							background-color: var(--color-white);
+							padding-inline: 1rem;
+							padding-block: 0.5rem;
+							margin-bottom: 0;
+						}
 					}
 				}
 			}
 
 			@media (width <= 768px) {
-				align-items: center;
+				align-items: flex-start;
 				justify-content: center;
-				max-height: none;
 				height: 100vh;
-				min-height: 100vh;
-				/* padding: 0.5rem; */
 				width: 100%;
 				transform: translateY(0);
-				overflow-x: hidden;
-				overflow-y: auto;
+				overflow: hidden;
 				box-sizing: border-box;
-				scroll-behavior: smooth;
 				margin-right: 2em;
+				padding-top: 1em;
 			}
 		}
 	}

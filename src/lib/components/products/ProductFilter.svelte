@@ -48,6 +48,10 @@
 		gap: 0.5rem;
 		align-items: center;
 
+		@media (width <= 768px) {
+			margin-top: 0;
+		}
+
 		& select {
 			padding: 0.5rem;
 			border-radius: var(--radius);
