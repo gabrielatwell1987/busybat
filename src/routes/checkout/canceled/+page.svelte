@@ -19,12 +19,16 @@
 <style>
 	.canceled-container {
 		max-width: 600px;
-		margin: 4rem auto;
+		margin: auto;
 		padding: 2rem;
 		text-align: center;
 
+		@media (width <= 768px) {
+			margin-top: -5em;
+		}
+
 		& h1 {
-			font-size: clamp(var(--h6), 5vw, var(--h1));
+			font-size: clamp(var(--h4), 5vw, var(--lg));
 			letter-spacing: -1px;
 			color: var(--color-accent);
 			-webkit-text-stroke: 1px var(--color-secondary);

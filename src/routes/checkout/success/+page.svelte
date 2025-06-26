@@ -42,12 +42,16 @@
 <style>
 	.success-container {
 		max-width: 600px;
-		margin: 4rem auto;
+		margin: auto;
 		text-align: center;
 		padding: 2rem;
 
+		@media (width <= 768px) {
+			margin-top: -5em;
+		}
+
 		& h1 {
-			font-size: clamp(var(--h6), 5vw, var(--h1));
+			font-size: clamp(var(--h4), 5vw, var(--lg));
 			letter-spacing: -1px;
 			color: var(--color-accent);
 			-webkit-text-stroke: 1px var(--color-secondary);
