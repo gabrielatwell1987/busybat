@@ -28,8 +28,10 @@
 	} = $props();
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
+	let isDropdownOpen = $state(false); // Fixed: was isDropdownOpened
 	let isDropdownOpened = $state(false);
 	let isAddedToCart = $state(false);
+	let isTransitioning = $state(false); // Add flag to prevent effect conflicts
 
 	// Get cart data
 	let cart = $state([]);
@@ -67,12 +69,20 @@
 		{
 			isEnlarged: (val) => {
 				if (val !== undefined) {
+					// Set transitioning flag before changing state
+					isTransitioning = true;
+
 					isEnlarged = val;
 					// When un-enlarging, always close the dropdown
 					if (!val) {
 						isDropdownOpen = false;
 						isDropdownOpened = false;
 					}
+
+					// Clear transitioning flag after a delay to allow transition to complete
+					setTimeout(() => {
+						isTransitioning = false;
+					}, 500); // Adjust timing based on your transition duration
 				}
 				return isEnlarged;
 			},
@@ -103,6 +113,9 @@
 	}
 
 	$effect(() => {
+		if (isTransitioning) {
+			return;
+		}
 		if (isEnlarged) {
 			// Add class to body to handle global z-index issues
 			document.body.classList.add('product-enlarged');
@@ -160,6 +173,9 @@
 	});
 
 	$effect(() => {
+		if (isTransitioning) {
+			return;
+		}
 		if (isEnlarged) {
 			setTimeout(() => {
 				const card = document.querySelector('.product-card.enlarged');
@@ -185,6 +201,9 @@
 	});
 
 	$effect(() => {
+		if (isTransitioning) {
+			return;
+		}
 		// When un-enlarging, ensure visibility is restored regardless of dropdown state
 		if (!isEnlarged) {
 			const otherProducts = document.querySelectorAll(
