@@ -215,8 +215,9 @@
 
 					& h3 {
 						margin: 0;
-						font-size: clamp(var(--sm), 1.5vw, var(--h5));
 						font-family: var(--font-bold);
+						font-size: clamp(var(--sm), 1.5vw, var(--h5));
+						font-weight: 400;
 						letter-spacing: -1px;
 
 						@media (width <= 768px) {
