@@ -63,7 +63,6 @@
 		isDropdownOpen: (val) => (val !== undefined ? (isDropdownOpen = val) : isDropdownOpen),
 		id: () => id
 	});
-
 	const toggleEnlargement = createToggleEnlargementHandler(
 		{ id, context },
 		{
@@ -82,6 +81,14 @@
 					// Clear transitioning flag after a delay to allow transition to complete
 					setTimeout(() => {
 						isTransitioning = false;
+
+						// Ensure scroll is reset to top after transition completes
+						if (isEnlarged) {
+							const productInfo = document.querySelector('.product-card.enlarged .product-info');
+							if (productInfo) {
+								productInfo.scrollTop = 0;
+							}
+						}
 					}, 500); // Adjust timing based on your transition duration
 				}
 				return isEnlarged;
@@ -134,13 +141,15 @@
 
 			// Reset scroll immediately when enlarged
 			const productInfo = document.querySelector('.product-card.enlarged .product-info');
-
 			if (productInfo) {
 				productInfo.scrollTop = 0;
+				// Force immediate scroll to top with multiple methods
+				productInfo.scrollTo(0, 0);
+				productInfo.scrollTo({ top: 0, behavior: 'instant' });
 			}
+
 			// Focus handling
 			const card = document.querySelector('.product-card.enlarged');
-
 			if (card) {
 				trapFocus(card);
 				card.style.zIndex = '10';
@@ -196,7 +205,15 @@
 						el.style.cssText += ';z-index:1;opacity:0.45';
 					}
 				}
-			}, 5);
+
+				// Delayed scroll reset to ensure content starts at top
+				const productInfo = document.querySelector('.product-card.enlarged .product-info');
+				if (productInfo) {
+					productInfo.scrollTop = 0;
+					productInfo.scrollTo(0, 0);
+					productInfo.scrollTo({ top: 0, behavior: 'instant' });
+				}
+			}, 0);
 		}
 	});
 
