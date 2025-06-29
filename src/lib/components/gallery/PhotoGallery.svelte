@@ -45,6 +45,60 @@
 			src: '/products/d.harry/dh-jacket__pocket.webp',
 			alt: 'D. Harry jacket pocket',
 			title: 'D. Harry Denim Jacket'
+		},
+		{
+			id: 'dainty-pink-front',
+			src: '/products/dainty.doomsday/dainty-pink__front.webp',
+			alt: 'Dainty Doomsday in Witches Brew',
+			title: 'Dainty Doomsday in Witches Brew'
+		},
+		{
+			id: 'dainty-pink-open',
+			src: '/products/dainty.doomsday/dainty-pink__open.webp',
+			alt: 'Inside Dainty Doomsday in Witches Brew',
+			title: 'Dainty Doomsday in Witches Brew'
+		},
+		{
+			id: 'dainty-pink-open-straps',
+			src: '/products/dainty.doomsday/dainty-pink__open-straps.webp',
+			alt: 'Inside Dainty Doomsday in Witches Brew',
+			title: 'Dainty Doomsday in Witches Brew'
+		},
+		{
+			id: 'dainty-red-front',
+			src: '/products/dainty.doomsday/dainty-red__front.webp',
+			alt: 'Dainty Doomsday Tote',
+			title: 'Dainty Doomsday Tote'
+		},
+		{
+			id: 'dainty-red-open',
+			src: '/products/dainty.doomsday/dainty-red__open.webp',
+			alt: 'Inside Dainty Doomsday Tote',
+			title: 'Dainty Doomsday Tote'
+		},
+		{
+			id: 'dainty-red-open-straps',
+			src: '/products/dainty.doomsday/dainty-red__open-straps.webp',
+			alt: 'Inside Dainty Doomsday Tote',
+			title: 'Dainty Doomsday Tote'
+		},
+		{
+			id: 'major-menace-front',
+			src: '/products/major.menace/major-menace__front.webp',
+			alt: 'Major Menace Tote',
+			title: 'Major Menace Tote'
+		},
+		{
+			id: 'major-menace-open',
+			src: '/products/major.menace/major-menace__open.webp',
+			alt: 'Inside Major Menace Tote',
+			title: 'Major Menace Tote'
+		},
+		{
+			id: 'major-menace-open-straps',
+			src: '/products/major.menace/major-menace__open-zippers.webp',
+			alt: 'Inside Major Menace Tote',
+			title: 'Major Menace Tote'
 		}
 	];
 
