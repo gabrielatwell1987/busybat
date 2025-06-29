@@ -14,9 +14,21 @@ export async function POST({ request, url }) {
 			return json({ error: 'No items in cart' }, { status: 400 });
 		}
 
-		// Format line items for Stripe with URL validation
+		// Format line items for Stripe - use existing Price IDs when available
 		const lineItems = items.map((item) => {
 			console.log('Processing item for Stripe:', item); // Debug log
+
+			// Check if item has a Stripe Price ID - use it if available
+			if (item.stripe_price_id) {
+				console.log(`Using existing Stripe Price ID for ${item.name}:`, item.stripe_price_id);
+				return {
+					price: item.stripe_price_id,
+					quantity: item.quantity
+				};
+			}
+
+			// Fallback: Create product dynamically (for items without Stripe Price IDs)
+			console.log(`Creating dynamic product for ${item.name} (no Stripe Price ID found)`);
 
 			// Create product data object
 			const productData = {
