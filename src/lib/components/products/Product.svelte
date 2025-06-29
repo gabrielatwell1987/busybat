@@ -42,7 +42,7 @@
 		isAddedToCart = cart.some((item) => item.id === id);
 	});
 
-	const useContainFit = id === '2' || imageFit === 'contain' || category === 'Bags';
+	const useContainFit = imageFit === 'contain' || category === 'Bags' || category === 'Clothing';
 	const dispatch = createEventDispatcher();
 	// Product data for cart
 	const productData = { id, name, price, imageUrl, productUrl, quantity: 1 };
