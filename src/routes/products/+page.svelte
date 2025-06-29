@@ -61,10 +61,9 @@
 
 <style>
 	.products {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		display: flex;
+		flex-wrap: wrap;
 		gap: 1em;
-		align-items: stretch;
 		justify-content: center;
 		max-width: 1200px;
 		width: 100%;
@@ -72,17 +71,34 @@
 		margin-inline: auto;
 		margin-bottom: 2rem;
 		padding: 0 1rem;
+	}
 
-		@media (width <= 768px) {
-			grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-			justify-items: center;
+	.products :global(.product-card) {
+		flex: 1 1 350px;
+		min-width: 350px;
+	}
+
+	@media (width <= 768px) {
+		.products {
 			padding: 0 0.5rem;
 		}
 
-		@media (width <= 500px) {
-			grid-template-columns: 1fr;
-			justify-items: center;
+		.products :global(.product-card) {
+			flex: 1 1 min(350px, 100%);
+			min-width: min(350px, 100%);
+			max-width: none;
+		}
+	}
+
+	@media (width <= 500px) {
+		.products {
 			max-width: 350px;
+		}
+
+		.products :global(.product-card) {
+			flex: 1 1 100%;
+			min-width: 100%;
+			max-width: none;
 		}
 	}
 
