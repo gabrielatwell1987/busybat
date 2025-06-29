@@ -75,9 +75,9 @@ export function createToggleEnlargementHandler(contextData, setState) {
 			styleEl.textContent = `
                 ::view-transition-old(${context}-product-card-${id}),
                 ::view-transition-new(${context}-product-card-${id}) {
-                    animation-delay: 0.05s;
+                    animation-delay: 0.15s;
                     animation-timing-function: cubic-bezier(0.15, 0.1, 0.15, 1);
-                    animation-duration: 0.15s;
+                    animation-duration: .5s;
                 }
             `;
 			document.head.appendChild(styleEl);

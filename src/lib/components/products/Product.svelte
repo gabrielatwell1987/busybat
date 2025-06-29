@@ -607,13 +607,13 @@
 			::view-transition-old(root),
 			::view-transition-new(root) {
 				animation-delay: 0s;
-				animation-duration: 0.25s;
+				animation-duration: 0.75s;
 			}
 
 			/* Target specific product card view transitions */
 			::view-transition-group(*product-card*) {
 				animation-delay: 0s;
-				animation-duration: 0.25s;
+				animation-duration: 0.75s;
 				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 			}
 
@@ -621,7 +621,7 @@
 			::view-transition-old(*product-card*),
 			::view-transition-new(*product-card*) {
 				animation-delay: 0s;
-				animation-duration: 0.25s;
+				animation-duration: 0.75s;
 				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 			}
 		}
