@@ -198,7 +198,9 @@
 		& .no-posts {
 			text-align: center;
 			padding: 3rem;
-			color: var(--color-warning);
+			color: var(--color-secondary);
+			font-size: clamp(var(--sm), 2vw, var(--h5));
+			font-weight: 500;
 		}
 		& .error {
 			color: var(--color-danger);
