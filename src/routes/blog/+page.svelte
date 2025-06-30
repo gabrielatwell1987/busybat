@@ -61,7 +61,7 @@
 	</section>
 
 	<header class="blog-header">
-		<h1>Our Blog</h1>
+		<h1>Behind the seams..</h1>
 
 		<p>Stay up to date with our latest news and insights</p>
 	</header>
