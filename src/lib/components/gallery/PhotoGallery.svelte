@@ -107,6 +107,18 @@
 
 	// Function to handle slide change
 	function changeSlide(index) {
+		// Use View Transition API if available
+		if (document.startViewTransition) {
+			document.startViewTransition(() => {
+				updateSlide(index);
+			});
+		} else {
+			updateSlide(index);
+		}
+	}
+
+	// Separate function to update slide state
+	function updateSlide(index) {
 		if (index < 0) {
 			currentSlide = images.length - 1;
 		} else if (index >= images.length) {
@@ -200,7 +212,12 @@
 					<img src={image.src} alt={image.alt || `Product image ${i + 1}`} />
 
 					{#if image.title}
-						<div class="slide-title">{image.title}</div>
+						<div
+							class="slide-title"
+							style="view-transition-name: slide-title-{currentSlide === i ? 'active' : i}"
+						>
+							{image.title}
+						</div>
 					{/if}
 				</div>
 			{/each}
@@ -418,6 +435,42 @@
 					}
 				}
 			}
+		}
+	}
+
+	/* View Transition Animations */
+	::view-transition-old(slide-title-active),
+	::view-transition-new(slide-title-active) {
+		animation-duration: 1s;
+		animation-timing-function: ease-in-out;
+	}
+
+	::view-transition-old(slide-title-active) {
+		animation-name: slide-title-out;
+	}
+
+	::view-transition-new(slide-title-active) {
+		animation-name: slide-title-in;
+	}
+
+	@keyframes slide-title-out {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+			scale: 0;
+		}
+	}
+
+	@keyframes slide-title-in {
+		from {
+			opacity: 0;
+			scale: 0.5;
+		}
+		to {
+			opacity: 1;
+			scale: 1;
 		}
 	}
 </style>
