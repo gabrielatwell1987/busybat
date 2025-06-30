@@ -1,4 +1,6 @@
 import { kv } from '@vercel/kv';
+import fs from 'fs/promises';
+import path from 'path';
 
 // Check if KV environment variables are available
 const isKVAvailable = () => {
@@ -12,19 +14,36 @@ const POSTS_INDEX_KEY = 'blog_posts_index'; // For storing the list of post IDs
 // In-memory storage fallback for development
 let memoryPosts = null;
 
-// Default posts for initial setup
-const DEFAULT_POSTS = [
-	{
-		id: 1,
-		title: 'Welcome to Our Blog!',
-		content:
-			"We're excited to launch our new blog where we'll share updates, insights, and stories. Stay tuned for more exciting content coming your way!",
-		createdAt: '2025-06-18T10:00:00.000Z'
+// Load default posts from posts.json file
+async function loadDefaultPosts() {
+	try {
+		const postsPath = path.resolve('src/lib/data/posts.json');
+		const data = await fs.readFile(postsPath, 'utf-8');
+		return JSON.parse(data);
+	} catch (error) {
+		console.warn('Could not load posts.json, using fallback default posts:', error.message);
+		// Fallback to hardcoded default if posts.json can't be read
+		return [
+			{
+				id: 1,
+				title: 'Welcome to Our Blog!',
+				content:
+					"We're excited to launch our new blog where we'll share updates, insights, and stories. Stay tuned for more exciting content coming your way!",
+				createdAt: '2025-06-18T10:00:00.000Z'
+			}
+		];
 	}
-];
+}
+
+// Cache for default posts
+let DEFAULT_POSTS = null;
 
 // Get all posts
 export async function getPosts() {
+	if (!DEFAULT_POSTS) {
+		DEFAULT_POSTS = await loadDefaultPosts();
+	}
+
 	if (!isKVAvailable()) {
 		// Use in-memory storage when KV is not available
 		if (!memoryPosts) {
@@ -63,6 +82,10 @@ export async function getPosts() {
 
 // Get a single post by ID
 export async function getPostById(id) {
+	if (!DEFAULT_POSTS) {
+		DEFAULT_POSTS = await loadDefaultPosts();
+	}
+
 	if (!isKVAvailable()) {
 		// Use in-memory storage when KV is not available
 		if (!memoryPosts) {
@@ -89,6 +112,10 @@ export async function getPostById(id) {
 
 // Create a new post
 export async function createPost(postData) {
+	if (!DEFAULT_POSTS) {
+		DEFAULT_POSTS = await loadDefaultPosts();
+	}
+
 	if (!isKVAvailable()) {
 		// Use in-memory storage when KV is not available
 		if (!memoryPosts) {
@@ -134,6 +161,10 @@ export async function createPost(postData) {
 
 // Update an existing post
 export async function updatePost(id, postData) {
+	if (!DEFAULT_POSTS) {
+		DEFAULT_POSTS = await loadDefaultPosts();
+	}
+
 	if (!isKVAvailable()) {
 		// Use in-memory storage when KV is not available
 		if (!memoryPosts) {
@@ -174,6 +205,10 @@ export async function updatePost(id, postData) {
 
 // Delete a post
 export async function deletePost(id) {
+	if (!DEFAULT_POSTS) {
+		DEFAULT_POSTS = await loadDefaultPosts();
+	}
+
 	if (!isKVAvailable()) {
 		// Use in-memory storage when KV is not available
 		if (!memoryPosts) {
@@ -199,6 +234,10 @@ export async function deletePost(id) {
 
 // Initialize default posts (helper function)
 async function initializeDefaultPosts() {
+	if (!DEFAULT_POSTS) {
+		DEFAULT_POSTS = await loadDefaultPosts();
+	}
+
 	try {
 		const postIds = [];
 		for (const post of DEFAULT_POSTS) {
@@ -209,4 +248,18 @@ async function initializeDefaultPosts() {
 	} catch (error) {
 		console.error('Error initializing default posts:', error);
 	}
+}
+
+// Utility function to clear cache and reload default posts from file
+export async function reloadDefaultPosts() {
+	DEFAULT_POSTS = null;
+	memoryPosts = null;
+	DEFAULT_POSTS = await loadDefaultPosts();
+	return DEFAULT_POSTS;
+}
+
+// Utility function to clear all cache
+export async function clearCache() {
+	DEFAULT_POSTS = null;
+	memoryPosts = null;
 }
