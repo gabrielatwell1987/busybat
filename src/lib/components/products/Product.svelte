@@ -265,7 +265,13 @@
 
 	<div class="product-info">
 		<div class="product-line" class:expanded={isEnlarged}>
-			<h3 class="product-name" class:expanded={isEnlarged}>{name}</h3>
+			<h3
+				class="product-name"
+				class:expanded={isEnlarged}
+				style="view-transition-name: {context}-product-name-{id}"
+			>
+				{name}
+			</h3>
 			<p class="product-price" class:expanded={isEnlarged}>{formatPrice(price)}</p>
 		</div>
 
@@ -638,6 +644,21 @@
 			to {
 				opacity: 1;
 			}
+		}
+	}
+
+	/* Product name view transition animations */
+	@supports (view-transition-name: none) {
+		::view-transition-old(*product-name*),
+		::view-transition-new(*product-name*) {
+			animation-duration: 1s;
+			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+		}
+
+		/* Smooth font size and layout changes */
+		::view-transition-group(*product-name*) {
+			animation-duration: 1s;
+			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 		}
 	}
 
