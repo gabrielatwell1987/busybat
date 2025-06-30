@@ -257,7 +257,12 @@
 	tabindex="0"
 >
 	<div class="product-image">
-		<img src={imageUrl} alt={name} class:zoomed-out={useContainFit} />
+		<img
+			src={imageUrl}
+			alt={name}
+			class:zoomed-out={useContainFit}
+			style="view-transition-name: {context}-product-image-{id}"
+		/>
 		{#if !inStock}
 			<div class="out-of-stock">Out of Stock</div>
 		{/if}
@@ -647,8 +652,8 @@
 		}
 	}
 
-	/* Product name view transition animations */
 	@supports (view-transition-name: none) {
+		/* Product name view transition animations */
 		::view-transition-old(*product-name*),
 		::view-transition-new(*product-name*) {
 			animation-duration: 1s;
@@ -658,6 +663,19 @@
 		/* Smooth font size and layout changes */
 		::view-transition-group(*product-name*) {
 			animation-duration: 1s;
+			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+		}
+
+		/* Product image view transition animations */
+		::view-transition-old(*product-image*),
+		::view-transition-new(*product-image*) {
+			animation-duration: 0.5s;
+			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+		}
+
+		/* Smooth image size and layout changes */
+		::view-transition-group(*product-image*) {
+			animation-duration: 0.5s;
 			animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 		}
 	}
