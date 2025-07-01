@@ -1,5 +1,6 @@
 <script>
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 	import pink from '$lib/assets/pink-leo.webp';
@@ -9,7 +10,20 @@
 	import { addToCart } from '$lib/components/products/CartStore.svelte';
 
 	let selectedCategory = $state('All');
+	let supportsViewTransitions = $state(false);
+	let isFirefox = $state(false);
 	const containFitCategories = $state(['Bags', 'Wall Art', 'Accessories']);
+
+	onMount(() => {
+		supportsViewTransitions = browser && 'startViewTransition' in document;
+		isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
+
+		console.log('Products page - Browser detection:', {
+			supportsViewTransitions,
+			isFirefox,
+			userAgent: browser ? navigator.userAgent : 'SSR'
+		});
+	});
 
 	function onCategoryChange(category) {
 		selectedCategory = category;
@@ -51,7 +65,9 @@
 				imageFit={getImageFit(product.category)}
 				{addToCart}
 				dropdownImage={product.dropdown}
-				style="view-transition-name: product-{product.id};"
+				style={supportsViewTransitions && !isFirefox
+					? `view-transition-name: product-${product.id};`
+					: ''}
 			/>
 		{/if}
 	{/each}
@@ -103,9 +119,21 @@
 	}
 
 	/* Global view transition styles for individual products */
-	:global([style*='view-transition-name: product-']::view-transition-old(*)),
-	:global([style*='view-transition-name: product-']::view-transition-new(*)) {
-		animation-duration: 0.4s;
-		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	@supports (view-transition-name: none) {
+		:global([style*='view-transition-name: product-']::view-transition-old(*)),
+		:global([style*='view-transition-name: product-']::view-transition-new(*)) {
+			animation-duration: 0.4s;
+			animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		}
+	}
+
+	/* Fallback for browsers without view transition support */
+	@supports not (view-transition-name: none) {
+		:global([style*='view-transition-name: product-']) {
+			animation: none !important;
+			transition:
+				transform 0.3s ease,
+				opacity 0.3s ease !important;
+		}
 	}
 </style>

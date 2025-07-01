@@ -1,6 +1,14 @@
 <script>
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 	import ViewTransition from '$lib/data/ViewTransition.svelte';
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
+
+	let supportsViewTransitions = $state(false);
+
+	onMount(() => {
+		supportsViewTransitions = browser && 'startViewTransition' in document;
+	});
 
 	// gallery images
 	const images = [
@@ -108,11 +116,12 @@
 	// Function to handle slide change
 	function changeSlide(index) {
 		// Use View Transition API if available
-		if (document.startViewTransition) {
+		if (supportsViewTransitions) {
 			document.startViewTransition(() => {
 				updateSlide(index);
 			});
 		} else {
+			// Fallback for browsers without view transition support
 			updateSlide(index);
 		}
 	}
@@ -214,7 +223,9 @@
 					{#if image.title}
 						<div
 							class="slide-title"
-							style="view-transition-name: slide-title-{currentSlide === i ? 'active' : i}"
+							style={supportsViewTransitions
+								? `view-transition-name: slide-title-${currentSlide === i ? 'active' : i}`
+								: ''}
 						>
 							{image.title}
 						</div>
@@ -439,18 +450,30 @@
 	}
 
 	/* View Transition Animations */
-	::view-transition-old(slide-title-active),
-	::view-transition-new(slide-title-active) {
-		animation-duration: 1s;
-		animation-timing-function: ease-in-out;
+	@supports (view-transition-name: none) {
+		::view-transition-old(slide-title-active),
+		::view-transition-new(slide-title-active) {
+			animation-duration: 1s;
+			animation-timing-function: ease-in-out;
+		}
+
+		::view-transition-old(slide-title-active) {
+			animation-name: slide-title-out;
+		}
+
+		::view-transition-new(slide-title-active) {
+			animation-name: slide-title-in;
+		}
 	}
 
-	::view-transition-old(slide-title-active) {
-		animation-name: slide-title-out;
-	}
-
-	::view-transition-new(slide-title-active) {
-		animation-name: slide-title-in;
+	/* Fallback for browsers without view transition support */
+	@supports not (view-transition-name: none) {
+		[style*='view-transition-name: slide-title'] {
+			transition:
+				opacity 0.5s ease,
+				transform 0.5s ease !important;
+			animation: none !important;
+		}
 	}
 
 	@keyframes slide-title-out {

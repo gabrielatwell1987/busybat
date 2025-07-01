@@ -63,21 +63,33 @@ export function createToggleDropdownHandler(setState) {
 export function createToggleEnlargementHandler(contextData, setState) {
 	return function toggleEnlargement() {
 		const { id, context } = contextData;
-		const otherProducts = document.querySelectorAll(
-			`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-		);
+		const isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
+		const supportsViewTransitions = browser && 'startViewTransition' in document;
+
+		// Select other products differently for Firefox
+		const otherProducts =
+			isFirefox || !supportsViewTransitions
+				? document.querySelectorAll(`.product-card:not(.product-id-${id})`)
+				: document.querySelectorAll(
+						`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+					);
 		const footer = document.querySelector('footer');
-		if (browser && document.startViewTransition) {
+
+		console.log('Toggle enlargement called:', { isFirefox, supportsViewTransitions, id, context });
+
+		if (supportsViewTransitions && !isFirefox) {
 			document.documentElement.style.setProperty('--view-transition-duration', '0.15s');
 			document.documentElement.style.setProperty('--view-transition-delay', '0.05s');
 
 			const styleEl = document.createElement('style');
 			styleEl.textContent = `
-                ::view-transition-old(${context}-product-card-${id}),
-                ::view-transition-new(${context}-product-card-${id}) {
-                    animation-delay: 0.15s;
-                    animation-timing-function: cubic-bezier(0.15, 0.1, 0.15, 1);
-                    animation-duration: .5s;
+                @supports (view-transition-name: none) {
+                    ::view-transition-old(${context}-product-card-${id}),
+                    ::view-transition-new(${context}-product-card-${id}) {
+                        animation-delay: 0.15s;
+                        animation-timing-function: cubic-bezier(0.15, 0.1, 0.15, 1);
+                        animation-duration: .5s;
+                    }
                 }
             `;
 			document.head.appendChild(styleEl);
@@ -139,18 +151,37 @@ export function createToggleEnlargementHandler(contextData, setState) {
 				}
 			});
 		} else {
+			// Fallback for Firefox and browsers without view transitions
+			console.log('Using fallback toggle for Firefox/unsupported browsers');
 			setState.isEnlarged(!setState.isEnlarged());
+
 			if (setState.isEnlarged()) {
+				// When enlarging, hide other products after a short delay
 				setTimeout(() => {
 					otherProducts.forEach((product) => {
 						product.style.opacity = '0';
 						product.style.visibility = 'hidden';
+						product.style.transition = 'opacity 0.3s ease';
 					});
 					if (footer) {
 						footer.style.opacity = '0';
 						footer.style.visibility = 'hidden';
+						footer.style.transition = 'opacity 0.3s ease';
 					}
-				}, 200);
+				}, 100);
+			} else {
+				// When un-enlarging, show other products immediately
+				setState.isDropdownOpen(false);
+				otherProducts.forEach((product) => {
+					product.style.removeProperty('visibility');
+					product.style.opacity = '1';
+					product.style.transition = 'opacity 0.3s ease';
+				});
+				if (footer) {
+					footer.style.removeProperty('visibility');
+					footer.style.opacity = '1';
+					footer.style.transition = 'opacity 0.3s ease';
+				}
 			}
 		}
 	};

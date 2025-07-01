@@ -1,5 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 	import {
 		formatPrice,
 		trapFocus,
@@ -32,6 +34,34 @@
 	let isDropdownOpened = $state(false);
 	let isAddedToCart = $state(false);
 	let isTransitioning = $state(false); // Add flag to prevent effect conflicts
+	let supportsViewTransitions = $state(false);
+	let isFirefox = $state(false);
+
+	// Check for View Transition support and browser type
+	onMount(() => {
+		supportsViewTransitions = browser && 'startViewTransition' in document;
+		isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
+
+		// Add a way to force Firefox mode for testing
+		if (browser) {
+			const urlParams = new URLSearchParams(window.location.search);
+			const forceFirefoxMode = urlParams.get('firefox') === 'true';
+
+			if (forceFirefoxMode) {
+				isFirefox = true;
+				supportsViewTransitions = false;
+				console.log('🦊 Firefox mode forced for product', id);
+			}
+		}
+
+		// Debug logging
+		console.log('Product browser detection:', {
+			id,
+			supportsViewTransitions,
+			isFirefox,
+			userAgent: browser ? navigator.userAgent : 'SSR'
+		});
+	});
 
 	// Get cart data
 	let cart = $state([]);
@@ -68,6 +98,8 @@
 		{
 			isEnlarged: (val) => {
 				if (val !== undefined) {
+					console.log('Toggling enlargement:', { val, isFirefox, supportsViewTransitions });
+
 					// Set transitioning flag before changing state
 					isTransitioning = true;
 
@@ -79,17 +111,20 @@
 					}
 
 					// Clear transitioning flag after a delay to allow transition to complete
-					setTimeout(() => {
-						isTransitioning = false;
+					setTimeout(
+						() => {
+							isTransitioning = false;
 
-						// Ensure scroll is reset to top after transition completes
-						if (isEnlarged) {
-							const productInfo = document.querySelector('.product-card.enlarged .product-info');
-							if (productInfo) {
-								productInfo.scrollTop = 0;
+							// Ensure scroll is reset to top after transition completes
+							if (isEnlarged) {
+								const productInfo = document.querySelector('.product-card.enlarged .product-info');
+								if (productInfo) {
+									productInfo.scrollTop = 0;
+								}
 							}
-						}
-					}, 500); // Adjust timing based on your transition duration
+						},
+						isFirefox ? 300 : 500
+					); // Shorter delay for Firefox
 				}
 				return isEnlarged;
 			},
@@ -101,9 +136,13 @@
 		isDropdownOpened = isOpen;
 		// Only handle visibility restoration when un-enlarging
 		if (!isOpen && !isEnlarged) {
-			const otherProducts = document.querySelectorAll(
-				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-			);
+			// For Firefox and non-supporting browsers, select differently
+			const otherProducts =
+				isFirefox || !supportsViewTransitions
+					? document.querySelectorAll(`.product-card:not(.product-id-${id})`)
+					: document.querySelectorAll(
+							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+						);
 			const footer = document.querySelector('footer');
 
 			otherProducts.forEach((product) => {
@@ -223,9 +262,13 @@
 		}
 		// When un-enlarging, ensure visibility is restored regardless of dropdown state
 		if (!isEnlarged) {
-			const otherProducts = document.querySelectorAll(
-				`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-			);
+			// For Firefox and non-supporting browsers, select differently
+			const otherProducts =
+				isFirefox || !supportsViewTransitions
+					? document.querySelectorAll(`.product-card:not(.product-id-${id})`)
+					: document.querySelectorAll(
+							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
+						);
 			const footer = document.querySelector('footer');
 
 			otherProducts.forEach((product) => {
@@ -243,8 +286,12 @@
 </script>
 
 <div
-	class="product-card {isEnlarged ? 'enlarged' : ''} product-id-{id}"
-	style="{style}; view-transition-name: {context}-product-card-{id}"
+	class="product-card {isEnlarged ? 'enlarged' : ''} product-id-{id} {isFirefox
+		? 'firefox-browser'
+		: ''}"
+	style="{style}{supportsViewTransitions && !isFirefox
+		? `; view-transition-name: ${context}-product-card-${id}`
+		: ''}"
 	onclick={toggleEnlargement}
 	onkeydown={(e) => {
 		if (e.target === e.currentTarget) {
@@ -261,7 +308,9 @@
 			src={imageUrl}
 			alt={name}
 			class:zoomed-out={useContainFit}
-			style="view-transition-name: {context}-product-image-{id}"
+			style={supportsViewTransitions && !isFirefox
+				? `view-transition-name: ${context}-product-image-${id}`
+				: ''}
 		/>
 		{#if !inStock}
 			<div class="out-of-stock">Out of Stock</div>
@@ -273,7 +322,9 @@
 			<h3
 				class="product-name"
 				class:expanded={isEnlarged}
-				style="view-transition-name: {context}-product-name-{id}"
+				style={supportsViewTransitions && !isFirefox
+					? `view-transition-name: ${context}-product-name-${id}`
+					: ''}
 			>
 				{name}
 			</h3>
@@ -318,7 +369,7 @@
 
 {#if isEnlarged}
 	<button
-		class="overlay"
+		class="overlay {isFirefox ? 'firefox-overlay' : ''}"
 		onclick={toggleEnlargement}
 		onkeydown={(e) => e.key === 'Enter' && toggleEnlargement()}
 		aria-label="Close enlarged view"
@@ -363,7 +414,21 @@
 			z-index: 9;
 			cursor: default;
 			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-			animation: enlarge 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+			background-color: hsl(0, 0%, 100%);
+		}
+
+		/* For browsers without view transition support, use fallback animation */
+		@supports not (view-transition-name: none) {
+			&.enlarged {
+				animation: enlarge 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+			}
+		}
+
+		/* For browsers with view transition support, disable manual animation */
+		@supports (view-transition-name: none) {
+			&.enlarged {
+				animation: enlarge 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+			}
 		}
 
 		&:not(.enlarged):hover {
@@ -580,6 +645,13 @@
 		inset: 0;
 		background-color: rgba(0, 0, 0, 0.5);
 		z-index: 8;
+		cursor: pointer;
+	}
+
+	/* Firefox specific overlay fix */
+	.firefox-browser + .overlay {
+		z-index: 9998 !important;
+		background-color: rgba(0, 0, 0, 0.5) !important;
 	}
 
 	.product-card.enlarged .product-image {
@@ -634,6 +706,13 @@
 				animation-delay: 0s;
 				animation-duration: 0.75s;
 				animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+			}
+		}
+
+		/* Fallback animations for browsers without view transition support */
+		@supports not (view-transition-name: none) {
+			.product-card.enlarged {
+				animation: enlarge 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 			}
 		}
 
@@ -747,5 +826,50 @@
 	}
 	:global(::view-transition-group(*product-card*)) {
 		z-index: 9;
+	}
+
+	/* Specific CSS for Firefox */
+	.product-card.firefox-browser.enlarged {
+		z-index: 9999 !important;
+		background-color: white !important;
+		position: fixed !important;
+		top: 50% !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%) !important;
+		animation: firefox-enlarge 0.3s ease forwards !important;
+	}
+
+	/* Specific CSS for Firefox and browsers without view transition support */
+	@supports not (view-transition-name: none) {
+		.product-card.enlarged {
+			z-index: 999 !important;
+			background-color: white !important;
+			animation: fallback-enlarge 0.5s ease forwards !important;
+		}
+
+		.overlay {
+			z-index: 998 !important;
+		}
+	}
+
+	/* Additional fallback for body class targeting */
+	:global(body.view-transitions-not-supported) .product-card.enlarged {
+		z-index: 999 !important;
+		background-color: white !important;
+	}
+
+	:global(body.view-transitions-not-supported) .overlay {
+		z-index: 998 !important;
+	}
+
+	@keyframes firefox-enlarge {
+		0% {
+			transform: translate(-50%, -50%) scale(0.9);
+			opacity: 0.7;
+		}
+		100% {
+			transform: translate(-50%, -50%) scale(1);
+			opacity: 1;
+		}
 	}
 </style>
