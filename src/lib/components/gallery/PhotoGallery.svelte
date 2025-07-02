@@ -87,7 +87,7 @@
 		{
 			id: 'dainty-red-open-straps',
 			src: '/products/dainty.doomsday/dainty-red__closed.webp',
-			alt: 'Inside Dainty Doomsday Tote',
+			alt: 'A closed Dainty Doomsday Tote',
 			title: 'Dainty Doomsday Tote'
 		},
 		{
