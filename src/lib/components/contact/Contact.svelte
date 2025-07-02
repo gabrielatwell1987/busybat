@@ -233,13 +233,14 @@
 				@media (width <= 1950px) {
 					scale: 0.9;
 					margin-block: 1em;
+					padding-top: 7em;
 				}
 
 				@media (width <= 1150px) {
 					width: min(80%, 1200px);
-					padding-top: 1.5em;
 					padding-bottom: 2.5rem;
 					margin-inline: auto;
+					padding-top: 0;
 				}
 
 				@media (width <= 980px) {
