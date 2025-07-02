@@ -159,6 +159,32 @@
 		height: 1px;
 		white-space: nowrap;
 	}
+
+	/* Enhanced focus indicators for better accessibility */
+	*:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+
+	/* Specific focus styles for interactive elements */
+	button:focus-visible,
+	a:focus-visible,
+	input:focus-visible,
+	textarea:focus-visible,
+	select:focus-visible {
+		outline: 3px solid var(--color-accent);
+		outline-offset: 2px;
+		box-shadow: 0 0 0 1px var(--color-white);
+	}
+
+	/* Focus styles for elements with aria-current */
+	[aria-current='page'] {
+		font-weight: bold;
+		text-decoration: underline;
+		text-decoration-color: var(--color-accent);
+		text-underline-offset: 4px;
+	}
 }
 
 @layer animations {

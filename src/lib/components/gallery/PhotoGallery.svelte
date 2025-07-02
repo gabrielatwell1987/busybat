@@ -86,7 +86,7 @@
 		},
 		{
 			id: 'dainty-red-open-straps',
-			src: '/products/dainty.doomsday/dainty-red__open-straps.webp',
+			src: '/products/dainty.doomsday/dainty-red__closed.webp',
 			alt: 'Inside Dainty Doomsday Tote',
 			title: 'Dainty Doomsday Tote'
 		},
@@ -124,6 +124,20 @@
 			// Fallback for browsers without view transition support
 			updateSlide(index);
 		}
+
+		// Announce slide change to screen readers
+		announceSlideChange(index);
+	}
+
+	// Function to announce slide changes to screen readers
+	function announceSlideChange(index) {
+		const announcer = document.getElementById('slide-announcer');
+		if (announcer) {
+			const slideNumber = index + 1;
+			const total = images.length;
+			const title = images[index]?.title || `Image ${slideNumber}`;
+			announcer.textContent = `Showing slide ${slideNumber} of ${total}: ${title}`;
+		}
 	}
 
 	// Separate function to update slide state
@@ -145,15 +159,24 @@
 	function handleKeydown(event) {
 		switch (event.key) {
 			case 'ArrowLeft':
+				event.preventDefault();
 				changeSlide(currentSlide - 1);
 				break;
 			case 'ArrowRight':
+				event.preventDefault();
 				changeSlide(currentSlide + 1);
+				break;
+			case 'Home':
+				event.preventDefault();
+				changeSlide(0);
+				break;
+			case 'End':
+				event.preventDefault();
+				changeSlide(images.length - 1);
 				break;
 			default:
 				return;
 		}
-		event.preventDefault();
 	}
 
 	// Function to find slide index by ID
@@ -185,6 +208,17 @@
 		// Listen for hash changes
 		window.addEventListener('hashchange', handleHashChange);
 
+		// Auto-focus the keyboard handler for immediate arrow key navigation
+		const keyboardHandler = document.querySelector('.carousel-keyboard-handler');
+		if (keyboardHandler) {
+			keyboardHandler.focus();
+		}
+
+		// Announce the initial slide after a brief delay
+		setTimeout(() => {
+			announceSlideChange(currentSlide);
+		}, 500);
+
 		// Clean up on component destroy
 		return () => {
 			window.removeEventListener('hashchange', handleHashChange);
@@ -194,82 +228,92 @@
 
 <VerticalTitle title="Gallery" />
 
-<main
-	class="carousel"
-	role="region"
-	aria-roledescription="carousel"
-	aria-label="Product gallery"
-	tabindex="-1"
->
-	<span class="visually-hidden">Use left and right arrow keys to navigate between slides</span>
+<main class="carousel" role="region" aria-roledescription="carousel" aria-label="Product gallery">
+	<!-- Screen reader announcements for slide changes -->
+	<div id="slide-announcer" aria-live="polite" aria-atomic="true" class="visually-hidden"></div>
 
-	<div class="carousel-container">
-		<div
-			class="carousel-slides"
-			aria-live="polite"
-			style="transform: translateX(-{currentSlide * 100}%)"
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+	<div
+		class="carousel-keyboard-handler"
+		tabindex="0"
+		onkeydown={handleKeydown}
+		role="application"
+		aria-label="Gallery keyboard navigation - use arrow keys to navigate"
+	>
+		<span class="visually-hidden"
+			>Use left and right arrow keys to navigate between slides, Home for first slide, End for last
+			slide</span
 		>
-			{#each images as image, i}
-				<div
-					id="slide-{image.id}"
-					class="carousel-slide"
-					role="group"
-					aria-roledescription="slide"
-					aria-label="Slide {i + 1} of {images.length}"
-					aria-hidden={currentSlide !== i}
-				>
-					<img src={image.src} alt={image.alt || `Product image ${i + 1}`} />
 
-					{#if image.title}
-						<div
-							class="slide-title"
-							style={supportsViewTransitions
-								? `view-transition-name: slide-title-${currentSlide === i ? 'active' : i}`
-								: ''}
-						>
-							{image.title}
-						</div>
-					{/if}
-				</div>
-			{/each}
-		</div>
+		<div class="carousel-container">
+			<div
+				class="carousel-slides"
+				aria-live="polite"
+				style="transform: translateX(-{currentSlide * 100}%)"
+			>
+				{#each images as image, i}
+					<div
+						id="slide-{image.id}"
+						class="carousel-slide"
+						role="group"
+						aria-roledescription="slide"
+						aria-label="Slide {i + 1} of {images.length}"
+						aria-hidden={currentSlide !== i}
+					>
+						<img src={image.src} alt={image.alt || `Product image ${i + 1}`} />
 
-		{#if images.length > 1}
-			<div class="carousel-controls" id="carousel-controls" tabindex="-1">
-				<button
-					class="prev-slide"
-					aria-label="Previous slide"
-					onclick={() => changeSlide(currentSlide - 1)}
-					onkeydown={handleKeydown}
-					type="button"
-				>
-					❮
-				</button>
-
-				<button
-					class="next-slide"
-					aria-label="Next slide"
-					onclick={() => changeSlide(currentSlide + 1)}
-					onkeydown={handleKeydown}
-					type="button"
-				>
-					❯
-				</button>
-			</div>
-
-			<div class="carousel-nav" role="tablist" aria-label="Slide navigation">
-				{#each images as _, i}
-					<button
-						class="nav-dot"
-						role="tab"
-						aria-selected={currentSlide === i}
-						aria-label="Go to slide {i + 1}"
-						aria-controls="slide-{i}"
-						onclick={() => changeSlide(i)}
-					></button>
+						{#if image.title}
+							<div
+								class="slide-title"
+								style={supportsViewTransitions
+									? `view-transition-name: slide-title-${currentSlide === i ? 'active' : i}`
+									: ''}
+							>
+								{image.title}
+							</div>
+						{/if}
+					</div>
 				{/each}
 			</div>
-		{/if}
+
+			{#if images.length > 1}
+				<div class="carousel-controls" id="carousel-controls" tabindex="-1">
+					<button
+						class="prev-slide"
+						aria-label="Previous slide"
+						onclick={() => changeSlide(currentSlide - 1)}
+						onkeydown={handleKeydown}
+						type="button"
+					>
+						❮
+					</button>
+
+					<button
+						class="next-slide"
+						aria-label="Next slide"
+						onclick={() => changeSlide(currentSlide + 1)}
+						onkeydown={handleKeydown}
+						type="button"
+					>
+						❯
+					</button>
+				</div>
+
+				<div class="carousel-nav" role="tablist" aria-label="Slide navigation">
+					{#each images as _, i}
+						<button
+							class="nav-dot"
+							role="tab"
+							aria-selected={currentSlide === i}
+							aria-label="Go to slide {i + 1}"
+							aria-controls="slide-{i}"
+							onclick={() => changeSlide(i)}
+						></button>
+					{/each}
+				</div>
+			{/if}
+		</div>
 	</div>
 </main>
 
@@ -286,6 +330,25 @@
 		&:focus {
 			outline: 2px solid var(--color-secondary);
 			outline-offset: 2px;
+		}
+
+		/* Keyboard handler styles */
+		& .carousel-keyboard-handler {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			outline: none;
+
+			&:focus {
+				outline: 3px solid var(--color-accent);
+				outline-offset: -3px;
+			}
+
+			&:focus-visible {
+				outline: 3px solid var(--color-accent);
+				outline-offset: 3px;
+				box-shadow: 0 0 0 1px var(--color-dark);
+			}
 		}
 
 		@media (width >= 1024px) {

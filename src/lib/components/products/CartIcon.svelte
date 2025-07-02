@@ -13,6 +13,29 @@
 
 	// Calculate total items in cart
 	let itemCount = $derived(cart.reduce((total, item) => total + (item.quantity || 0), 0));
+
+	// Previous count for comparison
+	let previousCount = $state(0);
+
+	// Announce cart changes to screen readers
+	$effect(() => {
+		if (itemCount !== previousCount && previousCount !== 0) {
+			// Create temporary announcement element
+			const announcement = document.createElement('div');
+			announcement.setAttribute('aria-live', 'polite');
+			announcement.setAttribute('aria-atomic', 'true');
+			announcement.className = 'visually-hidden';
+			announcement.textContent = `Cart updated. You now have ${itemCount} item${itemCount === 1 ? '' : 's'} in your cart.`;
+
+			document.body.appendChild(announcement);
+
+			// Remove after announcement
+			setTimeout(() => {
+				document.body.removeChild(announcement);
+			}, 1000);
+		}
+		previousCount = itemCount;
+	});
 </script>
 
 <a href="/cart" class="cart-icon-wrapper {className}" {onclick}>

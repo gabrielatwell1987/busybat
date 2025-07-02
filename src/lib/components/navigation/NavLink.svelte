@@ -1,9 +1,12 @@
 <script>
+	import { page } from '$app/stores';
 	let { title, url, onclick } = $props();
+
+	let isCurrentPage = $derived($page.url.pathname === url);
 </script>
 
 <li class="quick-flip">
-	<a href={url} {onclick}>{title}</a>
+	<a href={url} {onclick} aria-current={isCurrentPage ? 'page' : undefined}>{title}</a>
 </li>
 
 <style>

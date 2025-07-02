@@ -32,13 +32,20 @@
 		<Title title="Busy Little Bat Sewing" />
 	</div>
 
-	<button class="burger" class:open={isOpen} onclick={toggleMenu} aria-label="hamburger menu">
+	<button
+		class="burger"
+		class:open={isOpen}
+		onclick={toggleMenu}
+		aria-label="Toggle navigation menu"
+		aria-expanded={isOpen}
+		aria-controls="navigation-menu"
+	>
 		<span class="bar"></span>
 		<span class="bar"></span>
 		<span class="bar"></span>
 	</button>
 
-	<ul class:open={isOpen}>
+	<ul class:open={isOpen} id="navigation-menu" aria-label="Main navigation">
 		<li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>

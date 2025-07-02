@@ -11,6 +11,15 @@
 
 <div class="content">
 	<div class="form-container">
+		<div
+			role="status"
+			aria-live="polite"
+			aria-atomic="true"
+			class="visually-hidden"
+			id="form-status"
+		>
+			<!-- Screen reader announcements will go here -->
+		</div>
 		<form method="POST" action="https://form.taxi/s/226lrszc">
 			<fieldset>
 				<p>
@@ -20,14 +29,38 @@
 				<legend>Message Us</legend>
 
 				<label for="name">Name:</label>
-				<input type="text" id="name" name="name" bind:value={name} required />
+				<input
+					type="text"
+					id="name"
+					name="name"
+					bind:value={name}
+					required
+					aria-describedby="name-help"
+				/>
+				<div id="name-help" class="visually-hidden">Please enter your full name</div>
 
 				<label for="email">Email:</label>
-				<input type="email" id="email" name="email" bind:value={email} required />
+				<input
+					type="email"
+					id="email"
+					name="email"
+					bind:value={email}
+					required
+					aria-describedby="email-help"
+				/>
+				<div id="email-help" class="visually-hidden">Please enter a valid email address</div>
 
 				<label for="message">Message:</label>
-				<textarea name="message" id="message" cols="30" rows="10" bind:value={message} required
+				<textarea
+					name="message"
+					id="message"
+					cols="30"
+					rows="10"
+					bind:value={message}
+					required
+					aria-describedby="message-help"
 				></textarea>
+				<div id="message-help" class="visually-hidden">Please enter your message or question</div>
 
 				<div class="send">
 					<SendButton title="Send" />

@@ -10,13 +10,17 @@
 	keywords="busy bat, busy bat sewing, busy bat sewing co, busy bat sewing company, busy bat las vegas, busy bat sewing las vegas, busy bat sewing co las vegas, handmade bags, handmade accessories, handmade bags las vegas, handmade accessories las vegas"
 />
 
-<section>
+<main>
+	<h1 class="visually-hidden">Busy Little Bat Sewing Co. - Handmade Gothic Accessories</h1>
+
 	<Hero />
 
-	<InvertedBorder
-		title="Handmade Goods"
-		text="Custom handmade bags, clothing, and accessories. Everything is made by hand in Las Vegas, Nevada."
-		src="/products/d.harry/dh-jacket__back.webp"
-		alt="debbie harry jacket"
-	/>
-</section>
+	<section aria-labelledby="handmade-heading">
+		<InvertedBorder
+			title="Handmade Goods"
+			text="Custom handmade bags, clothing, and accessories. Everything is made by hand in Las Vegas, Nevada."
+			src="/products/d.harry/dh-jacket__back.webp"
+			alt="debbie harry jacket"
+		/>
+	</section>
+</main>

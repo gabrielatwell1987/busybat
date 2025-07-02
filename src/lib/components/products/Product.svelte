@@ -166,6 +166,20 @@
 			// Add class to body to handle global z-index issues
 			document.body.classList.add('product-enlarged');
 
+			// Announce enlargement to screen readers
+			const announcement = document.createElement('div');
+			announcement.setAttribute('aria-live', 'polite');
+			announcement.setAttribute('aria-atomic', 'true');
+			announcement.className = 'visually-hidden';
+			announcement.textContent = `Product details for ${name} expanded. Press Escape to close.`;
+			document.body.appendChild(announcement);
+
+			setTimeout(() => {
+				if (document.body.contains(announcement)) {
+					document.body.removeChild(announcement);
+				}
+			}, 1000);
+
 			// Immediately force NavBar behind with JavaScript (optimized for speed)
 			const navElements = document.querySelectorAll('nav, header, .navbar');
 			for (let i = 0; i < navElements.length; i++) {
@@ -194,6 +208,22 @@
 				card.style.zIndex = '10';
 			}
 		} else {
+			// Announce closing to screen readers
+			if (document.body.classList.contains('product-enlarged')) {
+				const announcement = document.createElement('div');
+				announcement.setAttribute('aria-live', 'polite');
+				announcement.setAttribute('aria-atomic', 'true');
+				announcement.className = 'visually-hidden';
+				announcement.textContent = `Product details closed. Returned to product grid.`;
+				document.body.appendChild(announcement);
+
+				setTimeout(() => {
+					if (document.body.contains(announcement)) {
+						document.body.removeChild(announcement);
+					}
+				}, 1000);
+			}
+
 			// Remove class when not enlarged
 			document.body.classList.remove('product-enlarged');
 
