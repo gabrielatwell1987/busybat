@@ -1,13 +1,4 @@
-export function GET() {
-  return new Response(
-    `User-agent: *
+User-agent: *
 Allow: /
 
-Sitemap: https://busybatsewing.com/sitemap.xml`,
-    {
-      headers: {
-        'Content-Type': 'text/plain'
-      }
-    }
-  );
-}
+Sitemap: https://busybatsewing.com/sitemap.xml
