@@ -338,17 +338,6 @@
 			height: 100%;
 			position: relative;
 			outline: none;
-
-			&:focus {
-				outline: 3px solid var(--color-accent);
-				outline-offset: -3px;
-			}
-
-			&:focus-visible {
-				outline: 3px solid var(--color-accent);
-				outline-offset: 3px;
-				box-shadow: 0 0 0 1px var(--color-dark);
-			}
 		}
 
 		@media (width >= 1024px) {
@@ -477,6 +466,7 @@
 				}
 
 				@media (width <= 500px) {
+					display: none;
 					bottom: -2.5em;
 					padding: 0.4rem 0.6rem;
 				}
@@ -516,7 +506,7 @@
 	@supports (view-transition-name: none) {
 		::view-transition-old(slide-title-active),
 		::view-transition-new(slide-title-active) {
-			animation-duration: 1s;
+			animation-duration: 0.75s;
 			animation-timing-function: ease-in-out;
 		}
 
