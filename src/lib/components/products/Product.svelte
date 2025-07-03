@@ -1,7 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
 	import {
 		formatPrice,
 		trapFocus,
@@ -37,13 +36,17 @@
 	let supportsViewTransitions = $state(false);
 	let isFirefox = $state(false);
 
-	// Check for View Transition support and browser type
-	onMount(() => {
-		supportsViewTransitions = browser && 'startViewTransition' in document;
-		isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
+	// Get cart data
+	let cart = $state([]);
 
-		// Add a way to force Firefox mode for testing
-		if (browser) {
+	// initialization and state management
+	$effect(() => {
+		// Initialize browser detection (runs once on mount)
+		if (browser && !supportsViewTransitions && !isFirefox) {
+			supportsViewTransitions = browser && 'startViewTransition' in document;
+			isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
+
+			// Add a way to force Firefox mode for testing
 			const urlParams = new URLSearchParams(window.location.search);
 			const forceFirefoxMode = urlParams.get('firefox') === 'true';
 
@@ -52,23 +55,19 @@
 				supportsViewTransitions = false;
 				console.log('🦊 Firefox mode forced for product', id);
 			}
+
+			// Debug logging
+			console.log('Product browser detection:', {
+				id,
+				supportsViewTransitions,
+				isFirefox,
+				userAgent: browser ? navigator.userAgent : 'SSR'
+			});
 		}
 
-		// Debug logging
-		console.log('Product browser detection:', {
-			id,
-			supportsViewTransitions,
-			isFirefox,
-			userAgent: browser ? navigator.userAgent : 'SSR'
-		});
-	});
-
-	// Get cart data
-	let cart = $state([]);
-	$effect(() => {
+		// Get cart data and update state
 		const data = getCartData();
 		cart = data.cart;
-		// Check if this item is in the cart
 		isAddedToCart = cart.some((item) => item.id === id);
 	});
 
@@ -158,10 +157,13 @@
 		}
 	}
 
+	// enlargement state management
 	$effect(() => {
+		// Don't run DOM manipulation effects during transitions to prevent flicker
 		if (isTransitioning) {
 			return;
 		}
+
 		if (isEnlarged) {
 			// Add class to body to handle global z-index issues
 			document.body.classList.add('product-enlarged');
@@ -201,13 +203,36 @@
 				productInfo.scrollTo({ top: 0, behavior: 'instant' });
 			}
 
-			// Focus handling
-			const card = document.querySelector('.product-card.enlarged');
-			if (card) {
-				trapFocus(card);
-				card.style.zIndex = '10';
-			}
+			// Focus handling with slight delay to ensure DOM is ready
+			setTimeout(() => {
+				const card = document.querySelector('.product-card.enlarged');
+				if (card) {
+					trapFocus(card);
+					card.style.zIndex = '10';
+				}
+
+				// Extra backup to force NavBar behind (optimized for speed)
+				const navElements = document.querySelectorAll('nav, header, .navbar');
+				for (let i = 0; i < navElements.length; i++) {
+					const el = navElements[i];
+					// On mobile, completely hide the navbar. On desktop, just grey it out.
+					if (window.innerWidth <= 768) {
+						el.style.cssText += ';display:none';
+					} else {
+						el.style.cssText += ';z-index:1;opacity:0.45';
+					}
+				}
+
+				// Delayed scroll reset to ensure content starts at top
+				const productInfo = document.querySelector('.product-card.enlarged .product-info');
+				if (productInfo) {
+					productInfo.scrollTop = 0;
+					productInfo.scrollTo(0, 0);
+					productInfo.scrollTo({ top: 0, behavior: 'instant' });
+				}
+			}, 0);
 		} else {
+			// When un-enlarging, handle cleanup
 			// Announce closing to screen readers
 			if (document.body.classList.contains('product-enlarged')) {
 				const announcement = document.createElement('div');
@@ -247,52 +272,8 @@
 				el.style.removeProperty('opacity');
 				el.style.removeProperty('display');
 			});
-		}
-	});
 
-	$effect(() => {
-		if (isTransitioning) {
-			return;
-		}
-		if (isEnlarged) {
-			setTimeout(() => {
-				const card = document.querySelector('.product-card.enlarged');
-
-				if (card) {
-					trapFocus(card);
-					card.style.zIndex = '10';
-				}
-
-				// Extra backup to force NavBar behind (optimized for speed)
-				const navElements = document.querySelectorAll('nav, header, .navbar');
-				for (let i = 0; i < navElements.length; i++) {
-					const el = navElements[i];
-					// On mobile, completely hide the navbar. On desktop, just grey it out.
-					if (window.innerWidth <= 768) {
-						el.style.cssText += ';display:none';
-					} else {
-						el.style.cssText += ';z-index:1;opacity:0.45';
-					}
-				}
-
-				// Delayed scroll reset to ensure content starts at top
-				const productInfo = document.querySelector('.product-card.enlarged .product-info');
-				if (productInfo) {
-					productInfo.scrollTop = 0;
-					productInfo.scrollTo(0, 0);
-					productInfo.scrollTo({ top: 0, behavior: 'instant' });
-				}
-			}, 0);
-		}
-	});
-
-	$effect(() => {
-		if (isTransitioning) {
-			return;
-		}
-		// When un-enlarging, ensure visibility is restored regardless of dropdown state
-		if (!isEnlarged) {
-			// For Firefox and non-supporting browsers, select differently
+			// Ensure visibility is restored for other products regardless of dropdown state
 			const otherProducts =
 				isFirefox || !supportsViewTransitions
 					? document.querySelectorAll(`.product-card:not(.product-id-${id})`)
