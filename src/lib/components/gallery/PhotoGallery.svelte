@@ -15,19 +15,19 @@
 		{
 			id: 'mini-menace-side',
 			src: '/products/mini.menace/mini-menace-chain__side.webp',
-			alt: 'Mini Menace Tote from the side',
+			alt: 'Mini Menace Tote viewed at an angle',
 			title: 'Mini Menace Tote'
 		},
 		{
 			id: 'mini-menace-forward',
 			src: '/products/mini.menace/mini-menace-chain__forward.webp',
-			alt: 'Mini Menace Tote',
+			alt: 'Mini Menace Tote viewed from the front',
 			title: 'Mini Menace Tote'
 		},
 		{
 			id: 'mini-menace-open',
 			src: '/products/mini.menace/mini-menace-chain__open.webp',
-			alt: 'inside the Mini Menace Tote',
+			alt: 'inside the Mini Menace Tote showing a zipper pocket',
 			title: 'Mini Menace Tote'
 		},
 		{
@@ -39,49 +39,43 @@
 		{
 			id: 'dh-jacket-left',
 			src: '/products/d.harry/dh-jacket__shoulder-left.webp',
-			alt: 'D. Harry left shoulder',
+			alt: 'D. Harry jackets left shoulder',
 			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dh-jacket-right',
 			src: '/products/d.harry/dh-jacket__shoulder-right.webp',
-			alt: 'D. Harry right shoulder',
-			title: 'D. Harry Denim Jacket'
-		},
-		{
-			id: 'dh-jacket-pocket',
-			src: '/products/d.harry/dh-jacket__pocket.webp',
-			alt: 'D. Harry jacket pocket',
+			alt: 'D. Harry jackets right shoulder',
 			title: 'D. Harry Denim Jacket'
 		},
 		{
 			id: 'dainty-pink-front',
 			src: '/products/dainty.doomsday/dainty-pink__front.webp',
-			alt: 'Dainty Doomsday in Witches Brew',
+			alt: 'the front of Dainty Doomsday in Witches Brew',
 			title: 'Dainty Doomsday in Witches Brew'
 		},
 		{
 			id: 'dainty-pink-open',
 			src: '/products/dainty.doomsday/dainty-pink__open.webp',
-			alt: 'Inside Dainty Doomsday in Witches Brew',
+			alt: 'Inside Dainty Doomsday in Witches Brew showing two pockets',
 			title: 'Dainty Doomsday in Witches Brew'
 		},
 		{
 			id: 'dainty-pink-open-straps',
 			src: '/products/dainty.doomsday/dainty-pink__open-straps.webp',
-			alt: 'Inside Dainty Doomsday in Witches Brew',
+			alt: 'the Dainty Doomsday in Witches Brew with some business cards',
 			title: 'Dainty Doomsday in Witches Brew'
 		},
 		{
 			id: 'dainty-red-front',
 			src: '/products/dainty.doomsday/dainty-red__front.webp',
-			alt: 'Dainty Doomsday Tote',
+			alt: 'the front of the Dainty Doomsday Tote',
 			title: 'Dainty Doomsday Tote'
 		},
 		{
 			id: 'dainty-red-open',
 			src: '/products/dainty.doomsday/dainty-red__open.webp',
-			alt: 'Inside Dainty Doomsday Tote',
+			alt: 'Inside Dainty Doomsday Tote showing two pockets',
 			title: 'Dainty Doomsday Tote'
 		},
 		{
@@ -93,19 +87,19 @@
 		{
 			id: 'major-menace-front',
 			src: '/products/major.menace/major-menace__front.webp',
-			alt: 'Major Menace Tote',
+			alt: 'Major Menace Tote viewed from the front',
 			title: 'Major Menace Tote'
 		},
 		{
 			id: 'major-menace-open',
 			src: '/products/major.menace/major-menace__open.webp',
-			alt: 'Inside Major Menace Tote',
+			alt: 'Inside Major Menace Tote showing one zipper pocket',
 			title: 'Major Menace Tote'
 		},
 		{
 			id: 'major-menace-open-straps',
 			src: '/products/major.menace/major-menace__open-zippers.webp',
-			alt: 'Inside Major Menace Tote',
+			alt: 'Inside Major Menace Tote showing multiple wallet pockets',
 			title: 'Major Menace Tote'
 		}
 	];
