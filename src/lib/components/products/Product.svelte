@@ -29,14 +29,12 @@
 	} = $props();
 	let isEnlarged = $state(false);
 	let isLoading = $state(false);
-	let isDropdownOpen = $state(false); // Fixed: was isDropdownOpened
+	let isDropdownOpen = $state(false);
 	let isDropdownOpened = $state(false);
 	let isAddedToCart = $state(false);
-	let isTransitioning = $state(false); // Add flag to prevent effect conflicts
+	let isTransitioning = $state(false);
 	let supportsViewTransitions = $state(false);
 	let isFirefox = $state(false);
-
-	// Get cart data
 	let cart = $state([]);
 
 	// initialization and state management
@@ -122,7 +120,7 @@
 								}
 							}
 						},
-						isFirefox ? 300 : 500
+						isFirefox ? 300 : 750
 					); // Shorter delay for Firefox
 				}
 				return isEnlarged;
@@ -186,9 +184,9 @@
 			const navElements = document.querySelectorAll('nav, header, .navbar');
 			for (let i = 0; i < navElements.length; i++) {
 				const el = navElements[i];
-				// On mobile, completely hide the navbar. On desktop, just grey it out.
+				// On mobile, hide the navbar with visibility. On desktop, just grey it out.
 				if (window.innerWidth <= 768) {
-					el.style.cssText += ';display:none';
+					el.style.cssText += ';visibility:hidden';
 				} else {
 					el.style.cssText += ';z-index:1;opacity:0.25';
 				}
@@ -215,9 +213,9 @@
 				const navElements = document.querySelectorAll('nav, header, .navbar');
 				for (let i = 0; i < navElements.length; i++) {
 					const el = navElements[i];
-					// On mobile, completely hide the navbar. On desktop, just grey it out.
+					// On mobile, hide the navbar with visibility. On desktop, just grey it out.
 					if (window.innerWidth <= 768) {
-						el.style.cssText += ';display:none';
+						el.style.cssText += ';visibility:hidden';
 					} else {
 						el.style.cssText += ';z-index:1;opacity:0.45';
 					}
@@ -265,12 +263,12 @@
 				enlargedCard.style.removeProperty('z-index');
 			}
 
-			// Reset NavBar styles when not enlarged
+			// Reset NavBar styles when not enlarged - smooth transition for mobile
 			const navElements = document.querySelectorAll('nav, header, .navbar');
 			navElements.forEach((el) => {
 				el.style.removeProperty('z-index');
 				el.style.removeProperty('opacity');
-				el.style.removeProperty('display');
+				el.style.removeProperty('visibility');
 			});
 
 			// Ensure visibility is restored for other products regardless of dropdown state
