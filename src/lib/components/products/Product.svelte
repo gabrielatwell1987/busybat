@@ -171,7 +171,8 @@
 			announcement.setAttribute('aria-live', 'polite');
 			announcement.setAttribute('aria-atomic', 'true');
 			announcement.className = 'visually-hidden';
-			announcement.textContent = `Product details for ${name} expanded. Press Escape to close.`;
+			const cleanDescription = description.replace(/<[^>]*>/g, '').trim();
+			announcement.textContent = `Product details for ${name} expanded. ${cleanDescription}. Press Escape to close.`;
 			document.body.appendChild(announcement);
 
 			setTimeout(() => {
@@ -308,7 +309,11 @@
 			if (e.key === 'Escape' && isEnlarged) toggleEnlargement();
 		}
 	}}
-	aria-label="View product details for {name}"
+	aria-label={isEnlarged
+		? `${name} - ${description.replace(/<[^>]*>/g, '')}`
+		: `View product details for ${name}`}
+	aria-describedby={isEnlarged ? `product-description-${id}` : null}
+	aria-expanded={isEnlarged}
 	role="button"
 	tabindex="0"
 >
@@ -340,7 +345,16 @@
 			<p class="product-price" class:expanded={isEnlarged}>{formatPrice(price)}</p>
 		</div>
 
-		<p class="product-description" class:expanded={isEnlarged}>{@html description}</p>
+		<p
+			class="product-description"
+			class:expanded={isEnlarged}
+			id="product-description-{id}"
+			aria-label="Product description: {description.replace(/<[^>]*>/g, '')}"
+			role="region"
+			aria-live={isEnlarged ? 'polite' : 'off'}
+		>
+			{@html description}
+		</p>
 		{#if isEnlarged}
 			<ProductDropdown
 				{id}
@@ -880,5 +894,18 @@
 			transform: translate(-50%, -50%) scale(1);
 			opacity: 1;
 		}
+	}
+
+	/* Screen reader only content */
+	:global(.visually-hidden) {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 </style>
