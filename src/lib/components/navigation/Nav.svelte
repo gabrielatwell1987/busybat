@@ -49,11 +49,21 @@
 		<li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
 		</li>
-		<NavLink title="About" url="/about" onclick={handleLinkClick} />
-		<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
-		<NavLink title="Visions" url="/gallery" onclick={handleLinkClick} />
-		<NavLink title="Chronicles" url="/blog" onclick={handleLinkClick} />
-		<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
+		<li>
+			<NavLink title="About" url="/about" onclick={handleLinkClick} />
+		</li>
+		<li>
+			<NavLink title="Creations" url="/products" onclick={handleLinkClick} />
+		</li>
+		<li>
+			<NavLink title="Visions" url="/gallery" onclick={handleLinkClick} />
+		</li>
+		<li>
+			<NavLink title="Chronicles" url="/blog" onclick={handleLinkClick} />
+		</li>
+		<li>
+			<NavLink title="Summon Me" url="/contact" onclick={handleLinkClick} />
+		</li>
 	</ul>
 
 	<div class="cart-container desktop-cart">
@@ -134,6 +144,7 @@
 			flex-flow: row wrap;
 			margin: 0;
 			padding: 0;
+			list-style: none;
 		}
 
 		.desktop-cart {
