@@ -29,7 +29,7 @@
 			</p>
 
 			<p class="width indent">
-				My journey began many dark nights ago with a passion for art, music and, quiet frankly,
+				My journey began many dark nights ago with a passion for art, music, and quite frankly,
 				clothes that actually fit. As a self-trained sewist, I unearthed my passion for creating
 				unique items that fit my goth/punk aesthetic. Over the years, I have sharpened my skills
 				like a finely honed blade, gaining invaluable experience through various ghostly projects
