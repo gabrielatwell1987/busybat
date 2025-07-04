@@ -2,7 +2,7 @@
 	let { title } = $props();
 </script>
 
-<a href="/">
+<a href="/" aria-label="Go to homepage - {title}">
 	<h1>{title}</h1>
 </a>
 
@@ -10,6 +10,19 @@
 	a {
 		text-decoration: none;
 		height: auto;
+		display: inline-block;
+
+		&:focus {
+			outline: 2px solid var(--color-accent);
+			outline-offset: 2px;
+			border-radius: 4px;
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--color-accent);
+			outline-offset: 2px;
+			border-radius: 4px;
+		}
 
 		& h1 {
 			color: var(--color-accent);
