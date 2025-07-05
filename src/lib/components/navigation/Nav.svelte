@@ -309,6 +309,10 @@
 							transition-delay: 0.8s;
 						}
 
+						&:nth-child(6) {
+							transition-delay: 0.9s;
+						}
+
 						&.mobile-cart {
 							display: flex;
 							justify-content: center;
