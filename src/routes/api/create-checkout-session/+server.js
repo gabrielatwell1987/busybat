@@ -18,8 +18,13 @@ export async function POST({ request, url }) {
 		const lineItems = items.map((item) => {
 			console.log('Processing item for Stripe:', item); // Debug log
 
-			// Check if item has a Stripe Price ID - use it if available
-			if (item.stripe_price_id) {
+			// Log size information for debugging
+			if (item.size) {
+				console.log(`Item ${item.name} has size: ${item.size}`);
+			}
+
+			// Check if item has a Stripe Price ID and NO size - use existing price if no size
+			if (item.stripe_price_id && !item.size) {
 				console.log(`Using existing Stripe Price ID for ${item.name}:`, item.stripe_price_id);
 				return {
 					price: item.stripe_price_id,
@@ -27,12 +32,19 @@ export async function POST({ request, url }) {
 				};
 			}
 
-			// Fallback: Create product dynamically (for items without Stripe Price IDs)
-			console.log(`Creating dynamic product for ${item.name} (no Stripe Price ID found)`);
+			// Fallback: Create product dynamically (for items without Stripe Price IDs OR items with sizes)
+			if (item.size) {
+				console.log(`Creating dynamic product for ${item.name} with size ${item.size}`);
+			} else {
+				console.log(`Creating dynamic product for ${item.name} (no Stripe Price ID found)`);
+			}
 
-			// Create product data object
+			// Create product data object with size information if available
+			const productName = item.size ? `${item.name} - Size ${item.size}` : item.name;
+			console.log(`Product name for Stripe: "${productName}"`); // Debug log
+
 			const productData = {
-				name: item.name,
+				name: productName,
 				tax_code: 'txcd_35010000' // Tax code for general clothing
 			};
 
@@ -61,13 +73,21 @@ export async function POST({ request, url }) {
 			// Only add description if it exists and isn't empty
 			if (item.description && item.description.trim() !== '') {
 				// Clean up HTML from description for Stripe (Stripe doesn't support HTML)
-				const cleanDescription = item.description
+				let cleanDescription = item.description
 					.replace(/<[^>]*>/g, '') // Remove HTML tags
 					.replace(/&middot;/g, '·') // Replace HTML entities
 					.replace(/&nbsp;/g, ' ')
 					.trim();
 
+				// Add size information to description if available
+				if (item.size) {
+					cleanDescription = `Size: ${item.size}\n\n${cleanDescription}`;
+				}
+
 				productData.description = cleanDescription;
+			} else if (item.size) {
+				// If no description but has size, just show size
+				productData.description = `Size: ${item.size}`;
 			}
 
 			return {

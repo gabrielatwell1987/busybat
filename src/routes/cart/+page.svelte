@@ -20,12 +20,12 @@
 	);
 
 	// Handlers for cart actions
-	function handleRemoveItem(id) {
-		removeFromCart(id);
+	function handleRemoveItem(id, size = null) {
+		removeFromCart(id, size);
 	}
 
-	function handleUpdateQuantity(id, newQuantity) {
-		updateQuantity(id, newQuantity);
+	function handleUpdateQuantity(id, newQuantity, size = null) {
+		updateQuantity(id, newQuantity, size);
 	}
 </script>
 
@@ -39,7 +39,7 @@
 		</div>
 	{:else}
 		<div class="cart-items">
-			{#each cart as item (item.id)}
+			{#each cart as item (`${item.id}-${item.size || 'no-size'}`)}
 				<div class="cart-item">
 					<div class="item-image">
 						{#if item.imageUrl}
@@ -51,6 +51,12 @@
 
 					<div class="item-details">
 						<h3>{item.name}</h3>
+						{#if item.size}
+							<div class="item-size">
+								<span class="label">Size:</span>
+								<span class="value">{item.size}</span>
+							</div>
+						{/if}
 						<div class="item-price">
 							<span class="label">Price:</span>
 							<span class="value">${item.price.toFixed(2)}</span>
@@ -61,7 +67,9 @@
 						</div>
 
 						<div class="quantity-controls">
-							<button class="remove-btn" onclick={() => handleRemoveItem(item.id)}>Remove</button>
+							<button class="remove-btn" onclick={() => handleRemoveItem(item.id, item.size)}
+								>Remove</button
+							>
 						</div>
 					</div>
 
@@ -225,7 +233,8 @@
 						}
 					}
 
-					& .item-price {
+					& .item-price,
+					& .item-size {
 						margin: 0;
 						display: flex;
 						align-items: center;
@@ -241,6 +250,15 @@
 							color: var(--color-info);
 							font-weight: 200;
 							font-size: clamp(var(--sm), 1.5vw, var(--h6));
+						}
+					}
+
+					& .item-size {
+						& .value {
+							color: var(--color-accent);
+							font-weight: 600;
+							text-transform: uppercase;
+							letter-spacing: 1px;
 						}
 					}
 

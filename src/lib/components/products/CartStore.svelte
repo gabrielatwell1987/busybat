@@ -30,7 +30,13 @@
 	// Add to cart function
 	export function addToCart(product) {
 		const newCart = [...cart];
-		const existingItem = newCart.find((item) => item.id === product.id);
+		// For products with sizes, check both id and size. For products without sizes, just check id
+		const existingItem = newCart.find((item) => {
+			if (product.size) {
+				return item.id === product.id && item.size === product.size;
+			}
+			return item.id === product.id && !item.size;
+		});
 
 		if (existingItem) {
 			existingItem.quantity += 1;
@@ -41,18 +47,30 @@
 		console.log('Cart updated:', cart); // Debug log
 	}
 
-	// Remove from cart
-	export function removeFromCart(productId) {
-		cart = cart.filter((item) => item.id !== productId);
+	// Remove from cart - now needs to handle items with sizes
+	export function removeFromCart(productId, size = null) {
+		cart = cart.filter((item) => {
+			if (size) {
+				return !(item.id === productId && item.size === size);
+			}
+			return !(item.id === productId && !item.size);
+		});
 	}
 
-	// Update item quantity
-	export function updateQuantity(productId, newQuantity) {
+	// Update item quantity - now needs to handle items with sizes
+	export function updateQuantity(productId, newQuantity, size = null) {
 		if (newQuantity < 1) {
-			removeFromCart(productId);
+			removeFromCart(productId, size);
 			return;
 		}
-		cart = cart.map((item) => (item.id === productId ? { ...item, quantity: newQuantity } : item));
+		cart = cart.map((item) => {
+			if (size) {
+				return item.id === productId && item.size === size
+					? { ...item, quantity: newQuantity }
+					: item;
+			}
+			return item.id === productId && !item.size ? { ...item, quantity: newQuantity } : item;
+		});
 	}
 
 	// Export cart data for components to use

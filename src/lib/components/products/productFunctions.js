@@ -61,7 +61,12 @@ export function createToggleDropdownHandler(setState) {
 
 // Factory function for enlargement toggle
 export function createToggleEnlargementHandler(contextData, setState) {
-	return function toggleEnlargement() {
+	return function toggleEnlargement(e) {
+		// Prevent enlargement toggle if the click came from a select element
+		if (e && (e.target.tagName === 'SELECT' || e.target.closest('select'))) {
+			return;
+		}
+
 		const { id, context } = contextData;
 		const isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
 		const supportsViewTransitions = browser && 'startViewTransition' in document;

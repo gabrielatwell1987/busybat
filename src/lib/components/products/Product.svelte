@@ -36,47 +36,37 @@
 	let supportsViewTransitions = $state(false);
 	let isFirefox = $state(false);
 	let cart = $state([]);
-
-	// initialization and state management
-	$effect(() => {
-		// Initialize browser detection (runs once on mount)
-		if (browser && !supportsViewTransitions && !isFirefox) {
-			supportsViewTransitions = browser && 'startViewTransition' in document;
-			isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
-
-			// Add a way to force Firefox mode for testing
-			const urlParams = new URLSearchParams(window.location.search);
-			const forceFirefoxMode = urlParams.get('firefox') === 'true';
-
-			if (forceFirefoxMode) {
-				isFirefox = true;
-				supportsViewTransitions = false;
-				console.log('🦊 Firefox mode forced for product', id);
-			}
-
-			// Debug logging
-			console.log('Product browser detection:', {
-				id,
-				supportsViewTransitions,
-				isFirefox,
-				userAgent: browser ? navigator.userAgent : 'SSR'
-			});
-		}
-
-		// Get cart data and update state
-		const data = getCartData();
-		cart = data.cart;
-		isAddedToCart = cart.some((item) => item.id === id);
-	});
+	let selectedSize = $state(''); // Add state for selected size
 
 	const useContainFit = imageFit === 'contain' || category === 'Bags' || category === 'Clothing';
 	const dispatch = createEventDispatcher();
-	// Product data for cart
-	const productData = { id, name, price, imageUrl, productUrl, quantity: 1 };
+
+	// Product data for cart - make it reactive to include selected size
+	let productData = $derived({
+		id,
+		name,
+		price,
+		imageUrl,
+		productUrl,
+		quantity: 1,
+		...(selectedSize && { size: selectedSize }) // Only include size if one is selected
+	});
 
 	// Handle add to cart with proper state updates
 	async function handleAddToCart(e) {
 		e.stopPropagation();
+
+		// Check if this product has size options and no size is selected
+		if (browser && id === '3') {
+			// Debbie Harry Jacket (id: "3") requires size selection
+			const productCard = document.querySelector(`.product-card.product-id-${id}`);
+			const selectElements = productCard?.querySelectorAll('select');
+			if (selectElements?.length > 0 && !selectedSize) {
+				alert('Please select a size before adding to cart.');
+				return;
+			}
+		}
+
 		if (addToCart && !isLoading && !isAddedToCart) {
 			isLoading = true;
 			addToCart(productData);
@@ -155,6 +145,80 @@
 		}
 	}
 
+	// Cleanup function for select event listeners
+	function cleanupSelectListeners() {
+		if (browser) {
+			const productCard = document.querySelector(`.product-card.product-id-${id}`);
+			if (productCard) {
+				const selectElements = productCard.querySelectorAll('select');
+				selectElements.forEach((select) => {
+					select.removeEventListener('click', handleSelectClick);
+					select.removeEventListener('mousedown', handleSelectClick);
+					select.removeEventListener('change', handleSizeChange);
+				});
+			}
+		}
+	}
+
+	function handleSelectClick(e) {
+		e.stopPropagation();
+	}
+
+	function handleSizeChange(e) {
+		selectedSize = e.target.value;
+		console.log('Size selected:', selectedSize);
+
+		// Update cart status when size changes
+		if (browser) {
+			const data = getCartData();
+			cart = data.cart;
+			isAddedToCart = cart.some((item) => {
+				if (selectedSize) {
+					return item.id === id && item.size === selectedSize;
+				}
+				return item.id === id && !item.size;
+			});
+		}
+	}
+
+	// initialization and state management
+	$effect(() => {
+		// Initialize browser detection (runs once on mount)
+		if (browser && !supportsViewTransitions && !isFirefox) {
+			supportsViewTransitions = browser && 'startViewTransition' in document;
+			isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
+
+			// Add a way to force Firefox mode for testing
+			const urlParams = new URLSearchParams(window.location.search);
+			const forceFirefoxMode = urlParams.get('firefox') === 'true';
+
+			if (forceFirefoxMode) {
+				isFirefox = true;
+				supportsViewTransitions = false;
+				console.log('🦊 Firefox mode forced for product', id);
+			}
+
+			// Debug logging
+			console.log('Product browser detection:', {
+				id,
+				supportsViewTransitions,
+				isFirefox,
+				userAgent: browser ? navigator.userAgent : 'SSR'
+			});
+		}
+
+		// Get cart data and update state
+		const data = getCartData();
+		cart = data.cart;
+		// Check if this specific product+size combination is already in cart
+		isAddedToCart = cart.some((item) => {
+			if (selectedSize) {
+				return item.id === id && item.size === selectedSize;
+			}
+			return item.id === id && !item.size;
+		});
+	});
+
 	// enlargement state management
 	$effect(() => {
 		// Don't run DOM manipulation effects during transitions to prevent flicker
@@ -229,9 +293,48 @@
 					productInfo.scrollTo(0, 0);
 					productInfo.scrollTo({ top: 0, behavior: 'instant' });
 				}
+
+				// Handle clicks on select elements to prevent closing the product
+				if (browser) {
+					const productCard = document.querySelector(`.product-card.product-id-${id}`);
+					if (productCard) {
+						const selectElements = productCard.querySelectorAll('select');
+						selectElements.forEach((select) => {
+							// Remove any existing listeners to prevent duplicates
+							select.removeEventListener('click', handleSelectClick);
+							select.removeEventListener('mousedown', handleSelectClick);
+							select.removeEventListener('change', handleSizeChange);
+
+							// Add event listeners to prevent propagation
+							select.addEventListener('click', handleSelectClick);
+							select.addEventListener('mousedown', handleSelectClick);
+
+							// Add change listener for size selection
+							select.addEventListener('change', handleSizeChange);
+
+							// Set initial selected size if there's a default value
+							if (select.value) {
+								selectedSize = select.value;
+							}
+						});
+
+						// Update cart status after handling select elements
+						const data = getCartData();
+						cart = data.cart;
+						isAddedToCart = cart.some((item) => {
+							if (selectedSize) {
+								return item.id === id && item.size === selectedSize;
+							}
+							return item.id === id && !item.size;
+						});
+					}
+				}
 			}, 0);
 		} else {
 			// When un-enlarging, handle cleanup
+			// Cleanup select event listeners
+			cleanupSelectListeners();
+
 			// Announce closing to screen readers
 			if (document.body.classList.contains('product-enlarged')) {
 				const announcement = document.createElement('div');
