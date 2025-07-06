@@ -1,16 +1,14 @@
 <script>
 	import { browser } from '$app/environment';
-	import ViewTransition from '$lib/data/ViewTransition.svelte';
+	import ViewTransition from '$lib/components/layout/ViewTransition.svelte';
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 	import galleryImages from './photoGallery.json';
 
+	let currentSlide = $state(0);
 	let supportsViewTransitions = $state(false);
 
 	// gallery images
 	const images = galleryImages;
-
-	// Active slide state
-	let currentSlide = $state(0);
 
 	// Function to handle slide change
 	function changeSlide(index) {
