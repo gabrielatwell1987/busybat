@@ -109,9 +109,10 @@
 		window.addEventListener('hashchange', handleHashChange);
 
 		// Auto-focus the keyboard handler for immediate arrow key navigation
+		// Use preventScroll to avoid scrolling the page when focusing
 		const keyboardHandler = document.querySelector('.carousel-keyboard-handler');
 		if (keyboardHandler) {
-			keyboardHandler.focus();
+			keyboardHandler.focus({ preventScroll: true });
 		}
 
 		// Announce the initial slide after a brief delay
