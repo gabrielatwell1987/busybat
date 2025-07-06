@@ -74,23 +74,25 @@
 	.content {
 		display: flex;
 		width: 100%;
-		overflow: hidden;
-		height: 100vh;
+		overflow-y: auto;
+		min-height: 100vh;
 
 		@media (width <= 768px) {
 			width: 100vw;
+			padding: 0;
+			min-height: auto;
+			justify-content: center;
+			align-items: center;
 		}
 
 		& .form-container {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			overflow: hidden;
-			padding: 0;
-			transform: translateY(0);
+			overflow: visible;
 			position: relative;
 			width: 100%;
-			height: 100vh;
+			min-height: 100vh;
 
 			& form {
 				display: flex;
@@ -100,7 +102,8 @@
 				margin-inline: auto;
 				transform: translateY(0);
 				scale: 1;
-				padding-bottom: 1.5rem;
+				/* padding-bottom: -1.5em; */
+				/* margin-bottom: -2rem; */
 
 				& fieldset {
 					border: none;
@@ -196,11 +199,14 @@
 				}
 
 				& .send {
-					margin-bottom: 1rem;
+					margin-bottom: 2rem;
+					margin-top: 1rem;
+
 					@media (width <= 500px) {
 						transform: none;
 						scale: 1.2;
-						margin-top: 1em;
+						margin-top: 1.5rem;
+						margin-bottom: 2rem;
 					}
 				}
 
@@ -232,8 +238,8 @@
 
 				@media (width <= 1950px) {
 					scale: 0.9;
-					margin-block: 1em;
-					padding-top: 7em;
+					margin-block: 0;
+					padding-top: 0;
 				}
 
 				@media (width <= 1150px) {
@@ -247,20 +253,21 @@
 					width: min(85%, 900px);
 				}
 				@media (width <= 768px) {
-					width: 90vw;
-					max-width: 90vw;
-					transform: translateY(-2em);
-					margin: 0 auto;
+					width: 100%;
+					max-width: none;
+					transform: translateY(0);
+					margin: 0;
 					scale: 1;
 					box-sizing: border-box;
 					padding: 0;
 
 					& fieldset {
 						padding: 1rem;
-						width: 100%;
+						width: 90%;
+						max-width: 500px;
+						margin: 0 auto;
 						box-sizing: border-box;
 						box-shadow: none;
-						margin: 0;
 						border: none;
 						position: relative;
 						z-index: 1;
@@ -277,16 +284,21 @@
 				}
 
 				@media (width <= 500px) {
-					width: 95vw;
-					max-width: 95vw;
-					transform: translateY(-2em);
-					margin: 0 auto;
+					width: 100%;
+					max-width: none;
+					transform: translateY(0);
+					margin: 0;
 					margin-top: 0;
 					scale: 1;
+					position: relative;
+					left: 0;
 
 					& fieldset {
 						padding: 0.75rem;
 						padding-top: 0;
+						width: 95%;
+						max-width: 400px;
+						margin: 0 auto;
 
 						& legend {
 							position: relative;
@@ -301,15 +313,18 @@
 			}
 
 			@media (width <= 768px) {
-				align-items: flex-start;
-				justify-content: center;
-				height: 100vh;
 				width: 100%;
-				transform: translateY(0);
-				overflow: hidden;
+				min-width: 325px;
+				min-height: 100vh;
+				height: auto;
+				overflow-y: visible;
 				box-sizing: border-box;
+				align-items: center;
+				justify-content: center;
+				transform: translateY(0);
+				margin: 0;
+				padding: 1rem;
 				margin-right: 2em;
-				padding-top: 1em;
 			}
 		}
 	}
