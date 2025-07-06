@@ -157,9 +157,12 @@
 			flex-direction: column;
 			gap: 1rem;
 
-			a {
-				font-size: clamp(--h6, 2vw, --h5);
-				font-weight: 600;
+			& a {
+				color: var(--color-secondary);
+				font-size: clamp(var(--h6), 2vw, var(--h5));
+				font-weight: 700;
+				padding: 0.5rem 1rem;
+				width: fit-content;
 			}
 		}
 
