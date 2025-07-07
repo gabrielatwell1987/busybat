@@ -1,4 +1,5 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	import { goto } from '$app/navigation';
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
@@ -62,6 +63,12 @@
 	<title>Admin Login</title>
 	<meta name="description" content="Admin login page" />
 </svelte:head>
+
+<SEO
+	title="Login &middot; Busy Little Bat Sewing"
+	description="Login to access your admin dashboard and manage your Busy Little Bat Sewing blog"
+	keywords="login, admin login, account access, busy little bat sewing login, admin dashboard"
+/>
 
 <VerticalTitle title="Admin Login" />
 

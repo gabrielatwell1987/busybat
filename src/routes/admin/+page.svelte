@@ -1,4 +1,5 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	import { goto } from '$app/navigation';
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
@@ -184,6 +185,12 @@
 		}
 	}
 </script>
+
+<SEO
+	title="Admin Dashboard &middot; Busy Little Bat Sewing"
+	description="Administrative dashboard for managing blog posts and content."
+	keywords="admin, dashboard, content management, busy little bat sewing blog admin"
+/>
 
 <VerticalTitle title="Admin Dashboard" />
 

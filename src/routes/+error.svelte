@@ -1,7 +1,14 @@
 <script>
 	import { page } from '$app/stores';
 	import { fade } from 'svelte/transition';
+	import SEO from '$lib/data/SEO.svelte';
 </script>
+
+<SEO
+	title="Error &middot; Busy Little Bat Sewing"
+	description="An error occurred while processing your request. Please try again later."
+	keywords="error, busy little bat sewing error, error page, 404, 500"
+/>
 
 <main aria-label="error" transition:fade={{ duration: 300, delay: 100 }}>
 	<div class="error">

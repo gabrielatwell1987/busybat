@@ -1,4 +1,5 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
 
 	let { data } = $props();
@@ -48,6 +49,12 @@
 	<title>Blog - Latest Posts</title>
 	<meta name="description" content="Read our latest blog posts and updates" />
 </svelte:head>
+
+<SEO
+	title="Blog &middot; Busy Little Bat Sewing"
+	description="Latest news, updates, and insights from Busy Little Bat Sewing. Stay updated with our fashion collections, behind-the-scenes content, and sewing tips."
+	keywords="sewing blog, fashion blog, alternative clothing news, sewing tips, handmade fashion, busy little bat sewing blog"
+/>
 
 <VerticalTitle title="Blog" />
 

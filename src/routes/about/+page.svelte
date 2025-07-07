@@ -6,7 +6,7 @@
 </script>
 
 <SEO
-	title="Busy Little Bat Sewing &middot; About Us"
+	title="About Us &middot; Busy Little Bat Sewing"
 	description="About Busy Little Bat Sewing."
 	keywords="about busy little bat sewing, about busy little bat"
 />

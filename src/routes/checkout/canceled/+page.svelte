@@ -1,6 +1,13 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	// No special logic needed for canceled payments
 </script>
+
+<SEO
+	title="Payment Canceled &middot; Busy Little Bat Sewing"
+	description="Your checkout session was canceled. Continue shopping for our handmade clothing and accessories."
+	keywords="payment canceled, checkout canceled, alternative fashion, handmade clothing, busy little bat sewing canceled payment"
+/>
 
 <section class="canceled-container">
 	<h1>Payment Canceled</h1>

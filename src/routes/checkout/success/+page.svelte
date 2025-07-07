@@ -1,4 +1,5 @@
 <script>
+	import SEO from '$lib/data/SEO.svelte';
 	import { page } from '$app/stores';
 
 	let sessionId = $state($page.url.searchParams.get('session_id') || '');
@@ -23,6 +24,12 @@
 		}
 	});
 </script>
+
+<SEO
+	title="Order Successful &middot; Busy Little Bat Sewing"
+	description="Thank you for your purchase! Your order has been successfully processed."
+	keywords="order success, payment successful, alternative fashion purchase, busy little bat sewing order success"
+/>
 
 <section class="success-container">
 	<h1>Thank You for Your Order!</h1>
