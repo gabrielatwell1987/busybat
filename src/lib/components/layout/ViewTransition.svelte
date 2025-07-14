@@ -1,7 +1,6 @@
 <script>
 	import { onNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
 
 	let supportsViewTransitions = $state(false);
 
@@ -10,7 +9,7 @@
 		return browser && 'startViewTransition' in document;
 	}
 
-	onMount(() => {
+	$effect(() => {
 		// Check for View Transition support and browser type
 		try {
 			supportsViewTransitions = hasViewTransitionSupport();
@@ -76,22 +75,20 @@
 			view-transition-name: root;
 		}
 		:root::view-transition-old(root) {
-			animation: 0.7s cubic-bezier(0.4, 0, 1, 1) both crossfade-out;
+			animation: 0.4s cubic-bezier(0.4, 0, 1, 1) both crossfade-out;
 		}
 
 		:root::view-transition-new(root) {
-			animation: 0.4s cubic-bezier(0, 0, 0.2, 1) both crossfade-in;
+			animation: 0.2s cubic-bezier(0, 0, 0.2, 1) both crossfade-in;
 		}
 
 		@supports (-webkit-touch-callout: none) {
 			:root::view-transition-old(root) {
-				animation: 0.15s cubic-bezier(0.4, 0, 1, 1) both crossfade-out-safari;
-				animation-delay: 0.5s;
+				animation: 0.4s cubic-bezier(0.4, 0, 1, 1) both crossfade-out-safari;
 			}
 
 			:root::view-transition-new(root) {
-				animation: 0.5s cubic-bezier(0, 0, 0.2, 1) both crossfade-in-safari;
-				animation-delay: 0.5s;
+				animation: 0.3s cubic-bezier(0, 0, 0.2, 1) both crossfade-in-safari;
 			}
 		}
 	}
