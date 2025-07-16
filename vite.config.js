@@ -6,7 +6,8 @@ export default defineConfig({
 	server: {
 		fs: {
 			allow: ['..']
-		}
+		},
+		open: true
 	},
 	build: {
 		target: 'es2020',
