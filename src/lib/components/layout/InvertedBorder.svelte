@@ -32,12 +32,21 @@
 		margin-block: 3em;
 		place-items: center;
 
+		@media (width <= 1150px) {
+			margin-top: -10vw;
+		}
+
+		@media (width <= 1150px) {
+			margin-top: -15vw;
+		}
+
 		@media (width <= 768px) {
 			grid-template-columns: 1fr;
 			grid-template-areas:
 				'content'
 				'img';
 			padding: 1rem;
+			margin-top: -45vw;
 		}
 
 		/* Container for content with background */
