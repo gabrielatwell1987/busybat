@@ -98,12 +98,10 @@
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
-				width: min(70%, 1000px);
+				width: min(85%, 1500px);
 				margin-inline: auto;
 				transform: translateY(0);
 				scale: 1;
-				/* padding-bottom: -1.5em; */
-				/* margin-bottom: -2rem; */
 
 				& fieldset {
 					border: none;
@@ -122,9 +120,8 @@
 
 					& legend {
 						color: var(--color-dark);
-						font-family: var(--font-regular);
+						font-family: var(--font-bold);
 						font-size: clamp(var(--h5), 2vw, var(--h4));
-						font-weight: 700;
 						text-align: left;
 						letter-spacing: -1px;
 						padding-inline: 1rem;
@@ -142,12 +139,16 @@
 					color: var(--color-gray);
 					font-family: var(--font-semibold);
 					font-size: clamp(var(--h6), 2vw, var(--h5));
-					font-weight: 700;
-					text-align: center;
 					letter-spacing: 0px;
+					background: var(--color-white);
+					color: var(--color-secondary);
+					transform: translate(20px, 34px);
+					z-index: 5;
+					width: fit-content;
+					padding: 0 0.5rem;
 
 					@media (width <= 500px) {
-						transform: none;
+						transform: translate(20px, 30px);
 					}
 				}
 				& input,
@@ -155,7 +156,7 @@
 					font-family: var(--font-regular);
 					font-size: clamp(var(--h6), 2vw, var(--h4));
 					padding-block: 0.1rem;
-					border-radius: calc(var(--radius) * 3);
+					border-radius: calc(var(--radius) * 1.75);
 					width: 100%;
 					box-sizing: border-box;
 
@@ -180,6 +181,7 @@
 
 				& input {
 					padding-inline: 1rem;
+					border: 1px solid var(--color-secondary);
 					padding-block: 0.5rem;
 
 					&:user-valid {
@@ -212,6 +214,7 @@
 
 				& textarea {
 					padding-inline: 1rem;
+					border: 1px solid var(--color-secondary);
 					padding-block: 0.5rem;
 
 					&:user-valid {
