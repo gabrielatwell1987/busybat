@@ -186,11 +186,12 @@
 	}
 </script>
 
-<SEO
-	title="Admin Dashboard &middot; Busy Little Bat Sewing"
-	description="Administrative dashboard for managing blog posts and content."
-	keywords="admin, dashboard, content management, busy little bat sewing blog admin"
-/>
+<svelte:head>
+	<title>Admin Dashboard &middot; Busy Little Bat Sewing</title>
+	<meta name="description" content="Admin dashboard for managing blog posts and content." />
+	<!-- Block search engine indexing -->
+	<meta name="robots" content="noindex, nofollow" />
+</svelte:head>
 
 <VerticalTitle title="Admin Dashboard" />
 

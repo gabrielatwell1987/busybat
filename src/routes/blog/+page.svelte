@@ -53,7 +53,7 @@
 <SEO
 	title="Blog &middot; Busy Little Bat Sewing"
 	description="Latest news, updates, and insights from Busy Little Bat Sewing. Stay updated with our fashion collections, behind-the-scenes content, and sewing tips."
-	keywords="sewing blog, fashion blog, alternative clothing news, sewing tips, handmade fashion, busy little bat sewing blog"
+	keywords="busy little bat sewing blog, busy little bat sewing craft fair, busy little bat sewing craft tips"
 />
 
 <VerticalTitle title="Blog" />

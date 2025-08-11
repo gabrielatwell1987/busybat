@@ -60,15 +60,14 @@
 </script>
 
 <svelte:head>
-	<title>Admin Login</title>
-	<meta name="description" content="Admin login page" />
+	<title>Login &middot; Busy Little Bat Sewing</title>
+	<meta
+		name="description"
+		content="Login to access your admin dashboard and manage your Busy Little Bat Sewing blog"
+	/>
+	<!-- Block search engine indexing -->
+	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
-
-<SEO
-	title="Login &middot; Busy Little Bat Sewing"
-	description="Login to access your admin dashboard and manage your Busy Little Bat Sewing blog"
-	keywords="login, admin login, account access, busy little bat sewing login, admin dashboard"
-/>
 
 <VerticalTitle title="Admin Login" />
 
