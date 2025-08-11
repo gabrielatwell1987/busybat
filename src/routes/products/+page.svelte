@@ -44,7 +44,7 @@
 <SEO
 	title="Our Products &middot; Busy Little Bat Sewing"
 	description="Explore the unique and handmade products from Busy Little Bat Sewing."
-	keywords="busy little bat products, busy little bat sewing creations, products, handmade clothing, alternative fashion"
+	keywords="busy little bat sewing products, busy little bat sewing creations"
 />
 
 <ProductFilter {products} {onCategoryChange} />

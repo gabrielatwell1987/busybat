@@ -33,7 +33,7 @@
 <SEO
 	title="Shopping Cart &middot; Busy Little Bat Sewing"
 	description="Review your selected items and proceed to checkout. Quality handmade gothic and alternative clothing from Busy Little Bat Sewing."
-	keywords="shopping cart, checkout, alternative fashion, handmade clothing, busy little bat sewing shopping cart"
+	keywords="busy little bat sewing shop, busy little bat sewing shopping cart"
 />
 
 <div class="cart-page">

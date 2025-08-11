@@ -7,7 +7,7 @@
 <SEO
 	title="Busy Little Bat Sewing"
 	description="Handmade sewing company in Las Vegas, Nevada. Specializing in bags and accessories."
-	keywords="busy bat, busy bat sewing, busy bat sewing co, busy bat sewing company, busy bat las vegas, busy bat sewing las vegas, busy bat sewing co las vegas, handmade bags, handmade accessories, handmade bags las vegas, handmade accessories las vegas"
+	keywords="busy bat, busy bat sewing, busy bat sewing co, busy bat sewing company, busy bat las vegas, busy bat sewing las vegas, busy bat sewing co las vegas, busy little bat sewing homepage, handmade bags, handmade accessories, unique upcycled clothing, unique gothic accessories"
 />
 
 <main>
