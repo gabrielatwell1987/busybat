@@ -175,6 +175,15 @@
 
 	// Browser detection and cart state management
 	$effect(() => {
+		// Edge browser check for Android
+		const ua = navigator.userAgent.toLowerCase();
+		const isEdgeMobile = ua.includes('edg/') && ua.includes('android');
+		if (isEdgeMobile) {
+			supportsViewTransitions = false;
+			console.log('Edge Android detected, disabling view transitions for product', id);
+		}
+
+		// firefox
 		if (browser && !supportsViewTransitions && !isFirefox) {
 			supportsViewTransitions = browser && 'startViewTransition' in document;
 			isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
