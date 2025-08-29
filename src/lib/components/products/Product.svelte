@@ -73,6 +73,7 @@
 			await new Promise((resolve) => setTimeout(resolve, 500));
 			isLoading = false;
 			isAddedToCart = true;
+			toggleEnlargement(false);
 		}
 	}
 
