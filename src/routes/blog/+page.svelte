@@ -28,20 +28,15 @@
 			loading = false;
 		}
 	}
-	function togglePostExpansion(postId) {
+
+	// Simplified mobile-friendly click handler
+	function handleExpandToggle(postId) {
 		if (expandedPosts.has(postId)) {
 			expandedPosts.delete(postId);
 		} else {
 			expandedPosts.add(postId);
 		}
 		expandedPosts = new Set(expandedPosts);
-
-		// Announce the change to screen readers
-		const expanded = expandedPosts.has(postId);
-		const button = document.querySelector(`[aria-controls="post-content-${postId}"]`);
-		if (button) {
-			button.setAttribute('aria-expanded', expanded.toString());
-		}
 	}
 </script>
 
@@ -99,20 +94,23 @@
 						{/if}
 
 						<div class="post-header-content">
-							<div class="post-title-section">
+							<div
+								class="post-title-section"
+								onclick={() => handleExpandToggle(post.id)}
+								role="button"
+								tabindex="0"
+								style="cursor: pointer; padding: 0.5rem; border-radius: 4px;"
+								onkeydown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										e.preventDefault();
+										handleExpandToggle(post.id);
+									}
+								}}
+							>
 								<h2 id="post-title-{post.id}">{post.title}</h2>
-
-								<button
-									class="expand-button"
-									onclick={() => togglePostExpansion(post.id)}
-									aria-label={expandedPosts.has(post.id) ? 'Collapse post' : 'Expand post'}
-									aria-expanded={expandedPosts.has(post.id)}
-									aria-controls="post-content-{post.id}"
-								>
-									<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
-										{expandedPosts.has(post.id) ? '▼' : '▶'}
-									</span>
-								</button>
+								<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
+									{expandedPosts.has(post.id) ? '▼' : '▶'}
+								</span>
 							</div>
 
 							<div class="post-meta">
@@ -316,43 +314,6 @@
 					align-items: center;
 					justify-content: space-between;
 					margin-bottom: 0.75rem;
-
-					& .expand-button {
-						background: none;
-						border: none;
-						cursor: pointer;
-						padding: 0.5rem;
-						border-radius: 6px;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						transition: background-color 0.2s ease;
-						font-size: clamp(var(--h4), 1.5vw, var(--h4));
-
-						&:hover {
-							background-color: var(--color-primary);
-						}
-
-						&:focus {
-							outline: none;
-							background-color: var(--color-primary);
-							box-shadow: 0 0 0 2px var(--color-accent);
-						}
-
-						&:focus-visible {
-							outline: 2px solid var(--color-accent);
-							outline-offset: 2px;
-						}
-
-						& .expand-icon {
-							color: var(--color-secondary);
-							transition: transform 0.2s ease;
-
-							&.expanded {
-								transform: rotate(0deg);
-							}
-						}
-					}
 				}
 				& .post-meta {
 					color: #666;
@@ -364,16 +325,6 @@
 
 					& h2 {
 						font-size: 1.25rem;
-					}
-
-					& .post-title-section {
-						& .expand-button {
-							padding: 0.25rem;
-
-							& .expand-icon {
-								font-size: 0.9em;
-							}
-						}
 					}
 				}
 			}
