@@ -5,12 +5,19 @@
 		createToggleEnlargementHandler,
 		trapFocus
 	} from './productFunctions.js';
+	import {
+		createBrowserDetection,
+		createCartState,
+		createAddToCartHandler,
+		createSelectHandlers,
+		createAccessibilityHelpers,
+		createDropdownHandlers
+	} from './uiFunctions.svelte.js';
 	import ProductDropdown from './ProductDropdown.svelte';
 	import ProductImage from './ProductImage.svelte';
 	import ProductInfo from './ProductInfo.svelte';
 	import ProductActions from './ProductActions.svelte';
 	import ProductOverlay from './ProductOverlay.svelte';
-	import { getCartData } from './CartStore.svelte';
 
 	let {
 		id,
@@ -32,15 +39,17 @@
 
 	// State variables
 	let isEnlarged = $state(false);
-	let isLoading = $state(false);
 	let isDropdownOpen = $state(false);
 	let isDropdownOpened = $state(false);
-	let isAddedToCart = $state(false);
 	let isTransitioning = $state(false);
+
+	// Initialize browser detection
+	const browserDetection = createBrowserDetection();
 	let supportsViewTransitions = $state(false);
 	let isFirefox = $state(false);
-	let cart = $state([]);
-	let selectedSize = $state('');
+
+	// Initialize cart state management
+	const cartState = createCartState(id);
 
 	// Product data for cart - make it reactive to include selected size
 	let productData = $derived({
@@ -50,30 +59,21 @@
 		imageUrl,
 		productUrl,
 		quantity: 1,
-		...(selectedSize && { size: selectedSize })
+		...(cartState.selectedSize && { size: cartState.selectedSize })
 	});
+
+	let addToCartHandler = $state(null);
+
+	const selectHandlers = createSelectHandlers(id, cartState);
+
+	const accessibilityHelpers = createAccessibilityHelpers();
+
+	const dropdownHandlers = createDropdownHandlers();
 
 	// Handle add to cart with proper state updates
 	async function handleAddToCart(e) {
-		e.stopPropagation();
-
-		// Check if this product has size options and no size is selected
-		if (browser && id === '3') {
-			const productCard = document.querySelector(`.product-card.product-id-${id}`);
-			const selectElements = productCard?.querySelectorAll('select');
-			if (selectElements?.length > 0 && !selectedSize) {
-				alert('Please select a size before adding to cart.');
-				return;
-			}
-		}
-
-		if (addToCart && !isLoading && !isAddedToCart) {
-			isLoading = true;
-			addToCart(productData);
-			await new Promise((resolve) => setTimeout(resolve, 500));
-			isLoading = false;
-			isAddedToCart = true;
-			toggleEnlargement(false);
+		if (addToCartHandler) {
+			await addToCartHandler.handleAddToCart(e, addToCart, toggleEnlargement);
 		}
 	}
 
@@ -118,102 +118,27 @@
 
 	function handleDropdownState(isOpen) {
 		isDropdownOpened = isOpen;
-		if (!isOpen && !isEnlarged) {
-			const otherProducts =
-				isFirefox || !supportsViewTransitions
-					? document.querySelectorAll(`.product-card:not(.product-id-${id})`)
-					: document.querySelectorAll(
-							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-						);
-			const footer = document.querySelector('footer');
-
-			otherProducts.forEach((product) => {
-				product.style.removeProperty('visibility');
-				product.style.opacity = '1';
-				product.style.transition = 'opacity 0.3s ease';
-			});
-			if (footer) {
-				footer.style.removeProperty('visibility');
-				footer.style.opacity = '1';
-				footer.style.zIndex = '20';
-			}
-		}
-	}
-
-	function handleSelectClick(e) {
-		e.stopPropagation();
-	}
-
-	function handleSizeChange(e) {
-		selectedSize = e.target.value;
-		console.log('Size selected:', selectedSize);
-
-		if (browser) {
-			const data = getCartData();
-			cart = data.cart;
-			isAddedToCart = cart.some((item) => {
-				if (selectedSize) {
-					return item.id === id && item.size === selectedSize;
-				}
-				return item.id === id && !item.size;
-			});
-		}
-	}
-
-	function cleanupSelectListeners() {
-		if (browser) {
-			const productCard = document.querySelector(`.product-card.product-id-${id}`);
-			if (productCard) {
-				const selectElements = productCard.querySelectorAll('select');
-				selectElements.forEach((select) => {
-					select.removeEventListener('click', handleSelectClick);
-					select.removeEventListener('mousedown', handleSelectClick);
-					select.removeEventListener('change', handleSizeChange);
-				});
-			}
-		}
+		dropdownHandlers.handleDropdownState(
+			isOpen,
+			id,
+			isEnlarged,
+			isFirefox,
+			supportsViewTransitions
+		);
 	}
 
 	// Browser detection and cart state management
 	$effect(() => {
-		// Edge browser check for Android
-		const ua = navigator.userAgent.toLowerCase();
-		const isEdgeMobile = ua.includes('edg/') && ua.includes('android');
-		if (isEdgeMobile) {
-			supportsViewTransitions = false;
-			console.log('Edge Android detected, disabling view transitions for product', id);
-		}
+		// Initialize browser detection
+		browserDetection.detectBrowser();
+		supportsViewTransitions = browserDetection.supportsViewTransitions;
+		isFirefox = browserDetection.isFirefox;
 
-		// firefox
-		if (browser && !supportsViewTransitions && !isFirefox) {
-			supportsViewTransitions = browser && 'startViewTransition' in document;
-			isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
+		// Initialize add to cart handler now that we have productData
+		addToCartHandler = createAddToCartHandler(id, productData, cartState);
 
-			const urlParams = new URLSearchParams(window.location.search);
-			const forceFirefoxMode = urlParams.get('firefox') === 'true';
-
-			if (forceFirefoxMode) {
-				isFirefox = true;
-				supportsViewTransitions = false;
-				console.log('🦊 Firefox mode forced for product', id);
-			}
-
-			console.log('Product browser detection:', {
-				id,
-				supportsViewTransitions,
-				isFirefox,
-				userAgent: browser ? navigator.userAgent : 'SSR'
-			});
-		}
-
-		const data = getCartData();
-		cart = data.cart;
-		isAddedToCart = cart.some((item) => {
-			if (selectedSize) {
-				return item.id === id && item.size === selectedSize;
-			}
-			return item.id === id && !item.size;
-		});
+		// Update cart state
+		cartState.updateCartState();
 	});
 
 	// Enlargement state management
@@ -224,38 +149,16 @@
 			document.body.classList.add('product-enlarged');
 
 			// Screen reader announcement
-			const announcement = document.createElement('div');
-			announcement.setAttribute('aria-live', 'polite');
-			announcement.setAttribute('aria-atomic', 'true');
-			announcement.className = 'visually-hidden';
 			const cleanDescription = description.replace(/<[^>]*>/g, '').trim();
-			announcement.textContent = `Product details for ${name} expanded. ${cleanDescription}. Press Escape to close.`;
-			document.body.appendChild(announcement);
-
-			setTimeout(() => {
-				if (document.body.contains(announcement)) {
-					document.body.removeChild(announcement);
-				}
-			}, 1000);
+			accessibilityHelpers.createScreenReaderAnnouncement(
+				`Product details for ${name} expanded. ${cleanDescription}. Press Escape to close.`
+			);
 
 			// Handle navigation elements
-			const navElements = document.querySelectorAll('nav, header, .navbar');
-			for (let i = 0; i < navElements.length; i++) {
-				const el = navElements[i];
-				if (window.innerWidth <= 768) {
-					el.style.cssText += ';visibility:hidden';
-				} else {
-					el.style.cssText += ';z-index:1;opacity:0.25';
-				}
-			}
+			accessibilityHelpers.hideNavElements();
 
 			// Immediately reset scroll when enlarged
-			const productInfo = document.querySelector('.product-card.enlarged .product-info');
-			if (productInfo) {
-				productInfo.scrollTop = 0;
-				productInfo.scrollTo(0, 0);
-				productInfo.scrollTo({ top: 0, behavior: 'instant' });
-			}
+			accessibilityHelpers.scrollProductInfoToTop();
 
 			// Handle select elements and scroll to top
 			setTimeout(() => {
@@ -266,68 +169,24 @@
 				}
 
 				// Force scroll to top of the product info content
-				const productInfo = document.querySelector('.product-card.enlarged .product-info');
-				if (productInfo) {
-					productInfo.scrollTop = 0;
-					productInfo.scrollTo(0, 0);
-					productInfo.scrollTo({ top: 0, behavior: 'instant' });
-				}
+				accessibilityHelpers.scrollProductInfoToTop();
 
-				if (browser) {
-					const productCard = document.querySelector(`.product-card.product-id-${id}`);
-					if (productCard) {
-						const selectElements = productCard.querySelectorAll('select');
-						selectElements.forEach((select) => {
-							select.removeEventListener('click', handleSelectClick);
-							select.removeEventListener('mousedown', handleSelectClick);
-							select.removeEventListener('change', handleSizeChange);
-
-							select.addEventListener('click', handleSelectClick);
-							select.addEventListener('mousedown', handleSelectClick);
-							select.addEventListener('change', handleSizeChange);
-
-							if (select.value) {
-								selectedSize = select.value;
-							}
-						});
-
-						const data = getCartData();
-						cart = data.cart;
-						isAddedToCart = cart.some((item) => {
-							if (selectedSize) {
-								return item.id === id && item.size === selectedSize;
-							}
-							return item.id === id && !item.size;
-						});
-					}
-				}
+				// Setup select listeners
+				selectHandlers.setupSelectListeners();
 
 				// Additional delayed scroll reset to ensure content starts at top
 				setTimeout(() => {
-					const productInfo = document.querySelector('.product-card.enlarged .product-info');
-					if (productInfo) {
-						productInfo.scrollTop = 0;
-						productInfo.scrollTo(0, 0);
-						productInfo.scrollTo({ top: 0, behavior: 'instant' });
-					}
+					accessibilityHelpers.scrollProductInfoToTop();
 				}, 100);
 			}, 0);
 		} else {
-			cleanupSelectListeners();
+			// Cleanup select listeners
+			selectHandlers.cleanupSelectListeners();
 
 			if (document.body.classList.contains('product-enlarged')) {
-				const announcement = document.createElement('div');
-				announcement.setAttribute('aria-live', 'polite');
-				announcement.setAttribute('aria-atomic', 'true');
-				announcement.className = 'visually-hidden';
-				announcement.textContent = `Product details closed. Returned to product grid.`;
-				document.body.appendChild(announcement);
-
-				setTimeout(() => {
-					if (document.body.contains(announcement)) {
-						document.body.removeChild(announcement);
-					}
-				}, 1000);
+				accessibilityHelpers.createScreenReaderAnnouncement(
+					'Product details closed. Returned to product grid.'
+				);
 			}
 
 			document.body.classList.remove('product-enlarged');
@@ -343,31 +202,11 @@
 				enlargedCard.style.removeProperty('z-index');
 			}
 
-			const navElements = document.querySelectorAll('nav, header, .navbar');
-			navElements.forEach((el) => {
-				el.style.removeProperty('z-index');
-				el.style.removeProperty('opacity');
-				el.style.removeProperty('visibility');
-			});
+			// Show navigation elements
+			accessibilityHelpers.showNavElements();
 
-			const otherProducts =
-				isFirefox || !supportsViewTransitions
-					? document.querySelectorAll(`.product-card:not(.product-id-${id})`)
-					: document.querySelectorAll(
-							`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
-						);
-			const footer = document.querySelector('footer');
-
-			otherProducts.forEach((product) => {
-				product.style.removeProperty('visibility');
-				product.style.opacity = '1';
-				product.style.transition = 'opacity 0.3s ease';
-			});
-			if (footer) {
-				footer.style.removeProperty('visibility');
-				footer.style.opacity = '1';
-				footer.style.zIndex = '20';
-			}
+			// Show other products
+			accessibilityHelpers.showOtherProducts(id, context, isFirefox, supportsViewTransitions);
 		}
 	});
 </script>
@@ -430,8 +269,8 @@
 
 			<ProductActions
 				{inStock}
-				{isLoading}
-				{isAddedToCart}
+				isLoading={addToCartHandler?.isLoading || false}
+				isAddedToCart={cartState.isAddedToCart}
 				{isEnlarged}
 				onAddToCart={handleAddToCart}
 				onToggleEnlargement={toggleEnlargement}
