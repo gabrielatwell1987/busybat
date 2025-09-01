@@ -1,6 +1,7 @@
 <script>
 	import SEO from '$lib/data/SEO.svelte';
 	import VerticalTitle from '$lib/components/layout/VerticalTitle.svelte';
+	import { slide } from 'svelte/transition';
 
 	let { data } = $props();
 	let posts = $state([]);
@@ -129,6 +130,7 @@
 							class="post-content"
 							id="post-content-{post.id}"
 							aria-labelledby="post-title-{post.id}"
+							transition:slide={{ duration: 500 }}
 						>
 							{#if post.image}
 								<div class="post-image">
@@ -331,8 +333,6 @@
 			& .post-content {
 				padding: 1.5rem;
 				border-top: 1px solid #eee;
-				animation: slideDown 0.3s ease-out;
-				max-height: 400px;
 				overflow-y: auto;
 				background-color: #fafafa;
 				border-radius: 0 0 12px 12px;
@@ -394,16 +394,6 @@
 					padding: 1rem;
 					max-height: 350px;
 				}
-			}
-		}
-		@keyframes slideDown {
-			from {
-				opacity: 0;
-				transform: translateY(-10px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
 			}
 		}
 	}
