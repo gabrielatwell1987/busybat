@@ -166,7 +166,7 @@
 
 			& a {
 				color: var(--color-secondary);
-				font-size: clamp(var(--h6), 2vw, var(--h5));
+				font-size: clamp(var(--sm), 1.5vw, var(--h5));
 				font-weight: 700;
 				padding: 0.5rem 1rem;
 				width: fit-content;
