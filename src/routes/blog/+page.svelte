@@ -87,44 +87,40 @@
 		<div class="posts-grid" role="main" aria-label="Blog posts">
 			{#each posts as post (post.id)}
 				<article class="post-card" aria-labelledby="post-title-{post.id}">
-					<header class="post-header">
-						{#if post.image}
-							<div class="post-thumbnail">
-								<img src={post.image} alt="Thumbnail for {post.title}" />
-							</div>
-						{/if}
+					<button
+						class="post-card-button"
+						onclick={() => handleExpandToggle(post.id)}
+						onkeydown={(e) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								e.preventDefault();
+								handleExpandToggle(post.id);
+							}
+						}}
+					>
+						<header class="post-header">
+							{#if post.image}
+								<div class="post-thumbnail">
+									<img src={post.image} alt="Thumbnail for {post.title}" />
+								</div>
+							{/if}
 
-						<div class="post-header-content">
-							<div
-								class="post-title-section"
-								onclick={() => handleExpandToggle(post.id)}
-								role="button"
-								tabindex="0"
-								style="cursor: pointer; padding: 0.5rem; border-radius: 4px;"
-								onkeydown={(e) => {
-									if (e.key === 'Enter' || e.key === ' ') {
-										e.preventDefault();
-										handleExpandToggle(post.id);
-									}
-								}}
-							>
-								<h2 id="post-title-{post.id}">{post.title}</h2>
-								<span class="expand-icon" class:expanded={expandedPosts.has(post.id)}>
-									{expandedPosts.has(post.id) ? '▼' : '▶'}
-								</span>
-							</div>
+							<div class="post-header-content">
+								<div class="post-title-section">
+									<h2 id="post-title-{post.id}">{post.title}</h2>
+								</div>
 
-							<div class="post-meta">
-								<time datetime={post.createdAt}>
-									{new Date(post.createdAt).toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: 'long',
-										day: 'numeric'
-									})}
-								</time>
+								<div class="post-meta">
+									<time datetime={post.createdAt}>
+										{new Date(post.createdAt).toLocaleDateString('en-US', {
+											year: 'numeric',
+											month: 'long',
+											day: 'numeric'
+										})}
+									</time>
+								</div>
 							</div>
-						</div>
-					</header>
+						</header>
+					</button>
 					{#if expandedPosts.has(post.id)}
 						<div
 							class="post-content"
@@ -265,6 +261,21 @@
 				box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 			}
 
+			& .post-card-button {
+				width: 100%;
+				background: none;
+				border: none;
+				padding: 0;
+				cursor: pointer;
+				text-align: left;
+				display: block;
+
+				&:focus {
+					outline: 2px solid var(--color-accent);
+					outline-offset: 2px;
+				}
+			}
+
 			& .post-header {
 				display: flex;
 				gap: 1rem;
@@ -332,7 +343,7 @@
 			}
 			& .post-content {
 				padding: 1.5rem;
-				border-top: 1px solid #eee;
+				border-top: 2px solid #eee;
 				overflow-y: auto;
 				background-color: #fafafa;
 				border-radius: 0 0 12px 12px;
