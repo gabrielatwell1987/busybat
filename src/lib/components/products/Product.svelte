@@ -61,13 +61,10 @@
 		quantity: 1,
 		...(cartState.selectedSize && { size: cartState.selectedSize })
 	});
-
 	let addToCartHandler = $state(null);
 
 	const selectHandlers = createSelectHandlers(id, cartState);
-
 	const accessibilityHelpers = createAccessibilityHelpers();
-
 	const dropdownHandlers = createDropdownHandlers();
 
 	// Handle add to cart with proper state updates
@@ -128,6 +125,7 @@
 	}
 
 	// Browser detection and cart state management
+
 	$effect(() => {
 		// Initialize browser detection
 		browserDetection.detectBrowser();
@@ -147,6 +145,22 @@
 
 		if (isEnlarged) {
 			document.body.classList.add('product-enlarged');
+
+			// Add global escape key listener
+			function handleGlobalKeydown(e) {
+				if (e.key === 'Escape' && isEnlarged) {
+					e.preventDefault();
+					toggleEnlargement();
+				}
+			}
+			// Mobile-specific: Close on background tap
+			function handleBackgroundTouch(e) {
+				if (e.target.classList.contains('product-overlay') && isEnlarged) {
+					toggleEnlargement();
+				}
+			}
+			document.addEventListener('keydown', handleGlobalKeydown);
+			document.addEventListener('click', handleBackgroundTouch);
 
 			// Screen reader announcement
 			const cleanDescription = description.replace(/<[^>]*>/g, '').trim();
@@ -179,6 +193,12 @@
 					accessibilityHelpers.scrollProductInfoToTop();
 				}, 100);
 			}, 0);
+
+			// Cleanup function
+			return () => {
+				document.removeEventListener('keydown', handleGlobalKeydown);
+				document.removeEventListener('click', handleBackgroundTouch);
+			};
 		} else {
 			// Cleanup select listeners
 			selectHandlers.cleanupSelectListeners();
