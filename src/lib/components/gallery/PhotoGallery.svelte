@@ -200,19 +200,6 @@
 						❯
 					</button>
 				</div>
-
-				<div class="carousel-nav" role="tablist" aria-label="Slide navigation">
-					{#each images as _, i}
-						<button
-							class="nav-dot"
-							role="tab"
-							aria-selected={currentSlide === i}
-							aria-label="Go to slide {i + 1}"
-							aria-controls="slide-{i}"
-							onclick={() => changeSlide(i)}
-						></button>
-					{/each}
-				</div>
 			{/if}
 		</div>
 	</div>
@@ -340,65 +327,6 @@
 
 			& .next-slide {
 				right: 10px;
-			}
-
-			& .carousel-nav {
-				position: absolute;
-				bottom: 2em;
-				left: 0;
-				right: 0;
-				display: flex;
-				justify-content: center;
-				gap: 0.75rem;
-				z-index: 4;
-				padding: 0.5rem 0.75rem;
-				background-color: var(--color-dark);
-				border-radius: 20px;
-				width: fit-content;
-				margin-inline: auto;
-
-				@media (width >= 1024px) {
-					bottom: 2em;
-					z-index: 5;
-				}
-
-				@media (width >= 500px) and (width <= 800px) {
-					bottom: -2em;
-				}
-
-				@media (width <= 500px) {
-					display: none;
-					bottom: -2.5em;
-					padding: 0.4rem 0.6rem;
-				}
-
-				& .nav-dot {
-					width: clamp(0.75rem, 2vw, 1rem);
-					height: clamp(0.75rem, 2vw, 1rem);
-					border-radius: 50%;
-					background: var(--color-light);
-					cursor: pointer;
-					transition: background 0.3s ease;
-					border: none;
-					padding: 0;
-					margin: 0 0.25rem;
-
-					&[aria-selected='true'] {
-						background: var(--color-accent);
-						transform: scale(1.2);
-						opacity: 0.75;
-					}
-
-					&:focus {
-						outline: 1px solid var(--color-white);
-						outline-offset: 2px;
-						opacity: 0.75;
-					}
-
-					&:hover {
-						opacity: 0.8;
-					}
-				}
 			}
 		}
 	}
