@@ -121,7 +121,7 @@
 
 			&.open {
 				.bar:nth-child(1) {
-					transform: rotate(45deg) translate(0.25rem, 0.8rem);
+					transform: rotate(45deg) translate(0.25rem, 0.75rem);
 					transition: transform 0.3s linear;
 					background-color: var(--color-dark);
 				}
