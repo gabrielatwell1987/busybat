@@ -37,6 +37,13 @@
 		grid-row: 1;
 		margin-bottom: 0.5rem;
 
+		@media (width <= 768px) {
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			gap: 0.25rem;
+		}
+
 		&.expanded {
 			grid-row: 1;
 			margin: 0;
@@ -59,13 +66,20 @@
 	}
 
 	.product-price {
-		font-size: clamp(var(--sm), 1.5vw, var(--h4));
-		font-weight: bold;
+		font-size: clamp(var(--h4), 1.75vw, var(--h2));
+		font-weight: 700;
 		color: var(--color-success);
 		margin: 0.5rem 0;
 		grid-row: 3;
 		text-align: right;
 		display: none;
+		position: relative;
+
+		@media (width <= 768px) {
+			display: block;
+			text-align: center;
+			margin: 0;
+		}
 
 		&.expanded {
 			display: block;
