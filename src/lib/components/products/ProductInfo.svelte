@@ -75,14 +75,13 @@
 		display: none;
 		position: relative;
 
-		@media (width <= 768px) {
-			display: block;
-			text-align: center;
-			margin: 0;
-		}
-
 		&.expanded {
 			display: block;
+
+			@media (width <= 768px) {
+				text-align: center;
+				margin: 0;
+			}
 		}
 	}
 
