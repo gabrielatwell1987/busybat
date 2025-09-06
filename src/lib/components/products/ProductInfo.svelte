@@ -59,6 +59,9 @@
 		font-weight: 600;
 		letter-spacing: 1px;
 		text-align: center;
+		word-break: break-word;
+		overflow-wrap: break-word;
+		hyphens: auto;
 
 		&.expanded {
 			font-size: clamp(var(--h5), 2vw, var(--h3));
