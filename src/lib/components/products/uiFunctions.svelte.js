@@ -1,9 +1,6 @@
 import { browser } from '$app/environment';
 import { getCartData } from './CartStore.svelte';
 
-/**
- * Browser detection utilities
- */
 export function createBrowserDetection() {
 	const state = {
 		supportsViewTransitions: false,
@@ -32,12 +29,6 @@ export function createBrowserDetection() {
 			state.isFirefox = true;
 			state.supportsViewTransitions = false;
 		}
-
-		console.log('Browser detection:', {
-			supportsViewTransitions: state.supportsViewTransitions,
-			isFirefox: state.isFirefox,
-			userAgent: browser ? navigator.userAgent : 'SSR'
-		});
 	}
 
 	return {
@@ -51,9 +42,7 @@ export function createBrowserDetection() {
 	};
 }
 
-/**
- * Cart state management
- */
+// Cart state management
 export function createCartState(productId) {
 	const state = {
 		cart: [],
@@ -94,9 +83,7 @@ export function createCartState(productId) {
 	};
 }
 
-/**
- * Add to cart functionality
- */
+// Add to cart functionality
 export function createAddToCartHandler(productId, productData, cartState) {
 	const state = {
 		isLoading: false
@@ -133,9 +120,7 @@ export function createAddToCartHandler(productId, productData, cartState) {
 	};
 }
 
-/**
- * Select element handlers
- */
+// Select element handlers
 export function createSelectHandlers(productId, cartState) {
 	function handleSelectClick(e) {
 		e.stopPropagation();
@@ -189,9 +174,7 @@ export function createSelectHandlers(productId, cartState) {
 	};
 }
 
-/**
- * Accessibility and UI utilities
- */
+// Accessibility and UI utilities
 export function createAccessibilityHelpers() {
 	function createScreenReaderAnnouncement(text) {
 		const announcement = document.createElement('div');
@@ -289,9 +272,7 @@ export function createAccessibilityHelpers() {
 	};
 }
 
-/**
- * Dropdown state management
- */
+// Dropdown state management
 export function createDropdownHandlers() {
 	function handleDropdownState(isOpen, productId, isEnlarged, isFirefox, supportsViewTransitions) {
 		if (!isOpen && !isEnlarged) {

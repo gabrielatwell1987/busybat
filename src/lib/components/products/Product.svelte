@@ -122,10 +122,8 @@
 		);
 	}
 
-	// Browser detection and cart state management
-
 	$effect(() => {
-		// Initialize browser detection
+		// run detection for browser features
 		browserDetection.detectBrowser();
 		supportsViewTransitions = browserDetection.supportsViewTransitions;
 		isFirefox = browserDetection.isFirefox;
