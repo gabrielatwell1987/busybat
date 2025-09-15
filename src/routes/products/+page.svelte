@@ -17,12 +17,6 @@
 	onMount(() => {
 		supportsViewTransitions = browser && 'startViewTransition' in document;
 		isFirefox = browser && navigator.userAgent.toLowerCase().includes('firefox');
-
-		console.log('Products page - Browser detection:', {
-			supportsViewTransitions,
-			isFirefox,
-			userAgent: browser ? navigator.userAgent : 'SSR'
-		});
 	});
 
 	function onCategoryChange(category) {

@@ -18,7 +18,6 @@ export function createBrowserDetection() {
 		const isEdgeMobile = ua.includes('edg/') && ua.includes('android');
 		if (isEdgeMobile) {
 			state.supportsViewTransitions = false;
-			console.log('Edge Android detected, disabling view transitions');
 			return;
 		}
 
@@ -32,7 +31,6 @@ export function createBrowserDetection() {
 		if (forceFirefoxMode) {
 			state.isFirefox = true;
 			state.supportsViewTransitions = false;
-			console.log('🦊 Firefox mode forced');
 		}
 
 		console.log('Browser detection:', {
@@ -145,7 +143,6 @@ export function createSelectHandlers(productId, cartState) {
 
 	function handleSizeChange(e) {
 		cartState.setSelectedSize(e.target.value);
-		console.log('Size selected:', e.target.value);
 	}
 
 	function setupSelectListeners() {

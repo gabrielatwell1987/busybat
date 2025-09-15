@@ -84,8 +84,6 @@
 		{
 			isEnlarged: (val) => {
 				if (val !== undefined) {
-					console.log('Toggling enlargement:', { val, isFirefox, supportsViewTransitions });
-
 					isTransitioning = true;
 					isEnlarged = val;
 

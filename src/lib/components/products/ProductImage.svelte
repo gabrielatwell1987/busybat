@@ -49,9 +49,11 @@
 		& .out-of-stock {
 			position: absolute;
 			inset: 0;
-			background-color: hsla(0, 0%, 100%, 0.3);
+			background-color: hsla(0, 0%, 100%, 0.4);
 			backdrop-filter: blur(2px);
-			color: var(--color-white);
+			color: var(--color-black);
+			font-size: clamp(var(--sm), 4vw, var(--h5));
+			letter-spacing: clamp(1px, 2vw, 3px);
 			display: flex;
 			justify-content: center;
 			align-items: center;

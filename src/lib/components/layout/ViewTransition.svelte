@@ -48,21 +48,20 @@
 			return;
 		}
 
-		console.log(`Navigation: ${navigation.from} → ${navigation.to}`);
 		return new Promise((resolve) => {
 			try {
 				const transition = document.startViewTransition(async () => {
 					resolve();
-					await new Promise((r) => setTimeout(r, 300)); // Longer duration for crossfade
+					await new Promise((r) => setTimeout(r, 300));
 				});
 
 				transition.finished.catch((e) => {
 					console.error('Transition failed:', e);
-					resolve(); // Resolve anyway to prevent hanging
+					resolve();
 				});
 			} catch (e) {
 				console.error('Failed to start view transition:', e);
-				resolve(); // Resolve immediately on error
+				resolve();
 			}
 		});
 	});

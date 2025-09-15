@@ -44,7 +44,6 @@
 		} else {
 			cart = [...cart, { ...product, quantity: 1 }]; // Trigger reactivity with new array
 		}
-		console.log('Cart updated:', cart); // Debug log
 	}
 
 	// Remove from cart - now needs to handle items with sizes
@@ -98,8 +97,6 @@
 		isProcessingPayment = true;
 
 		try {
-			console.log('Cart items being sent to checkout:', cart); // Debug log
-
 			const response = await fetch('/api/create-checkout-session', {
 				method: 'POST',
 				headers: {

@@ -1,5 +1,5 @@
 /* Layer order declaration */
-@layer root, fonts, reset, base, utilities, animations;
+@layer root, fonts, reset, theming, base, utilities, animations;
 
 @layer fonts {
 	@font-face {
@@ -41,6 +41,26 @@
 	}
 }
 
+@layer theming {
+	:root {
+		/* colors */
+		--color-primary: hsl(0, 0%, 94%);
+		--color-fade-primary: hsl(0, 0%, 74%);
+		--color-secondary: hsl(300, 33%, 9%);
+		--color-accent: hsl(320, 75%, 66%);
+		--color-lighter-accent: hsl(320, 75%, 86%);
+		--color-success: hsl(134, 61%, 41%);
+		--color-danger: hsl(354, 70%, 54%);
+		--color-warning: hsl(45, 100%, 51%);
+		--color-info: hsl(188, 78%, 41%);
+		--color-light: hsl(210, 17%, 96%);
+		--color-dark: hsl(210, 10%, 23%);
+		--color-gray: hsl(0, 0%, 50%);
+		--color-white: hsl(0, 0%, 100%);
+		--color-black: hsl(0, 0%, 0%);
+	}
+}
+
 @layer root {
 	:root {
 		/* fonts */
@@ -49,36 +69,6 @@
 		--font-bold: 'Fira Black', sans-serif;
 		--font-title: 'Creepster', sans-serif;
 		--radius: 5px;
-
-		/* colors */
-		/* --color-primary: hsl(0, 0%, 94%); */
-		--color-primary: oklab(0.94 0 0);
-		/* --color-fade-primary: hsl(0, 0%, 74%); */
-		--color-fade-primary: oklab(0.74 0 0);
-		/* --color-secondary: hsl(300, 33%, 9%); */
-		--color-secondary: oklab(0.19 0.06 -0.05);
-		/* --color-accent: hsl(320, 75%, 66%); */
-		--color-accent: oklab(0.73 0.16 -0.05);
-		/* --color-lighter-accent: hsl(320, 75%, 86%); */
-		--color-lighter-accent: oklab(0.86 0.1 -0.03);
-		/* --color-success: hsl(134, 61%, 41%); */
-		--color-success: oklab(0.56 -0.16 0.09);
-		/* --color-danger: hsl(354, 70%, 54%); */
-		--color-danger: oklab(0.63 0.18 0.09);
-		/* --color-warning: hsl(45, 100%, 51%); */
-		--color-warning: oklab(0.81 0.01 0.15);
-		/* --color-info: hsl(188, 78%, 41%); */
-		--color-info: oklab(0.64 -0.12 -0.06);
-		/* --color-light: hsl(210, 17%, 96%); */
-		--color-light: oklab(0.96 0 -0.01);
-		/* --color-dark: hsl(210, 10%, 23%); */
-		--color-dark: oklab(0.31 0 -0.01);
-		/* --color-gray: hsl(0, 0%, 50%); */
-		--color-gray: oklab(0.5 0 0);
-		/* --color-white: hsl(0, 0%, 100%); */
-		--color-white: oklab(1 0 0);
-		/* --color-black: hsl(0, 0%, 0%); */
-		--color-black: oklab(0 0 0);
 
 		/* sizes */
 		--base-size: 1.2rem;

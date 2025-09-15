@@ -38,8 +38,7 @@ export function trapFocus(element) {
 
 // Factory function for adding to cart
 export function handleAddToCart(e) {
-	e.stopPropagation(); // Prevent triggering the card click event
-	console.log('Add to cart button clicked for product');
+	e.stopPropagation();
 }
 
 // Factory function for dropdown toggle
@@ -79,8 +78,6 @@ export function createToggleEnlargementHandler(contextData, setState) {
 						`.product-card:not([style*="view-transition-name: ${context}-product-card-${id}"])`
 					);
 		const footer = document.querySelector('footer');
-
-		console.log('Toggle enlargement called:', { isFirefox, supportsViewTransitions, id, context });
 
 		if (supportsViewTransitions && !isFirefox) {
 			document.documentElement.style.setProperty('--view-transition-duration', '0.15s');
@@ -157,7 +154,6 @@ export function createToggleEnlargementHandler(contextData, setState) {
 			});
 		} else {
 			// Fallback for Firefox and browsers without view transitions
-			console.log('Using fallback toggle for Firefox/unsupported browsers');
 			setState.isEnlarged(!setState.isEnlarged());
 
 			if (setState.isEnlarged()) {
