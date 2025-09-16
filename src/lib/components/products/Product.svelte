@@ -3,6 +3,8 @@
 	import {
 		createToggleDropdownHandler,
 		createToggleEnlargementHandler,
+		createHandleDropdownState,
+		createDropdownHandlers,
 		trapFocus
 	} from './productFunctions.svelte.js';
 	import {
@@ -10,8 +12,7 @@
 		createCartState,
 		createAddToCartHandler,
 		createSelectHandlers,
-		createAccessibilityHelpers,
-		createDropdownHandlers
+		createAccessibilityHelpers
 	} from './uiFunctions.svelte.js';
 	import ProductDropdown from './ProductDropdown.svelte';
 	import ProductImage from './ProductImage.svelte';
@@ -67,7 +68,6 @@
 	const accessibilityHelpers = createAccessibilityHelpers();
 	const dropdownHandlers = createDropdownHandlers();
 
-	// Handle add to cart with proper state updates
 	async function handleAddToCart(e) {
 		if (addToCartHandler) {
 			await addToCartHandler.handleAddToCart(e, addToCart, toggleEnlargement);
@@ -111,16 +111,17 @@
 		}
 	);
 
-	function handleDropdownState(isOpen) {
-		isDropdownOpened = isOpen;
-		dropdownHandlers.handleDropdownState(
-			isOpen,
-			id,
-			isEnlarged,
-			isFirefox,
-			supportsViewTransitions
-		);
-	}
+	let handleDropdownState = $derived(() => {
+		return (isOpen) => {
+			dropdownHandlers.handleDropdownState(
+				isOpen,
+				id,
+				isEnlarged,
+				isFirefox,
+				supportsViewTransitions
+			);
+		};
+	});
 
 	$effect(() => {
 		// run detection for browser features
@@ -128,10 +129,8 @@
 		supportsViewTransitions = browserDetection.supportsViewTransitions;
 		isFirefox = browserDetection.isFirefox;
 
-		// Initialize add to cart handler now that we have productData
 		addToCartHandler = createAddToCartHandler(id, productData, cartState);
 
-		// Update cart state
 		cartState.updateCartState();
 	});
 

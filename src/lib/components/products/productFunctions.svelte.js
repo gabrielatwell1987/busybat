@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { createAccessibilityHelpers } from '$lib/components/products/uiFunctions.svelte.js';
 
 // Format price with currency
 export function formatPrice(value) {
@@ -185,5 +186,38 @@ export function createToggleEnlargementHandler(contextData, setState) {
 				}
 			}
 		}
+	};
+}
+
+// Dropdown state management (moved from uiFunctions.svelte.js)
+export function createDropdownHandlers() {
+	function handleDropdownState(isOpen, productId, isEnlarged, isFirefox, supportsViewTransitions) {
+		if (!isOpen && !isEnlarged) {
+			const { showOtherProducts } = createAccessibilityHelpers();
+			showOtherProducts(productId, 'default', isFirefox, supportsViewTransitions);
+		}
+	}
+
+	return {
+		handleDropdownState
+	};
+}
+
+// Factory function for handleDropdownState
+export function createHandleDropdownState(
+	dropdownHandlers,
+	id,
+	isEnlarged,
+	isFirefox,
+	supportsViewTransitions
+) {
+	return function handleDropdownState(isOpen) {
+		dropdownHandlers.handleDropdownState(
+			isOpen,
+			id,
+			isEnlarged,
+			isFirefox,
+			supportsViewTransitions
+		);
 	};
 }
