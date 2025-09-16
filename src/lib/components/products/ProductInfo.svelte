@@ -1,5 +1,5 @@
 <script>
-	import { formatPrice } from './productFunctions.js';
+	import { formatPrice } from './productFunctions.svelte.js';
 
 	let { name, price, description, id, isEnlarged, context, supportsViewTransitions, isFirefox } =
 		$props();

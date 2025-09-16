@@ -4,7 +4,7 @@
 		createToggleDropdownHandler,
 		createToggleEnlargementHandler,
 		trapFocus
-	} from './productFunctions.js';
+	} from './productFunctions.svelte.js';
 	import {
 		createBrowserDetection,
 		createCartState,
