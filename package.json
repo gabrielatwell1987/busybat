@@ -39,5 +39,8 @@
 		"bcrypt": "^6.0.0",
 		"jsonwebtoken": "^9.0.2",
 		"stripe": "^18.0.0"
+	},
+	"overrides": {
+		"cookie": "^0.7.0"
 	}
 }
