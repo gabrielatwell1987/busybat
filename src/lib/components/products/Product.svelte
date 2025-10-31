@@ -17,7 +17,7 @@
 	import ProductDropdown from './ProductDropdown.svelte';
 	import ProductImage from './ProductImage.svelte';
 	import ProductInfo from './ProductInfo.svelte';
-	import ProductActions from './ProductActions.svelte';
+	// import ProductActions from './ProductActions.svelte';
 	import ProductOverlay from './ProductOverlay.svelte';
 
 	let {
@@ -282,14 +282,14 @@
 				dropdownImage={dropdown ?? dropdownImage}
 			/>
 
-			<ProductActions
+			<!-- <ProductActions
 				{inStock}
 				isLoading={addToCartHandler?.isLoading || false}
 				isAddedToCart={cartState.isAddedToCart}
 				{isEnlarged}
 				onAddToCart={handleAddToCart}
 				onToggleEnlargement={toggleEnlargement}
-			/>
+			/> -->
 		{/if}
 	</div>
 </div>
