@@ -80,6 +80,7 @@
 
 		&.expanded {
 			display: block;
+			display: none;
 
 			@media (width <= 768px) {
 				text-align: center;
