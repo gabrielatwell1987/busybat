@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import ViewTransition from '$lib/components/layout/ViewTransition.svelte';
 	import Nav from '$lib/components/navigation/Nav.svelte';
-	import Footer from '$lib/components/layout/Footer.svelte';
+	import Footer from '$lib/components/navigation/Footer.svelte';
 	import SkipToMain from '$lib/components/layout/SkipToMain.svelte';
 	import LocalStorage from '$lib/components/layout/localStorage.svelte';
 	import LoadingSpinner from '$lib/components/layout/LoadingSpinner.svelte';

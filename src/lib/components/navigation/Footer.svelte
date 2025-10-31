@@ -1,9 +1,13 @@
 <script>
+	import bg from '$lib/assets/pink-leo.webp';
+
 	let { year = new Date().getFullYear(), name } = $props();
 </script>
 
 <footer>
-	<section>
+	<section
+		style="background-image: url({bg}); background-size: cover; background-position: center; background-attachment: fixed;"
+	>
 		<p>
 			&copy;
 			{year}
@@ -35,7 +39,6 @@
 		}
 
 		& section {
-			backdrop-filter: blur(1rem);
 			border-radius: var(--radius);
 			margin: 0;
 			margin-bottom: var(--xs);
