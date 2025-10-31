@@ -46,9 +46,9 @@
 	</button>
 
 	<ul class:open={isOpen} id="navigation-menu" aria-label="Main navigation">
-		<li class="mobile-cart">
+		<!-- <li class="mobile-cart">
 			<CartIcon onclick={handleLinkClick} navOpen={isOpen} />
-		</li>
+		</li> -->
 		<li>
 			<NavLink title="About" url="/about" onclick={handleLinkClick} />
 		</li>
@@ -66,9 +66,9 @@
 		</li>
 	</ul>
 
-	<div class="cart-container desktop-cart">
+	<!-- <div class="cart-container desktop-cart">
 		<CartIcon navOpen={isOpen} />
-	</div>
+	</div> -->
 </nav>
 
 <style>
@@ -147,12 +147,12 @@
 			list-style: none;
 		}
 
-		.desktop-cart {
+		/* .desktop-cart {
 			display: flex;
 			align-items: center;
 			margin-right: 1rem;
 			position: relative;
-		}
+		} */
 
 		@media (width <= 1150px) {
 			padding: 1em;
@@ -167,13 +167,13 @@
 		@media (width <= 980px) {
 			padding: 0.5rem;
 
-			.desktop-cart {
+			/* .desktop-cart {
 				margin-right: 3em;
 				transform: scale(0.85);
 				transform-origin: center;
 				position: relative;
 				right: 0;
-			}
+			} */
 
 			ul {
 				margin: 0 0.5rem;
@@ -211,10 +211,10 @@
 				transform-origin: center;
 			}
 
-			.desktop-cart {
+			/* .desktop-cart {
 				transform: scale(0.75);
 				margin-right: 0.5rem;
-			}
+			} */
 		}
 
 		@media (width <= 600px) {
@@ -237,9 +237,9 @@
 			width: 95%;
 			height: 3.25em;
 
-			.desktop-cart {
+			/* .desktop-cart {
 				display: none;
-			}
+			} */
 
 			.burger {
 				order: 3;
@@ -313,7 +313,7 @@
 							transition-delay: 0.9s;
 						}
 
-						&.mobile-cart {
+						/* &.mobile-cart {
 							display: flex;
 							justify-content: center;
 							align-items: center;
@@ -342,14 +342,14 @@
 								margin: 0;
 								padding: 0;
 							}
-						}
+						} */
 					}
 				}
 			}
 		}
 	}
 
-	.mobile-cart {
+	/* .mobile-cart {
 		display: none;
 
 		@media (width <= 500px) {
@@ -377,9 +377,9 @@
 				text-align: center;
 			}
 		}
-	}
+	} */
 
-	.desktop-cart {
+	/* .desktop-cart {
 		display: block;
 
 		@media (500px <= width <= 990px) {
@@ -388,5 +388,5 @@
 			margin-right: 0.25rem;
 			transform: scale(0.8);
 		}
-	}
+	} */
 </style>

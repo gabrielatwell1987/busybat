@@ -16,7 +16,7 @@
 
 		<p>Handmade clothing and accessories for the spooky and the strange</p>
 
-		<Button href="/products" title="Shop now" />
+		<Button href="/products" title="View Products" />
 	</div>
 </div>
 
