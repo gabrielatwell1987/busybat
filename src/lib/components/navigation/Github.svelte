@@ -26,6 +26,11 @@
 		z-index: 10;
 		color: var(--color-secondary);
 
+		@media (width <= 768px) {
+			bottom: 1.25em;
+			right: 0.5em;
+		}
+
 		&:hover {
 			opacity: 0.9;
 		}
@@ -33,6 +38,11 @@
 		& svg {
 			width: 4em;
 			height: 4em;
+
+			@media (width <= 768px) {
+				width: 3.5em;
+				height: 3.5em;
+			}
 		}
 	}
 </style>
