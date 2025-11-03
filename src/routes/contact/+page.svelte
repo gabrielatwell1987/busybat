@@ -1,7 +1,7 @@
 <script>
 	import SEO from '$lib/data/SEO.svelte';
 	import Contact from '$lib/components/contact/Contact.svelte';
-	import bg from '$lib/assets/product-bg.webp';
+	import productBg from '$lib/assets/product-bg.webp';
 </script>
 
 <SEO
@@ -11,7 +11,7 @@
 />
 
 <section
-	style="background-image: url({bg}); background-repeat: repeat; background-position: center center; background-size: contain;"
+	style="background-image: url({productBg}); background-repeat: repeat; background-position: center center; background-size: contain;"
 >
 	<Contact />
 </section>

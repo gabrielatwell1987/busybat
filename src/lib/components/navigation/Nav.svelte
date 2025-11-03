@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Title from '$lib/components/layout/Title.svelte';
 	import logo from '$lib/assets/logo.webp';
-	import bg from '$lib/assets/pink-leo.webp';
+	import pinkLeo from '$lib/assets/pink-leo.webp';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import CartIcon from '$lib/components/products/CartIcon.svelte';
 
@@ -26,7 +26,7 @@
 </script>
 
 <nav
-	style="background-image: url({bg}); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
+	style="background-image: url({pinkLeo}); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
 >
 	<div class="title">
 		<Title title="Busy Little Bat Sewing" />
