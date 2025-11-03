@@ -5,6 +5,7 @@
 	import pinkLeo from '$lib/assets/pink-leo.webp';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import CartIcon from '$lib/components/products/CartIcon.svelte';
+	import Github from '$lib/components/navigation/Github.svelte';
 
 	let isOpen = $state(false);
 
@@ -24,6 +25,8 @@
 		}
 	};
 </script>
+
+<Github />
 
 <nav
 	style="background-image: url({pinkLeo}); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: repeat;"
