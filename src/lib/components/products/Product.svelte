@@ -18,6 +18,7 @@
 	import ProductImage from './ProductImage.svelte';
 	import ProductInfo from './ProductInfo.svelte';
 	// import ProductActions from './ProductActions.svelte';
+	import SquareLink from './SquareLink.svelte';
 	import ProductOverlay from './ProductOverlay.svelte';
 
 	let {
@@ -290,6 +291,8 @@
 				onAddToCart={handleAddToCart}
 				onToggleEnlargement={toggleEnlargement}
 			/> -->
+
+			<SquareLink />
 		{/if}
 	</div>
 </div>
