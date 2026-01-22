@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/assets/logo.webp';
 
-	/** @type {{title: any, description: any, keywords: any}} */
+	/** @type {{title: string, description: string, keywords: string}} */
 	let { title, description, keywords } = $props();
 
 	let url = $derived($page.url.href);
@@ -38,12 +38,21 @@
 	<meta name="twitter:image" content={logoUrl} />
 
 	<script type="application/ld+json">
-		{JSON.stringify({
-			"@context": "http://schema.org",
-			"@type": "WebSite",
-			"name": siteName,
-			"description": description,
-			"url": canonicalUrl
-		})}
+        {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": siteName,
+            "description": description,
+            "url": canonicalUrl,
+            "logo": logoUrl,
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "url": canonicalUrl
+            },
+            "sameAs": [
+                // Add social media URLs if available, e.g., "https://twitter.com/busybatsewing"
+            ]
+        })}
 	</script>
 </svelte:head>
