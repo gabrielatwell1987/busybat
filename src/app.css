@@ -44,20 +44,20 @@
 @layer theming {
 	:root {
 		/* colors */
-		--color-primary: hsl(0, 0%, 94%);
-		--color-fade-primary: hsl(0, 0%, 74%);
-		--color-secondary: hsl(300, 33%, 9%);
-		--color-accent: hsl(320, 75%, 66%);
-		--color-lighter-accent: hsl(320, 75%, 86%);
-		--color-success: hsl(134, 61%, 41%);
-		--color-danger: hsl(354, 70%, 54%);
-		--color-warning: hsl(45, 100%, 51%);
-		--color-info: hsl(188, 78%, 41%);
-		--color-light: hsl(210, 17%, 96%);
-		--color-dark: hsl(210, 10%, 23%);
-		--color-gray: hsl(0, 0%, 50%);
-		--color-white: hsl(0, 0%, 100%);
-		--color-black: hsl(0, 0%, 0%);
+		--color-primary: oklch(0.9542 0 0);
+		--color-fade-primary: oklch(0.7974 0 0);
+		--color-secondary: oklch(0.1988 0.0373 326.86);
+		--color-accent: oklch(0.7002 0.1873 342.33);
+		--color-lighter-accent: oklch(0.8675 0.0764 338.95);
+		--color-success: oklch(0.6441 0.1752 146.88);
+		--color-danger: oklch(0.5939 0.1995 20.68);
+		--color-warning: oklch(0.8432 0.1722 84.73);
+		--color-info: oklch(0.6619 0.1115 211.75);
+		--color-light: oklch(0.9687 0.003 247.85);
+		--color-dark: oklch(0.3477 0.013 248.2);
+		--color-gray: oklch(0.5982 0 0);
+		--color-white: oklch(1 0 0);
+		--color-black: oklch(0 0 0);
 	}
 }
 
